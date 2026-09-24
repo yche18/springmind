@@ -1,0 +1,796 @@
+<script setup lang="ts">
+import { computed, onBeforeUnmount, reactive, ref, watch } from 'vue'
+import {
+  deleteDocument,
+  fetchDocumentPreview,
+  fetchDocuments,
+  retryDocumentIngestion,
+  type DocumentItem,
+} from '../../api/document'
+import { fetchGroups } from '../../api/group'
+import { extractApiError } from '../../api/http'
+import PageHeaderHero from '../../components/layout/PageHeaderHero.vue'
+import WorkbenchShell from '../../components/layout/WorkbenchShell.vue'
+import WorkbenchSidebar from '../../components/layout/WorkbenchSidebar.vue'
+import { useAppStore } from '../../stores/app'
+import { useAuthStore } from '../../stores/auth'
+import {
+  DOCUMENT_STATUS_OPTIONS,
+  calculateTotalDocumentSize,
+  canPreviewDocument,
+  collectRecentDocumentFailures,
+  createDocumentFilterForm,
+  createDocumentStatusSummary,
+  formatDocumentDateTime,
+  formatDocumentFileSize,
+  formatGroupRelationLabel,
+  formatUploaderLabel,
+  getDocumentStatusMeta,
+  getPreviewButtonLabel,
+  matchesDocumentFilters,
+  truncatePreviewText,
+} from './documentPageView'
+import '../../assets/page-shell.css'
+import '../../assets/document-page.css'
+import DocumentPageToolbar from './components/DocumentPageToolbar.vue'
+import DocumentStatusBoard from './components/DocumentStatusBoard.vue'
+import { uploadDocumentWithResume, type UploadStage } from './documentUpload'
+
+const appStore = useAppStore()
+const authStore = useAuthStore()
+
+const documents = ref<DocumentItem[]>([])
+const filters = reactive(createDocumentFilterForm())
+const selectedFile = ref<File | null>(null)
+const selectedFileName = ref('未选择文件')
+const fileInputKey = ref(0)
+const groupLoadError = ref('')
+const documentsError = ref('')
+const uploadFeedback = ref('')
+const uploadError = ref('')
+const isLoading = ref(false)
+const isUploading = ref(false)
+const uploadProgress = ref(0)
+const uploadStage = ref<UploadStage | 'idle'>('idle')
+const deletingDocumentIds = ref<Set<number>>(new Set())
+const retryingDocumentIds = ref<Set<number>>(new Set())
+const isPreviewOpen = ref(false)
+const isPreviewLoading = ref(false)
+const previewDocumentId = ref<number | null>(null)
+const previewFileName = ref('')
+const previewStatus = ref('')
+const previewText = ref('')
+const previewMessage = ref('')
+const previewMessageTone = ref<'note' | 'error'>('note')
+const isPollingDocuments = ref(false)
+
+let documentContextVersion = 0
+let latestLoadRequestId = 0
+let latestPreviewRequestId = 0
+let latestGroupRequestToken = 0
+let pollingTimer: number | null = null
+
+const DOCUMENT_POLL_INTERVAL_MS = 4000
+
+const visibleGroups = computed(() => appStore.visibleGroups)
+const currentGroup = computed(() => appStore.currentGroup)
+const currentGroupId = computed(() => currentGroup.value?.groupId ?? null)
+const currentGroupRelation = computed(() => currentGroup.value?.relation ?? null)
+const canLoadDocuments = computed(() => currentGroupId.value !== null && !appStore.isGroupsLoading)
+const canManageCurrentGroup = computed(() => canLoadDocuments.value && appStore.canManageCurrentGroup)
+const visibleDocuments = computed(() =>
+  documents.value.filter((item) => matchesDocumentFilters(item, filters, currentGroupRelation.value)),
+)
+const totalSize = computed(() => calculateTotalDocumentSize(visibleDocuments.value))
+const statusSummaryItems = computed(() =>
+  createDocumentStatusSummary(visibleDocuments.value, totalSize.value),
+)
+const recentFailures = computed(() => collectRecentDocumentFailures(visibleDocuments.value))
+const hasPendingDocuments = computed(() =>
+  documents.value.some((item) => item.status === 'PROCESSING' || item.status === 'UPLOADED'),
+)
+const currentContextKey = computed(
+  () => `${authStore.currentUser?.userId ?? 'anonymous'}:${currentGroupId.value ?? 'none'}`,
+)
+const pageHeroDescription = computed(() =>
+  currentGroup.value === null
+    ? '选择知识库后，可上传文件、查看索引状态，并筛选异常文档。'
+    : `当前知识库：${currentGroup.value.groupName}。可上传、筛选、预览与重试失败文件。`,
+)
+const groupScopeSummary = computed(() => {
+  if (currentGroup.value === null) {
+    return `你拥有 ${appStore.ownedGroups.length} 个组，加入 ${appStore.joinedGroups.length} 个组。`
+  }
+
+  return `组 #${currentGroup.value.groupId} · ${formatGroupRelationLabel(currentGroup.value.relation)}`
+})
+const filterHint = computed(() => {
+  if (currentGroup.value === null) {
+    return '先选择知识库，再筛选文件。'
+  }
+
+  return '可按文件名、状态、上传时间筛选。'
+})
+const resultsSummary = computed(() => {
+  if (documents.value.length === visibleDocuments.value.length) {
+    return `共 ${visibleDocuments.value.length} 个文件。`
+  }
+
+  return `共 ${documents.value.length} 个文件，当前命中 ${visibleDocuments.value.length} 个。`
+})
+const emptyStateMessage = computed(() => {
+  if (documents.value.length === 0) {
+    return canManageCurrentGroup.value
+      ? '当前组还没有文件，可先上传一个样例。'
+      : '当前组还没有可查看的文件。'
+  }
+
+  return '没有符合当前筛选条件的文件。'
+})
+
+watch(
+  () => authStore.currentUser?.userId,
+  () => {
+    void refreshGroups()
+  },
+  { immediate: true },
+)
+
+watch(
+  [() => authStore.currentUser?.userId, currentGroupId, () => appStore.isGroupsLoading],
+  () => {
+    documentContextVersion += 1
+    latestLoadRequestId += 1
+    latestPreviewRequestId += 1
+    resetPageForContextChange()
+    syncDefaultFilters()
+    if (canLoadDocuments.value) {
+      void loadDocuments()
+    }
+  },
+  { immediate: true },
+)
+
+onBeforeUnmount(() => {
+  stopDocumentPolling()
+})
+
+async function refreshGroups() {
+  const currentToken = ++latestGroupRequestToken
+  appStore.setGroupsLoading(true)
+  groupLoadError.value = ''
+
+  try {
+    const result = await fetchGroups()
+    if (currentToken !== latestGroupRequestToken) {
+      return
+    }
+    appStore.applyGroupQueryResult(result)
+  } catch (error) {
+    if (currentToken !== latestGroupRequestToken) {
+      return
+    }
+    appStore.resetGroupContext(false)
+    groupLoadError.value = extractApiError(error, '获取群组失败')
+  } finally {
+    if (currentToken === latestGroupRequestToken) {
+      appStore.setGroupsLoading(false)
+    }
+  }
+}
+
+function resetPageForContextChange() {
+  stopDocumentPolling()
+  documents.value = []
+  isLoading.value = false
+  isPollingDocuments.value = false
+  isUploading.value = false
+  uploadProgress.value = 0
+  uploadStage.value = 'idle'
+  deletingDocumentIds.value = new Set()
+  retryingDocumentIds.value = new Set()
+  documentsError.value = ''
+  uploadFeedback.value = ''
+  uploadError.value = ''
+  resetSelectedFile()
+  closePreview()
+}
+
+function syncDefaultFilters() {
+  Object.assign(
+    filters,
+    createDocumentFilterForm({
+      groupId: currentGroupId.value,
+      relation: currentGroupRelation.value,
+    }),
+  )
+}
+
+async function loadDocuments(options: { silent?: boolean } = {}) {
+  if (!canLoadDocuments.value || currentGroupId.value === null) {
+    stopDocumentPolling()
+    documents.value = []
+    return
+  }
+
+  const contextVersion = documentContextVersion
+  const contextKey = currentContextKey.value
+  const requestId = ++latestLoadRequestId
+  clearDocumentPollingTimer()
+  if (options.silent) {
+    isPollingDocuments.value = true
+  } else {
+    isLoading.value = true
+  }
+  documentsError.value = ''
+
+  try {
+    const previousDocuments = documents.value
+    const nextDocuments = await fetchDocuments({
+      groupId: filters.groupId ?? currentGroupId.value ?? undefined,
+      fileName: filters.fileName.trim() || undefined,
+      status: filters.status || undefined,
+      uploadedFrom: filters.uploadedFrom || undefined,
+      uploadedTo: filters.uploadedTo || undefined,
+    })
+    if (isActiveDocumentRequest(contextVersion, contextKey, requestId)) {
+      documents.value = nextDocuments
+      if (options.silent) {
+        syncPollingFeedback(previousDocuments, nextDocuments)
+      }
+    }
+  } catch (error) {
+    if (isActiveDocumentRequest(contextVersion, contextKey, requestId)) {
+      documents.value = []
+      documentsError.value = extractApiError(error, '加载文档列表失败')
+    }
+  } finally {
+    if (isActiveDocumentRequest(contextVersion, contextKey, requestId)) {
+      if (options.silent) {
+        isPollingDocuments.value = false
+      } else {
+        isLoading.value = false
+      }
+      syncDocumentPolling()
+    }
+  }
+}
+
+async function handleRefreshDocuments() {
+  if (!canLoadDocuments.value) {
+    return
+  }
+  await loadDocuments()
+}
+
+function handleGroupChange(groupId: number | null) {
+  appStore.setCurrentGroupId(groupId)
+}
+
+function handleFileChange(file: File | null) {
+  selectedFile.value = file
+  selectedFileName.value = file?.name ?? '未选择文件'
+  uploadFeedback.value = ''
+  uploadError.value = ''
+}
+
+function resetSelectedFile() {
+  selectedFile.value = null
+  selectedFileName.value = '未选择文件'
+  fileInputKey.value += 1
+}
+
+async function handleApplyFilters() {
+  if (!canLoadDocuments.value) {
+    return
+  }
+
+  if (filters.uploadedFrom && filters.uploadedTo && filters.uploadedFrom > filters.uploadedTo) {
+    documentsError.value = '上传时间范围不合法，开始时间不能晚于结束时间。'
+    return
+  }
+
+  await loadDocuments()
+}
+
+function handleResetFilters() {
+  syncDefaultFilters()
+  documentsError.value = ''
+  if (canLoadDocuments.value) {
+    void loadDocuments()
+  }
+}
+
+async function handleUpload() {
+  if (!canManageCurrentGroup.value || currentGroupId.value === null) {
+    uploadError.value = '当前组为只读模式，只有 OWNER 可以上传文件。'
+    return
+  }
+
+  if (selectedFile.value === null) {
+    uploadError.value = '请选择待上传文件。'
+    return
+  }
+
+  const contextVersion = documentContextVersion
+  const contextKey = currentContextKey.value
+  isUploading.value = true
+  uploadProgress.value = 0
+  uploadStage.value = 'hashing'
+  uploadFeedback.value = ''
+  uploadError.value = ''
+
+  try {
+    const documentId = await uploadDocumentWithResume(
+      currentGroupId.value,
+      selectedFile.value,
+      (payload) => {
+        if (isCurrentDocumentContext(contextVersion, contextKey)) {
+          uploadProgress.value = payload.percent
+          uploadStage.value = payload.stage
+        }
+      },
+    )
+    if (!isCurrentDocumentContext(contextVersion, contextKey)) {
+      return
+    }
+    uploadFeedback.value = `文件已提交，文档 ID #${documentId}。若仍在处理中，可稍后刷新。`
+    resetSelectedFile()
+    await loadDocuments()
+  } catch (error) {
+    if (isCurrentDocumentContext(contextVersion, contextKey)) {
+      uploadError.value = extractApiError(error, '上传文档失败')
+    }
+  } finally {
+    if (isCurrentDocumentContext(contextVersion, contextKey)) {
+      isUploading.value = false
+      uploadStage.value = 'idle'
+    }
+  }
+}
+
+async function handleDelete(documentId: number, fileName: string) {
+  if (!canManageCurrentGroup.value || currentGroupId.value === null) {
+    return
+  }
+
+  if (!window.confirm(`确认删除文档「${fileName}」吗？`)) {
+    return
+  }
+
+  const contextVersion = documentContextVersion
+  const contextKey = currentContextKey.value
+  deletingDocumentIds.value = new Set(deletingDocumentIds.value).add(documentId)
+  documentsError.value = ''
+
+  try {
+    await deleteDocument(documentId, currentGroupId.value)
+    if (!isCurrentDocumentContext(contextVersion, contextKey)) {
+      return
+    }
+    uploadFeedback.value = `文档「${fileName}」已删除。`
+    await loadDocuments()
+  } catch (error) {
+    if (isCurrentDocumentContext(contextVersion, contextKey)) {
+      documentsError.value = extractApiError(error, '删除文档失败')
+    }
+  } finally {
+    if (isCurrentDocumentContext(contextVersion, contextKey)) {
+      const nextDeletingIds = new Set(deletingDocumentIds.value)
+      nextDeletingIds.delete(documentId)
+      deletingDocumentIds.value = nextDeletingIds
+    }
+  }
+}
+
+async function handleRetryIngestion(item: DocumentItem) {
+  if (!canManageCurrentGroup.value || currentGroupId.value === null || item.status !== 'FAILED') {
+    return
+  }
+
+  const contextVersion = documentContextVersion
+  const contextKey = currentContextKey.value
+  retryingDocumentIds.value = new Set(retryingDocumentIds.value).add(item.documentId)
+  documentsError.value = ''
+
+  try {
+    await retryDocumentIngestion(item.documentId, currentGroupId.value)
+    if (!isCurrentDocumentContext(contextVersion, contextKey)) {
+      return
+    }
+    uploadFeedback.value = `文档「${item.fileName}」已重新进入处理队列。`
+    await loadDocuments()
+  } catch (error) {
+    if (isCurrentDocumentContext(contextVersion, contextKey)) {
+      documentsError.value = extractApiError(error, '重新处理文档失败')
+    }
+  } finally {
+    if (isCurrentDocumentContext(contextVersion, contextKey)) {
+      const nextRetryingIds = new Set(retryingDocumentIds.value)
+      nextRetryingIds.delete(item.documentId)
+      retryingDocumentIds.value = nextRetryingIds
+    }
+  }
+}
+
+async function handlePreview(item: DocumentItem) {
+  if (currentGroupId.value === null || !canPreviewDocument(item, currentGroupRelation.value)) {
+    return
+  }
+
+  const cachedPreview = truncatePreviewText(item.previewText)
+  const contextVersion = documentContextVersion
+  const contextKey = currentContextKey.value
+  const requestId = ++latestPreviewRequestId
+
+  previewDocumentId.value = item.documentId
+  previewFileName.value = item.fileName
+  previewStatus.value = item.status
+  previewText.value = cachedPreview
+  previewMessage.value = cachedPreview ? '正在同步最新预览...' : ''
+  previewMessageTone.value = 'note'
+  isPreviewOpen.value = true
+  isPreviewLoading.value = true
+
+  try {
+    const preview = await fetchDocumentPreview(item.documentId, currentGroupId.value)
+    if (!isActivePreviewRequest(contextVersion, contextKey, requestId)) {
+      return
+    }
+    const nextPreview = truncatePreviewText(preview.previewText) || cachedPreview
+    previewFileName.value = preview.fileName || item.fileName
+    previewStatus.value = preview.status || item.status
+    previewText.value = nextPreview
+    previewMessage.value = nextPreview ? '' : '当前文件暂无可展示的前 200 字预览。'
+    previewMessageTone.value = 'note'
+  } catch (error) {
+    if (!isActivePreviewRequest(contextVersion, contextKey, requestId)) {
+      return
+    }
+    if (cachedPreview) {
+      previewText.value = cachedPreview
+      previewMessage.value = '预览接口暂不可用，已显示列表缓存片段。'
+      previewMessageTone.value = 'note'
+      return
+    }
+    previewText.value = ''
+    previewMessage.value = extractApiError(error, '加载预览失败')
+    previewMessageTone.value = 'error'
+  } finally {
+    if (isActivePreviewRequest(contextVersion, contextKey, requestId)) {
+      isPreviewLoading.value = false
+    }
+  }
+}
+
+function closePreview() {
+  latestPreviewRequestId += 1
+  isPreviewOpen.value = false
+  isPreviewLoading.value = false
+  previewDocumentId.value = null
+  previewFileName.value = ''
+  previewStatus.value = ''
+  previewText.value = ''
+  previewMessage.value = ''
+  previewMessageTone.value = 'note'
+}
+
+function isCurrentDocumentContext(contextVersion: number, contextKey: string) {
+  return (
+    contextVersion === documentContextVersion &&
+    contextKey === currentContextKey.value &&
+    !appStore.isGroupsLoading
+  )
+}
+
+function isActiveDocumentRequest(contextVersion: number, contextKey: string, requestId: number) {
+  return isCurrentDocumentContext(contextVersion, contextKey) && requestId === latestLoadRequestId
+}
+
+function isActivePreviewRequest(contextVersion: number, contextKey: string, requestId: number) {
+  return (
+    isCurrentDocumentContext(contextVersion, contextKey) &&
+    requestId === latestPreviewRequestId &&
+    isPreviewOpen.value
+  )
+}
+
+function clearDocumentPollingTimer() {
+  if (pollingTimer !== null) {
+    window.clearTimeout(pollingTimer)
+    pollingTimer = null
+  }
+}
+
+function stopDocumentPolling() {
+  clearDocumentPollingTimer()
+  isPollingDocuments.value = false
+}
+
+function syncDocumentPolling() {
+  clearDocumentPollingTimer()
+  if (!canLoadDocuments.value || currentGroupId.value === null || !hasPendingDocuments.value) {
+    isPollingDocuments.value = false
+    return
+  }
+  pollingTimer = window.setTimeout(() => {
+    if (!canLoadDocuments.value || currentGroupId.value === null) {
+      stopDocumentPolling()
+      return
+    }
+    void loadDocuments({ silent: true })
+  }, DOCUMENT_POLL_INTERVAL_MS)
+}
+
+function syncPollingFeedback(previousDocuments: DocumentItem[], nextDocuments: DocumentItem[]) {
+  const transitionedDocument = findPollingTransitionedDocument(previousDocuments, nextDocuments)
+  if (transitionedDocument === null) {
+    return
+  }
+
+  if (transitionedDocument.status === 'READY') {
+    uploadFeedback.value = `文档「${transitionedDocument.fileName}」已处理完成。`
+    return
+  }
+
+  if (transitionedDocument.status === 'FAILED') {
+    uploadFeedback.value = `文档「${transitionedDocument.fileName}」处理失败，可点击“重试处理”。`
+  }
+}
+
+function findPollingTransitionedDocument(
+  previousDocuments: DocumentItem[],
+  nextDocuments: DocumentItem[],
+): DocumentItem | null {
+  const previousStatusMap = new Map(previousDocuments.map((item) => [item.documentId, item.status]))
+
+  for (const item of nextDocuments) {
+    const previousStatus = previousStatusMap.get(item.documentId)
+    if (!isPendingDocumentStatus(previousStatus) || !isTerminalDocumentStatus(item.status)) {
+      continue
+    }
+    return item
+  }
+
+  return null
+}
+
+function isPendingDocumentStatus(status: string | undefined) {
+  return status === 'UPLOADED' || status === 'PROCESSING'
+}
+
+function isTerminalDocumentStatus(status: string) {
+  return status === 'READY' || status === 'FAILED'
+}
+
+function describeDocumentRow(item: DocumentItem) {
+  return item.contentType ?? item.fileExt ?? '未知类型'
+}
+
+const uploadStageText = computed(() => {
+  switch (uploadStage.value) {
+    case 'hashing':
+      return '正在计算文件指纹...'
+    case 'checking':
+      return '正在检查秒传与续传状态...'
+    case 'uploading':
+      return `正在上传分片：${uploadProgress.value}%`
+    case 'completing':
+      return '分片已完成，正在提交合并...'
+    default:
+      return ''
+  }
+})
+</script>
+
+<template>
+  <WorkbenchShell class="page-shell--documents">
+    <template #sidebar>
+      <WorkbenchSidebar />
+    </template>
+
+    <template #main>
+      <main class="documents-page">
+        <PageHeaderHero eyebrow="文档" title="文档中心" :description="pageHeroDescription">
+        </PageHeaderHero>
+
+        <div class="documents-page__feedback">
+          <p v-if="groupLoadError" class="feedback feedback--error">{{ groupLoadError }}</p>
+          <p v-if="uploadFeedback" class="feedback feedback--success">{{ uploadFeedback }}</p>
+          <p v-if="uploadError" class="feedback feedback--error">{{ uploadError }}</p>
+          <p v-if="documentsError" class="feedback feedback--error">{{ documentsError }}</p>
+          <div v-if="isUploading" class="document-upload-progress">
+            <div class="document-upload-progress__meta">
+              <strong>{{ selectedFileName }}</strong>
+              <span>{{ uploadStageText }}</span>
+            </div>
+            <div class="document-upload-progress__bar">
+              <div class="document-upload-progress__value" :style="{ width: `${uploadProgress}%` }"></div>
+            </div>
+          </div>
+        </div>
+
+        <DocumentPageToolbar
+          :groups="visibleGroups"
+          :current-group-id="currentGroupId"
+          :current-group="currentGroup"
+          :is-groups-loading="appStore.isGroupsLoading"
+          :file-name="filters.fileName"
+          :status="filters.status"
+          :status-options="DOCUMENT_STATUS_OPTIONS"
+          :selected-file-name="selectedFileName"
+          :file-input-key="fileInputKey"
+          :can-manage-current-group="canManageCurrentGroup"
+          :is-uploading="isUploading"
+          @change:group-id="handleGroupChange"
+          @change:file-name="filters.fileName = $event"
+          @change:status="filters.status = $event"
+          @refresh-groups="refreshGroups"
+          @file-change="handleFileChange"
+          @upload="handleUpload"
+        />
+
+        <DocumentStatusBoard
+          :summary-items="statusSummaryItems"
+          :recent-failures="recentFailures"
+          :results-summary="resultsSummary"
+          :matched-count="visibleDocuments.length"
+        />
+
+        <article class="panel panel--wide documents-page__results">
+          <div class="panel__header">
+            <div>
+              <p class="panel__eyebrow">结果</p>
+              <h2>文件列表</h2>
+            </div>
+            <div class="documents-page__results-actions">
+              <span v-if="hasPendingDocuments" class="document-auto-refresh-hint">
+                {{ isPollingDocuments ? '自动刷新中…' : '有处理中文件，约 4 秒后自动刷新' }}
+              </span>
+              <button
+                type="button"
+                class="ghost-button"
+                :disabled="!canLoadDocuments || isLoading || isPollingDocuments"
+                @click="handleRefreshDocuments"
+              >
+                {{ isLoading ? '刷新中…' : '刷新' }}
+              </button>
+              <span class="panel__pill">{{ currentGroup ? currentGroup.groupName : '未选择' }}</span>
+            </div>
+          </div>
+
+          <form class="document-filter-form" @submit.prevent="handleApplyFilters">
+            <label class="document-filter-form__field">
+              <span>上传起</span>
+              <input v-model="filters.uploadedFrom" type="date" />
+            </label>
+
+            <label class="document-filter-form__field">
+              <span>上传止</span>
+              <input v-model="filters.uploadedTo" type="date" />
+            </label>
+
+            <div class="document-filter-form__actions">
+              <div class="document-filter-form__meta">
+                <p class="filter-hint">{{ filterHint }}</p>
+                <p class="filter-hint">{{ groupScopeSummary }}</p>
+              </div>
+              <div class="document-filter-form__buttons">
+                <button type="button" class="ghost-button" @click="handleResetFilters">重置</button>
+                <button type="submit" class="primary-button" :disabled="isLoading || !canLoadDocuments">
+                  {{ isLoading ? '筛选中…' : '应用' }}
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <p v-if="appStore.isGroupsLoading" class="placeholder-text">正在同步可用知识库…</p>
+          <p v-else-if="currentGroup === null" class="placeholder-text">请先选择知识库。</p>
+          <p v-else-if="isLoading" class="placeholder-text">正在加载文件列表…</p>
+          <p v-else-if="visibleDocuments.length === 0" class="placeholder-text">{{ emptyStateMessage }}</p>
+
+          <div v-else class="document-table-wrap">
+            <table class="document-table">
+              <thead>
+                <tr>
+                  <th>文件</th>
+                  <th>类型</th>
+                  <th>大小</th>
+                  <th>上传用户</th>
+                  <th>状态与异常</th>
+                  <th>上传时间</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="item in visibleDocuments" :key="item.documentId">
+                  <td>
+                    <strong>{{ item.fileName }}</strong>
+                  </td>
+                  <td><span>{{ describeDocumentRow(item) }}</span></td>
+                  <td><span>{{ formatDocumentFileSize(item.fileSize) }}</span></td>
+                  <td>
+                    <strong>{{ formatUploaderLabel(item) }}</strong>
+                  </td>
+                  <td>
+                    <span class="status-chip" :data-tone="getDocumentStatusMeta(item.status).tone">
+                      {{ getDocumentStatusMeta(item.status).label }}
+                    </span>
+                    <span v-if="item.failureReason" class="table-note table-note--danger">
+                      {{ item.failureReason }}
+                    </span>
+                    <span v-else class="table-note">
+                      {{ item.previewText ? '已带缓存预览片段' : '预览将按需调用接口' }}
+                    </span>
+                  </td>
+                  <td>{{ formatDocumentDateTime(item.uploadedAt) }}</td>
+                  <td>
+                    <div class="table-actions">
+                      <button
+                        class="ghost-button"
+                        :class="{ 'preview-trigger--disabled': !canPreviewDocument(item, currentGroupRelation) }"
+                        :disabled="!canPreviewDocument(item, currentGroupRelation)"
+                        @click="handlePreview(item)"
+                      >
+                        {{ getPreviewButtonLabel(item, currentGroupRelation) }}
+                      </button>
+                      <button
+                        v-if="canManageCurrentGroup && item.status === 'FAILED'"
+                        class="ghost-button"
+                        :disabled="retryingDocumentIds.has(item.documentId)"
+                        @click="handleRetryIngestion(item)"
+                      >
+                        {{ retryingDocumentIds.has(item.documentId) ? '处理中...' : '重试处理' }}
+                      </button>
+                      <button
+                        v-if="canManageCurrentGroup"
+                        class="ghost-button ghost-button--danger"
+                        :disabled="deletingDocumentIds.has(item.documentId) || retryingDocumentIds.has(item.documentId)"
+                        @click="handleDelete(item.documentId, item.fileName)"
+                      >
+                        {{ deletingDocumentIds.has(item.documentId) ? '删除中...' : '删除' }}
+                      </button>
+                    </div>
+                    <span v-if="!canPreviewDocument(item, currentGroupRelation)" class="table-note">
+                      当前仅可查看已就绪文件预览
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </main>
+    </template>
+  </WorkbenchShell>
+
+  <Teleport to="body">
+    <div v-if="isPreviewOpen" class="document-preview-backdrop" @click.self="closePreview">
+      <section class="document-preview-panel" role="dialog" aria-modal="true" aria-labelledby="document-preview-title">
+        <header>
+          <div>
+            <p class="panel__eyebrow">文档预览</p>
+            <h2 id="document-preview-title">{{ previewFileName }}</h2>
+            <p class="document-preview-meta">
+              文档 #{{ previewDocumentId }} · {{ getDocumentStatusMeta(previewStatus).label }} · 最多展示前 200 字
+            </p>
+          </div>
+          <button class="ghost-button" @click="closePreview">关闭</button>
+        </header>
+
+        <p v-if="previewMessage" :class="previewMessageTone === 'error' ? 'feedback feedback--error' : 'document-preview-note'">
+          {{ previewMessage }}
+        </p>
+
+        <p v-if="isPreviewLoading && previewText.length === 0" class="placeholder-text">正在加载预览内容...</p>
+        <div v-else class="document-preview-text">
+          {{ previewText || '当前文件暂无可展示的前 200 字预览。' }}
+        </div>
+
+        <div class="document-preview-actions">
+          <button class="primary-button" @click="closePreview">完成</button>
+        </div>
+      </section>
+    </div>
+  </Teleport>
+</template>

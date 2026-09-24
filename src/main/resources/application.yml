@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: springmind
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      max-file-size: 256MB
+      max-request-size: 256MB
+
+app:
+  ai:
+    chat:
+      # Any OpenAI-compatible chat endpoint can be used.
+      base-url: ${AI_BASE_URL:https://api.openai.com/v1}
+      api-key: ${AI_API_KEY:}
+      model: ${AI_CHAT_MODEL:gpt-4o-mini}
