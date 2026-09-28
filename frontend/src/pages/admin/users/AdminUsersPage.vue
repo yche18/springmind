@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import {
   fetchAdminUsers,
   resetAdminUserPassword,
@@ -12,6 +13,7 @@ import { extractApiError } from '../../../api/http'
 import { formatChinaDateTime } from '../../../utils/date-time'
 
 const router = useRouter()
+const { t } = useI18n({ useScope: 'global' })
 const users = ref<AdminUserItem[]>([])
 const pageError = ref('')
 const pageFeedback = ref('')
@@ -41,9 +43,9 @@ const filteredUsers = computed(() => {
 })
 const resultSummary = computed(() => {
   if (filteredUsers.value.length === users.value.length) {
-    return `当前共展示 ${filteredUsers.value.length} 个用户。`
+    return t('admin.displayedUsers', { count: filteredUsers.value.length })
   }
-  return `总计 ${users.value.length} 个用户，当前筛选命中 ${filteredUsers.value.length} 个。`
+  return t('admin.matchedUsers', { total: users.value.length, matched: filteredUsers.value.length })
 })
 
 onMounted(() => {
@@ -56,7 +58,7 @@ async function loadUsers() {
   try {
     users.value = await fetchAdminUsers()
   } catch (error) {
-    pageError.value = extractApiError(error, '加载用户列表失败')
+    pageError.value = extractApiError(error, t('errors.loadUsers'))
   } finally {
     isLoading.value = false
   }
@@ -64,22 +66,22 @@ async function loadUsers() {
 
 async function handleStatusChange(user: AdminUserItem) {
   const nextStatus: UserStatus = user.status === 'ACTIVE' ? 'DISABLED' : 'ACTIVE'
-  const actionLabel = nextStatus === 'DISABLED' ? '禁用' : '启用'
-  if (!window.confirm(`确认${actionLabel}用户「${user.username}」吗？`)) return
+  const actionLabel = t(nextStatus === 'DISABLED' ? 'admin.disableVerb' : 'admin.enableVerb')
+  if (!window.confirm(t('admin.confirmStatus', { action: actionLabel, name: user.username }))) return
 
-  await runUserAction(user.userId, `${actionLabel}用户失败`, async () => {
+  await runUserAction(user.userId, t('admin.statusChangeFailed'), async () => {
     await updateAdminUserStatus(user.userId, nextStatus)
-    pageFeedback.value = `已${actionLabel}用户「${user.username}」。`
+    pageFeedback.value = t(nextStatus === 'DISABLED' ? 'admin.disabledUser' : 'admin.enabledUser', { name: user.username })
   })
 }
 
 async function handleResetPassword(user: AdminUserItem) {
-  const newPassword = window.prompt(`请输入「${user.username}」的新密码`)
+  const newPassword = window.prompt(t('admin.newPasswordPrompt', { name: user.username }))
   if (newPassword === null) return
 
-  await runUserAction(user.userId, '重置密码失败', async () => {
+  await runUserAction(user.userId, t('admin.resetPasswordFailed'), async () => {
     await resetAdminUserPassword(user.userId, newPassword)
-    pageFeedback.value = `已重置用户「${user.username}」的密码。`
+    pageFeedback.value = t('admin.passwordReset', { name: user.username })
   })
 }
 
@@ -103,7 +105,7 @@ async function runUserAction(userId: number, fallbackMessage: string, action: ()
 }
 
 function formatLastLogin(value: string | null) {
-  return formatChinaDateTime(value, '从未登录')
+  return formatChinaDateTime(value, t('common.never'))
 }
 
 function updateStatusFilter(value: 'ALL' | UserStatus) {
@@ -116,32 +118,32 @@ function updateStatusFilter(value: 'ALL' | UserStatus) {
     <article class="admin-panel admin-panel--hero">
       <div class="admin-panel__header">
         <div>
-          <p class="panel__eyebrow">用户总览</p>
-          <h2>用户管理</h2>
+          <p class="panel__eyebrow">{{ $t('admin.userOverview') }}</p>
+          <h2>{{ $t('admin.users') }}</h2>
           <p class="admin-panel__description">
-            先看账号状态，再决定禁用、重置密码或进入详情页，避免在同一表格里混淆治理动作。
+            {{ $t('admin.usersIntro') }}
           </p>
         </div>
         <div class="admin-panel__header-actions">
-          <button class="ghost-button" type="button" @click="void loadUsers()">刷新列表</button>
+          <button class="ghost-button" type="button" @click="void loadUsers()">{{ $t('admin.refreshList') }}</button>
         </div>
       </div>
 
       <div class="admin-stats">
         <article>
-          <span>活跃用户</span>
+          <span>{{ $t('admin.activeUsers') }}</span>
           <strong>{{ activeUsers }}</strong>
-          <small>可正常登录并进入授权区域</small>
+          <small>{{ $t('admin.activeUsersHint') }}</small>
         </article>
         <article>
-          <span>禁用用户</span>
+          <span>{{ $t('admin.disabledUsers') }}</span>
           <strong>{{ disabledUsers }}</strong>
-          <small>仍保留账号信息，但当前会话应被阻断</small>
+          <small>{{ $t('admin.disabledUsersHint') }}</small>
         </article>
         <article>
-          <span>待改密用户</span>
+          <span>{{ $t('admin.passwordChangeUsers') }}</span>
           <strong>{{ mustChangePasswordUsers }}</strong>
-          <small>首次开通或重置密码后需立即更新口令</small>
+          <small>{{ $t('admin.passwordChangeUsersHint') }}</small>
         </article>
       </div>
     </article>
@@ -149,13 +151,13 @@ function updateStatusFilter(value: 'ALL' | UserStatus) {
     <article class="admin-panel admin-panel--table">
       <div class="admin-panel__header admin-panel__header--stacked">
         <div>
-          <p class="panel__eyebrow">筛选条件</p>
-          <h2>列表筛选</h2>
+          <p class="panel__eyebrow">{{ $t('admin.filterConditions') }}</p>
+          <h2>{{ $t('admin.listFilter') }}</h2>
           <p class="admin-panel__description">{{ resultSummary }}</p>
         </div>
-        <div class="admin-filter-bar" aria-label="用户筛选">
+        <div class="admin-filter-bar" :aria-label="$t('admin.userFilter')">
           <label class="admin-filter-field">
-            <span>状态</span>
+            <span>{{ $t('common.status') }}</span>
             <div class="admin-filter-pills">
               <button
                 class="admin-filter-pill"
@@ -163,7 +165,7 @@ function updateStatusFilter(value: 'ALL' | UserStatus) {
                 type="button"
                 @click="updateStatusFilter('ALL')"
               >
-                全部
+                {{ $t('admin.all') }}
               </button>
               <button
                 class="admin-filter-pill"
@@ -171,7 +173,7 @@ function updateStatusFilter(value: 'ALL' | UserStatus) {
                 type="button"
                 @click="updateStatusFilter('ACTIVE')"
               >
-                启用中
+                {{ $t('admin.active') }}
               </button>
               <button
                 class="admin-filter-pill"
@@ -179,18 +181,18 @@ function updateStatusFilter(value: 'ALL' | UserStatus) {
                 type="button"
                 @click="updateStatusFilter('DISABLED')"
               >
-                已禁用
+                {{ $t('common.disabled') }}
               </button>
             </div>
           </label>
 
           <label class="admin-filter-field admin-filter-field--search">
-            <span>检索</span>
+            <span>{{ $t('admin.searchLabel') }}</span>
             <input
               v-model="searchKeyword"
               type="search"
               maxlength="128"
-              placeholder="按姓名、用户名、邮箱或账号编码筛选"
+              :placeholder="$t('admin.searchUsers')"
             />
           </label>
         </div>
@@ -198,24 +200,20 @@ function updateStatusFilter(value: 'ALL' | UserStatus) {
 
       <p v-if="pageFeedback" class="feedback feedback--success">{{ pageFeedback }}</p>
       <p v-if="pageError" class="feedback feedback--error">{{ pageError }}</p>
-      <p v-if="isLoading" class="placeholder-text">正在加载用户列表...</p>
+      <p v-if="isLoading" class="placeholder-text">{{ $t('admin.loadingUsers') }}</p>
 
       <div v-else-if="filteredUsers.length === 0" class="admin-empty-state">
-        <p class="panel__eyebrow">暂无结果</p>
-        <h3>当前筛选没有命中用户</h3>
-        <p>可以先清空状态筛选或搜索关键字，再重新查看全部账号。</p>
+        <p class="panel__eyebrow">{{ $t('admin.noResults') }}</p>
+        <h3>{{ $t('admin.noMatchingUsers') }}</h3>
+        <p>{{ $t('admin.noMatchingUsersHint') }}</p>
       </div>
 
       <div v-else class="admin-table-wrap">
         <table>
           <thead>
             <tr>
-              <th>用户</th>
-              <th>角色</th>
-              <th>账号状态</th>
-              <th>密码状态</th>
-              <th>最近登录</th>
-              <th>操作</th>
+              <th>{{ $t('admin.user') }}</th><th>{{ $t('common.role') }}</th><th>{{ $t('admin.accountStatus') }}</th>
+              <th>{{ $t('admin.passwordStatus') }}</th><th>{{ $t('admin.lastLogin') }}</th><th>{{ $t('common.actions') }}</th>
             </tr>
           </thead>
           <tbody>
@@ -225,14 +223,14 @@ function updateStatusFilter(value: 'ALL' | UserStatus) {
                   <strong>{{ user.displayName }}</strong>
                   <span>{{ user.username }}</span>
                   <small>{{ user.email }}</small>
-                  <small>用户 ID：{{ user.userId }}</small>
-                  <small>账号编码：{{ user.userCode }}</small>
+                  <small>{{ $t('admin.userMetaId', { id: user.userId }) }}</small>
+                  <small>{{ $t('admin.accountCodeMeta', { code: user.userCode }) }}</small>
                   <button
                     class="admin-user-cell__link"
                     type="button"
                     @click="router.push(`/admin/users/${user.userId}`)"
                   >
-                    查看详情
+                    {{ $t('common.details') }}
                   </button>
                 </div>
               </td>
@@ -247,7 +245,7 @@ function updateStatusFilter(value: 'ALL' | UserStatus) {
                   class="admin-security-pill"
                   :data-tone="user.mustChangePassword ? 'warning' : 'normal'"
                 >
-                  {{ user.mustChangePassword ? '待改密' : '正常' }}
+                  {{ user.mustChangePassword ? $t('admin.pendingPassword') : $t('common.normal') }}
                 </span>
               </td>
               <td>{{ formatLastLogin(user.lastLoginAt) }}</td>
@@ -259,7 +257,7 @@ function updateStatusFilter(value: 'ALL' | UserStatus) {
                     :disabled="actionUserIds.has(user.userId)"
                     @click="handleStatusChange(user)"
                   >
-                    {{ user.status === 'ACTIVE' ? '禁用' : '启用' }}
+                    {{ user.status === 'ACTIVE' ? $t('admin.disableVerb') : $t('admin.enableVerb') }}
                   </button>
                   <button
                     class="ghost-button"
@@ -267,7 +265,7 @@ function updateStatusFilter(value: 'ALL' | UserStatus) {
                     :disabled="actionUserIds.has(user.userId)"
                     @click="handleResetPassword(user)"
                   >
-                    重置密码
+                    {{ $t('admin.resetPassword') }}
                   </button>
                 </div>
               </td>

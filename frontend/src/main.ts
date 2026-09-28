@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import { pinia } from './stores/pinia'
+import { i18n } from './i18n'
 import { installHttpCryptoPolyfill } from './utils/secure-crypto'
 import './style.css'
 
@@ -11,5 +12,6 @@ installHttpCryptoPolyfill()
 const app = createApp(App)
 
 app.use(pinia)
+app.use(i18n)
 app.use(router)
 app.mount('#app')

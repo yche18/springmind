@@ -1,4 +1,5 @@
 import http, { type ApiResponse } from './http'
+import { translate } from '../i18n'
 
 export type DocumentGroupRelation = 'OWNER' | 'MEMBER'
 
@@ -107,7 +108,7 @@ export async function uploadDocument(payload: UploadDocumentPayload): Promise<nu
   const { data } = await http.post<ApiResponse<number>>('/documents/upload', formData)
 
   if (!data.success || typeof data.data !== 'number') {
-    throw new Error(data.message ?? '上传文件失败')
+    throw new Error(data.message ?? translate('errors.uploadFile'))
   }
 
   return data.data
@@ -119,7 +120,7 @@ export async function initDocumentUpload(
   const { data } = await http.post<ApiResponse<UploadInitResult>>('/documents/upload/init', payload)
 
   if (!data.success || !data.data) {
-    throw new Error(data.message ?? '初始化上传失败')
+    throw new Error(data.message ?? translate('errors.initializeUpload'))
   }
 
   return normalizeUploadInitResult(data.data)
@@ -142,7 +143,7 @@ export async function uploadDocumentChunk(
   })
 
   if (!data.success || !data.data) {
-    throw new Error(data.message ?? '上传分片失败')
+    throw new Error(data.message ?? translate('errors.uploadChunk'))
   }
 
   return normalizeUploadStatusResult(data.data)
@@ -152,7 +153,7 @@ export async function fetchUploadStatus(uploadId: string): Promise<UploadStatusR
   const { data } = await http.get<ApiResponse<UploadStatusResult>>(`/documents/upload/${uploadId}`)
 
   if (!data.success || !data.data) {
-    throw new Error(data.message ?? '获取上传状态失败')
+    throw new Error(data.message ?? translate('errors.uploadStatus'))
   }
 
   return normalizeUploadStatusResult(data.data)
@@ -162,7 +163,7 @@ export async function completeDocumentUpload(uploadId: string): Promise<number> 
   const { data } = await http.post<ApiResponse<number>>(`/documents/upload/${uploadId}/complete`)
 
   if (!data.success || typeof data.data !== 'number') {
-    throw new Error(data.message ?? '完成上传失败')
+    throw new Error(data.message ?? translate('errors.completeUpload'))
   }
 
   return data.data
@@ -174,7 +175,7 @@ export async function deleteDocument(documentId: number, groupId: number): Promi
   })
 
   if (!data.success) {
-    throw new Error(data.message ?? '删除文档失败')
+    throw new Error(data.message ?? translate('errors.deleteDocument'))
   }
 }
 
@@ -184,7 +185,7 @@ export async function retryDocumentIngestion(documentId: number, groupId: number
   })
 
   if (!data.success) {
-    throw new Error(data.message ?? '重新处理文档失败')
+    throw new Error(data.message ?? translate('errors.retryDocument'))
   }
 }
 
@@ -238,7 +239,7 @@ function normalizeDocumentPreviewPayload(
   return {
     documentId: readNumber(source.documentId) ?? fallbackDocumentId,
     groupId: readNumber(source.groupId) ?? fallbackGroupId,
-    fileName: readString(source.fileName) ?? `文档 #${fallbackDocumentId}`,
+    fileName: readString(source.fileName) ?? `${translate('documents.file')} #${fallbackDocumentId}`,
     previewText,
     status: readString(source.status),
   }
@@ -307,7 +308,7 @@ function normalizeDocumentItem(source: Record<string, unknown> | null): Document
   return {
     documentId,
     groupId: readNumber(source.groupId) ?? 0,
-    fileName: readString(source.fileName) ?? `文档 #${documentId}`,
+    fileName: readString(source.fileName) ?? `${translate('documents.file')} #${documentId}`,
     fileExt: readString(source.fileExt),
     contentType: readString(source.contentType),
     fileSize: readNumber(source.fileSize) ?? 0,

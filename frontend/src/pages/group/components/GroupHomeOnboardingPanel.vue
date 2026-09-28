@@ -34,26 +34,26 @@ function handleJoinGroupCodeInput(event: Event) {
   <section class="group-home-onboarding">
     <header class="group-home-onboarding__hero">
       <div class="group-home-onboarding__copy">
-        <p class="group-home-onboarding__eyebrow">开始使用</p>
+        <p class="group-home-onboarding__eyebrow">{{ $t('groups.gettingStartedEyebrow') }}</p>
         <h2>
-          {{ hasAnyWorkspaceItem ? (hasSelection ? '工作台已就绪' : '从左侧选择一个组开始') : '创建或加入第一个组' }}
+          {{ hasAnyWorkspaceItem ? (hasSelection ? $t('groups.workspaceReady') : $t('groups.selectToStart')) : $t('groups.gettingStarted') }}
         </h2>
         <p>
-          你好，{{ currentUserLabel }}。先在这里确定协作组，再去文档中心上传资料，或在问答/助手中基于证据提问。
+          {{ $t('groups.onboardingHello', { name: currentUserLabel }) }}
         </p>
       </div>
 
       <div class="group-home-onboarding__stats">
         <article>
-          <span>我拥有的组</span>
+          <span>{{ $t('groups.owned') }}</span>
           <strong>{{ ownedCount }}</strong>
         </article>
         <article>
-          <span>我加入的组</span>
+          <span>{{ $t('groups.joined') }}</span>
           <strong>{{ joinedCount }}</strong>
         </article>
         <article>
-          <span>待处理邀请</span>
+          <span>{{ $t('groups.invitations') }}</span>
           <strong>{{ invitationCount }}</strong>
         </article>
       </div>
@@ -62,9 +62,9 @@ function handleJoinGroupCodeInput(event: Event) {
     <section class="group-home-onboarding__steps">
       <article class="group-home-onboarding__step">
         <span class="group-home-onboarding__step-index">01</span>
-        <h3>确认当前组</h3>
-        <p v-if="hasAnyWorkspaceItem">从左侧选择组或待处理邀请，中间会进入对应详情。</p>
-        <p v-else>还没有组时，先创建自己的知识库，或申请加入已有组。</p>
+        <h3>{{ $t('groups.confirmCurrentGroup') }}</h3>
+        <p v-if="hasAnyWorkspaceItem">{{ $t('groups.chooseExistingHint') }}</p>
+        <p v-else>{{ $t('groups.noGroupHint') }}</p>
         <div class="group-home-onboarding__actions">
           <button
             v-if="ownedCount > 0"
@@ -72,7 +72,7 @@ function handleJoinGroupCodeInput(event: Event) {
             type="button"
             @click="emit('focus', 'ownedGroup')"
           >
-            查看我拥有的组
+            {{ $t('groups.viewOwned') }}
           </button>
           <button
             v-else-if="joinedCount > 0"
@@ -80,36 +80,36 @@ function handleJoinGroupCodeInput(event: Event) {
             type="button"
             @click="emit('focus', 'joinedGroup')"
           >
-            查看我加入的组
+            {{ $t('groups.viewJoined') }}
           </button>
-          <button v-else class="primary-button" type="button" @click="emit('openCreate')">创建第一个组</button>
+          <button v-else class="primary-button" type="button" @click="emit('openCreate')">{{ $t('groups.createFirst') }}</button>
           <button
             v-if="invitationCount > 0"
             class="ghost-button"
             type="button"
             @click="emit('focus', 'invitation')"
           >
-            先处理邀请
+            {{ $t('groups.processInvitations') }}
           </button>
         </div>
       </article>
 
       <article class="group-home-onboarding__step">
         <span class="group-home-onboarding__step-index">02</span>
-        <h3>准备文档</h3>
-        <p>选中组后，到文档中心上传并确认索引状态。</p>
+        <h3>{{ $t('groups.prepareDocuments') }}</h3>
+        <p>{{ $t('groups.prepareDocumentsHint') }}</p>
         <div class="group-home-onboarding__actions">
-          <RouterLink class="ghost-button group-home-onboarding__link" to="/documents">前往文档中心</RouterLink>
+          <RouterLink class="ghost-button group-home-onboarding__link" to="/documents">{{ $t('groups.goDocuments') }}</RouterLink>
         </div>
       </article>
 
       <article class="group-home-onboarding__step">
         <span class="group-home-onboarding__step-index">03</span>
-        <h3>开始提问</h3>
-        <p>确认当前组后，再到知识问答中提问，避免选错知识库。</p>
+        <h3>{{ $t('groups.startAsking') }}</h3>
+        <p>{{ $t('groups.startAskingHint') }}</p>
         <div class="group-home-onboarding__actions">
-          <RouterLink class="ghost-button group-home-onboarding__link" to="/qa">知识问答</RouterLink>
-          <button class="ghost-button" type="button" @click="emit('openSecurity')">账号安全</button>
+          <RouterLink class="ghost-button group-home-onboarding__link" to="/qa">{{ $t('qa.title') }}</RouterLink>
+          <button class="ghost-button" type="button" @click="emit('openSecurity')">{{ $t('groups.accountSecurity') }}</button>
         </div>
       </article>
     </section>
@@ -118,25 +118,25 @@ function handleJoinGroupCodeInput(event: Event) {
       <article class="group-home-onboarding__card">
         <div class="group-home-onboarding__card-header">
           <div>
-            <p class="panel__eyebrow">待办</p>
-            <h3>接下来做什么</h3>
+            <p class="panel__eyebrow">{{ $t('groups.todo') }}</p>
+            <h3>{{ $t('groups.nextSteps') }}</h3>
           </div>
           <span class="panel__pill panel__pill--soft">{{ invitationCount + myJoinRequestCount }}</span>
         </div>
         <ul class="group-home-onboarding__todo">
-          <li v-if="invitationCount > 0">有 {{ invitationCount }} 条邀请待处理。</li>
-          <li v-if="myJoinRequestCount > 0">有 {{ myJoinRequestCount }} 条加入申请在跟进。</li>
-          <li v-if="!hasAnyWorkspaceItem">还没有组：先创建，或输入组织 ID 申请加入。</li>
-          <li v-if="hasAnyWorkspaceItem && !hasSelection">已有组，但尚未选中具体工作区。</li>
-          <li>敏感操作前可先检查账号安全状态。</li>
+          <li v-if="invitationCount > 0">{{ $t('groups.invitationsTodo', { count: invitationCount }) }}</li>
+          <li v-if="myJoinRequestCount > 0">{{ $t('groups.requestsTodo', { count: myJoinRequestCount }) }}</li>
+          <li v-if="!hasAnyWorkspaceItem">{{ $t('groups.noGroupTodo') }}</li>
+          <li v-if="hasAnyWorkspaceItem && !hasSelection">{{ $t('groups.noSelectionTodo') }}</li>
+          <li>{{ $t('groups.securityTodo') }}</li>
         </ul>
       </article>
 
       <article class="group-home-onboarding__card">
         <div class="group-home-onboarding__card-header">
           <div>
-            <p class="panel__eyebrow">加入</p>
-            <h3>用组织 ID 申请</h3>
+            <p class="panel__eyebrow">{{ $t('groups.applyToJoin') }}</p>
+            <h3>{{ $t('groups.joinByOrganizationId') }}</h3>
           </div>
         </div>
 
@@ -145,17 +145,17 @@ function handleJoinGroupCodeInput(event: Event) {
             :value="joinGroupCode"
             type="text"
             maxlength="80"
-            placeholder="例如：engineering-team"
+            :placeholder="$t('groups.organizationIdExample')"
             @input="handleJoinGroupCodeInput"
           />
           <button class="primary-button" :disabled="isSubmittingJoinRequest" type="button" @click="emit('submitJoinRequest')">
-            {{ isSubmittingJoinRequest ? '提交中…' : '提交申请' }}
+            {{ isSubmittingJoinRequest ? $t('common.submitting') : $t('groups.submitRequest') }}
           </button>
         </div>
 
-        <p class="group-home-onboarding__hint">填写页面上的组织 ID（groupCode），不是数字主键。</p>
+        <p class="group-home-onboarding__hint">{{ $t('groups.organizationIdHelp') }}</p>
 
-        <p v-if="isMyRequestsLoading" class="placeholder-text">正在加载我的申请…</p>
+        <p v-if="isMyRequestsLoading" class="placeholder-text">{{ $t('groups.loadingMyRequests') }}</p>
         <ul v-else-if="myJoinRequests.length > 0" class="join-request-list">
           <li
             v-for="request in myJoinRequests.slice(0, 3)"
@@ -169,7 +169,7 @@ function handleJoinGroupCodeInput(event: Event) {
             <span>{{ new Date(request.createdAt).toLocaleString() }}</span>
           </li>
         </ul>
-        <p v-else class="placeholder-text">还没有提交过加入申请。</p>
+        <p v-else class="placeholder-text">{{ $t('groups.noSubmittedRequests') }}</p>
       </article>
     </section>
   </section>

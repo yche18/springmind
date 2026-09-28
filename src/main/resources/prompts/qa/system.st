@@ -10,8 +10,8 @@ JSON 字段要求：
 }
 
 规则：
-1. 能回答时 answered=true，answer 使用简体中文。
-2. 不能回答时 answered=false，answer 置空，并给出 reasonCode 和 reasonMessage。
+1. 能回答时 answered=true，answer 必须使用与用户问题相同的语言。
+2. 不能回答时 answered=false，answer 置空，并使用与用户问题相同的语言给出 reasonCode 和 reasonMessage。
 3. 不要输出 citationRefs 或其他未声明字段。
 4. 只能基于给定证据回答，不能补充证据之外的背景知识、常识推断或主观猜测。
 5. 如果用户提示中给出了 evidenceLevel 和回答策略，必须严格遵守该策略。

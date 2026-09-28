@@ -35,7 +35,7 @@ const emit = defineEmits<{
 <template>
   <aside class="group-context-aside" :class="[`group-context-aside--${variant}`, `is-${badgeTone}`]">
     <header class="group-context-aside__header">
-      <p class="group-context-aside__eyebrow">{{ variant === 'aside' ? 'Workspace Context' : '当前上下文' }}</p>
+      <p class="group-context-aside__eyebrow">{{ $t('groups.currentContext') }}</p>
       <div class="group-context-aside__title-row">
         <h2>{{ title }}</h2>
         <span class="group-context-aside__badge">{{ badgeLabel }}</span>
@@ -44,7 +44,7 @@ const emit = defineEmits<{
     </header>
 
     <section class="group-context-aside__section">
-      <h3>权限边界</h3>
+      <h3>{{ $t('groups.permissionBoundary') }}</h3>
       <ul class="group-context-aside__list">
         <li v-for="line in permissionLines" :key="line">{{ line }}</li>
       </ul>
@@ -52,20 +52,20 @@ const emit = defineEmits<{
 
     <section class="group-context-aside__section">
       <div class="group-context-aside__section-header">
-        <h3>待办摘要</h3>
+        <h3>{{ $t('groups.todoSummary') }}</h3>
         <span v-if="pendingCount > 0" class="group-context-aside__count">{{ pendingCount }}</span>
       </div>
       <p>{{ pendingLabel }}</p>
-      <button v-if="showPendingFocus" class="ghost-button" type="button" @click="emit('focusPending')">查看左栏待处理</button>
+      <button v-if="showPendingFocus" class="ghost-button" type="button" @click="emit('focusPending')">{{ $t('groups.viewPending') }}</button>
     </section>
 
     <section class="group-context-aside__section">
-      <h3>快捷动作</h3>
+      <h3>{{ $t('groups.quickActions') }}</h3>
       <div class="group-context-aside__actions">
-        <button class="primary-button" type="button" @click="emit('openCreate')">创建组</button>
-        <button class="ghost-button" type="button" @click="emit('openSecurity')">账户安全</button>
-        <RouterLink class="ghost-button group-context-aside__link" to="/documents">去文档</RouterLink>
-        <RouterLink class="ghost-button group-context-aside__link" to="/qa">去问答</RouterLink>
+        <button class="primary-button" type="button" @click="emit('openCreate')">{{ $t('groups.createGroup') }}</button>
+        <button class="ghost-button" type="button" @click="emit('openSecurity')">{{ $t('groups.accountSecurity') }}</button>
+        <RouterLink class="ghost-button group-context-aside__link" to="/documents">{{ $t('groups.goDocuments') }}</RouterLink>
+        <RouterLink class="ghost-button group-context-aside__link" to="/qa">{{ $t('groups.goQa') }}</RouterLink>
         <button
           v-if="showInvitationActions"
           class="primary-button"
@@ -73,7 +73,7 @@ const emit = defineEmits<{
           type="button"
           @click="emit('acceptInvitation')"
         >
-          接受邀请
+          {{ $t('groups.acceptInvitation') }}
         </button>
         <button
           v-if="showInvitationActions"
@@ -82,7 +82,7 @@ const emit = defineEmits<{
           type="button"
           @click="emit('rejectInvitation')"
         >
-          拒绝邀请
+          {{ $t('groups.rejectInvitation') }}
         </button>
         <button
           v-if="showLeaveAction"
@@ -91,7 +91,7 @@ const emit = defineEmits<{
           type="button"
           @click="emit('leaveGroup')"
         >
-          退出当前组
+          {{ $t('groups.leaveCurrent') }}
         </button>
       </div>
     </section>

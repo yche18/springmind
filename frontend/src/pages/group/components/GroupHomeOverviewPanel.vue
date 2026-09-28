@@ -43,32 +43,32 @@ function handleJoinGroupCodeInput(event: Event) {
       <article class="group-home-overview__card group-home-overview__card--pending-summary">
         <div class="group-home-overview__header">
           <div>
-            <p class="panel__eyebrow">待办</p>
-            <h3>待处理事项</h3>
+            <p class="panel__eyebrow">{{ $t('groups.todo') }}</p>
+            <h3>{{ $t('groups.pendingItems') }}</h3>
           </div>
           <span class="panel__pill panel__pill--pending">{{ totalPendingCount }}</span>
         </div>
 
         <div class="group-home-overview__pending-total">
           <strong>{{ totalPendingCount }}</strong>
-          <span>汇总邀请、我的申请与当前组审批，方便先处理待办。</span>
+          <span>{{ $t('groups.pendingSummary') }}</span>
         </div>
       </article>
 
       <article class="group-home-overview__card">
         <div class="group-home-overview__header">
           <div>
-            <p class="panel__eyebrow">邀请</p>
-            <h3>最近邀请</h3>
+            <p class="panel__eyebrow">{{ $t('groups.invite') }}</p>
+            <h3>{{ $t('groups.recentInvitations') }}</h3>
           </div>
           <span class="panel__pill panel__pill--pending">{{ pendingInvitations.length }}</span>
         </div>
 
-        <p v-if="pendingInvitations.length === 0" class="placeholder-text">暂无新邀请。</p>
+        <p v-if="pendingInvitations.length === 0" class="placeholder-text">{{ $t('groups.noNewInvitations') }}</p>
         <ul v-else class="group-home-overview__list">
           <li v-for="invitation in pendingInvitations.slice(0, 3)" :key="`overview-invitation-${invitation.invitationId}`">
             <strong>{{ invitation.groupName }}</strong>
-            <span>来自 {{ invitation.inviterDisplayName }} · {{ invitation.status }}</span>
+            <span>{{ $t('groups.fromUser', { name: invitation.inviterDisplayName }) }} · {{ invitation.status }}</span>
           </li>
         </ul>
       </article>
@@ -76,14 +76,14 @@ function handleJoinGroupCodeInput(event: Event) {
       <article class="group-home-overview__card">
         <div class="group-home-overview__header">
           <div>
-            <p class="panel__eyebrow">申请</p>
-            <h3>我的申请</h3>
+            <p class="panel__eyebrow">{{ $t('groups.applyToJoin') }}</p>
+            <h3>{{ $t('groups.myRequests') }}</h3>
           </div>
           <span class="panel__pill panel__pill--soft">{{ myJoinRequests.length }}</span>
         </div>
 
-        <p v-if="isMyRequestsLoading" class="placeholder-text">正在加载申请…</p>
-        <p v-else-if="myJoinRequests.length === 0" class="placeholder-text">暂无跟进中的申请。</p>
+        <p v-if="isMyRequestsLoading" class="placeholder-text">{{ $t('groups.loadingRequests') }}</p>
+        <p v-else-if="myJoinRequests.length === 0" class="placeholder-text">{{ $t('groups.noActiveRequests') }}</p>
         <ul v-else class="group-home-overview__list">
           <li v-for="request in myJoinRequests.slice(0, 3)" :key="`overview-request-${request.requestId}`">
             <strong>{{ request.groupName }}</strong>
@@ -95,25 +95,25 @@ function handleJoinGroupCodeInput(event: Event) {
       <article class="group-home-overview__card group-home-overview__card--join">
         <div class="group-home-overview__header">
           <div>
-            <p class="panel__eyebrow">加入</p>
-            <h3>用组织 ID 申请</h3>
+            <p class="panel__eyebrow">{{ $t('groups.applyToJoin') }}</p>
+            <h3>{{ $t('groups.joinByOrganizationId') }}</h3>
           </div>
         </div>
 
-        <p class="group-home-overview__copy">输入组织 ID（groupCode）申请加入其他知识库。</p>
+        <p class="group-home-overview__copy">{{ $t('groups.joinPrompt') }}</p>
         <div class="groups-inline-form">
           <input
             :value="joinGroupCode"
             type="text"
             maxlength="80"
-            placeholder="例如：engineering-team"
+            :placeholder="$t('groups.organizationIdExample')"
             @input="handleJoinGroupCodeInput"
           />
           <button class="primary-button" :disabled="isSubmittingJoinRequest" type="button" @click="emit('submitJoinRequest')">
-            {{ isSubmittingJoinRequest ? '提交中…' : '提交申请' }}
+            {{ isSubmittingJoinRequest ? $t('common.submitting') : $t('groups.submitRequest') }}
           </button>
         </div>
-        <p class="group-home-overview__hint">填写页面上的组织 ID，不是数字主键。</p>
+        <p class="group-home-overview__hint">{{ $t('groups.organizationIdHelp') }}</p>
       </article>
     </div>
   </section>

@@ -39,81 +39,81 @@ function handleGroupChange(event: Event) {
   <article class="panel qa-prompt-panel">
     <div class="panel__header">
       <div>
-        <p class="panel__eyebrow">提问</p>
-        <h2>选择知识库并提问</h2>
+        <p class="panel__eyebrow">{{ $t('qa.ask') }}</p>
+        <h2>{{ $t('qa.selectKnowledgeBase') }}</h2>
       </div>
       <button class="ghost-button" type="button" :disabled="isGroupsRefreshing" @click="emit('refresh-groups')">
-        {{ isGroupsRefreshing ? '同步中…' : '刷新列表' }}
+        {{ isGroupsRefreshing ? $t('qa.syncing') : $t('qa.refreshList') }}
       </button>
     </div>
 
     <section class="qa-prompt-panel__workspace">
       <div class="qa-prompt-panel__workspace-copy">
-        <span class="qa-prompt-panel__workspace-label">当前知识库</span>
-        <strong>{{ currentGroup?.groupName ?? '未选择' }}</strong>
+        <span class="qa-prompt-panel__workspace-label">{{ $t('qa.currentScope') }}</span>
+        <strong>{{ currentGroup?.groupName ?? $t('common.notSelected') }}</strong>
         <p>{{ currentGroupDescription }}</p>
         <small>{{ currentRoleHint }}</small>
       </div>
       <div class="qa-prompt-panel__workspace-status">
-        <span class="panel__pill">{{ hasGroups ? '组内检索' : '无可用组' }}</span>
+        <span class="panel__pill">{{ hasGroups ? $t('qa.groupRetrieval') : $t('qa.noGroups') }}</span>
         <span class="qa-prompt-panel__workspace-tip">
-          {{ currentGroupId !== null ? '范围已锁定' : '请先选择知识库' }}
+          {{ currentGroupId !== null ? $t('qa.scopeLocked') : $t('qa.selectKnowledgeBase') }}
         </span>
       </div>
     </section>
 
     <section class="qa-prompt-panel__selection-board">
       <div class="qa-prompt-panel__selection-copy">
-        <p class="qa-prompt-panel__section-label">步骤 1</p>
-        <h3>选择知识库</h3>
-        <p>只在当前选中的组内检索，不会跨组作答。</p>
+        <p class="qa-prompt-panel__section-label">{{ $t('qa.stepOne') }}</p>
+        <h3>{{ $t('qa.selectKnowledgeBase') }}</h3>
+        <p>{{ $t('qa.selectionBoundary') }}</p>
       </div>
 
       <label class="qa-prompt-panel__scope-field">
-        <span>知识库空间</span>
+        <span>{{ $t('qa.knowledgeBaseSpace') }}</span>
         <div class="qa-prompt-panel__scope-select-wrap">
           <select class="qa-prompt-panel__scope-select" :value="currentGroupId ?? ''" :disabled="!hasGroups" @change="handleGroupChange">
-            <option value="">{{ hasGroups ? '请选择当前问答范围' : '当前没有可用知识库' }}</option>
-            <optgroup v-if="ownedGroups.length > 0" label="我拥有的知识库">
+            <option value="">{{ hasGroups ? $t('qa.selectScope') : $t('qa.noGroups') }}</option>
+            <optgroup v-if="ownedGroups.length > 0" :label="$t('qa.ownedKnowledgeBases')">
               <option
                 v-for="group in ownedGroups"
                 :key="`qa-owned-${group.groupId}`"
                 :value="group.groupId"
               >
-                {{ group.groupName }} · 所有者
+                {{ group.groupName }} · {{ $t('common.owner') }}
               </option>
             </optgroup>
-            <optgroup v-if="joinedGroups.length > 0" label="我加入的知识库">
+            <optgroup v-if="joinedGroups.length > 0" :label="$t('qa.joinedKnowledgeBases')">
               <option
                 v-for="group in joinedGroups"
                 :key="`qa-joined-${group.groupId}`"
                 :value="group.groupId"
               >
-                {{ group.groupName }} · 成员
+                {{ group.groupName }} · {{ $t('common.member') }}
               </option>
             </optgroup>
           </select>
         </div>
         <p class="qa-prompt-panel__scope-hint">
-          {{ currentGroup ? `当前已锁定：「${currentGroup.groupName}」` : `当前共有 ${selectableGroups} 个可选知识库` }}
+          {{ currentGroup ? $t('qa.lockedScope', { name: currentGroup.groupName }) : $t('qa.selectableCount', { count: selectableGroups }) }}
         </p>
       </label>
     </section>
 
     <section class="qa-prompt-panel__composer-card">
       <div class="qa-prompt-panel__selection-copy">
-        <p class="qa-prompt-panel__section-label">步骤 2</p>
-        <h3>输入问题</h3>
-        <p>问题越具体，越容易命中有效证据。</p>
+        <p class="qa-prompt-panel__section-label">{{ $t('qa.stepTwo') }}</p>
+        <h3>{{ $t('qa.enterQuestion') }}</h3>
+        <p>{{ $t('qa.specificQuestionHint') }}</p>
       </div>
 
       <label class="qa-prompt-panel__composer">
-        <span>问题</span>
+        <span>{{ $t('qa.enterQuestion') }}</span>
         <textarea
           :value="question"
           class="qa-question-box"
           maxlength="2000"
-          placeholder="例如：本组文档里关于部署步骤的说明有哪些？分别出自哪些文件？"
+          :placeholder="$t('qa.questionPlaceholder')"
           @input="emit('update:question', ($event.target as HTMLTextAreaElement).value)"
         />
       </label>
@@ -121,23 +121,23 @@ function handleGroupChange(event: Event) {
       <div class="qa-prompt-panel__footer">
         <div class="qa-prompt-panel__footer-copy">
           <span>{{ questionLength }}/2000</span>
-          <p>仅使用当前组内可引用的证据片段。</p>
+          <p>{{ $t('qa.evidenceOnlyHint') }}</p>
         </div>
         <button class="primary-button" type="button" :disabled="isSubmitting || !canSubmit" @click="emit('submit')">
-          {{ isSubmitting ? '检索中…' : '提问' }}
+          {{ isSubmitting ? $t('qa.asking') : $t('qa.ask') }}
         </button>
       </div>
     </section>
 
     <section class="qa-prompt-panel__rules">
       <div class="qa-prompt-panel__selection-copy">
-        <p class="qa-prompt-panel__section-label">规则</p>
-        <h3>回答边界</h3>
+        <p class="qa-prompt-panel__section-label">{{ $t('qa.rules') }}</p>
+        <h3>{{ $t('qa.answerBoundary') }}</h3>
       </div>
       <ul class="qa-prompt-panel__rules-list">
-        <li>只在当前知识库内检索，不跨组。</li>
-        <li>所有者与成员都可提问，权限仍按组角色执行。</li>
-        <li>请结合证据区核对，不要只看模型正文。</li>
+        <li>{{ $t('qa.ruleScope') }}</li>
+        <li>{{ $t('qa.rulePermission') }}</li>
+        <li>{{ $t('qa.ruleEvidence') }}</li>
       </ul>
     </section>
 

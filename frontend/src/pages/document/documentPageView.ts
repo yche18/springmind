@@ -1,11 +1,12 @@
 import type { DocumentItem } from '../../api/document'
 import type { GroupRelation, VisibleGroup } from '../../stores/app'
+import { getAppLocale, translate } from '../../i18n'
 
-const STATUS_META: Record<string, { label: string; tone: string }> = {
-  UPLOADED: { label: '已上传', tone: 'queued' },
-  PROCESSING: { label: '处理中', tone: 'progress' },
-  READY: { label: '已就绪', tone: 'ready' },
-  FAILED: { label: '失败', tone: 'failed' },
+const STATUS_META: Record<string, { key: string; tone: string }> = {
+  UPLOADED: { key: 'documents.uploaded', tone: 'queued' },
+  PROCESSING: { key: 'documents.pending', tone: 'progress' },
+  READY: { key: 'documents.ready', tone: 'ready' },
+  FAILED: { key: 'documents.failed', tone: 'failed' },
 }
 
 export interface DocumentFilterForm {
@@ -31,13 +32,12 @@ export interface DocumentFailureItem {
   uploadedAt: string
 }
 
-export const DOCUMENT_STATUS_OPTIONS = [
-  { value: '', label: '全部状态' },
-  { value: 'UPLOADED', label: '已上传' },
-  { value: 'PROCESSING', label: '处理中' },
-  { value: 'READY', label: '已就绪' },
-  { value: 'FAILED', label: '失败' },
-]
+export function getDocumentStatusOptions() {
+  return [
+    { value: '', label: translate('documents.allStatuses') },
+    ...Object.entries(STATUS_META).map(([value, meta]) => ({ value, label: translate(meta.key) })),
+  ]
+}
 
 export function createDocumentFilterForm(
   context: { groupId?: number | null; relation?: GroupRelation | null } = {},
@@ -72,23 +72,24 @@ export function formatDocumentFileSize(size: number) {
 
 export function formatDocumentDateTime(raw: string) {
   const parsed = new Date(raw)
-  if (Number.isNaN(parsed.getTime())) return raw || '未知时间'
-  return new Intl.DateTimeFormat('zh-CN', { dateStyle: 'medium', timeStyle: 'short' }).format(parsed)
+  if (Number.isNaN(parsed.getTime())) return raw || translate('documents.unknownTime')
+  return new Intl.DateTimeFormat(getAppLocale() === 'zh' ? 'zh-CN' : 'en', { dateStyle: 'medium', timeStyle: 'short' }).format(parsed)
 }
 
 export function getDocumentStatusMeta(status: string) {
-  return STATUS_META[status] ?? { label: status, tone: 'queued' }
+  const meta = STATUS_META[status]
+  return meta ? { label: translate(meta.key), tone: meta.tone } : { label: status, tone: 'queued' }
 }
 
 export function formatGroupRelationLabel(relation: GroupRelation | null | undefined) {
-  if (relation === 'OWNER') return '我拥有的组'
-  if (relation === 'MEMBER') return '我加入的组'
-  return '未绑定群组'
+  if (relation === 'OWNER') return translate('documents.ownGroup')
+  if (relation === 'MEMBER') return translate('documents.joinedGroup')
+  return translate('documents.unboundGroup')
 }
 
 export function formatUploaderLabel(item: DocumentItem) {
   if (item.uploaderDisplayName) return item.uploaderDisplayName
-  return '未标记用户'
+  return translate('documents.unknownUploader')
 }
 
 export function canPreviewDocument(item: DocumentItem, relation: GroupRelation | null) {
@@ -97,7 +98,7 @@ export function canPreviewDocument(item: DocumentItem, relation: GroupRelation |
 }
 
 export function getPreviewButtonLabel(item: DocumentItem, relation: GroupRelation | null) {
-  return canPreviewDocument(item, relation) ? '查看' : '待就绪'
+  return canPreviewDocument(item, relation) ? translate('common.view') : translate('documents.waitingUntilReady')
 }
 
 export function truncatePreviewText(raw: string | null | undefined) {
@@ -113,10 +114,10 @@ export function createDocumentStatusSummary(
   const failedCount = countFailedDocuments(documents)
 
   return [
-    { key: 'ready', label: '已就绪', value: String(countReadyDocuments(documents)), description: '可直接预览与问答使用', tone: 'ready' },
-    { key: 'progress', label: '处理中', value: String(queuedCount), description: '仍在切分、向量化或排队中', tone: 'progress' },
-    { key: 'failed', label: '异常文件', value: String(failedCount), description: failedCount > 0 ? '建议优先检查失败原因' : '当前没有失败文件', tone: 'failed' },
-    { key: 'size', label: '当前体积', value: formatDocumentFileSize(totalSize), description: '按当前筛选结果累计大小', tone: 'neutral' },
+    { key: 'ready', label: translate('documents.ready'), value: String(countReadyDocuments(documents)), description: translate('documents.readyDescription'), tone: 'ready' },
+    { key: 'progress', label: translate('documents.pending'), value: String(queuedCount), description: translate('documents.processingDescription'), tone: 'progress' },
+    { key: 'failed', label: translate('documents.failedFiles'), value: String(failedCount), description: translate(failedCount > 0 ? 'documents.failureCheck' : 'documents.noFailedFiles'), tone: 'failed' },
+    { key: 'size', label: translate('documents.currentSize'), value: formatDocumentFileSize(totalSize), description: translate('documents.sizeDescription'), tone: 'neutral' },
   ]
 }
 
@@ -131,7 +132,7 @@ export function collectRecentDocumentFailures(
     .map((item) => ({
       documentId: item.documentId,
       fileName: item.fileName,
-      reason: item.failureReason ?? '未返回失败原因',
+      reason: item.failureReason ?? translate('documents.failureReasonMissing'),
       uploadedAt: formatDocumentDateTime(item.uploadedAt),
     }))
 }
@@ -141,14 +142,14 @@ export function createDocumentActionItems(options: {
   canManageCurrentGroup: boolean
 }): string[] {
   if (options.currentGroup === null) {
-    return ['先选择知识库空间，再加载文件列表与筛选结果。']
+    return [translate('documents.actionSelectGroup')]
   }
 
   if (options.canManageCurrentGroup) {
-    return ['上传新文件', '查看 READY 文件预览', '对 FAILED 文件执行重试处理', '按状态与时间窗口收窄结果']
+    return ['documents.actionUpload', 'documents.actionPreview', 'documents.actionRetry', 'documents.actionFilter'].map((key) => translate(key))
   }
 
-  return ['查看当前文件状态', '预览 READY 文件内容', '按状态与时间窗口缩小结果', '上传与删除仅由所有者执行']
+  return ['documents.actionViewStatus', 'documents.actionPreview', 'documents.actionFilter', 'documents.actionReadOnly'].map((key) => translate(key))
 }
 
 export function createDocumentFilterContext(
@@ -157,14 +158,14 @@ export function createDocumentFilterContext(
 ): string[] {
   void relation
   const items = [
-    filters.fileName.trim() ? `文件名包含 “${filters.fileName.trim()}”` : '文件名：全部',
-    filters.status ? `状态：${getDocumentStatusMeta(filters.status).label}` : '状态：全部',
+    filters.fileName.trim() ? translate('documents.fileNameContains', { name: filters.fileName.trim() }) : translate('documents.fileNameAll'),
+    filters.status ? translate('documents.statusValue', { status: getDocumentStatusMeta(filters.status).label }) : translate('documents.statusAll'),
   ]
 
   items.push(
     filters.uploadedFrom || filters.uploadedTo
-      ? `上传时间：${filters.uploadedFrom || '不限'} 至 ${filters.uploadedTo || '不限'}`
-      : '上传时间：不限',
+      ? translate('documents.uploadTimeRange', { from: filters.uploadedFrom || translate('documents.noLimit'), to: filters.uploadedTo || translate('documents.noLimit') })
+      : translate('documents.uploadTimeAny'),
   )
 
   return items

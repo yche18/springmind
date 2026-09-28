@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { translate } from '../i18n'
 
 export interface ApiResponse<T> {
   success: boolean
@@ -17,7 +18,7 @@ const http = axios.create({
   withCredentials: true,
 })
 
-export function extractApiError(error: unknown, fallbackMessage = '请求失败'): string {
+export function extractApiError(error: unknown, fallbackMessage = translate('errors.requestFailed')): string {
   if (axios.isAxiosError<ApiErrorPayload>(error)) {
     const responseMessage = error.response?.data?.message
 

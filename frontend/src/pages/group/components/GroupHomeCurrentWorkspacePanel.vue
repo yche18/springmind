@@ -58,13 +58,13 @@ function handleInviteeUserIdInput(event: Event) {
   <section class="group-home-current">
     <div class="group-home-current__header">
       <div>
-        <p class="panel__eyebrow">{{ isCreateComposerOpen ? '创建' : '详情' }}</p>
-        <h2>{{ isCreateComposerOpen ? '创建新组' : '组详情' }}</h2>
+        <p class="panel__eyebrow">{{ isCreateComposerOpen ? $t('common.create') : $t('common.details') }}</p>
+        <h2>{{ isCreateComposerOpen ? $t('groups.createNewGroup') : $t('groups.groupDetails') }}</h2>
         <p>
           {{
             isCreateComposerOpen
-              ? '填写名称与描述，创建后可上传文档并邀请成员。'
-              : '左侧选中组后，在这里查看信息并执行成员相关操作。'
+              ? $t('groups.createDetails')
+              : $t('groups.detailHint')
           }}
         </p>
       </div>
@@ -73,30 +73,30 @@ function handleInviteeUserIdInput(event: Event) {
     <section v-if="isCreateComposerOpen" class="detail-card detail-card--composer">
       <div class="detail-card__header">
         <div>
-          <p class="panel__eyebrow">创建</p>
-          <h2>新组信息</h2>
+          <p class="panel__eyebrow">{{ $t('common.create') }}</p>
+          <h2>{{ $t('groups.newGroupInfo') }}</h2>
         </div>
-        <button class="ghost-button" type="button" @click="emit('closeCreate')">取消</button>
+        <button class="ghost-button" type="button" @click="emit('closeCreate')">{{ $t('common.cancel') }}</button>
       </div>
 
       <div class="detail-card__stack">
         <label class="groups-form-field">
-          <span>组名称</span>
+          <span>{{ $t('groups.groupName') }}</span>
           <input
             :value="createGroupName"
             type="text"
             maxlength="128"
-            placeholder="例如：设计资料库"
+            :placeholder="$t('groups.groupNameExample')"
             @input="handleCreateGroupNameInput"
           />
         </label>
         <label class="groups-form-field">
-          <span>组描述</span>
+          <span>{{ $t('groups.groupDescription') }}</span>
           <textarea
             :value="createGroupDescription"
             maxlength="512"
             rows="4"
-            placeholder="说明这个知识库的用途与范围。"
+            :placeholder="$t('groups.groupDescriptionPlaceholder')"
             @input="handleCreateGroupDescriptionInput"
           />
         </label>
@@ -104,7 +104,7 @@ function handleInviteeUserIdInput(event: Event) {
 
       <div class="detail-card__actions">
         <button class="primary-button" :disabled="isCreatingGroup" type="button" @click="emit('createGroup')">
-          {{ isCreatingGroup ? '创建中…' : '创建组' }}
+          {{ isCreatingGroup ? $t('common.processing') : $t('groups.createGroup') }}
         </button>
       </div>
     </section>
@@ -112,7 +112,7 @@ function handleInviteeUserIdInput(event: Event) {
     <section v-else-if="selectedInvitation" class="detail-card">
       <div class="detail-card__header">
         <div>
-          <p class="panel__eyebrow">邀请</p>
+          <p class="panel__eyebrow">{{ $t('groups.invite') }}</p>
           <h2>{{ selectedInvitation.groupName }}</h2>
         </div>
       </div>
@@ -120,19 +120,19 @@ function handleInviteeUserIdInput(event: Event) {
       <div class="detail-card__stack">
         <div class="detail-meta">
           <div>
-            <span>邀请人</span>
+            <span>{{ $t('groups.inviter') }}</span>
             <strong>{{ selectedInvitation.inviterDisplayName }}</strong>
           </div>
           <div>
-            <span>目标组</span>
+            <span>{{ $t('groups.targetGroup') }}</span>
             <strong>#{{ selectedInvitation.groupId }}</strong>
           </div>
           <div>
-            <span>状态</span>
+            <span>{{ $t('common.status') }}</span>
             <strong>{{ selectedInvitation.status }}</strong>
           </div>
         </div>
-        <p class="detail-note">接受后进入「我加入的组」；拒绝后会从列表移除。</p>
+        <p class="detail-note">{{ $t('groups.invitationDecisionHint') }}</p>
       </div>
 
       <div class="detail-card__actions">
@@ -142,7 +142,7 @@ function handleInviteeUserIdInput(event: Event) {
           type="button"
           @click="emit('invitationDecision', selectedInvitation.invitationId, 'accept')"
         >
-          接受邀请
+          {{ $t('groups.acceptInvitation') }}
         </button>
         <button
           class="ghost-button"
@@ -150,7 +150,7 @@ function handleInviteeUserIdInput(event: Event) {
           type="button"
           @click="emit('invitationDecision', selectedInvitation.invitationId, 'reject')"
         >
-          拒绝邀请
+          {{ $t('groups.rejectInvitation') }}
         </button>
       </div>
 
@@ -159,68 +159,66 @@ function handleInviteeUserIdInput(event: Event) {
     <section v-else-if="selectedOwnedGroup" class="detail-card detail-card--owner">
       <div class="detail-card__header">
         <div>
-          <p class="panel__eyebrow">我拥有的组</p>
+          <p class="panel__eyebrow">{{ $t('groups.owned') }}</p>
           <h2>{{ selectedOwnedGroup.groupName }}</h2>
         </div>
-        <span class="panel__pill">所有者</span>
+        <span class="panel__pill">{{ $t('common.owner') }}</span>
       </div>
 
       <div class="detail-card__stack detail-card__stack--split">
         <section class="detail-subsection">
-          <h3>基础信息</h3>
+          <h3>{{ $t('groups.basicInfo') }}</h3>
           <div class="detail-meta">
             <div>
-              <span>组织 ID</span>
+              <span>{{ $t('groups.organizationId') }}</span>
               <strong :title="selectedOwnedGroup.groupCode">{{ selectedOwnedGroup.groupCode }}</strong>
             </div>
             <div>
-              <span>内部记录 ID</span>
+              <span>{{ $t('groups.internalId') }}</span>
               <strong>#{{ selectedOwnedGroup.groupId }}</strong>
             </div>
             <div>
-              <span>当前角色</span>
-              <strong>所有者</strong>
+              <span>{{ $t('groups.currentRole') }}</span>
+              <strong>{{ $t('common.owner') }}</strong>
             </div>
             <div>
-              <span>成员数</span>
+              <span>{{ $t('groups.memberCount') }}</span>
               <strong>{{ selectedOwnerMemberCount }}</strong>
             </div>
           </div>
-          <p class="detail-note">你可以邀请成员、审批加入申请，并移除非所有者成员。</p>
+          <p class="detail-note">{{ $t('groups.ownerPermissionHint') }}</p>
         </section>
 
         <section class="detail-subsection">
           <div class="detail-subsection__header">
-            <h3>成员管理</h3>
-            <span class="panel__pill panel__pill--soft">当前选中组</span>
+            <h3>{{ $t('groups.members') }}</h3>
+            <span class="panel__pill panel__pill--soft">{{ $t('groups.selectedGroup') }}</span>
           </div>
 
           <label class="groups-form-field">
-            <span>邀请用户 ID</span>
+            <span>{{ $t('groups.inviteUserId') }}</span>
             <div class="groups-inline-form">
               <input
                 :value="inviteeUserId"
                 type="number"
                 min="1"
-                placeholder="例如：1003"
+                :placeholder="$t('groups.inviteeIdExample')"
                 @input="handleInviteeUserIdInput"
               />
               <button class="primary-button" :disabled="isInviting" type="button" @click="emit('inviteMember')">
-                {{ isInviting ? '邀请中...' : '发起邀请' }}
+                {{ isInviting ? $t('groups.inviting') : $t('groups.inviteMember') }}
               </button>
             </div>
           </label>
-          <p class="detail-note">可让对方在“我的组”页右上角查看自己的用户 ID，再把该编号发给你。</p>
+          <p class="detail-note">{{ $t('groups.inviteHelp') }}</p>
 
-          <p v-if="isMembersLoading" class="placeholder-text">正在加载成员…</p>
+          <p v-if="isMembersLoading" class="placeholder-text">{{ $t('groups.loadingMembers') }}</p>
           <ul v-else class="groups-member-list">
             <li v-for="member in groupMembers" :key="`member-${member.userId}`" class="groups-member-list__item">
               <div class="groups-member-list__profile">
                 <strong>{{ member.displayName }}</strong>
                 <span>
-                  用户 ID：{{ member.userId }} · 用户编码：{{ member.userCode }} · 角色：{{
-                    member.role === 'OWNER' ? '所有者' : member.role
-                  }}
+                  {{ $t('groups.memberMeta', { id: member.userId, code: member.userCode, role: member.role === 'OWNER' ? $t('common.owner') : member.role }) }}
                 </span>
               </div>
               <button
@@ -230,7 +228,7 @@ function handleInviteeUserIdInput(event: Event) {
                 type="button"
                 @click="emit('removeMember', member.userId)"
               >
-                {{ removingMemberKeys.has(`${selectedOwnedGroup.groupId}:${member.userId}`) ? '移除中...' : '移除成员' }}
+                {{ removingMemberKeys.has(`${selectedOwnedGroup.groupId}:${member.userId}`) ? $t('groups.removing') : $t('groups.removeMember') }}
               </button>
             </li>
           </ul>
@@ -238,12 +236,12 @@ function handleInviteeUserIdInput(event: Event) {
 
         <section class="detail-subsection">
           <div class="detail-subsection__header">
-            <h3>待审批申请</h3>
+            <h3>{{ $t('groups.pendingRequests') }}</h3>
             <span class="panel__pill panel__pill--pending">{{ ownerJoinRequests.length }}</span>
           </div>
 
-          <p v-if="isOwnerRequestsLoading" class="placeholder-text">正在加载待审批申请…</p>
-          <p v-else-if="ownerJoinRequests.length === 0" class="placeholder-text">暂无待审批申请。</p>
+          <p v-if="isOwnerRequestsLoading" class="placeholder-text">{{ $t('groups.loadingApprovals') }}</p>
+          <p v-else-if="ownerJoinRequests.length === 0" class="placeholder-text">{{ $t('groups.noRequests') }}</p>
           <ul v-else class="groups-member-list">
             <li
               v-for="request in ownerJoinRequests"
@@ -261,7 +259,7 @@ function handleInviteeUserIdInput(event: Event) {
                   type="button"
                   @click="emit('joinRequestDecision', request.requestId, 'approve')"
                 >
-                  通过
+                  {{ $t('groups.approve') }}
                 </button>
                 <button
                   class="ghost-button"
@@ -269,7 +267,7 @@ function handleInviteeUserIdInput(event: Event) {
                   type="button"
                   @click="emit('joinRequestDecision', request.requestId, 'reject')"
                 >
-                  拒绝
+                  {{ $t('groups.reject') }}
                 </button>
               </div>
             </li>
@@ -282,37 +280,37 @@ function handleInviteeUserIdInput(event: Event) {
     <section v-else-if="selectedJoinedGroup" class="detail-card detail-card--member">
       <div class="detail-card__header">
         <div>
-          <p class="panel__eyebrow">我加入的组</p>
+          <p class="panel__eyebrow">{{ $t('groups.joined') }}</p>
           <h2>{{ selectedJoinedGroup.groupName }}</h2>
         </div>
-        <span class="panel__pill panel__pill--member">成员</span>
+        <span class="panel__pill panel__pill--member">{{ $t('common.member') }}</span>
       </div>
 
       <div class="detail-card__stack detail-card__stack--split">
         <section class="detail-subsection">
-          <h3>基础信息</h3>
+          <h3>{{ $t('groups.basicInfo') }}</h3>
           <div class="detail-meta">
             <div>
-              <span>组织 ID</span>
+              <span>{{ $t('groups.organizationId') }}</span>
               <strong :title="selectedJoinedGroup.groupCode">{{ selectedJoinedGroup.groupCode }}</strong>
             </div>
             <div>
-              <span>内部记录 ID</span>
+              <span>{{ $t('groups.internalId') }}</span>
               <strong>#{{ selectedJoinedGroup.groupId }}</strong>
             </div>
             <div>
-              <span>当前角色</span>
-              <strong>成员</strong>
+              <span>{{ $t('groups.currentRole') }}</span>
+              <strong>{{ $t('common.member') }}</strong>
             </div>
           </div>
         </section>
 
         <section class="detail-subsection">
-          <h3>权限边界</h3>
+          <h3>{{ $t('groups.permissionBoundary') }}</h3>
           <ul class="permissions-list">
             <li>{{ selectedMemberMessage }}</li>
-            <li>你不能邀请成员或移除成员。</li>
-            <li>如需管理权限，请联系该组的所有者。</li>
+            <li>{{ $t('groups.memberRestrictionInvite') }}</li>
+            <li>{{ $t('groups.memberRestrictionOwner') }}</li>
           </ul>
         </section>
 
@@ -325,15 +323,15 @@ function handleInviteeUserIdInput(event: Event) {
           type="button"
           @click="emit('leaveGroup', selectedJoinedGroup.groupId)"
         >
-          {{ leavingGroupIds.has(selectedJoinedGroup.groupId) ? '退出中...' : '退出该组' }}
+          {{ leavingGroupIds.has(selectedJoinedGroup.groupId) ? $t('groups.leaving') : $t('groups.leave') }}
         </button>
       </div>
     </section>
 
     <section v-else class="detail-empty">
-      <p class="detail-empty__eyebrow">未选择</p>
-      <h2>从左侧选择组或邀请</h2>
-      <p>选中后，这里会显示详情和可执行操作。</p>
+      <p class="detail-empty__eyebrow">{{ $t('common.notSelected') }}</p>
+      <h2>{{ $t('groups.noSelection') }}</h2>
+      <p>{{ $t('groups.selectionHint') }}</p>
     </section>
   </section>
 </template>

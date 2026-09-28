@@ -4,9 +4,11 @@ import { fetchGroups } from '../api/group'
 import { extractApiError } from '../api/http'
 import { useAppStore } from '../stores/app'
 import { useAuthStore } from '../stores/auth'
+import { useI18n } from 'vue-i18n'
 
 const appStore = useAppStore()
 const authStore = useAuthStore()
+const { t } = useI18n({ useScope: 'global' })
 const errorMessage = ref('')
 let requestToken = 0
 
@@ -35,7 +37,7 @@ async function refreshGroups() {
     }
 
     appStore.resetGroupContext(false)
-    errorMessage.value = extractApiError(error, '获取群组失败')
+    errorMessage.value = extractApiError(error, t('errors.loadGroups'))
   } finally {
     if (currentToken === requestToken) {
       appStore.setGroupsLoading(false)
@@ -66,24 +68,24 @@ defineExpose({
     <div class="group-card__header">
       <div>
         <p class="group-card__eyebrow">Group Scope</p>
-        <h2>选择当前群组</h2>
+        <h2>{{ $t('groups.selectGroup') }}</h2>
       </div>
       <button type="button" class="group-card__refresh" :disabled="isLoading" @click="refreshGroups">
-        {{ isLoading ? '刷新中...' : '刷新群组' }}
+        {{ isLoading ? $t('common.refreshing') : $t('common.refresh') }}
       </button>
     </div>
 
     <div class="group-card__controls">
       <label class="group-card__field">
-        <span>当前可见群组</span>
+        <span>{{ $t('groups.selectGroup') }}</span>
         <select
           :value="currentGroupValue"
           :disabled="isLoading || groups.length === 0"
           @change="handleGroupChange"
         >
-          <option value="" disabled>请选择群组</option>
+          <option value="" disabled>{{ $t('groups.selectGroup') }}</option>
           <option v-for="group in groups" :key="group.groupId" :value="group.groupId">
-            {{ group.groupName }} · {{ group.relation === 'OWNER' ? '我拥有的组' : '我加入的组' }}
+            {{ group.groupName }} · {{ group.relation === 'OWNER' ? $t('groups.owned') : $t('groups.joined') }}
           </option>
         </select>
       </label>
@@ -92,12 +94,12 @@ defineExpose({
     <p v-if="errorMessage" class="group-card__message group-card__message--error">
       {{ errorMessage }}
     </p>
-    <p v-else-if="isLoading" class="group-card__message">正在同步当前登录用户的群组列表。</p>
+    <p v-else-if="isLoading" class="group-card__message">{{ $t('common.loading') }}</p>
     <p v-else-if="groups.length === 0" class="group-card__message">
-      当前登录用户暂无可见群组。
+      {{ $t('qa.noGroups') }}
     </p>
     <p v-else class="group-card__message">
-      已同步 {{ groups.length }} 个群组和 {{ appStore.pendingInvitations.length }} 条待处理邀请。
+      {{ groups.length }} · {{ $t('groups.invitations') }}: {{ appStore.pendingInvitations.length }}
     </p>
   </section>
 </template>

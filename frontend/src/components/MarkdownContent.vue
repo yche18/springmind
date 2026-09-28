@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { renderMarkdown } from '../utils/markdown'
+import { translate } from '../i18n'
 
 const props = withDefaults(
   defineProps<{
@@ -31,9 +32,9 @@ const html = computed(() => {
 })
 
 const copyLabel = computed(() => {
-  if (copyState.value === 'copied') return '已复制'
-  if (copyState.value === 'failed') return '复制失败'
-  return '复制'
+  if (copyState.value === 'copied') return translate('common.copied')
+  if (copyState.value === 'failed') return translate('common.copyFailed')
+  return translate('common.copy')
 })
 
 async function copyText(text: string): Promise<boolean> {
@@ -112,13 +113,13 @@ async function enhanceCodeBlocks() {
     const button = document.createElement('button')
     button.type = 'button'
     button.className = 'md-code-block__copy'
-    button.textContent = '复制代码'
+    button.textContent = translate('common.copyCode')
     button.addEventListener('click', async () => {
       const code = pre.textContent ?? ''
       const ok = await copyText(code)
-      button.textContent = ok ? '已复制' : '失败'
+      button.textContent = ok ? translate('common.copied') : translate('common.failed')
       window.setTimeout(() => {
-        button.textContent = '复制代码'
+        button.textContent = translate('common.copyCode')
       }, 1400)
     })
     wrap.appendChild(button)

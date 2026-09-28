@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { extractApiError } from '../../api/http'
 import { register } from '../../api/auth'
 import '../../assets/login-page.css'
 import AuthSplitShell from '../../components/auth/AuthSplitShell.vue'
 
 const router = useRouter()
+const { t } = useI18n({ useScope: 'global' })
 
 const form = reactive({
   username: '',
@@ -28,12 +30,12 @@ async function handleSubmit() {
     form.displayName.trim().length === 0 ||
     form.password.length === 0
   ) {
-    pageError.value = '请填写完整注册信息'
+    pageError.value = t('auth.registerRequired')
     return
   }
 
   if (form.password !== form.confirmPassword) {
-    pageError.value = '两次输入的密码不一致'
+    pageError.value = t('auth.passwordMismatch')
     return
   }
 
@@ -47,7 +49,7 @@ async function handleSubmit() {
     })
     await router.replace({ path: '/login', query: { registered: '1' } })
   } catch (error) {
-    pageError.value = extractApiError(error, '注册失败')
+    pageError.value = extractApiError(error, t('errors.requestFailed'))
   } finally {
     isSubmitting.value = false
   }
@@ -58,23 +60,23 @@ async function handleSubmit() {
   <AuthSplitShell
     class="login-page auth-page--register"
     eyebrow="Create business account"
-    title="创建可加入知识库的业务账号"
-    description="注册只完成身份创建，不会自动获得任何组权限。登录后，你仍需要按组织 ID 申请加入空间，或自行创建协作组。"
+    :title="$t('auth.createBusinessAccount')"
+    :description="$t('auth.registerDescription')"
   >
     <template #brand>
       <div class="auth-brand-stack">
-        <ul class="auth-brand-list" aria-label="注册规则">
+        <ul class="auth-brand-list" :aria-label="$t('auth.registerRuleTitle')">
           <li>
-            <strong>默认角色是 USER</strong>
-            <span>注册后只拥有基础业务身份，不会直接接触管理员入口。</span>
+            <strong>{{ $t('auth.registerRuleDefaultRoleTitle') }}</strong>
+            <span>{{ $t('auth.registerRuleDefaultRoleBody') }}</span>
           </li>
           <li>
-            <strong>不会自动加入任何知识库</strong>
-            <span>群组权限仍由 OWNER 创建、邀请或审批加入。</span>
+            <strong>{{ $t('auth.registerRuleNoGroupTitle') }}</strong>
+            <span>{{ $t('auth.registerRuleNoGroupBody') }}</span>
           </li>
           <li>
-            <strong>密码规则在首次注册时生效</strong>
-            <span>建议直接设置满足规则的强密码，减少后续改密成本。</span>
+            <strong>{{ $t('auth.registerRulePasswordTitle') }}</strong>
+            <span>{{ $t('auth.registerRulePasswordBody') }}</span>
           </li>
         </ul>
       </div>
@@ -83,34 +85,34 @@ async function handleSubmit() {
     <section class="auth-panel" aria-labelledby="register-title">
       <div class="auth-panel__header">
         <p class="auth-panel__eyebrow">Create account</p>
-        <h2 id="register-title" class="auth-panel__title">注册账号</h2>
-        <p class="auth-panel__hint">填写基础资料后创建账号，成功后会自动返回登录页。</p>
+        <h2 id="register-title" class="auth-panel__title">{{ $t('auth.register') }}</h2>
+        <p class="auth-panel__hint">{{ $t('auth.registerHint') }}</p>
       </div>
 
       <form class="auth-form" @submit.prevent="handleSubmit">
         <label class="auth-form__field">
-          <span>用户名</span>
-          <input v-model="form.username" type="text" autocomplete="username" maxlength="64" placeholder="例如：user001" />
+          <span>{{ $t('common.username') }}</span>
+          <input v-model="form.username" type="text" autocomplete="username" maxlength="64" :placeholder="$t('auth.usernameExample')" />
         </label>
 
         <label class="auth-form__field">
-          <span>邮箱</span>
+          <span>{{ $t('common.email') }}</span>
           <input v-model="form.email" type="email" autocomplete="email" maxlength="128" placeholder="user001@example.com" />
         </label>
 
         <label class="auth-form__field">
-          <span>显示名称</span>
-          <input v-model="form.displayName" type="text" maxlength="128" placeholder="例如：张三" />
+          <span>{{ $t('common.displayName') }}</span>
+          <input v-model="form.displayName" type="text" maxlength="128" :placeholder="$t('auth.displayNameExample')" />
         </label>
 
         <label class="auth-form__field">
-          <span>密码</span>
-          <input v-model="form.password" type="password" autocomplete="new-password" maxlength="128" placeholder="至少 8 位，包含字母和数字" />
+          <span>{{ $t('auth.password') }}</span>
+          <input v-model="form.password" type="password" autocomplete="new-password" maxlength="128" :placeholder="$t('auth.passwordExample')" />
         </label>
 
         <label class="auth-form__field">
-          <span>确认密码</span>
-          <input v-model="form.confirmPassword" type="password" autocomplete="new-password" maxlength="128" placeholder="再次输入密码" />
+          <span>{{ $t('auth.confirmPassword') }}</span>
+          <input v-model="form.confirmPassword" type="password" autocomplete="new-password" maxlength="128" :placeholder="$t('auth.confirmPasswordPlaceholder')" />
         </label>
 
         <p v-if="pageError" class="auth-form__error" role="alert">
@@ -118,13 +120,13 @@ async function handleSubmit() {
         </p>
 
         <button class="auth-form__submit" type="submit" :disabled="isSubmitting">
-          {{ isSubmitting ? '注册中...' : '创建账号' }}
+          {{ isSubmitting ? $t('auth.registering') : $t('auth.register') }}
         </button>
       </form>
 
       <div class="auth-panel__footer">
-        <span>已有账号？</span>
-        <RouterLink class="auth-page-link" to="/login">返回登录</RouterLink>
+        <span>{{ $t('auth.alreadyRegistered') }}</span>
+        <RouterLink class="auth-page-link" to="/login">{{ $t('auth.backToLogin') }}</RouterLink>
       </div>
     </section>
   </AuthSplitShell>
