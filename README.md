@@ -1,57 +1,57 @@
-# SpringMind 思泉｜企业知识证据检索与问答平台
+# SpringMind | Evidence-Grounded Enterprise Knowledge Q&A
 
-[English](README_EN.md) | **简体中文**
+**English** | [简体中文](README_ZH.md)
 
-一个面向团队知识库的全栈 RAG 项目。用户可以创建或加入知识组，上传企业文档，并基于组内资料进行有来源、可追溯、证据不足时会拒答的知识问答。
+SpringMind is a full-stack Retrieval-Augmented Generation (RAG) platform for team knowledge bases. Users can create or join knowledge groups, upload internal documents, and ask questions that produce source-backed, traceable answers—or explicitly decline to answer when the available evidence is insufficient.
 
-SpringMind 围绕“文档入库—混合检索—证据分级—可追溯回答”构建完整业务闭环。后端采用 `Controller → Service → Mapper` 分层，核心模块按认证、知识组、文档、入库、检索和问答等业务职责组织，便于维护与扩展。
+The platform provides an end-to-end workflow covering document ingestion, hybrid retrieval, evidence grading, and citation-backed answer generation. The backend follows a `Controller → Service → Mapper` architecture and is organized by business domain, including authentication, knowledge groups, documents, ingestion, retrieval, and Q&A, making the system easy to maintain and extend.
 
-## 核心亮点
+## Key Features
 
-- 组织级数据隔离：检索请求必须携带真实用户与知识组上下文，文档、切片和检索结果按 `groupId` 隔离。
-- 完整文档生命周期：支持普通上传与分片续传、MinIO 对象存储、异步入库、失败重试和卡死任务恢复。
-- 结构感知解析：支持 PDF、DOCX、Markdown、TXT，经过文本清洗和带重叠窗口的结构化切片。
-- 混合检索：pgvector 语义检索与 Elasticsearch 关键词检索并行召回，使用 RRF 融合排名。
-- 查询规划：模型根据问题选择直接检索、改写或拆解；规划失败时自动回退原问题，不阻断问答。
-- 证据约束回答：对召回结果划分 `NONE / WEAK / PARTIAL / SUFFICIENT`，限制模型只能基于证据作答。
-- 可追溯引用：答案返回文档名、文档 ID、切片位置和检索分数等引用信息。
-- 可执行质量门禁：认证、组权限、文档生命周期和问答检索均有 Harness 测试约束核心业务规则。
+- Group-level data isolation: every retrieval request carries an authenticated user and knowledge-group context; documents, chunks, and search results are isolated by `groupId`.
+- Complete document lifecycle: standard and resumable multipart uploads, MinIO object storage, asynchronous ingestion, retry handling, and recovery for stalled jobs.
+- Structure-aware parsing: PDF, DOCX, Markdown, and TXT support, with text normalization and structured chunking using overlapping windows.
+- Hybrid retrieval: pgvector semantic search and Elasticsearch keyword search run in parallel, with Reciprocal Rank Fusion (RRF) combining their results.
+- Query planning: the model chooses whether to search directly, rewrite the query, or decompose it; planning failures fall back to the original question without interrupting the Q&A flow.
+- Evidence-constrained answers: retrieved evidence is graded as `NONE / WEAK / PARTIAL / SUFFICIENT`, and the model is restricted to answering from that evidence.
+- Traceable citations: answers include source metadata such as document name, document ID, chunk position, and retrieval score.
+- Executable quality gates: harness tests enforce core business rules for authentication, group permissions, document lifecycle management, and Q&A retrieval.
 
-## 业务流程
+## How It Works
 
 ```text
-注册 / 登录
-  → 创建或加入知识组
-  → 上传 PDF / DOCX / MD / TXT
-  → MinIO 保存原文件
-  → 异步解析、清洗、切片
-  → pgvector + Elasticsearch 建立双路索引
-  → 查询规划与混合召回
-  → RRF 融合、相邻切片扩展、证据分级
-  → 大模型生成受证据约束的答案
-  → 返回答案、引用或拒答原因
+Sign up / Sign in
+  → Create or join a knowledge group
+  → Upload PDF / DOCX / MD / TXT files
+  → Store original files in MinIO
+  → Parse, clean, and chunk documents asynchronously
+  → Build dual indexes with pgvector + Elasticsearch
+  → Plan the query and run hybrid retrieval
+  → Apply RRF, expand adjacent chunks, and grade the evidence
+  → Generate an evidence-constrained answer with an LLM
+  → Return the answer, citations, or a reason for declining
 ```
 
-## 技术栈
+## Tech Stack
 
-- 后端：Java 21、Spring Boot 3.5、Spring AI 1.1、MyBatis-Plus、Flyway
-- 检索：PostgreSQL + pgvector、Elasticsearch、Ollama Embedding
-- 存储：MinIO
-- 前端：Vue 3、TypeScript、Pinia、Vue Router、Vite
-- 工程：Docker Compose、JUnit 5、Mockito
+- Backend: Java 21, Spring Boot 3.5, Spring AI 1.1, MyBatis-Plus, Flyway
+- Retrieval: PostgreSQL + pgvector, Elasticsearch, Ollama Embeddings
+- Storage: MinIO
+- Frontend: Vue 3, TypeScript, Pinia, Vue Router, Vite
+- Engineering: Docker Compose, JUnit 5, Mockito
 
-聊天模型使用 OpenAI-compatible 接口，通过环境变量配置；向量模型默认使用本地 Ollama 的 `qllama/bge-small-zh-v1.5`。
+The chat model is configured through environment variables and uses an OpenAI-compatible API. Embeddings default to the locally hosted Ollama model `qllama/bge-small-zh-v1.5`.
 
-## 本地启动
+## Getting Started
 
-### 环境要求
+### Prerequisites
 
-- Docker Desktop（建议为 Docker 分配至少 6 GB 内存）
-- 可用的 OpenAI-compatible 聊天模型 API Key
+- Docker Desktop (allocate at least 6 GB of memory)
+- An API key for an OpenAI-compatible chat model
 
-### 配置模型
+### Configure the Model
 
-在项目根目录创建 `.env`：
+Create a `.env` file in the project root:
 
 ```dotenv
 AI_BASE_URL=https://api.openai.com/v1
@@ -59,55 +59,55 @@ AI_API_KEY=your-api-key
 AI_CHAT_MODEL=gpt-4o-mini
 ```
 
-也可以将 `AI_BASE_URL` 和 `AI_CHAT_MODEL` 替换为其他兼容服务的地址与模型名。不要提交包含真实密钥的 `.env`。
+You can replace `AI_BASE_URL` and `AI_CHAT_MODEL` with the endpoint and model name of another compatible provider. Never commit a `.env` file containing real credentials.
 
-### 启动服务
+### Start the Services
 
 ```bash
 docker compose up -d
 ```
 
-首次启动需要下载镜像和 Embedding 模型，耗时取决于网络。查看状态：
+The first startup downloads the required container images and embedding model, so completion time depends on your network connection. Check the service status and backend logs with:
 
 ```bash
 docker compose ps
 docker compose logs -f backend
 ```
 
-访问地址：
+Service endpoints:
 
-- Web：<http://localhost:5173>
-- 后端健康检查：<http://localhost:18080/actuator/health>
-- API 文档：<http://localhost:18080/doc.html>
-- MinIO 控制台：<http://localhost:9001>
+- Web application: <http://localhost:5173>
+- Backend health check: <http://localhost:18080/actuator/health>
+- API documentation: <http://localhost:18080/doc.html>
+- MinIO console: <http://localhost:9001>
 
-开发环境管理员：
+Development administrator account:
 
-- 用户名：`admin`
-- 密码：`Admin@123456`
+- Username: `admin`
+- Password: `Admin@123456`
 
-管理员用于用户管理；普通用户注册后进入知识组、文档和问答功能。
+The administrator account is used for user management. Regular users can access knowledge groups, documents, and Q&A features after signing up.
 
-### 数据与环境说明
+### Data and Environment Notes
 
-项目使用 Flyway 管理数据库结构，并通过 Compose 项目名 `springmind` 隔离容器和数据卷。若需要重置本地演示数据：
+Flyway manages the database schema, while the Compose project name `springmind` isolates the project's containers and volumes. To reset the local demo data:
 
 ```bash
 docker compose down -v
 ```
 
-该命令会删除当前 SpringMind 环境中的 PostgreSQL、Elasticsearch、MinIO 和 Ollama 数据，请只在确认无需保留数据时执行。
+This command deletes the PostgreSQL, Elasticsearch, MinIO, and Ollama data in the current SpringMind environment. Run it only when you are certain that the data is no longer needed.
 
-## 本地开发
+## Local Development
 
-后端：
+Backend:
 
 ```bash
 mvn test
 mvn spring-boot:run
 ```
 
-前端：
+Frontend:
 
 ```bash
 cd frontend
@@ -115,36 +115,36 @@ npm install
 npm run dev
 ```
 
-本地运行后端时，PostgreSQL、Elasticsearch、MinIO 和 Ollama 仍可由 Docker 单独启动：
+When running the backend locally, you can still start PostgreSQL, Elasticsearch, MinIO, and Ollama separately with Docker:
 
 ```bash
 docker compose up -d postgres elasticsearch minio ollama ollama-model-init
 ```
 
-## 项目结构
+## Project Structure
 
 ```text
 src/main/java/com/yche/springmind/
-├─ ai                 # OpenAI-compatible 聊天模型配置
-├─ auth               # 登录、JWT、刷新令牌
-├─ user               # 账户安全与管理员用户管理
-├─ groupmembership    # 知识组、成员、邀请和加入申请
-├─ document           # 上传、分片续传、预览与文档状态
-├─ ingestion          # 解析、清洗、切片、异步入库
-├─ retrieval          # pgvector 与 Elasticsearch 适配
-├─ qa                 # 查询规划、混合检索、证据分级、引用和回答
-└─ storage            # MinIO 对象存储
+├─ ai                 # OpenAI-compatible chat model configuration
+├─ auth               # Sign-in, JWT, and refresh tokens
+├─ user               # Account security and administrator user management
+├─ groupmembership    # Knowledge groups, members, invitations, and join requests
+├─ document           # Uploads, resumable multipart uploads, previews, and document status
+├─ ingestion          # Parsing, cleaning, chunking, and asynchronous ingestion
+├─ retrieval          # pgvector and Elasticsearch adapters
+├─ qa                 # Query planning, hybrid retrieval, evidence grading, citations, and answers
+└─ storage            # MinIO object storage
 
 frontend/src/
-├─ pages              # 登录、知识组、文档、问答、管理后台
-├─ api                # 后端接口封装
-├─ stores             # 登录态和当前知识组
-└─ components         # 通用布局与内容组件
+├─ pages              # Sign-in, knowledge groups, documents, Q&A, and admin console
+├─ api                # Backend API clients
+├─ stores             # Authentication state and the active knowledge group
+└─ components         # Shared layout and content components
 ```
 
-## 核心代码入口
+## Key Code Paths
 
-可以按以下顺序跟随文档入库与问答主链路：
+Follow the main document-ingestion and Q&A flows in this order:
 
 1. `DocumentController` → `DocumentService` / `DocumentUploadService`
 2. `DocumentIngestionAsyncListener` → `EtlDocumentIngestionProcessor`
@@ -152,23 +152,23 @@ frontend/src/
 4. `QaController` → `QaService` → `QueryPlanningService`
 5. `HybridEvidenceRetriever` → `QaChatService` → `CitationAssembler`
 
-## 测试
+## Testing
 
-运行不依赖真实外部模型的核心门禁：
+Run the core quality gates that do not require a live external model:
 
 ```bash
 mvn "-Dtest=IdentityAccessHarnessTest,GroupPermissionHarnessTest,DocumentLifecycleHarnessTest,QaRetrievalHarnessTest" test
 ```
 
-Flyway 集成测试需要本机 `5433` 端口上的 PostgreSQL：
+The Flyway integration test requires PostgreSQL to be available locally on port `5433`:
 
 ```bash
 docker compose up -d postgres
 mvn -Dtest=FlywayMigrationTest test
 ```
 
-详细门禁规则见 [Harness 说明](harness/README.md)。
+See the [Harness documentation](harness/README.md) for the detailed quality-gate rules.
 
-## 设计边界
+## Design Principles
 
-SpringMind 以知识组作为数据与权限边界，以团队文档作为回答依据。问答链路只处理可检索、可验证的知识请求；证据不足时返回明确的拒答原因，所有引用均由真实召回结果生成。新增能力需要同时满足权限隔离、结果可评测、成本可观测和故障可恢复四项工程约束。
+SpringMind treats the knowledge group as both the data-isolation and authorization boundary, and uses team documents as the sole basis for generated answers. The Q&A pipeline handles only retrievable, verifiable knowledge requests. When evidence is insufficient, it returns an explicit reason for declining to answer, and every citation is produced from actual retrieved content. New capabilities must preserve four engineering constraints: permission isolation, measurable quality, observable cost, and recoverable failures.
