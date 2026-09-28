@@ -5,11 +5,11 @@ import { renderMarkdown } from '../utils/markdown'
 const props = withDefaults(
   defineProps<{
     content: string
-    /** plain：用户消息等纯文本；markdown：模型回复 */
+    /** Use plain for user text and markdown for model responses. */
     mode?: 'markdown' | 'plain'
-    /** 是否显示复制全文 */
+    /** Whether to show the copy-all action. */
     showCopy?: boolean
-    /** 是否为流式输出（流式时不挂代码块按钮，避免频繁重绑） */
+    /** Streaming mode omits code-block actions to avoid repeatedly binding them. */
     streaming?: boolean
   }>(),
   {

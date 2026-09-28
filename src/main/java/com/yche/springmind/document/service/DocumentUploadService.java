@@ -27,9 +27,8 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * 编排普通上传和大文件分片上传，负责会话、分片校验、合并及最终确认。
- *
- * <p>位于业务服务层：编排领域操作和基础设施调用，并集中维护事务、权限校验及失败处理边界。</p>
+ * Coordinates resumable uploads, deduplication, object composition, and the
+ * transition from an upload session to an ingestible document.
  */
 @Service
 public class DocumentUploadService {
@@ -55,18 +54,6 @@ public class DocumentUploadService {
     private final DocumentService documentService;
     private final ObjectStorageService objectStorageService;
 
-    /**
-     * 创建并初始化 {@link DocumentUploadService}，保存该组件运行所需的依赖与配置。
-     * <p>
-     * 实现要点：校验群组成员关系和角色权限；读写 MinIO 对象存储中的原始文件。
-     *
-     * @param documentMapper 方法参数 {@code documentMapper}
-     * @param documentUploadSessionMapper 方法参数 {@code documentUploadSessionMapper}
-     * @param documentUploadChunkMapper 方法参数 {@code documentUploadChunkMapper}
-     * @param groupMembershipService 方法参数 {@code groupMembershipService}
-     * @param documentService 方法参数 {@code documentService}
-     * @param objectStorageService 方法参数 {@code objectStorageService}
-     */
     public DocumentUploadService(
             DocumentMapper documentMapper,
             DocumentUploadSessionMapper documentUploadSessionMapper,
@@ -84,13 +71,8 @@ public class DocumentUploadService {
     }
 
     /**
-     * 初始化分片上传会话，计算分片数量并返回客户端续传所需的信息。
-     * <p>
-     * 实现要点：使用事务保证多次数据库操作的一致性；先校验输入、状态或业务边界；校验群组成员关系和角色权限；读取数据库中的当前状态；持久化数据库状态变更。
-     *
-     * @param request 已经通过控制器基础校验的请求对象
-     * @param uploadRequest 上传请求参数
-     * @return 方法执行结果，具体结构由返回类型 {@code UploadInitResponse} 表示
+     * Start or resume an upload, or return an instant-upload result when a ready
+     * object with the same content hash already exists in the group.
      */
     @Transactional
     public UploadInitResponse initUpload(HttpServletRequest request, UploadInitRequest uploadRequest) {
@@ -128,16 +110,7 @@ public class DocumentUploadService {
         return UploadInitResponse.uploadSession(session.getUploadId(), session.getChunkSize(), session.getChunkCount());
     }
 
-    /**
-     * 校验上传会话归属和分片范围后，将单个分片写入对象存储并记录状态。
-     * <p>
-     * 实现要点：使用事务保证多次数据库操作的一致性；先校验输入、状态或业务边界；读写 MinIO 对象存储中的原始文件；捕获依赖异常并转换、记录或执行降级策略；读取数据库中的当前状态。
-     *
-     * @param request 已经通过控制器基础校验的请求对象
-     * @param uploadRequest 上传请求参数
-     * @return 符合条件的结果集合；无结果时返回空集合
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
+    /** Store one validated chunk idempotently and return all uploaded chunk indexes. */
     @Transactional
     public List<Integer> uploadChunk(HttpServletRequest request, UploadChunkRequest uploadRequest) {
         DocumentUploadSessionEntity session = requireOwnedActiveSession(request, uploadRequest.uploadId());
@@ -181,15 +154,7 @@ public class DocumentUploadService {
                 .toList();
     }
 
-    /**
-     * 校验所有分片齐备后合并对象，创建文档记录并触发异步入库。
-     * <p>
-     * 实现要点：使用事务保证多次数据库操作的一致性；先校验输入、状态或业务边界；读取数据库中的当前状态；读写 MinIO 对象存储中的原始文件；捕获依赖异常并转换、记录或执行降级策略。
-     *
-     * @param request 已经通过控制器基础校验的请求对象
-     * @param uploadId 分片上传任务唯一标识
-     * @return 计算或处理得到的数值结果
-     */
+    /** Compose every chunk in order and transition the upload session to a document. */
     @Transactional
     public Long completeUpload(HttpServletRequest request, String uploadId) {
         DocumentUploadSessionEntity session = requireOwnedActiveSession(request, uploadId);
@@ -239,13 +204,6 @@ public class DocumentUploadService {
         }
     }
 
-    /**
-     * 返回 {@code uploadStatus} 对应的配置或状态值。
-     *
-     * @param request 已经通过控制器基础校验的请求对象
-     * @param uploadId 分片上传任务唯一标识
-     * @return 查询得到的上传状态结果
-     */
     public UploadStatusResponse getUploadStatus(HttpServletRequest request, String uploadId) {
         DocumentUploadSessionEntity session = requireOwnedActiveSession(request, uploadId);
         List<Integer> uploadedChunks = documentUploadChunkMapper.selectByUploadId(uploadId).stream()
@@ -259,15 +217,6 @@ public class DocumentUploadService {
         );
     }
 
-    /**
-     * 执行 {@code validateInitRequest} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param uploadRequest 上传请求参数
-     * @return 方法执行结果，具体结构由返回类型 {@code NormalizedInitRequest} 表示
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private NormalizedInitRequest validateInitRequest(UploadInitRequest uploadRequest) {
         if (uploadRequest == null) {
             throw new BusinessException("上传初始化请求不能为空");
@@ -293,15 +242,6 @@ public class DocumentUploadService {
         return new NormalizedInitRequest(groupId, fileName, fileExt, fileSize, contentType, fileHash, chunkSize, chunkCount);
     }
 
-    /**
-     * 执行 {@code requireGroupId} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param groupId 群组唯一标识
-     * @return 计算或处理得到的数值结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private Long requireGroupId(Long groupId) {
         if (groupId == null || groupId <= 0) {
             throw new BusinessException("groupId 非法");
@@ -309,15 +249,6 @@ public class DocumentUploadService {
         return groupId;
     }
 
-    /**
-     * 执行 {@code sanitizeFileName} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param fileName 原始文件名
-     * @return 处理后得到的字符串结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private String sanitizeFileName(String fileName) {
         if (!StringUtils.hasText(fileName)) {
             throw new BusinessException("文件名非法");
@@ -330,13 +261,6 @@ public class DocumentUploadService {
         return sanitizedFileName;
     }
 
-    /**
-     * 执行 {@code extractFileExt} 对应的业务步骤。
-     *
-     * @param fileName 原始文件名
-     * @return 处理后得到的字符串结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private String extractFileExt(String fileName) {
         int dotIndex = fileName.lastIndexOf('.');
         if (dotIndex <= 0 || dotIndex == fileName.length() - 1) {
@@ -349,15 +273,6 @@ public class DocumentUploadService {
         return fileExt;
     }
 
-    /**
-     * 执行 {@code normalizeContentType} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param contentType 文件的 MIME 类型
-     * @return 处理后得到的字符串结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private String normalizeContentType(String contentType) {
         if (!StringUtils.hasText(contentType)) {
             return "application/octet-stream";
@@ -369,15 +284,6 @@ public class DocumentUploadService {
         return normalizedContentType;
     }
 
-    /**
-     * 执行 {@code normalizeFileHash} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param fileHash 方法参数 {@code fileHash}
-     * @return 处理后得到的字符串结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private String normalizeFileHash(String fileHash) {
         if (!StringUtils.hasText(fileHash)) {
             throw new BusinessException("fileHash 非法");
@@ -389,16 +295,6 @@ public class DocumentUploadService {
         return normalizedFileHash;
     }
 
-    /**
-     * 执行 {@code requirePositive} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param value 方法参数 {@code value}
-     * @param message 方法参数 {@code message}
-     * @return 计算或处理得到的数值结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private long requirePositive(Long value, String message) {
         if (value == null || value <= 0) {
             throw new BusinessException(message);
@@ -406,16 +302,6 @@ public class DocumentUploadService {
         return value;
     }
 
-    /**
-     * 执行 {@code requirePositive} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param value 方法参数 {@code value}
-     * @param message 方法参数 {@code message}
-     * @return 计算或处理得到的数值结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private int requirePositive(Integer value, String message) {
         if (value == null || value <= 0) {
             throw new BusinessException(message);
@@ -423,16 +309,6 @@ public class DocumentUploadService {
         return value;
     }
 
-    /**
-     * 执行 {@code requireOwnedActiveSession} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界；读取数据库中的当前状态；校验群组成员关系和角色权限。
-     *
-     * @param request 已经通过控制器基础校验的请求对象
-     * @param uploadId 分片上传任务唯一标识
-     * @return 方法执行结果，具体结构由返回类型 {@code DocumentUploadSessionEntity} 表示
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private DocumentUploadSessionEntity requireOwnedActiveSession(HttpServletRequest request, String uploadId) {
         if (!StringUtils.hasText(uploadId)) {
             throw new BusinessException("uploadId 非法");
@@ -454,16 +330,6 @@ public class DocumentUploadService {
         return session;
     }
 
-    /**
-     * 执行 {@code requireChunk} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param uploadRequest 上传请求参数
-     * @param session 方法参数 {@code session}
-     * @return 方法执行结果，具体结构由返回类型 {@code MultipartFile} 表示
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private MultipartFile requireChunk(UploadChunkRequest uploadRequest, DocumentUploadSessionEntity session) {
         if (uploadRequest == null) {
             throw new BusinessException("分片上传请求不能为空");
@@ -483,15 +349,6 @@ public class DocumentUploadService {
         return chunk;
     }
 
-    /**
-     * 执行 {@code ensureAllChunksPresent} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param session 方法参数 {@code session}
-     * @param chunks 待处理的文档切片集合
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private void ensureAllChunksPresent(DocumentUploadSessionEntity session, List<DocumentUploadChunkEntity> chunks) {
         if (chunks.size() != session.getChunkCount()) {
             throw new BusinessException("缺少分片，无法完成上传");
@@ -503,24 +360,10 @@ public class DocumentUploadService {
         }
     }
 
-    /**
-     * 执行 {@code buildChunkObjectKey} 对应的业务步骤。
-     *
-     * @param groupId 群组唯一标识
-     * @param uploadId 分片上传任务唯一标识
-     * @param chunkIndex 方法参数 {@code chunkIndex}
-     * @return 处理后得到的字符串结果
-     */
     private String buildChunkObjectKey(Long groupId, String uploadId, Integer chunkIndex) {
         return "uploads/%d/%s/chunks/%d".formatted(groupId, uploadId, chunkIndex);
     }
 
-    /**
-     * 执行 {@code buildFinalObjectKey} 对应的业务步骤。
-     *
-     * @param session 方法参数 {@code session}
-     * @return 处理后得到的字符串结果
-     */
     private String buildFinalObjectKey(DocumentUploadSessionEntity session) {
         String fileId = UUID.randomUUID().toString().replace("-", "");
         return "groups/%d/users/%d/%s.%s".formatted(
@@ -531,16 +374,6 @@ public class DocumentUploadService {
         );
     }
 
-    /**
-     * 执行 {@code buildUploadSession} 对应的业务步骤。
-     * <p>
-     * 实现要点：读写 MinIO 对象存储中的原始文件。
-     *
-     * @param groupId 群组唯一标识
-     * @param userId 用户唯一标识
-     * @param uploadRequest 上传请求参数
-     * @return 方法执行结果，具体结构由返回类型 {@code DocumentUploadSessionEntity} 表示
-     */
     private DocumentUploadSessionEntity buildUploadSession(Long groupId, Long userId, NormalizedInitRequest uploadRequest) {
         LocalDateTime now = LocalDateTime.now();
         DocumentUploadSessionEntity session = new DocumentUploadSessionEntity();
@@ -563,11 +396,6 @@ public class DocumentUploadService {
         return session;
     }
 
-    /**
-     * 保存分片上传初始化请求经过规范化和校验后的数据。
-     *
-     * <p>仅在 {@code DocumentUploadService} 的实现过程中使用，用不可变数据结构收拢中间结果，避免参数和值的含义混淆。</p>
-     */
     private record NormalizedInitRequest(
             Long groupId,
             String fileName,

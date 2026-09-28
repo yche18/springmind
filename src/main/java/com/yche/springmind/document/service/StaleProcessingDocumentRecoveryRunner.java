@@ -12,9 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
-/**
- * 启动时回收遗留在 PROCESSING 的文档，避免服务中断后前端永远看到“处理中”。
- */
+/** Recovers documents left in PROCESSING after an interrupted application run. */
 @Component
 public class StaleProcessingDocumentRecoveryRunner implements ApplicationRunner {
 
@@ -23,12 +21,6 @@ public class StaleProcessingDocumentRecoveryRunner implements ApplicationRunner 
 
     private final DocumentMapper documentMapper;
 
-    /**
-     * 创建并初始化 {@link StaleProcessingDocumentRecoveryRunner}，保存该组件运行所需的依赖与配置。
-     *
-     * @param documentMapper 方法参数 {@code documentMapper}
-     * @param staleTimeoutMinutes 方法参数 {@code staleTimeoutMinutes}
-     */
     public StaleProcessingDocumentRecoveryRunner(
             DocumentMapper documentMapper,
             @Value("${document.ingestion.processing-timeout-minutes:30}") long staleTimeoutMinutes
@@ -36,13 +28,6 @@ public class StaleProcessingDocumentRecoveryRunner implements ApplicationRunner 
         this.documentMapper = documentMapper;
     }
 
-    /**
-     * 在应用生命周期的指定阶段执行初始化或恢复任务。
-     * <p>
-     * 实现要点：使用事务保证多次数据库操作的一致性。
-     *
-     * @param args 方法参数 {@code args}
-     */
     @Override
     @Transactional
     public void run(ApplicationArguments args) {

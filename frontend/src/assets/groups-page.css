@@ -129,7 +129,7 @@
   overflow: visible;
 }
 
-/* 不再给子节点强加大圆角，避免裁切 eyebrow / 标题 */
+/* Avoid forcing large radii on children, which can clip eyebrows and headings. */
 .groups-page__sidebar-panel > *,
 .groups-page__main-panel > * {
   min-width: 0;

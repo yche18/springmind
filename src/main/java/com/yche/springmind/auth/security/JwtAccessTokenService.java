@@ -16,11 +16,7 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
-/**
- * 签发并校验短期 JWT 访问令牌，将合法声明转换为系统可识别的用户身份。
- *
- * <p>位于认证安全边界：负责令牌、Cookie 或安全上下文处理，为业务服务提供可信的用户身份。</p>
- */
+/** Issue and validate short-lived JWT access tokens using the configured signing key. */
 @Service
 public class JwtAccessTokenService {
 
@@ -34,24 +30,12 @@ public class JwtAccessTokenService {
     private final Clock clock;
     private final SecretKey signingKey;
 
-    /**
-     * 创建并初始化 {@link JwtAccessTokenService}，保存该组件运行所需的依赖与配置。
-     *
-     * @param authProperties 方法参数 {@code authProperties}
-     * @param clock 用于生成可测试时间的时钟
-     */
     public JwtAccessTokenService(AuthProperties authProperties, Clock clock) {
         this.authProperties = authProperties;
         this.clock = clock;
         this.signingKey = buildSigningKey(authProperties.getJwtSecret());
     }
 
-    /**
-     * 判断当前数据是否满足 {@code sueToken} 条件。
-     *
-     * @param subject 方法参数 {@code subject}
-     * @return 处理后得到的字符串结果
-     */
     public String issueToken(TokenSubject subject) {
         Instant issuedAt = clock.instant();
         Instant expiresAt = issuedAt.plus(authProperties.getAccessTokenExpireMinutes(), ChronoUnit.MINUTES);
@@ -68,15 +52,7 @@ public class JwtAccessTokenService {
                 .compact();
     }
 
-    /**
-     * 将输入内容解析为当前组件约定的结构化结果。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界；捕获依赖异常并转换、记录或执行降级策略。
-     *
-     * @param token 方法参数 {@code token}
-     * @return 方法执行结果，具体结构由返回类型 {@code AccessTokenClaims} 表示
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
+    /** Parse and validate signature, issuer, token type, and required identity claims. */
     public AccessTokenClaims parse(String token) {
         try {
             Claims claims = Jwts.parser()
@@ -103,14 +79,6 @@ public class JwtAccessTokenService {
         }
     }
 
-    /**
-     * 完成 {@code validateClaims} 对应的处理。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param claims 方法参数 {@code claims}
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private void validateClaims(Claims claims) {
         if (!authProperties.getIssuer().equals(claims.getIssuer())) {
             throw new BusinessException(JwtAuthenticationFilter.INVALID_ACCESS_TOKEN_MESSAGE);
@@ -126,13 +94,6 @@ public class JwtAccessTokenService {
         }
     }
 
-    /**
-     * 完成 {@code buildSigningKey} 对应的处理。
-     *
-     * @param jwtSecret 方法参数 {@code jwtSecret}
-     * @return 方法执行结果，具体结构由返回类型 {@code SecretKey} 表示
-     * @throws IllegalStateException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private SecretKey buildSigningKey(String jwtSecret) {
         byte[] secretBytes = jwtSecret.getBytes(StandardCharsets.UTF_8);
         if (secretBytes.length < MIN_SECRET_LENGTH) {
@@ -141,11 +102,6 @@ public class JwtAccessTokenService {
         return Keys.hmacShaKeyFor(secretBytes);
     }
 
-    /**
-     * 表示签发访问令牌时写入的用户主体和角色信息。
-     *
-     * <p>仅在 {@code JwtAccessTokenService} 的实现过程中使用，用不可变数据结构收拢中间结果，避免参数和值的含义混淆。</p>
-     */
     public record TokenSubject(
             Long userId,
             String userCode,
@@ -155,11 +111,6 @@ public class JwtAccessTokenService {
     ) {
     }
 
-    /**
-     * 表示从合法访问令牌中解析出的身份声明和过期时间。
-     *
-     * <p>仅在 {@code JwtAccessTokenService} 的实现过程中使用，用不可变数据结构收拢中间结果，避免参数和值的含义混淆。</p>
-     */
     public record AccessTokenClaims(
             Long userId,
             String userCode,

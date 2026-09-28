@@ -30,9 +30,8 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * 管理文档查询、预览、删除和上传完成后的持久化，并维护权限与生命周期规则。
- *
- * <p>位于业务服务层：编排领域操作和基础设施调用，并集中维护事务、权限校验及失败处理边界。</p>
+ * Manage the document lifecycle while enforcing group boundaries and keeping
+ * object storage, database state, and retrieval indexes consistent.
  */
 @Service
 public class DocumentService {
@@ -53,19 +52,6 @@ public class DocumentService {
     private final ElasticsearchChunkIndexService elasticsearchChunkIndexService;
     private final ApplicationEventPublisher applicationEventPublisher;
 
-    /**
-     * 创建并初始化 {@link DocumentService}，保存该组件运行所需的依赖与配置。
-     * <p>
-     * 实现要点：校验群组成员关系和角色权限；解析并确认当前登录用户；读写 MinIO 对象存储中的原始文件；写入或查询 pgvector 向量索引；维护或查询 Elasticsearch 关键词索引。
-     *
-     * @param documentMapper 方法参数 {@code documentMapper}
-     * @param groupMembershipService 方法参数 {@code groupMembershipService}
-     * @param currentUserService 方法参数 {@code currentUserService}
-     * @param objectStorageService 方法参数 {@code objectStorageService}
-     * @param vectorIngestionService 方法参数 {@code vectorIngestionService}
-     * @param elasticsearchChunkIndexService 方法参数 {@code elasticsearchChunkIndexService}
-     * @param applicationEventPublisher 方法参数 {@code applicationEventPublisher}
-     */
     public DocumentService(
             DocumentMapper documentMapper,
             GroupMembershipService groupMembershipService,
@@ -85,13 +71,8 @@ public class DocumentService {
     }
 
     /**
-     * 接收并保存文档原文件与元数据，随后发布异步 ETL 入库事件。
-     * <p>
-     * 实现要点：使用事务保证多次数据库操作的一致性；先校验输入、状态或业务边界；读写 MinIO 对象存储中的原始文件；捕获依赖异常并转换、记录或执行降级策略。
-     *
-     * @param request 已经通过控制器基础校验的请求对象
-     * @param uploadRequest 上传请求参数
-     * @return 计算或处理得到的数值结果
+     * Store a small upload and publish ingestion only after its metadata is durable.
+     * Compensate the object and external indexes if finalization fails.
      */
     @Transactional
     public Long uploadDocument(HttpServletRequest request, UploadDocumentRequest uploadRequest) {
@@ -129,18 +110,7 @@ public class DocumentService {
         }
     }
 
-    /**
-     * 执行 {@code createInstantUploadedDocument} 对应的业务步骤。
-     * <p>
-     * 实现要点：使用事务保证多次数据库操作的一致性；先校验输入、状态或业务边界。
-     *
-     * @param groupId 群组唯一标识
-     * @param userId 用户唯一标识
-     * @param existingDocument 方法参数 {@code existingDocument}
-     * @param fileName 原始文件名
-     * @return 计算或处理得到的数值结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
+    /** Create a new logical document by reusing the object of an existing ready document. */
     @Transactional
     public Long createInstantUploadedDocument(
             Long groupId,
@@ -165,22 +135,7 @@ public class DocumentService {
         return document.getId();
     }
 
-    /**
-     * 执行 {@code finalizeUploadedDocument} 对应的业务步骤。
-     * <p>
-     * 实现要点：使用事务保证多次数据库操作的一致性；先校验输入、状态或业务边界。
-     *
-     * @param groupId 群组唯一标识
-     * @param userId 用户唯一标识
-     * @param fileName 原始文件名
-     * @param fileExt 方法参数 {@code fileExt}
-     * @param contentType 文件的 MIME 类型
-     * @param fileSize 方法参数 {@code fileSize}
-     * @param fileHash 方法参数 {@code fileHash}
-     * @param bucket 对象存储桶名称
-     * @param objectKey 对象存储中的对象键
-     * @return 计算或处理得到的数值结果
-     */
+    /** Finalize a composed multipart object and enqueue it for asynchronous ingestion. */
     @Transactional
     public Long finalizeUploadedDocument(
             Long groupId,
@@ -207,30 +162,12 @@ public class DocumentService {
         return document.getId();
     }
 
-    /**
-     * 执行 {@code listDocuments} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param request 已经通过控制器基础校验的请求对象
-     * @param query 用于检索或筛选的查询条件
-     * @return 符合条件的结果集合；无结果时返回空集合
-     */
     public List<DocumentListItemVO> listDocuments(HttpServletRequest request, DocumentQuery query) {
         DocumentQuery validatedQuery = normalizeQuery(request, query);
         return documentMapper.selectReadableDocuments(validatedQuery);
     }
 
-    /**
-     * 校验群组所有者权限后软删除文档，并清理向量与关键词索引。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界；写入或查询 pgvector 向量索引；维护或查询 Elasticsearch 关键词索引。
-     *
-     * @param request 已经通过控制器基础校验的请求对象
-     * @param groupId 群组唯一标识
-     * @param documentId 文档唯一标识
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
+    /** Soft-delete a document and remove its vector and keyword index entries. */
     public void softDeleteDocument(HttpServletRequest request, Long groupId, Long documentId) {
         requireGroupOwner(request, requireGroupId(groupId));
         if (documentId == null || documentId <= 0) {
@@ -243,16 +180,7 @@ public class DocumentService {
         elasticsearchChunkIndexService.deleteDocumentChunks(documentId);
     }
 
-    /**
-     * 仅允许失败文档重新进入处理状态，并重新发布异步入库事件。
-     * <p>
-     * 实现要点：使用事务保证多次数据库操作的一致性；先校验输入、状态或业务边界；读取数据库中的当前状态。
-     *
-     * @param request 已经通过控制器基础校验的请求对象
-     * @param groupId 群组唯一标识
-     * @param documentId 文档唯一标识
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
+    /** Move a failed document back to processing and publish a fresh ingestion request. */
     @Transactional
     public void retryFailedDocumentIngestion(HttpServletRequest request, Long groupId, Long documentId) {
         Long requiredGroupId = requireGroupId(groupId);
@@ -280,17 +208,6 @@ public class DocumentService {
         publishIngestionRequestedEvent(documentId, requiredGroupId);
     }
 
-    /**
-     * 执行 {@code previewDocument} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界；校验群组成员关系和角色权限；读取数据库中的当前状态。
-     *
-     * @param request 已经通过控制器基础校验的请求对象
-     * @param groupId 群组唯一标识
-     * @param documentId 文档唯一标识
-     * @return 方法执行结果，具体结构由返回类型 {@code DocumentPreviewVO} 表示
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     public DocumentPreviewVO previewDocument(HttpServletRequest request, Long groupId, Long documentId) {
         Long requiredGroupId = requireGroupId(groupId);
         groupMembershipService.requireGroupReadable(request, requiredGroupId);
@@ -314,15 +231,6 @@ public class DocumentService {
         return preview;
     }
 
-    /**
-     * 执行 {@code requireGroupId} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param groupId 群组唯一标识
-     * @return 计算或处理得到的数值结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private Long requireGroupId(Long groupId) {
         if (groupId == null || groupId <= 0) {
             throw new BusinessException("groupId 非法");
@@ -330,30 +238,12 @@ public class DocumentService {
         return groupId;
     }
 
-    /**
-     * 执行 {@code requireGroupOwner} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界；校验群组成员关系和角色权限。
-     *
-     * @param request 已经通过控制器基础校验的请求对象
-     * @param groupId 群组唯一标识
-     * @return 方法执行结果，具体结构由返回类型 {@code CurrentUserService.CurrentUser} 表示
-     */
     private CurrentUserService.CurrentUser requireGroupOwner(HttpServletRequest request, Long groupId) {
         CurrentUserService.CurrentUser currentUser = groupMembershipService.requireGroupReadable(request, groupId);
         groupMembershipService.requireGroupOwner(request, groupId);
         return currentUser;
     }
 
-    /**
-     * 执行 {@code requireValidFile} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param file 用户上传的文件
-     * @return 方法执行结果，具体结构由返回类型 {@code MultipartFile} 表示
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private MultipartFile requireValidFile(MultipartFile file) {
         if (file == null || file.isEmpty()) {
             throw new BusinessException("上传文件不能为空");
@@ -364,26 +254,11 @@ public class DocumentService {
         return file;
     }
 
-    /**
-     * 执行 {@code extractFileName} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param file 用户上传的文件
-     * @return 处理后得到的字符串结果
-     */
     private String extractFileName(MultipartFile file) {
         String originalFileName = file.getOriginalFilename();
         return normalizeFileName(originalFileName);
     }
 
-    /**
-     * 执行 {@code extractFileExt} 对应的业务步骤。
-     *
-     * @param fileName 原始文件名
-     * @return 处理后得到的字符串结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private String extractFileExt(String fileName) {
         int dotIndex = fileName.lastIndexOf('.');
         if (dotIndex <= 0 || dotIndex == fileName.length() - 1) {
@@ -396,29 +271,11 @@ public class DocumentService {
         return fileExt;
     }
 
-    /**
-     * 执行 {@code buildObjectKey} 对应的业务步骤。
-     *
-     * @param groupId 群组唯一标识
-     * @param userId 用户唯一标识
-     * @param fileExt 方法参数 {@code fileExt}
-     * @return 处理后得到的字符串结果
-     */
     private String buildObjectKey(Long groupId, Long userId, String fileExt) {
         String fileId = UUID.randomUUID().toString().replace("-", "");
         return "groups/%d/users/%d/%s.%s".formatted(groupId, userId, fileId, fileExt);
     }
 
-    /**
-     * 执行 {@code uploadFile} 对应的业务步骤。
-     * <p>
-     * 实现要点：读写 MinIO 对象存储中的原始文件；先校验输入、状态或业务边界；捕获依赖异常并转换、记录或执行降级策略。
-     *
-     * @param bucket 对象存储桶名称
-     * @param objectKey 对象存储中的对象键
-     * @param file 用户上传的文件
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private void uploadFile(String bucket, String objectKey, MultipartFile file) {
         try (InputStream inputStream = file.getInputStream()) {
             objectStorageService.putObject(
@@ -437,15 +294,6 @@ public class DocumentService {
         }
     }
 
-    /**
-     * 执行 {@code compensateUploadedObject} 对应的业务步骤。
-     * <p>
-     * 实现要点：读写 MinIO 对象存储中的原始文件；捕获依赖异常并转换、记录或执行降级策略。
-     *
-     * @param bucket 对象存储桶名称
-     * @param objectKey 对象存储中的对象键
-     * @param originalException 方法参数 {@code originalException}
-     */
     private void compensateUploadedObject(String bucket, String objectKey, RuntimeException originalException) {
         try {
             objectStorageService.deleteObject(bucket, objectKey);
@@ -460,13 +308,6 @@ public class DocumentService {
         }
     }
 
-    /**
-     * 执行 {@code compensateExternalIndexes} 对应的业务步骤。
-     * <p>
-     * 实现要点：写入或查询 pgvector 向量索引；捕获依赖异常并转换、记录或执行降级策略；维护或查询 Elasticsearch 关键词索引。
-     *
-     * @param document 当前处理的文档实体
-     */
     private void compensateExternalIndexes(DocumentEntity document) {
         if (document == null || document.getId() == null) {
             return;
@@ -483,14 +324,6 @@ public class DocumentService {
         }
     }
 
-    /**
-     * 执行 {@code persistAndFinalizeUploadedDocument} 对应的业务步骤。
-     * <p>
-     * 实现要点：持久化数据库状态变更。
-     *
-     * @param command 方法参数 {@code command}
-     * @return 方法执行结果，具体结构由返回类型 {@code DocumentEntity} 表示
-     */
     private DocumentEntity persistAndFinalizeUploadedDocument(FinalizedUploadCommand command) {
         DocumentEntity document = buildDocument(command);
         documentMapper.insert(document);
@@ -501,27 +334,10 @@ public class DocumentService {
         return document;
     }
 
-    /**
-     * 执行 {@code publishIngestionRequestedEvent} 对应的业务步骤。
-     * <p>
-     * 实现要点：发布事件触发后续异步处理。
-     *
-     * @param documentId 文档唯一标识
-     * @param groupId 群组唯一标识
-     */
     private void publishIngestionRequestedEvent(Long documentId, Long groupId) {
         applicationEventPublisher.publishEvent(new DocumentIngestionRequestedEvent(documentId, groupId));
     }
 
-    /**
-     * 执行 {@code normalizeContentType} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param contentType 文件的 MIME 类型
-     * @return 处理后得到的字符串结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private String normalizeContentType(String contentType) {
         if (!StringUtils.hasText(contentType)) {
             return "application/octet-stream";
@@ -532,16 +348,6 @@ public class DocumentService {
         return contentType;
     }
 
-    /**
-     * 执行 {@code normalizeQuery} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界；解析并确认当前登录用户；校验群组成员关系和角色权限。
-     *
-     * @param request 已经通过控制器基础校验的请求对象
-     * @param query 用于检索或筛选的查询条件
-     * @return 方法执行结果，具体结构由返回类型 {@code DocumentQuery} 表示
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private DocumentQuery normalizeQuery(HttpServletRequest request, DocumentQuery query) {
         DocumentQuery safeQuery = query == null ? new DocumentQuery() : query;
         CurrentUserService.CurrentUser currentUser = currentUserService.requireBusinessUser(request);
@@ -569,15 +375,6 @@ public class DocumentService {
         return safeQuery;
     }
 
-    /**
-     * 执行 {@code normalizeGroupRelation} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param groupRelation 方法参数 {@code groupRelation}
-     * @return 处理后得到的字符串结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private String normalizeGroupRelation(String groupRelation) {
         String normalized = groupRelation.trim().toUpperCase();
         return switch (normalized) {
@@ -587,15 +384,6 @@ public class DocumentService {
         };
     }
 
-    /**
-     * 执行 {@code normalizeStatus} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界；捕获依赖异常并转换、记录或执行降级策略。
-     *
-     * @param status 目标业务状态
-     * @return 处理后得到的字符串结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private String normalizeStatus(String status) {
         try {
             return DocumentStatus.valueOf(status.trim().toUpperCase()).name();
@@ -604,12 +392,6 @@ public class DocumentService {
         }
     }
 
-    /**
-     * 执行 {@code buildDocument} 对应的业务步骤。
-     *
-     * @param command 方法参数 {@code command}
-     * @return 方法执行结果，具体结构由返回类型 {@code DocumentEntity} 表示
-     */
     private DocumentEntity buildDocument(FinalizedUploadCommand command) {
         LocalDateTime now = LocalDateTime.now();
         DocumentEntity document = new DocumentEntity();
@@ -630,15 +412,6 @@ public class DocumentService {
         return document;
     }
 
-    /**
-     * 执行 {@code requirePositiveUserId} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param userId 用户唯一标识
-     * @return 计算或处理得到的数值结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private Long requirePositiveUserId(Long userId) {
         if (userId == null || userId <= 0) {
             throw new BusinessException("userId 非法");
@@ -646,15 +419,6 @@ public class DocumentService {
         return userId;
     }
 
-    /**
-     * 执行 {@code requirePositiveFileSize} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param fileSize 方法参数 {@code fileSize}
-     * @return 计算或处理得到的数值结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private long requirePositiveFileSize(Long fileSize) {
         if (fileSize == null || fileSize <= 0) {
             throw new BusinessException("fileSize 非法");
@@ -662,12 +426,6 @@ public class DocumentService {
         return fileSize;
     }
 
-    /**
-     * 执行 {@code trimPreviewText} 对应的业务步骤。
-     *
-     * @param previewText 方法参数 {@code previewText}
-     * @return 处理后得到的字符串结果
-     */
     private String trimPreviewText(String previewText) {
         if (!StringUtils.hasText(previewText) || previewText.length() <= PREVIEW_MAX_LENGTH) {
             return previewText;
@@ -675,28 +433,10 @@ public class DocumentService {
         return previewText.substring(0, PREVIEW_MAX_LENGTH);
     }
 
-    /**
-     * 执行 {@code validateReusableFileName} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param fileName 原始文件名
-     * @return 处理后得到的字符串结果
-     */
     private String validateReusableFileName(String fileName) {
         return normalizeFileName(fileName);
     }
 
-    /**
-     * 执行 {@code requireText} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param value 方法参数 {@code value}
-     * @param message 方法参数 {@code message}
-     * @return 处理后得到的字符串结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private String requireText(String value, String message) {
         if (!StringUtils.hasText(value)) {
             throw new BusinessException(message);
@@ -704,15 +444,6 @@ public class DocumentService {
         return value.trim();
     }
 
-    /**
-     * 执行 {@code normalizeFileName} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param rawFileName 方法参数 {@code rawFileName}
-     * @return 处理后得到的字符串结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private String normalizeFileName(String rawFileName) {
         if (!StringUtils.hasText(rawFileName)) {
             throw new BusinessException("文件名非法");
@@ -725,11 +456,6 @@ public class DocumentService {
         return fileName;
     }
 
-    /**
-     * 封装上传完成后创建文档记录并触发入库所需的规范化参数。
-     *
-     * <p>仅在 {@code DocumentService} 的实现过程中使用，用不可变数据结构收拢中间结果，避免参数和值的含义混淆。</p>
-     */
     record FinalizedUploadCommand(
             Long groupId,
             Long userId,

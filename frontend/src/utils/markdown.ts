@@ -7,23 +7,23 @@ marked.setOptions({
 })
 
 /**
- * 规范化模型输出，提高 ATX 标题等结构的解析成功率。
- * 中文模型常见：无空格标题、全角 #、CRLF、行首缩进。
+ * Normalizes model output so structures such as ATX headings parse reliably.
+ * Chinese-language models commonly emit headings without spaces, full-width # characters, CRLF, or indentation.
  */
 function normalizeMarkdownSource(source: string): string {
   let text = source
     .replace(/\uFEFF/g, '')
     .replace(/\r\n?/g, '\n')
-    // 全角井号 → 半角
+    // Convert full-width hash characters to ASCII.
     .replace(/＃/g, '#')
 
-  // 允许行首最多 3 个空格（CommonMark 规则），并给无空格标题补空格：###标题 → ### 标题
+  // CommonMark permits up to three leading spaces; also insert the missing space in headings such as ###Title.
   text = text.replace(/^[ \t]{0,3}(#{1,6})(?=[^\s#])/gm, '$1 ')
 
-  // 去掉行尾空白，减少流式拼接时的怪异 token
+  // Remove trailing whitespace that can produce odd tokens while streaming.
   text = text.replace(/[ \t]+$/gm, '')
 
-  // 流式未闭合代码围栏：补一个结束 fence，避免整段被吞成半成品
+  // Temporarily close an unfinished code fence so a partial stream remains renderable.
   const fenceCount = (text.match(/^```/gm) ?? []).length
   if (fenceCount % 2 === 1) {
     text = `${text}\n\`\`\``
@@ -33,8 +33,8 @@ function normalizeMarkdownSource(source: string): string {
 }
 
 /**
- * 将模型返回的 Markdown 安全渲染为 HTML。
- * 流式片段可能不完整，仍按 best-effort 解析；XSS 由 DOMPurify 兜底。
+ * Safely renders model-generated Markdown as HTML.
+ * Streaming fragments may be incomplete, so parsing is best-effort and DOMPurify provides the XSS boundary.
  */
 export function renderMarkdown(source: string): string {
   const text = normalizeMarkdownSource(source ?? '')

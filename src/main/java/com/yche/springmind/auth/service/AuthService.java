@@ -18,11 +18,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * 编排用户注册、登录、令牌刷新、退出和当前用户查询等完整认证流程。
- *
- * <p>位于业务服务层：编排领域操作和基础设施调用，并集中维护事务、权限校验及失败处理边界。</p>
- */
+/** Coordinate credential validation, registration, and token lifecycle operations. */
 @Service
 public class AuthService {
 
@@ -42,17 +38,6 @@ public class AuthService {
     private final RefreshTokenService refreshTokenService;
     private final Clock clock;
 
-    /**
-     * 创建并初始化 {@link AuthService}，保存该组件运行所需的依赖与配置。
-     * <p>
-     * 实现要点：使用安全哈希校验或保存密码；签发或解析 JWT 访问令牌；维护刷新令牌的签发、轮换或撤销状态。
-     *
-     * @param jdbcTemplate 方法参数 {@code jdbcTemplate}
-     * @param passwordHasher 方法参数 {@code passwordHasher}
-     * @param jwtAccessTokenService 方法参数 {@code jwtAccessTokenService}
-     * @param refreshTokenService 方法参数 {@code refreshTokenService}
-     * @param clock 用于生成可测试时间的时钟
-     */
     public AuthService(
             JdbcTemplate jdbcTemplate,
             PasswordHasher passwordHasher,
@@ -67,15 +52,6 @@ public class AuthService {
         this.clock = clock;
     }
 
-    /**
-     * 校验用户名或邮箱与密码，签发访问令牌和刷新令牌，并记录本次成功登录。
-     * <p>
-     * 实现要点：使用事务保证多次数据库操作的一致性；先校验输入、状态或业务边界；维护刷新令牌的签发、轮换或撤销状态。
-     *
-     * @param loginId 用户名或邮箱形式的登录标识
-     * @param password 用户提交的明文密码，仅用于本次校验或哈希计算
-     * @return 方法执行结果，具体结构由返回类型 {@code AuthTokens} 表示
-     */
     @Transactional
     public AuthTokens login(String loginId, String password) {
         LoginCommand command = validateLoginCommand(loginId, password);
@@ -92,13 +68,6 @@ public class AuthService {
         );
     }
 
-    /**
-     * 完成用户自助注册；密码由用户本人设置，因此新账号无需执行首次改密。
-     * <p>
-     * 实现要点：使用事务保证多次数据库操作的一致性；先校验输入、状态或业务边界；持久化数据库状态变更；使用安全哈希校验或保存密码。
-     *
-     * @param request 已经通过控制器基础校验的请求对象
-     */
     @Transactional
     public void register(RegisterRequest request) {
         RegisterCommand command = validateRegisterCommand(request);
@@ -121,15 +90,7 @@ public class AuthService {
         );
     }
 
-    /**
-     * 校验并轮换刷新令牌，为仍可登录的用户签发新的访问凭据。
-     * <p>
-     * 实现要点：使用事务保证多次数据库操作的一致性；维护刷新令牌的签发、轮换或撤销状态；先校验输入、状态或业务边界。
-     *
-     * @param refreshToken 客户端提交的刷新令牌
-     * @return 方法执行结果，具体结构由返回类型 {@code AuthTokens} 表示
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
+    /** Rotate a valid refresh token and issue a new access/refresh token pair. */
     @Transactional
     public AuthTokens refresh(String refreshToken) {
         if (refreshToken == null || refreshToken.isBlank()) {
@@ -149,13 +110,6 @@ public class AuthService {
         );
     }
 
-    /**
-     * 撤销当前刷新令牌，使对应会话无法继续换取访问令牌。
-     * <p>
-     * 实现要点：使用事务保证多次数据库操作的一致性；维护刷新令牌的签发、轮换或撤销状态。
-     *
-     * @param refreshToken 客户端提交的刷新令牌
-     */
     @Transactional
     public void logout(String refreshToken) {
         if (refreshToken == null || refreshToken.isBlank()) {
@@ -164,12 +118,6 @@ public class AuthService {
         refreshTokenService.revokeToken(refreshToken);
     }
 
-    /**
-     * 返回 {@code currentUser} 对应的配置或状态值。
-     *
-     * @param userId 用户唯一标识
-     * @return 查询得到的当前用户结果
-     */
     public CurrentUserService.CurrentUser getCurrentUser(Long userId) {
         UserAccount user = loadUserById(userId);
         return new CurrentUserService.CurrentUser(
@@ -181,15 +129,6 @@ public class AuthService {
         );
     }
 
-    /**
-     * 执行 {@code validateRegisterCommand} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param request 已经通过控制器基础校验的请求对象
-     * @return 方法执行结果，具体结构由返回类型 {@code RegisterCommand} 表示
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private RegisterCommand validateRegisterCommand(RegisterRequest request) {
         if (request == null) {
             throw new BusinessException("注册请求不能为空");
@@ -206,16 +145,6 @@ public class AuthService {
         return new RegisterCommand(username, email, displayName, request.password());
     }
 
-    /**
-     * 执行 {@code validateLoginCommand} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param loginId 用户名或邮箱形式的登录标识
-     * @param password 用户提交的明文密码，仅用于本次校验或哈希计算
-     * @return 方法执行结果，具体结构由返回类型 {@code LoginCommand} 表示
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private LoginCommand validateLoginCommand(String loginId, String password) {
         String normalizedLoginId = normalizeLoginId(loginId);
         if (password == null || password.isBlank()) {
@@ -230,15 +159,6 @@ public class AuthService {
         return new LoginCommand(normalizedLoginId, password);
     }
 
-    /**
-     * 执行 {@code normalizeLoginId} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param loginId 用户名或邮箱形式的登录标识
-     * @return 处理后得到的字符串结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private String normalizeLoginId(String loginId) {
         if (loginId == null || loginId.isBlank()) {
             throw new BusinessException("登录标识不能为空");
@@ -250,14 +170,6 @@ public class AuthService {
         return normalizedLoginId;
     }
 
-    /**
-     * 执行 {@code validateRegisterPassword} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param password 用户提交的明文密码，仅用于本次校验或哈希计算
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private void validateRegisterPassword(String password) {
         if (password == null || password.length() < MIN_PASSWORD_LENGTH) {
             throw new BusinessException(INVALID_PASSWORD_MESSAGE);
@@ -284,18 +196,6 @@ public class AuthService {
         }
     }
 
-    /**
-     * 执行 {@code normalizeRequiredValue} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param value 方法参数 {@code value}
-     * @param blankMessage 方法参数 {@code blankMessage}
-     * @param lengthMessage 方法参数 {@code lengthMessage}
-     * @param maxLength 方法参数 {@code maxLength}
-     * @return 处理后得到的字符串结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private String normalizeRequiredValue(String value, String blankMessage, String lengthMessage, int maxLength) {
         if (value == null || value.isBlank()) {
             throw new BusinessException(blankMessage);
@@ -307,15 +207,6 @@ public class AuthService {
         return normalizedValue;
     }
 
-    /**
-     * 执行 {@code ensureUniqueIdentity} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param username 用户登录名
-     * @param email 用户邮箱地址
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private void ensureUniqueIdentity(String username, String email) {
         if (existsByUsername(username)) {
             throw new BusinessException("用户名已存在");
@@ -325,14 +216,6 @@ public class AuthService {
         }
     }
 
-    /**
-     * 判断 {@code byUsername} 对应的数据是否存在。
-     * <p>
-     * 实现要点：读取数据库中的当前状态。
-     *
-     * @param username 用户登录名
-     * @return 满足条件时返回 {@code true}，否则返回 {@code false}
-     */
     private boolean existsByUsername(String username) {
         Integer count = jdbcTemplate.queryForObject(
                 "select count(*) from users where username = ?",
@@ -342,14 +225,6 @@ public class AuthService {
         return count != null && count > 0;
     }
 
-    /**
-     * 判断 {@code byEmail} 对应的数据是否存在。
-     * <p>
-     * 实现要点：读取数据库中的当前状态。
-     *
-     * @param email 用户邮箱地址
-     * @return 满足条件时返回 {@code true}，否则返回 {@code false}
-     */
     private boolean existsByEmail(String email) {
         Integer count = jdbcTemplate.queryForObject(
                 "select count(*) from users where email = ?",
@@ -359,15 +234,6 @@ public class AuthService {
         return count != null && count > 0;
     }
 
-    /**
-     * 执行 {@code loadUserForLogin} 对应的业务步骤。
-     * <p>
-     * 实现要点：读取数据库中的当前状态；先校验输入、状态或业务边界。
-     *
-     * @param loginId 用户名或邮箱形式的登录标识
-     * @return 查询得到的用户用于登录结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private UserAccount loadUserForLogin(String loginId) {
         List<UserAccount> users = jdbcTemplate.query(
                 """
@@ -399,15 +265,6 @@ public class AuthService {
         return users.getFirst();
     }
 
-    /**
-     * 执行 {@code loadUserById} 对应的业务步骤。
-     * <p>
-     * 实现要点：读取数据库中的当前状态。
-     *
-     * @param userId 用户唯一标识
-     * @return 查询得到的用户按标识结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private UserAccount loadUserById(Long userId) {
         List<UserAccount> users = jdbcTemplate.query(
                 """
@@ -435,14 +292,6 @@ public class AuthService {
         return users.getFirst();
     }
 
-    /**
-     * 执行 {@code ensureUniqueLoginMatch} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param users 方法参数 {@code users}
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private void ensureUniqueLoginMatch(List<UserAccount> users) {
         Set<Long> userIds = new LinkedHashSet<>();
         for (UserAccount user : users) {
@@ -453,15 +302,6 @@ public class AuthService {
         }
     }
 
-    /**
-     * 校验账号状态与密码是否允许登录，避免禁用账号或无有效密码的账号进入系统。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界；使用安全哈希校验或保存密码。
-     *
-     * @param user 方法参数 {@code user}
-     * @param password 用户提交的明文密码，仅用于本次校验或哈希计算
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private void ensureUserCanLogin(UserAccount user, String password) {
         if (user.status() == UserStatus.DISABLED) {
             throw new BusinessException("账号已被禁用");
@@ -471,27 +311,12 @@ public class AuthService {
         }
     }
 
-    /**
-     * 执行 {@code ensureRefreshAllowed} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param user 方法参数 {@code user}
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private void ensureRefreshAllowed(UserAccount user) {
         if (user.status() == UserStatus.DISABLED) {
             throw new BusinessException("账号已被禁用");
         }
     }
 
-    /**
-     * 执行 {@code updateSuccessfulLogin} 对应的业务步骤。
-     * <p>
-     * 实现要点：持久化数据库状态变更。
-     *
-     * @param userId 用户唯一标识
-     */
     private void updateSuccessfulLogin(Long userId) {
         jdbcTemplate.update(
                 "update users set last_login_at = ?, updated_at = ? where id = ?",
@@ -501,12 +326,6 @@ public class AuthService {
         );
     }
 
-    /**
-     * 根据用户身份、角色和改密状态签发 JWT 访问令牌。
-     *
-     * @param user 方法参数 {@code user}
-     * @return 处理后得到的字符串结果
-     */
     private String issueAccessToken(UserAccount user) {
         return jwtAccessTokenService.issueToken(
                 new JwtAccessTokenService.TokenSubject(
@@ -519,11 +338,6 @@ public class AuthService {
         );
     }
 
-    /**
-     * 封装认证成功后签发的访问令牌、刷新令牌及相关过期信息。
-     *
-     * <p>仅在 {@code AuthService} 的实现过程中使用，用不可变数据结构收拢中间结果，避免参数和值的含义混淆。</p>
-     */
     public record AuthTokens(
             Long userId,
             String accessToken,
@@ -532,27 +346,12 @@ public class AuthService {
     ) {
     }
 
-    /**
-     * 保存登录输入经过规范化后的账号标识和密码。
-     *
-     * <p>仅在 {@code AuthService} 的实现过程中使用，用不可变数据结构收拢中间结果，避免参数和值的含义混淆。</p>
-     */
     private record LoginCommand(String loginId, String password) {
     }
 
-    /**
-     * 保存注册输入经过规范化后的账号、邮箱、显示名和密码。
-     *
-     * <p>仅在 {@code AuthService} 的实现过程中使用，用不可变数据结构收拢中间结果，避免参数和值的含义混淆。</p>
-     */
     private record RegisterCommand(String username, String email, String displayName, String password) {
     }
 
-    /**
-     * 表示认证流程从数据库加载的最小用户账号快照。
-     *
-     * <p>仅在 {@code AuthService} 的实现过程中使用，用不可变数据结构收拢中间结果，避免参数和值的含义混淆。</p>
-     */
     private record UserAccount(
             Long userId,
             String userCode,
