@@ -5,16 +5,13 @@ interface Props {
   description?: string
 }
 
-withDefaults(defineProps<Props>(), {
-  eyebrow: '工作台',
-  description: '',
-})
+withDefaults(defineProps<Props>(), { eyebrow: '', description: '' })
 </script>
 
 <template>
   <header class="page-header-hero">
     <div class="page-header-hero__body">
-      <span v-if="eyebrow" class="page-header-hero__eyebrow">{{ eyebrow }}</span>
+      <span class="page-header-hero__eyebrow">{{ eyebrow || $t('nav.workbench') }}</span>
       <h1>{{ title }}</h1>
       <p v-if="description">{{ description }}</p>
     </div>

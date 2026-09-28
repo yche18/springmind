@@ -1,26 +1,20 @@
 <script setup lang="ts">
 import type { CitationItem } from '../api/qa'
 
-withDefaults(
-  defineProps<{
+defineProps<{
     citations: CitationItem[]
     title?: string
     emptyText?: string
-  }>(),
-  {
-    title: '参考文件',
-    emptyText: '当前回答没有可展示的参考文件。',
-  },
-)
+  }>()
 </script>
 
 <template>
   <section class="citation-list">
     <header class="citation-list__header">
       <p class="citation-list__eyebrow">Evidence Trail</p>
-      <h2>{{ title }}</h2>
+      <h2>{{ title || $t('qa.citations') }}</h2>
       <p class="citation-list__summary">
-        将后端返回的文件、片段和相关性分数按证据区形式展开，便于核对回答是否可信。
+        {{ $t('qa.evidence') }}
       </p>
     </header>
 
@@ -34,8 +28,8 @@ withDefaults(
 
           <div class="citation-card__meta">
             <strong>{{ citation.fileName }}</strong>
-            <span v-if="citation.documentId !== null">文档 #{{ citation.documentId }}</span>
-            <span v-if="citation.chunkIndex !== null">片段 {{ citation.chunkIndex }}</span>
+            <span v-if="citation.documentId !== null">Document #{{ citation.documentId }}</span>
+            <span v-if="citation.chunkIndex !== null">Chunk {{ citation.chunkIndex }}</span>
           </div>
 
           <p v-if="citation.snippet" class="citation-card__snippet">
@@ -43,14 +37,14 @@ withDefaults(
           </p>
 
           <div class="citation-card__footer">
-            <span>{{ citation.chunkId !== null ? `Chunk ID ${citation.chunkId}` : '未返回 Chunk ID' }}</span>
-            <span>{{ citation.snippet ? '已携带片段摘要' : '当前仅返回文件级引用' }}</span>
+            <span>{{ citation.chunkId !== null ? `Chunk ID ${citation.chunkId}` : $t('common.unknown') }}</span>
+            <span>{{ citation.snippet ? $t('qa.excerptAvailable') : $t('qa.fileLevelCitation') }}</span>
           </div>
         </article>
       </li>
     </ul>
 
-    <p v-else class="citation-list__empty">{{ emptyText }}</p>
+    <p v-else class="citation-list__empty">{{ emptyText || $t('qa.noCitations') }}</p>
   </section>
 </template>
 

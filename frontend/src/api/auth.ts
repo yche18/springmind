@@ -1,4 +1,5 @@
 import http, { type ApiResponse } from './http'
+import { translate } from '../i18n'
 
 export type SystemRole = 'ADMIN' | 'USER'
 
@@ -37,12 +38,12 @@ export async function login(payload: LoginPayload): Promise<AuthSessionResponse>
     withCredentials: true,
   })
 
-  return unwrapApiResponse(data, '登录失败')
+  return unwrapApiResponse(data, translate('auth.loginFailed'))
 }
 
 export async function register(payload: RegisterPayload): Promise<void> {
   const { data } = await http.post<ApiResponse<null>>('/auth/register', payload)
-  unwrapApiResponse(data, '注册失败')
+  unwrapApiResponse(data, translate('errors.register'))
 }
 
 export async function refreshSession(): Promise<AuthSessionResponse> {
@@ -50,25 +51,25 @@ export async function refreshSession(): Promise<AuthSessionResponse> {
     withCredentials: true,
   })
 
-  return unwrapApiResponse(data, '登录状态已过期')
+  return unwrapApiResponse(data, translate('errors.loginExpired'))
 }
 
 export async function logout(): Promise<void> {
   const { data } = await http.post<ApiResponse<null>>('/auth/logout', null, {
     withCredentials: true,
   })
-  unwrapApiResponse(data, '退出登录失败')
+  unwrapApiResponse(data, translate('errors.signOut'))
 }
 
 export async function fetchCurrentUser(): Promise<CurrentUserProfile> {
   const { data } = await http.get<ApiResponse<CurrentUserProfile>>('/auth/me')
 
-  return unwrapApiResponse(data, '获取当前用户失败')
+  return unwrapApiResponse(data, translate('errors.currentUser'))
 }
 
 export async function changePassword(payload: ChangePasswordPayload): Promise<void> {
   const { data } = await http.post<ApiResponse<null>>('/account/change-password', payload)
-  unwrapApiResponse(data, '修改密码失败')
+  unwrapApiResponse(data, translate('errors.changePassword'))
 }
 
 function unwrapApiResponse<T>(payload: ApiResponse<T>, fallbackMessage: string): T {

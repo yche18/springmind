@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { askQuestion, type AskQuestionResponse } from '../../api/qa'
 import { fetchGroups } from '../../api/group'
 import { extractApiError } from '../../api/http'
@@ -16,6 +17,7 @@ import QaPromptPanel from './components/QaPromptPanel.vue'
 
 const appStore = useAppStore()
 const authStore = useAuthStore()
+const { t } = useI18n({ useScope: 'global' })
 const question = ref('')
 const result = ref<AskQuestionResponse | null>(null)
 const askError = ref('')
@@ -35,29 +37,33 @@ const canSubmit = computed(
   () => currentGroupId.value !== null && hasGroups.value && !appStore.isGroupsLoading,
 )
 const questionLength = computed(() => question.value.trim().length)
-const currentRoleLabel = computed(() => currentGroup.value?.relation ?? '未选择')
+const currentRoleLabel = computed(() => {
+  if (currentGroup.value?.relation === 'OWNER') return t('common.owner')
+  if (currentGroup.value?.relation === 'MEMBER') return t('common.member')
+  return t('common.notSelected')
+})
 const availableGroupCount = computed(() => ownedGroups.value.length + joinedGroups.value.length)
 const currentContextKey = computed(() => `${authStore.currentUser?.userId ?? 'anonymous'}:${currentGroupId.value ?? 'none'}`)
 const currentGroupDescription = computed(() => {
   if (currentGroup.value === null) {
-    return '先选择知识库，再提问。回答只会用该组文档中的证据。'
+    return t('qa.chooseFirst')
   }
   return currentGroup.value.relation === 'OWNER'
-    ? `知识库「${currentGroup.value.groupName}」（所有者）。回答仅基于本组文档。`
-    : `知识库「${currentGroup.value.groupName}」（成员）。回答仅基于本组文档。`
+    ? t('qa.ownerScope', { name: currentGroup.value.groupName })
+    : t('qa.memberScope', { name: currentGroup.value.groupName })
 })
 const currentRoleHint = computed(() => {
   if (currentGroup.value === null) {
-    return '所有者与成员都可提问，但必须先选中一个组。'
+    return t('qa.roleSelectionHint')
   }
   return currentGroup.value.relation === 'OWNER'
-    ? '你是所有者：可在文档页管理文件，在此页专注问答。'
-    : '你是成员：可查看与问答，不能上传或管理成员。'
+    ? t('qa.ownerHint')
+    : t('qa.memberHint')
 })
 const pageHeroDescription = computed(() =>
   currentGroup.value === null
-    ? '单轮知识问答：选组 → 提问 → 查看回答与证据。'
-    : `当前知识库：${currentGroup.value.groupName}。回答严格限定在该组检索结果内。`,
+    ? t('qa.description')
+    : t('qa.currentKnowledgeBase', { name: currentGroup.value.groupName }),
 )
 
 watch(
@@ -82,11 +88,11 @@ watch(
 async function handleAsk() {
   const trimmedQuestion = question.value.trim()
   if (!canSubmit.value || currentGroupId.value === null) {
-    askError.value = '请先选择群组后再提问。'
+    askError.value = t('qa.groupRequired')
     return
   }
   if (trimmedQuestion.length === 0) {
-    askError.value = '请输入问题。'
+    askError.value = t('qa.questionRequired')
     return
   }
   const contextVersion = qaContextVersion
@@ -105,8 +111,8 @@ async function handleAsk() {
     if (!isActiveAskRequest(contextVersion, contextKey, requestId)) return
     result.value = null
     askError.value = humanizeModelErrorMessage(
-      extractApiError(error, '问答请求失败'),
-      '问答请求失败',
+      extractApiError(error, t('errors.askQuestion')),
+      t('errors.askQuestion'),
     )
   } finally {
     if (isActiveAskRequest(contextVersion, contextKey, requestId)) {
@@ -123,7 +129,7 @@ async function refreshGroups() {
     appStore.applyGroupQueryResult(groupQueryResult)
   } catch (error) {
     appStore.resetGroupContext(false)
-    groupError.value = extractApiError(error, '获取问答空间失败')
+    groupError.value = extractApiError(error, t('qa.groupScopeLoadFailed'))
   } finally {
     isGroupsRefreshing.value = false
   }
@@ -154,23 +160,23 @@ function isActiveAskRequest(contextVersion: number, contextKey: string, requestI
 
     <template #main>
       <main class="qa-page">
-        <PageHeaderHero eyebrow="问答" title="知识问答" :description="pageHeroDescription">
+        <PageHeaderHero :eyebrow="$t('qa.eyebrow')" :title="$t('qa.title')" :description="pageHeroDescription">
           <template #actions>
             <div class="qa-page__hero-actions">
               <div class="qa-page__hero-context">
-                <span>知识库</span>
-                <strong>{{ currentGroup?.groupName ?? '未选择' }}</strong>
+                <span>{{ $t('qa.knowledgeBase') }}</span>
+                <strong>{{ currentGroup?.groupName ?? $t('common.notSelected') }}</strong>
               </div>
               <div class="qa-page__hero-context">
-                <span>角色</span>
+                <span>{{ $t('qa.role') }}</span>
                 <strong>{{ currentRoleLabel }}</strong>
               </div>
               <div class="qa-page__hero-context">
-                <span>可见组</span>
+                <span>{{ $t('qa.visibleGroups') }}</span>
                 <strong>{{ availableGroupCount }}</strong>
               </div>
               <div class="qa-page__hero-context">
-                <span>邀请</span>
+                <span>{{ $t('qa.invitations') }}</span>
                 <strong>{{ pendingInvitationCount }}</strong>
               </div>
             </div>
@@ -199,7 +205,7 @@ function isActiveAskRequest(contextVersion: number, contextKey: string, requestI
           />
 
           <QaConversationPanel
-            :current-group-name="currentGroup?.groupName ?? '未选择知识库'"
+            :current-group-name="currentGroup?.groupName ?? $t('qa.noKnowledgeBase')"
             :current-question="question"
             :result="result"
             :ask-error="askError"

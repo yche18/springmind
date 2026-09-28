@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, reactive, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import {
   deleteDocument,
   fetchDocumentPreview,
@@ -15,7 +16,7 @@ import WorkbenchSidebar from '../../components/layout/WorkbenchSidebar.vue'
 import { useAppStore } from '../../stores/app'
 import { useAuthStore } from '../../stores/auth'
 import {
-  DOCUMENT_STATUS_OPTIONS,
+  getDocumentStatusOptions,
   calculateTotalDocumentSize,
   canPreviewDocument,
   collectRecentDocumentFailures,
@@ -38,11 +39,11 @@ import { uploadDocumentWithResume, type UploadStage } from './documentUpload'
 
 const appStore = useAppStore()
 const authStore = useAuthStore()
+const { t } = useI18n({ useScope: 'global' })
 
 const documents = ref<DocumentItem[]>([])
 const filters = reactive(createDocumentFilterForm())
 const selectedFile = ref<File | null>(null)
-const selectedFileName = ref('未选择文件')
 const fileInputKey = ref(0)
 const groupLoadError = ref('')
 const documentsError = ref('')
@@ -73,6 +74,7 @@ let pollingTimer: number | null = null
 const DOCUMENT_POLL_INTERVAL_MS = 4000
 
 const visibleGroups = computed(() => appStore.visibleGroups)
+const selectedFileName = computed(() => selectedFile.value?.name ?? t('documents.noFileSelected'))
 const currentGroup = computed(() => appStore.currentGroup)
 const currentGroupId = computed(() => currentGroup.value?.groupId ?? null)
 const currentGroupRelation = computed(() => currentGroup.value?.relation ?? null)
@@ -82,6 +84,7 @@ const visibleDocuments = computed(() =>
   documents.value.filter((item) => matchesDocumentFilters(item, filters, currentGroupRelation.value)),
 )
 const totalSize = computed(() => calculateTotalDocumentSize(visibleDocuments.value))
+const documentStatusOptions = computed(() => getDocumentStatusOptions())
 const statusSummaryItems = computed(() =>
   createDocumentStatusSummary(visibleDocuments.value, totalSize.value),
 )
@@ -94,38 +97,38 @@ const currentContextKey = computed(
 )
 const pageHeroDescription = computed(() =>
   currentGroup.value === null
-    ? '选择知识库后，可上传文件、查看索引状态，并筛选异常文档。'
-    : `当前知识库：${currentGroup.value.groupName}。可上传、筛选、预览与重试失败文件。`,
+    ? t('documents.descriptionEmpty')
+    : t('documents.currentKnowledgeBase', { name: currentGroup.value.groupName }),
 )
 const groupScopeSummary = computed(() => {
   if (currentGroup.value === null) {
-    return `你拥有 ${appStore.ownedGroups.length} 个组，加入 ${appStore.joinedGroups.length} 个组。`
+    return t('documents.groupCounts', { owned: appStore.ownedGroups.length, joined: appStore.joinedGroups.length })
   }
 
-  return `组 #${currentGroup.value.groupId} · ${formatGroupRelationLabel(currentGroup.value.relation)}`
+  return t('documents.groupMeta', { id: currentGroup.value.groupId, relation: formatGroupRelationLabel(currentGroup.value.relation) })
 })
 const filterHint = computed(() => {
   if (currentGroup.value === null) {
-    return '先选择知识库，再筛选文件。'
+    return t('documents.filterFirst')
   }
 
-  return '可按文件名、状态、上传时间筛选。'
+  return t('documents.filterHint')
 })
 const resultsSummary = computed(() => {
   if (documents.value.length === visibleDocuments.value.length) {
-    return `共 ${visibleDocuments.value.length} 个文件。`
+    return t('documents.totalFiles', { count: visibleDocuments.value.length })
   }
 
-  return `共 ${documents.value.length} 个文件，当前命中 ${visibleDocuments.value.length} 个。`
+  return t('documents.matchedFiles', { total: documents.value.length, matched: visibleDocuments.value.length })
 })
 const emptyStateMessage = computed(() => {
   if (documents.value.length === 0) {
     return canManageCurrentGroup.value
-      ? '当前组还没有文件，可先上传一个样例。'
-      : '当前组还没有可查看的文件。'
+      ? t('documents.noFiles')
+      : t('documents.noReadableFiles')
   }
 
-  return '没有符合当前筛选条件的文件。'
+  return t('documents.noMatches')
 })
 
 watch(
@@ -171,7 +174,7 @@ async function refreshGroups() {
       return
     }
     appStore.resetGroupContext(false)
-    groupLoadError.value = extractApiError(error, '获取群组失败')
+    groupLoadError.value = extractApiError(error, t('errors.loadGroups'))
   } finally {
     if (currentToken === latestGroupRequestToken) {
       appStore.setGroupsLoading(false)
@@ -242,7 +245,7 @@ async function loadDocuments(options: { silent?: boolean } = {}) {
   } catch (error) {
     if (isActiveDocumentRequest(contextVersion, contextKey, requestId)) {
       documents.value = []
-      documentsError.value = extractApiError(error, '加载文档列表失败')
+      documentsError.value = extractApiError(error, t('errors.loadDocuments'))
     }
   } finally {
     if (isActiveDocumentRequest(contextVersion, contextKey, requestId)) {
@@ -269,14 +272,12 @@ function handleGroupChange(groupId: number | null) {
 
 function handleFileChange(file: File | null) {
   selectedFile.value = file
-  selectedFileName.value = file?.name ?? '未选择文件'
   uploadFeedback.value = ''
   uploadError.value = ''
 }
 
 function resetSelectedFile() {
   selectedFile.value = null
-  selectedFileName.value = '未选择文件'
   fileInputKey.value += 1
 }
 
@@ -286,7 +287,7 @@ async function handleApplyFilters() {
   }
 
   if (filters.uploadedFrom && filters.uploadedTo && filters.uploadedFrom > filters.uploadedTo) {
-    documentsError.value = '上传时间范围不合法，开始时间不能晚于结束时间。'
+    documentsError.value = t('documents.invalidDateRange')
     return
   }
 
@@ -303,12 +304,12 @@ function handleResetFilters() {
 
 async function handleUpload() {
   if (!canManageCurrentGroup.value || currentGroupId.value === null) {
-    uploadError.value = '当前组为只读模式，只有 OWNER 可以上传文件。'
+    uploadError.value = t('documents.ownerOnly')
     return
   }
 
   if (selectedFile.value === null) {
-    uploadError.value = '请选择待上传文件。'
+    uploadError.value = t('documents.chooseFile')
     return
   }
 
@@ -334,12 +335,12 @@ async function handleUpload() {
     if (!isCurrentDocumentContext(contextVersion, contextKey)) {
       return
     }
-    uploadFeedback.value = `文件已提交，文档 ID #${documentId}。若仍在处理中，可稍后刷新。`
+    uploadFeedback.value = t('documents.uploadSubmitted', { id: documentId })
     resetSelectedFile()
     await loadDocuments()
   } catch (error) {
     if (isCurrentDocumentContext(contextVersion, contextKey)) {
-      uploadError.value = extractApiError(error, '上传文档失败')
+      uploadError.value = extractApiError(error, t('errors.uploadDocument'))
     }
   } finally {
     if (isCurrentDocumentContext(contextVersion, contextKey)) {
@@ -354,7 +355,7 @@ async function handleDelete(documentId: number, fileName: string) {
     return
   }
 
-  if (!window.confirm(`确认删除文档「${fileName}」吗？`)) {
+  if (!window.confirm(t('documents.confirmDelete', { name: fileName }))) {
     return
   }
 
@@ -368,11 +369,11 @@ async function handleDelete(documentId: number, fileName: string) {
     if (!isCurrentDocumentContext(contextVersion, contextKey)) {
       return
     }
-    uploadFeedback.value = `文档「${fileName}」已删除。`
+    uploadFeedback.value = t('documents.deleted', { name: fileName })
     await loadDocuments()
   } catch (error) {
     if (isCurrentDocumentContext(contextVersion, contextKey)) {
-      documentsError.value = extractApiError(error, '删除文档失败')
+      documentsError.value = extractApiError(error, t('errors.deleteDocument'))
     }
   } finally {
     if (isCurrentDocumentContext(contextVersion, contextKey)) {
@@ -398,11 +399,11 @@ async function handleRetryIngestion(item: DocumentItem) {
     if (!isCurrentDocumentContext(contextVersion, contextKey)) {
       return
     }
-    uploadFeedback.value = `文档「${item.fileName}」已重新进入处理队列。`
+    uploadFeedback.value = t('documents.retryQueued', { name: item.fileName })
     await loadDocuments()
   } catch (error) {
     if (isCurrentDocumentContext(contextVersion, contextKey)) {
-      documentsError.value = extractApiError(error, '重新处理文档失败')
+      documentsError.value = extractApiError(error, t('errors.retryDocument'))
     }
   } finally {
     if (isCurrentDocumentContext(contextVersion, contextKey)) {
@@ -427,7 +428,7 @@ async function handlePreview(item: DocumentItem) {
   previewFileName.value = item.fileName
   previewStatus.value = item.status
   previewText.value = cachedPreview
-  previewMessage.value = cachedPreview ? '正在同步最新预览...' : ''
+  previewMessage.value = cachedPreview ? t('documents.latestPreview') : ''
   previewMessageTone.value = 'note'
   isPreviewOpen.value = true
   isPreviewLoading.value = true
@@ -441,7 +442,7 @@ async function handlePreview(item: DocumentItem) {
     previewFileName.value = preview.fileName || item.fileName
     previewStatus.value = preview.status || item.status
     previewText.value = nextPreview
-    previewMessage.value = nextPreview ? '' : '当前文件暂无可展示的前 200 字预览。'
+    previewMessage.value = nextPreview ? '' : t('documents.emptyPreview')
     previewMessageTone.value = 'note'
   } catch (error) {
     if (!isActivePreviewRequest(contextVersion, contextKey, requestId)) {
@@ -449,12 +450,12 @@ async function handlePreview(item: DocumentItem) {
     }
     if (cachedPreview) {
       previewText.value = cachedPreview
-      previewMessage.value = '预览接口暂不可用，已显示列表缓存片段。'
+      previewMessage.value = t('documents.previewUnavailable')
       previewMessageTone.value = 'note'
       return
     }
     previewText.value = ''
-    previewMessage.value = extractApiError(error, '加载预览失败')
+    previewMessage.value = extractApiError(error, t('errors.loadPreview'))
     previewMessageTone.value = 'error'
   } finally {
     if (isActivePreviewRequest(contextVersion, contextKey, requestId)) {
@@ -529,12 +530,12 @@ function syncPollingFeedback(previousDocuments: DocumentItem[], nextDocuments: D
   }
 
   if (transitionedDocument.status === 'READY') {
-    uploadFeedback.value = `文档「${transitionedDocument.fileName}」已处理完成。`
+    uploadFeedback.value = t('documents.completed', { name: transitionedDocument.fileName })
     return
   }
 
   if (transitionedDocument.status === 'FAILED') {
-    uploadFeedback.value = `文档「${transitionedDocument.fileName}」处理失败，可点击“重试处理”。`
+    uploadFeedback.value = t('documents.processFailed', { name: transitionedDocument.fileName })
   }
 }
 
@@ -564,19 +565,19 @@ function isTerminalDocumentStatus(status: string) {
 }
 
 function describeDocumentRow(item: DocumentItem) {
-  return item.contentType ?? item.fileExt ?? '未知类型'
+  return item.contentType ?? item.fileExt ?? t('documents.unknownType')
 }
 
 const uploadStageText = computed(() => {
   switch (uploadStage.value) {
     case 'hashing':
-      return '正在计算文件指纹...'
+      return t('documents.hashing')
     case 'checking':
-      return '正在检查秒传与续传状态...'
+      return t('documents.checkingUpload')
     case 'uploading':
-      return `正在上传分片：${uploadProgress.value}%`
+      return t('documents.uploadingChunks', { percent: uploadProgress.value })
     case 'completing':
-      return '分片已完成，正在提交合并...'
+      return t('documents.completingUpload')
     default:
       return ''
   }
@@ -591,7 +592,7 @@ const uploadStageText = computed(() => {
 
     <template #main>
       <main class="documents-page">
-        <PageHeaderHero eyebrow="文档" title="文档中心" :description="pageHeroDescription">
+        <PageHeaderHero :eyebrow="$t('documents.eyebrow')" :title="$t('documents.title')" :description="pageHeroDescription">
         </PageHeaderHero>
 
         <div class="documents-page__feedback">
@@ -617,7 +618,7 @@ const uploadStageText = computed(() => {
           :is-groups-loading="appStore.isGroupsLoading"
           :file-name="filters.fileName"
           :status="filters.status"
-          :status-options="DOCUMENT_STATUS_OPTIONS"
+          :status-options="documentStatusOptions"
           :selected-file-name="selectedFileName"
           :file-input-key="fileInputKey"
           :can-manage-current-group="canManageCurrentGroup"
@@ -640,12 +641,12 @@ const uploadStageText = computed(() => {
         <article class="panel panel--wide documents-page__results">
           <div class="panel__header">
             <div>
-              <p class="panel__eyebrow">结果</p>
-              <h2>文件列表</h2>
+              <p class="panel__eyebrow">{{ $t('common.result') }}</p>
+              <h2>{{ $t('documents.fileList') }}</h2>
             </div>
             <div class="documents-page__results-actions">
               <span v-if="hasPendingDocuments" class="document-auto-refresh-hint">
-                {{ isPollingDocuments ? '自动刷新中…' : '有处理中文件，约 4 秒后自动刷新' }}
+                {{ isPollingDocuments ? $t('documents.autoRefreshing') : $t('documents.processingRefresh') }}
               </span>
               <button
                 type="button"
@@ -653,20 +654,20 @@ const uploadStageText = computed(() => {
                 :disabled="!canLoadDocuments || isLoading || isPollingDocuments"
                 @click="handleRefreshDocuments"
               >
-                {{ isLoading ? '刷新中…' : '刷新' }}
+                {{ isLoading ? $t('common.refreshing') : $t('common.refresh') }}
               </button>
-              <span class="panel__pill">{{ currentGroup ? currentGroup.groupName : '未选择' }}</span>
+              <span class="panel__pill">{{ currentGroup ? currentGroup.groupName : $t('common.notSelected') }}</span>
             </div>
           </div>
 
           <form class="document-filter-form" @submit.prevent="handleApplyFilters">
             <label class="document-filter-form__field">
-              <span>上传起</span>
+              <span>{{ $t('documents.from') }}</span>
               <input v-model="filters.uploadedFrom" type="date" />
             </label>
 
             <label class="document-filter-form__field">
-              <span>上传止</span>
+              <span>{{ $t('documents.to') }}</span>
               <input v-model="filters.uploadedTo" type="date" />
             </label>
 
@@ -676,30 +677,30 @@ const uploadStageText = computed(() => {
                 <p class="filter-hint">{{ groupScopeSummary }}</p>
               </div>
               <div class="document-filter-form__buttons">
-                <button type="button" class="ghost-button" @click="handleResetFilters">重置</button>
+                <button type="button" class="ghost-button" @click="handleResetFilters">{{ $t('documents.reset') }}</button>
                 <button type="submit" class="primary-button" :disabled="isLoading || !canLoadDocuments">
-                  {{ isLoading ? '筛选中…' : '应用' }}
+                  {{ isLoading ? $t('documents.filtering') : $t('documents.apply') }}
                 </button>
               </div>
             </div>
           </form>
 
-          <p v-if="appStore.isGroupsLoading" class="placeholder-text">正在同步可用知识库…</p>
-          <p v-else-if="currentGroup === null" class="placeholder-text">请先选择知识库。</p>
-          <p v-else-if="isLoading" class="placeholder-text">正在加载文件列表…</p>
+          <p v-if="appStore.isGroupsLoading" class="placeholder-text">{{ $t('qa.syncingKnowledgeBases') }}</p>
+          <p v-else-if="currentGroup === null" class="placeholder-text">{{ $t('documents.selectKnowledgeBase') }}</p>
+          <p v-else-if="isLoading" class="placeholder-text">{{ $t('documents.loadingFiles') }}</p>
           <p v-else-if="visibleDocuments.length === 0" class="placeholder-text">{{ emptyStateMessage }}</p>
 
           <div v-else class="document-table-wrap">
             <table class="document-table">
               <thead>
                 <tr>
-                  <th>文件</th>
-                  <th>类型</th>
-                  <th>大小</th>
-                  <th>上传用户</th>
-                  <th>状态与异常</th>
-                  <th>上传时间</th>
-                  <th>操作</th>
+                  <th>{{ $t('documents.file') }}</th>
+                  <th>{{ $t('documents.type') }}</th>
+                  <th>{{ $t('documents.size') }}</th>
+                  <th>{{ $t('documents.uploader') }}</th>
+                  <th>{{ $t('documents.statusAndIssue') }}</th>
+                  <th>{{ $t('documents.uploadedAt') }}</th>
+                  <th>{{ $t('common.actions') }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -720,7 +721,7 @@ const uploadStageText = computed(() => {
                       {{ item.failureReason }}
                     </span>
                     <span v-else class="table-note">
-                      {{ item.previewText ? '已带缓存预览片段' : '预览将按需调用接口' }}
+                      {{ item.previewText ? $t('documents.cachedPreview') : $t('documents.previewOnDemand') }}
                     </span>
                   </td>
                   <td>{{ formatDocumentDateTime(item.uploadedAt) }}</td>
@@ -740,7 +741,7 @@ const uploadStageText = computed(() => {
                         :disabled="retryingDocumentIds.has(item.documentId)"
                         @click="handleRetryIngestion(item)"
                       >
-                        {{ retryingDocumentIds.has(item.documentId) ? '处理中...' : '重试处理' }}
+                        {{ retryingDocumentIds.has(item.documentId) ? $t('common.processing') : $t('documents.retryProcessing') }}
                       </button>
                       <button
                         v-if="canManageCurrentGroup"
@@ -748,11 +749,11 @@ const uploadStageText = computed(() => {
                         :disabled="deletingDocumentIds.has(item.documentId) || retryingDocumentIds.has(item.documentId)"
                         @click="handleDelete(item.documentId, item.fileName)"
                       >
-                        {{ deletingDocumentIds.has(item.documentId) ? '删除中...' : '删除' }}
+                        {{ deletingDocumentIds.has(item.documentId) ? $t('documents.deleting') : $t('common.delete') }}
                       </button>
                     </div>
                     <span v-if="!canPreviewDocument(item, currentGroupRelation)" class="table-note">
-                      当前仅可查看已就绪文件预览
+                      {{ $t('documents.readyOnlyPreview') }}
                     </span>
                   </td>
                 </tr>
@@ -769,26 +770,26 @@ const uploadStageText = computed(() => {
       <section class="document-preview-panel" role="dialog" aria-modal="true" aria-labelledby="document-preview-title">
         <header>
           <div>
-            <p class="panel__eyebrow">文档预览</p>
+            <p class="panel__eyebrow">{{ $t('documents.documentPreview') }}</p>
             <h2 id="document-preview-title">{{ previewFileName }}</h2>
             <p class="document-preview-meta">
-              文档 #{{ previewDocumentId }} · {{ getDocumentStatusMeta(previewStatus).label }} · 最多展示前 200 字
+              {{ $t('documents.previewMeta', { id: previewDocumentId, status: getDocumentStatusMeta(previewStatus).label }) }}
             </p>
           </div>
-          <button class="ghost-button" @click="closePreview">关闭</button>
+          <button class="ghost-button" @click="closePreview">{{ $t('common.close') }}</button>
         </header>
 
         <p v-if="previewMessage" :class="previewMessageTone === 'error' ? 'feedback feedback--error' : 'document-preview-note'">
           {{ previewMessage }}
         </p>
 
-        <p v-if="isPreviewLoading && previewText.length === 0" class="placeholder-text">正在加载预览内容...</p>
+        <p v-if="isPreviewLoading && previewText.length === 0" class="placeholder-text">{{ $t('documents.loadingPreview') }}</p>
         <div v-else class="document-preview-text">
-          {{ previewText || '当前文件暂无可展示的前 200 字预览。' }}
+          {{ previewText || $t('documents.emptyPreview') }}
         </div>
 
         <div class="document-preview-actions">
-          <button class="primary-button" @click="closePreview">完成</button>
+          <button class="primary-button" @click="closePreview">{{ $t('documents.done') }}</button>
         </div>
       </section>
     </div>

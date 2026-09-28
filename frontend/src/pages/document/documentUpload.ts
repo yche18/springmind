@@ -4,6 +4,7 @@ import {
   initDocumentUpload,
   uploadDocumentChunk,
 } from '../../api/document'
+import { translate } from '../../i18n'
 import { sha256Hex } from '../../utils/secure-crypto'
 
 const DEFAULT_CHUNK_SIZE = 5 * 1024 * 1024
@@ -43,7 +44,7 @@ export async function uploadDocumentWithResume(
   }
 
   if (!initResponse.uploadId) {
-    throw new Error('上传会话创建失败')
+    throw new Error(translate('errors.uploadSession'))
   }
 
   const status = await fetchUploadStatus(initResponse.uploadId)

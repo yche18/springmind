@@ -29,7 +29,7 @@ async function handleLogout() {
     :disabled="isLoggingOut"
     @click="handleLogout"
   >
-    {{ isLoggingOut ? '退出中...' : '退出登录' }}
+    {{ isLoggingOut ? $t('auth.signingOut') : $t('auth.signOut') }}
   </button>
 </template>
 

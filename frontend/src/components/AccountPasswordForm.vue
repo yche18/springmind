@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, reactive, ref, useId } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { extractApiError } from '../api/http'
 import { useAuthStore } from '../stores/auth'
 
@@ -21,6 +22,7 @@ const emit = defineEmits<{
 }>()
 
 const authStore = useAuthStore()
+const { t } = useI18n({ useScope: 'global' })
 const titleId = useId()
 
 const form = reactive({
@@ -35,11 +37,11 @@ const isSubmitting = ref(false)
 
 const currentUser = computed(() => authStore.currentUser)
 const mustChangePassword = computed(() => currentUser.value?.mustChangePassword === true)
-const passwordRuleText = '至少 8 位，并同时包含字母和数字'
+const passwordRuleText = computed(() => t('auth.passwordRule'))
 const securitySummary = computed(() =>
   mustChangePassword.value
-    ? '首次登录后需要先更新密码，完成后系统会根据角色放行到对应工作区。'
-    : '建议定期更新密码，并避免复用与当前密码过于接近的口令。',
+    ? t('auth.mandatoryPasswordSummary')
+    : t('auth.regularPasswordSummary'),
 )
 
 async function handleSubmit() {
@@ -61,10 +63,10 @@ async function handleSubmit() {
       newPassword: form.newPassword,
     })
     resetForm()
-    successMessage.value = '密码已更新'
+    successMessage.value = t('auth.changed')
     emit('completed', { wasMandatory: shouldLeaveSecurityPage })
   } catch (error) {
-    pageError.value = extractApiError(error, '修改密码失败')
+    pageError.value = extractApiError(error, t('auth.passwordUpdateFailed'))
   } finally {
     isSubmitting.value = false
   }
@@ -72,23 +74,23 @@ async function handleSubmit() {
 
 function validateForm(): string | null {
   if (form.currentPassword.length === 0 || form.newPassword.length === 0) {
-    return '请输入当前密码和新密码'
+    return t('auth.passwordRequired')
   }
 
   if (form.newPassword.length < MIN_PASSWORD_LENGTH) {
-    return `新密码${passwordRuleText}`
+    return t('auth.newPasswordRule')
   }
 
   if (!/[A-Za-z]/.test(form.newPassword) || !/\d/.test(form.newPassword)) {
-    return `新密码${passwordRuleText}`
+    return t('auth.newPasswordRule')
   }
 
   if (form.currentPassword === form.newPassword) {
-    return '新密码不能与当前密码相同'
+    return t('auth.samePassword')
   }
 
   if (form.newPassword !== form.confirmPassword) {
-    return '两次输入的新密码不一致'
+    return t('auth.passwordMismatch')
   }
 
   return null
@@ -110,9 +112,9 @@ function resetForm() {
     <div class="security-card__header">
       <div class="security-card__title-block">
         <p class="auth-panel__eyebrow security-card__kicker">
-          {{ mustChangePassword ? '必须修改密码' : '修改登录密码' }}
+          {{ mustChangePassword ? $t('auth.mustChangePassword') : $t('auth.changePassword') }}
         </p>
-        <h2 :id="titleId" class="auth-panel__title">设置新密码</h2>
+        <h2 :id="titleId" class="auth-panel__title">{{ $t('auth.newPassword') }}</h2>
         <p class="auth-panel__hint security-card__summary">
           {{ securitySummary }}
         </p>
@@ -123,45 +125,45 @@ function resetForm() {
     </div>
 
     <div v-if="props.showUserSummary && currentUser" class="security-card__user-strip">
-      <span class="security-card__user-eyebrow">当前账号</span>
+      <span class="security-card__user-eyebrow">{{ $t('auth.currentAccount') }}</span>
       <strong>{{ currentUser.displayName }}</strong>
       <span>{{ currentUser.userCode }}</span>
     </div>
 
     <form class="auth-form security-form" @submit.prevent="handleSubmit">
       <label class="auth-form__field security-form__field">
-        <span>当前密码</span>
+        <span>{{ $t('auth.currentPassword') }}</span>
         <input
           v-model="form.currentPassword"
           type="password"
           autocomplete="current-password"
           maxlength="128"
-          placeholder="输入当前登录密码"
+          :placeholder="$t('auth.currentPasswordPlaceholder')"
           :disabled="isSubmitting"
         />
       </label>
 
       <label class="auth-form__field security-form__field">
-        <span>新密码</span>
+        <span>{{ $t('auth.newPassword') }}</span>
         <input
           v-model="form.newPassword"
           type="password"
           autocomplete="new-password"
           maxlength="128"
-          placeholder="输入新的登录密码"
+          :placeholder="$t('auth.newPasswordPlaceholder')"
           :disabled="isSubmitting"
         />
         <small class="auth-form__help">{{ passwordRuleText }}</small>
       </label>
 
       <label class="auth-form__field security-form__field">
-        <span>确认新密码</span>
+        <span>{{ $t('auth.confirmNewPassword') }}</span>
         <input
           v-model="form.confirmPassword"
           type="password"
           autocomplete="new-password"
           maxlength="128"
-          placeholder="再次输入新密码"
+          :placeholder="$t('auth.confirmPasswordPlaceholder')"
           :disabled="isSubmitting"
         />
       </label>
@@ -174,7 +176,7 @@ function resetForm() {
       </p>
 
       <button class="auth-form__submit security-form__submit" type="submit" :disabled="isSubmitting">
-        {{ isSubmitting ? '保存中...' : '保存新密码' }}
+        {{ isSubmitting ? $t('common.saving') : $t('auth.saveNewPassword') }}
       </button>
     </form>
   </section>

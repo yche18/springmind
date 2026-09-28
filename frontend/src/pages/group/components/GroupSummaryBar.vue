@@ -22,14 +22,14 @@ function handleFocus(section: WorkspaceNodeType) {
   <section class="groups-summary">
     <div class="groups-summary__heading">
       <div>
-        <p class="groups-summary__eyebrow">概览</p>
-        <h2>组一览</h2>
+        <p class="groups-summary__eyebrow">{{ $t('groups.overview') }}</p>
+        <h2>{{ $t('groups.groupOverview') }}</h2>
         <p class="groups-summary__intro">
-          点选一类组，再在中间完成邀请、成员或退出操作。
+          {{ $t('groups.overviewHint') }}
         </p>
       </div>
       <button class="primary-button groups-summary__create" type="button" @click="emit('create')">
-        创建组
+        {{ $t('groups.createGroup') }}
       </button>
     </div>
 
@@ -40,9 +40,9 @@ function handleFocus(section: WorkspaceNodeType) {
         type="button"
         @click="handleFocus('ownedGroup')"
       >
-        <span class="groups-summary__label">我拥有的</span>
+        <span class="groups-summary__label">{{ $t('groups.owned') }}</span>
         <strong>{{ ownedCount }}</strong>
-        <small>进入你管理的知识库</small>
+        <small>{{ $t('groups.enterOwned') }}</small>
       </button>
 
       <button
@@ -51,9 +51,9 @@ function handleFocus(section: WorkspaceNodeType) {
         type="button"
         @click="handleFocus('joinedGroup')"
       >
-        <span class="groups-summary__label">我加入的</span>
+        <span class="groups-summary__label">{{ $t('groups.joined') }}</span>
         <strong>{{ joinedCount }}</strong>
-        <small>进入你参与的知识库</small>
+        <small>{{ $t('groups.enterJoined') }}</small>
       </button>
 
       <button
@@ -63,11 +63,11 @@ function handleFocus(section: WorkspaceNodeType) {
         @click="handleFocus('invitation')"
       >
         <span class="groups-summary__label">
-          待处理邀请
-          <span v-if="invitationCount > 0" class="groups-summary__badge">待办</span>
+          {{ $t('groups.invitations') }}
+          <span v-if="invitationCount > 0" class="groups-summary__badge">{{ $t('groups.todo') }}</span>
         </span>
         <strong>{{ invitationCount }}</strong>
-        <small>优先处理邀请</small>
+        <small>{{ $t('groups.processInvitationsFirst') }}</small>
       </button>
     </div>
   </section>

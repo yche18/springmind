@@ -47,40 +47,40 @@ function handleFileChange(event: Event) {
   <section class="document-toolbar">
     <div class="document-toolbar__primary">
       <label class="document-toolbar__field document-toolbar__field--group">
-        <span>知识库</span>
+        <span>{{ $t('qa.knowledgeBase') }}</span>
         <div class="document-toolbar__select-wrap">
           <select :value="props.currentGroupId ?? ''" :disabled="props.isGroupsLoading" @change="handleGroupChange">
-            <option value="">请选择知识库</option>
-            <optgroup v-if="ownedGroups.length > 0" label="我拥有的">
+            <option value="">{{ $t('documents.selectKnowledgeBase') }}</option>
+            <optgroup v-if="ownedGroups.length > 0" :label="$t('documents.ownedOption')">
               <option v-for="group in ownedGroups" :key="`owner-${group.groupId}`" :value="group.groupId">
-                {{ group.groupName }} · 所有者
+                {{ group.groupName }} · {{ $t('common.owner') }}
               </option>
             </optgroup>
-            <optgroup v-if="joinedGroups.length > 0" label="我加入的">
+            <optgroup v-if="joinedGroups.length > 0" :label="$t('documents.joinedOption')">
               <option v-for="group in joinedGroups" :key="`member-${group.groupId}`" :value="group.groupId">
-                {{ group.groupName }} · 成员
+                {{ group.groupName }} · {{ $t('common.member') }}
               </option>
             </optgroup>
           </select>
           <button type="button" class="ghost-button" :disabled="props.isGroupsLoading" @click="emit('refresh-groups')">
-            {{ props.isGroupsLoading ? '同步中…' : '刷新' }}
+            {{ props.isGroupsLoading ? $t('qa.syncing') : $t('common.refresh') }}
           </button>
         </div>
       </label>
 
       <label class="document-toolbar__field">
-        <span>文件名</span>
+        <span>{{ $t('documents.fileName') }}</span>
         <input
           :value="props.fileName"
           type="search"
           maxlength="128"
-          placeholder="搜索当前组文件"
+          :placeholder="$t('documents.searchPlaceholder')"
           @input="emit('change:fileName', ($event.target as HTMLInputElement).value)"
         />
       </label>
 
       <label class="document-toolbar__field">
-        <span>状态</span>
+        <span>{{ $t('common.status') }}</span>
         <select :value="props.status" @change="emit('change:status', ($event.target as HTMLSelectElement).value)">
           <option v-for="option in props.statusOptions" :key="`status-${option.value || 'all'}`" :value="option.value">
             {{ option.label }}
@@ -91,24 +91,24 @@ function handleFileChange(event: Event) {
 
     <div v-if="props.currentGroup && props.canManageCurrentGroup" class="document-toolbar__upload">
       <div class="document-toolbar__upload-copy">
-        <span class="document-toolbar__label">上传</span>
+        <span class="document-toolbar__label">{{ $t('documents.upload') }}</span>
         <strong>{{ props.selectedFileName }}</strong>
-        <p>上传到当前知识库，列表会自动同步处理状态。</p>
+        <p>{{ $t('documents.uploadDescription') }}</p>
       </div>
 
       <div class="document-toolbar__upload-actions">
         <label class="document-toolbar__upload-picker">
           <input :key="fileInputKey" type="file" @change="handleFileChange" />
-          <span>选择文件</span>
+          <span>{{ $t('documents.chooseFileButton') }}</span>
         </label>
         <button type="button" class="primary-button" :disabled="props.isUploading" @click="emit('upload')">
-          {{ props.isUploading ? '上传中…' : '上传' }}
+          {{ props.isUploading ? $t('documents.uploading') : $t('documents.upload') }}
         </button>
       </div>
     </div>
 
     <div v-else-if="props.currentGroup" class="document-toolbar__readonly">
-      <p class="filter-hint">成员身份访问「{{ props.currentGroup.groupName }}」：可筛选与预览，不可上传。</p>
+      <p class="filter-hint">{{ $t('documents.readOnlyGroup', { name: props.currentGroup.groupName }) }}</p>
     </div>
   </section>
 </template>

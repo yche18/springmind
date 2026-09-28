@@ -18,33 +18,33 @@ withDefaults(
 <template>
   <section class="qa-context-aside" :class="`qa-context-aside--${variant}`">
     <section class="qa-context-aside__section">
-      <p class="panel__eyebrow">知识库</p>
-      <h2>当前范围</h2>
+      <p class="panel__eyebrow">{{ $t('qa.knowledgeBase') }}</p>
+      <h2>{{ $t('qa.currentRange') }}</h2>
       <strong>{{ workspaceName }}</strong>
       <p>{{ workspaceMeta }}</p>
     </section>
 
     <section class="qa-context-aside__section">
-      <p class="panel__eyebrow">角色</p>
-      <h2>权限边界</h2>
+      <p class="panel__eyebrow">{{ $t('qa.role') }}</p>
+      <h2>{{ $t('qa.permissionBoundary') }}</h2>
       <div class="qa-context-aside__badge">{{ relationLabel }}</div>
     </section>
 
     <section class="qa-context-aside__section">
-      <p class="panel__eyebrow">问题</p>
-      <h2>当前上下文</h2>
+      <p class="panel__eyebrow">{{ $t('qa.enterQuestion') }}</p>
+      <h2>{{ $t('qa.currentContext') }}</h2>
       <p>{{ questionContext }}</p>
     </section>
 
     <section class="qa-context-aside__section">
-      <p class="panel__eyebrow">证据</p>
-      <h2>检索摘要</h2>
+      <p class="panel__eyebrow">{{ $t('qa.evidence') }}</p>
+      <h2>{{ $t('qa.retrievalSummary') }}</h2>
       <p>{{ evidenceSummary }}</p>
     </section>
 
     <section class="qa-context-aside__section">
-      <p class="panel__eyebrow">提示</p>
-      <h2>使用建议</h2>
+      <p class="panel__eyebrow">{{ $t('qa.hints') }}</p>
+      <h2>{{ $t('qa.usageAdvice') }}</h2>
       <ul class="qa-context-aside__list">
         <li v-for="item in usageHints" :key="item">{{ item }}</li>
       </ul>

@@ -24,8 +24,8 @@ function handleSelect(selection: WorkspaceSelection) {
     <section id="groups-sidebar-invitation" class="workspace-sidebar__section workspace-sidebar__section--pending">
       <div class="workspace-sidebar__header">
         <div class="workspace-sidebar__heading">
-          <p class="workspace-sidebar__eyebrow">待处理</p>
-          <h3>待处理邀请</h3>
+          <p class="workspace-sidebar__eyebrow">{{ $t('groups.pending') }}</p>
+          <h3>{{ $t('groups.invitations') }}</h3>
         </div>
         <span class="workspace-sidebar__count">{{ pendingInvitations.length }}</span>
       </div>
@@ -41,19 +41,19 @@ function handleSelect(selection: WorkspaceSelection) {
         >
           <div class="workspace-item__title-row">
             <strong>{{ invitation.groupName }}</strong>
-            <span class="workspace-item__badge">待处理</span>
+            <span class="workspace-item__badge">{{ $t('groups.pending') }}</span>
           </div>
-          <p>来自 {{ invitation.inviterDisplayName }}</p>
+          <p>{{ $t('groups.fromUser', { name: invitation.inviterDisplayName }) }}</p>
         </button>
       </div>
-      <p v-else class="workspace-sidebar__empty">暂无待处理邀请。</p>
+      <p v-else class="workspace-sidebar__empty">{{ $t('groups.noInvitations') }}</p>
     </section>
 
     <section id="groups-sidebar-owned" class="workspace-sidebar__section">
       <div class="workspace-sidebar__header">
         <div class="workspace-sidebar__heading">
-          <p class="workspace-sidebar__eyebrow">我拥有的组</p>
-          <h3>我拥有的组</h3>
+          <p class="workspace-sidebar__eyebrow">{{ $t('groups.owned') }}</p>
+          <h3>{{ $t('groups.owned') }}</h3>
         </div>
         <span class="workspace-sidebar__count">{{ ownedGroups.length }}</span>
       </div>
@@ -67,28 +67,28 @@ function handleSelect(selection: WorkspaceSelection) {
         >
           <div class="workspace-item__title-row">
             <strong>{{ group.groupName }}</strong>
-            <span class="workspace-item__role">所有者</span>
+            <span class="workspace-item__role">{{ $t('common.owner') }}</span>
           </div>
-          <p class="workspace-item__code" :title="group.groupCode">组织 ID：{{ group.groupCode }}</p>
+          <p class="workspace-item__code" :title="group.groupCode">{{ $t('groups.organizationId') }}: {{ group.groupCode }}</p>
           <div class="workspace-item__actions">
             <button
               class="workspace-item__action-button"
               type="button"
               @click="handleSelect({ type: 'ownedGroup', id: group.groupId })"
             >
-              管理
+              {{ $t('groups.manage') }}
             </button>
           </div>
         </article>
       </div>
-      <p v-else class="workspace-sidebar__empty">当前没有你拥有的组。</p>
+      <p v-else class="workspace-sidebar__empty">{{ $t('groups.noOwned') }}</p>
     </section>
 
     <section id="groups-sidebar-joined" class="workspace-sidebar__section">
       <div class="workspace-sidebar__header">
         <div class="workspace-sidebar__heading">
-          <p class="workspace-sidebar__eyebrow">我加入的组</p>
-          <h3>我加入的组</h3>
+          <p class="workspace-sidebar__eyebrow">{{ $t('groups.joined') }}</p>
+          <h3>{{ $t('groups.joined') }}</h3>
         </div>
         <span class="workspace-sidebar__count">{{ joinedGroups.length }}</span>
       </div>
@@ -102,24 +102,24 @@ function handleSelect(selection: WorkspaceSelection) {
         >
           <div class="workspace-item__title-row">
             <strong>{{ group.groupName }}</strong>
-            <span class="workspace-item__role workspace-item__role--member">成员</span>
+            <span class="workspace-item__role workspace-item__role--member">{{ $t('common.member') }}</span>
           </div>
-          <p class="workspace-item__code" :title="group.groupCode">组织 ID：{{ group.groupCode }}</p>
+          <p class="workspace-item__code" :title="group.groupCode">{{ $t('groups.organizationId') }}: {{ group.groupCode }}</p>
           <div class="workspace-item__actions">
             <button
               class="workspace-item__action-button workspace-item__action-button--member"
               type="button"
               @click="handleSelect({ type: 'joinedGroup', id: group.groupId })"
             >
-              查看详情
+              {{ $t('groups.viewDetails') }}
             </button>
           </div>
         </article>
       </div>
-      <p v-else class="workspace-sidebar__empty">当前没有你加入的组。</p>
+      <p v-else class="workspace-sidebar__empty">{{ $t('groups.noJoined') }}</p>
     </section>
 
-    <p v-if="isLoading" class="workspace-sidebar__hint">正在同步当前用户的组数据。</p>
+    <p v-if="isLoading" class="workspace-sidebar__hint">{{ $t('groups.syncingWorkspace') }}</p>
   </aside>
 </template>
 

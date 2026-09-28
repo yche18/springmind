@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, nextTick, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import {
   acceptInvitation,
   approveJoinRequest,
@@ -42,6 +43,7 @@ import '../../assets/groups-page.css'
 
 const appStore = useAppStore()
 const authStore = useAuthStore()
+const { t } = useI18n({ useScope: 'global' })
 
 const ownedGroups = computed(() => appStore.ownedGroups)
 const joinedGroups = computed(() => appStore.joinedGroups)
@@ -79,7 +81,7 @@ const workspaceCollections = computed(() => ({
 }))
 const activeSection = computed<WorkspaceNodeType | ''>(() => selectedNode.value?.type ?? '')
 const hasAnyWorkspaceItem = computed(() => hasWorkspaceItems(workspaceCollections.value))
-const currentUserLabel = computed(() => authStore.currentUser?.displayName ?? '未识别用户')
+const currentUserLabel = computed(() => authStore.currentUser?.displayName ?? t('groups.unknownUser'))
 const shouldShowOnboarding = computed(
   () => !isCreateComposerOpen.value && (!hasAnyWorkspaceItem.value || selectedNode.value === null),
 )
@@ -100,16 +102,16 @@ const selectedJoinedGroup = computed(() =>
 )
 const selectedOwnerMemberCount = computed(() =>
   selectedOwnedGroup.value === null
-    ? '未选中'
+    ? t('groups.selectedNone')
     : isMembersLoading.value
-      ? '成员同步中'
-      : `${groupMembers.value.length} 名成员`,
+      ? t('groups.syncingMembers')
+      : t('groups.memberCountLabel', { count: groupMembers.value.length }),
 )
 const selectedMemberMessage = computed(() => {
   if (selectedJoinedGroup.value === null) {
     return ''
   }
-  return `你当前是成员，仅可查看「${selectedJoinedGroup.value.groupName}」中的内容。`
+  return t('groups.memberReadOnly', { name: selectedJoinedGroup.value.groupName })
 })
 const totalPendingCount = computed(
   () => pendingInvitations.value.length + myJoinRequests.value.length + ownerJoinRequests.value.length,
@@ -117,8 +119,8 @@ const totalPendingCount = computed(
 const currentUserIdLabel = computed(() => authStore.currentUser?.userId?.toString() ?? '--')
 const pageHeroDescription = computed(() =>
   shouldShowOnboarding.value
-    ? '先创建或加入一个组，再上传文档、发起问答。左侧是组列表，中间处理详情。'
-    : '在左侧切换组，中间管理成员、邀请与申请。',
+    ? t('groups.onboardingDescription')
+    : t('groups.description'),
 )
 
 watch(
@@ -145,7 +147,7 @@ async function refreshWorkspace(preferredSelection: WorkspaceSelection | null = 
     groupMembers.value = []
     myJoinRequests.value = []
     ownerJoinRequests.value = []
-    pageError.value = extractApiError(error, '同步组工作台失败')
+    pageError.value = extractApiError(error, t('groups.workspaceSyncFailed'))
   } finally {
     isWorkspaceLoading.value = false
     isMyRequestsLoading.value = false
@@ -213,7 +215,7 @@ async function loadMembers(groupId: number) {
     groupMembers.value = await fetchGroupMembers(groupId)
   } catch (error) {
     groupMembers.value = []
-    pageError.value = extractApiError(error, '加载成员列表失败')
+    pageError.value = extractApiError(error, t('errors.loadMembers'))
   } finally {
     isMembersLoading.value = false
   }
@@ -226,7 +228,7 @@ async function loadOwnerJoinRequests(groupId: number) {
     ownerJoinRequests.value = await fetchOwnerJoinRequests(groupId)
   } catch (error) {
     ownerJoinRequests.value = []
-    pageError.value = extractApiError(error, '加载待审批申请失败')
+    pageError.value = extractApiError(error, t('groups.loadRequestsFailed'))
   } finally {
     isOwnerRequestsLoading.value = false
   }
@@ -244,10 +246,10 @@ async function handleSummaryFocus(section: WorkspaceNodeType) {
   if (nextSelection === null) {
     pageFeedback.value =
       section === 'invitation'
-        ? '当前没有待处理邀请。'
+        ? t('groups.noInvitations')
         : section === 'ownedGroup'
-          ? '当前没有你拥有的组。'
-          : '当前没有你加入的组。'
+          ? t('groups.noOwned')
+          : t('groups.noJoined')
     scrollSection(section)
     return
   }
@@ -303,7 +305,7 @@ function closeSecurityPanel() {
 
 async function handleCreateGroup() {
   if (createGroupName.value.trim().length === 0) {
-    pageError.value = '请输入组名称。'
+    pageError.value = t('groups.groupNameRequired')
     return
   }
 
@@ -319,9 +321,9 @@ async function handleCreateGroup() {
     createGroupDescription.value = ''
     isCreateComposerOpen.value = false
     await refreshWorkspace({ type: 'ownedGroup', id: groupId })
-    pageFeedback.value = `已创建新组 #${groupId}。`
+    pageFeedback.value = t('groups.created', { id: groupId })
   } catch (error) {
-    pageError.value = extractApiError(error, '创建组失败')
+    pageError.value = extractApiError(error, t('errors.createGroup'))
   } finally {
     isCreatingGroup.value = false
   }
@@ -339,14 +341,14 @@ async function handleInvitationDecision(invitationId: number, action: 'accept' |
     if (action === 'accept') {
       await acceptInvitation(invitationId)
       await refreshWorkspace(invitation ? { type: 'joinedGroup', id: invitation.groupId } : null)
-      pageFeedback.value = '邀请已接受。'
+      pageFeedback.value = t('groups.invitationAccepted')
     } else {
       await rejectInvitation(invitationId)
       await refreshWorkspace(selectedNode.value?.id === invitationId ? null : selectedNode.value)
-      pageFeedback.value = '邀请已拒绝。'
+      pageFeedback.value = t('groups.invitationRejected')
     }
   } catch (error) {
-    pageError.value = extractApiError(error, action === 'accept' ? '接受邀请失败' : '拒绝邀请失败')
+    pageError.value = extractApiError(error, t(action === 'accept' ? 'groups.acceptFailed' : 'groups.rejectFailed'))
   } finally {
     const finalActionIds = new Set(invitationActionIds.value)
     finalActionIds.delete(invitationId)
@@ -356,13 +358,13 @@ async function handleInvitationDecision(invitationId: number, action: 'accept' |
 
 async function handleInviteMember() {
   if (selectedOwnedGroup.value === null) {
-    pageError.value = '请先选择一个你拥有的组。'
+    pageError.value = t('groups.ownedGroupRequired')
     return
   }
 
   const parsedUserId = Number(inviteeUserId.value)
   if (!Number.isInteger(parsedUserId) || parsedUserId <= 0) {
-    pageError.value = '请输入合法的用户 ID。'
+    pageError.value = t('groups.validUserIdRequired')
     return
   }
 
@@ -373,9 +375,9 @@ async function handleInviteMember() {
     const invitationId = await createInvitation(selectedOwnedGroup.value.groupId, parsedUserId)
     inviteeUserId.value = ''
     await refreshWorkspace(selectedNode.value)
-    pageFeedback.value = `已发出邀请 #${invitationId}。`
+    pageFeedback.value = t('groups.invitationSent', { id: invitationId })
   } catch (error) {
-    pageError.value = extractApiError(error, '发起邀请失败')
+    pageError.value = extractApiError(error, t('groups.inviteFailed'))
   } finally {
     isInviting.value = false
   }
@@ -384,7 +386,7 @@ async function handleInviteMember() {
 async function handleSubmitJoinRequest() {
   const groupCode = joinGroupCode.value.trim()
   if (groupCode.length === 0) {
-    pageError.value = '请输入组织 ID。'
+    pageError.value = t('groups.organizationIdRequired')
     return
   }
 
@@ -395,9 +397,9 @@ async function handleSubmitJoinRequest() {
     const requestId = await submitJoinRequest(groupCode)
     joinGroupCode.value = ''
     myJoinRequests.value = await fetchMyJoinRequests()
-    pageFeedback.value = `已提交加入申请 #${requestId}，等待所有者审批。`
+    pageFeedback.value = t('groups.requestWaiting', { id: requestId })
   } catch (error) {
-    pageError.value = extractApiError(error, '提交加入申请失败')
+    pageError.value = extractApiError(error, t('errors.submitJoinRequest'))
   } finally {
     isSubmittingJoinRequest.value = false
   }
@@ -418,14 +420,14 @@ async function handleJoinRequestDecision(requestId: number, action: 'approve' | 
   try {
     if (action === 'approve') {
       await approveJoinRequest(groupId, requestId)
-      pageFeedback.value = '已通过加入申请。'
+      pageFeedback.value = t('groups.requestApproved')
     } else {
       await rejectJoinRequest(groupId, requestId)
-      pageFeedback.value = '已拒绝加入申请。'
+      pageFeedback.value = t('groups.requestRejected')
     }
     await loadOwnerGroupDetails(groupId)
   } catch (error) {
-    pageError.value = extractApiError(error, action === 'approve' ? '通过申请失败' : '拒绝申请失败')
+    pageError.value = extractApiError(error, t(action === 'approve' ? 'groups.approveFailed' : 'groups.rejectRequestFailed'))
   } finally {
     const finalActionIds = new Set(joinRequestActionIds.value)
     finalActionIds.delete(requestId)
@@ -449,9 +451,9 @@ async function handleRemoveMember(userId: number) {
     await removeGroupMember(selectedOwnedGroup.value.groupId, userId)
     await loadMembers(selectedOwnedGroup.value.groupId)
     await refreshWorkspace(selectedNode.value)
-    pageFeedback.value = `已移除成员 #${userId}。`
+    pageFeedback.value = t('groups.memberRemoved', { id: userId })
   } catch (error) {
-    pageError.value = extractApiError(error, '移除成员失败')
+    pageError.value = extractApiError(error, t('groups.removeMemberFailed'))
   } finally {
     const finalRemovingKeys = new Set(removingMemberKeys.value)
     finalRemovingKeys.delete(memberKey)
@@ -469,9 +471,9 @@ async function handleLeaveGroup(groupId: number) {
   try {
     await leaveGroup(groupId)
     await refreshWorkspace(selectedNode.value?.type === 'joinedGroup' && selectedNode.value.id === groupId ? null : selectedNode.value)
-    pageFeedback.value = `已退出群组 #${groupId}。`
+    pageFeedback.value = t('groups.groupLeft', { id: groupId })
   } catch (error) {
-    pageError.value = extractApiError(error, '退出群组失败')
+    pageError.value = extractApiError(error, t('groups.leaveFailed'))
   } finally {
     const finalLeavingIds = new Set(leavingGroupIds.value)
     finalLeavingIds.delete(groupId)
@@ -488,15 +490,15 @@ async function handleLeaveGroup(groupId: number) {
 
     <template #main>
       <main class="groups-page">
-        <PageHeaderHero eyebrow="协作" title="我的组" :description="pageHeroDescription">
+        <PageHeaderHero :eyebrow="$t('groups.eyebrow')" :title="$t('groups.title')" :description="pageHeroDescription">
           <template #actions>
             <div class="groups-page__hero-actions">
               <div class="groups-page__identity">
-                <span>当前用户</span>
+                <span>{{ $t('groups.currentUser') }}</span>
                 <strong>{{ currentUserLabel }}</strong>
               </div>
               <div class="groups-page__identity">
-                <span>我的用户 ID</span>
+                <span>{{ $t('groups.myUserId') }}</span>
                 <strong>{{ currentUserIdLabel }}</strong>
               </div>
             </div>
@@ -510,10 +512,10 @@ async function handleLeaveGroup(groupId: number) {
         >
           <div class="inline-security-panel__header">
             <div>
-              <p class="panel__eyebrow">账户安全</p>
-              <h2>账户安全</h2>
+              <p class="panel__eyebrow">{{ $t('groups.accountSecurity') }}</p>
+              <h2>{{ $t('groups.accountSecurity') }}</h2>
             </div>
-            <button class="ghost-button" type="button" @click="closeSecurityPanel">返回我的组</button>
+            <button class="ghost-button" type="button" @click="closeSecurityPanel">{{ $t('groups.backToGroups') }}</button>
           </div>
           <AccountPasswordForm inline @completed="closeSecurityPanel" />
         </section>
