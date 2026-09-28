@@ -16,21 +16,15 @@ spring:
       embedding:
         options:
           model: qllama/bge-small-zh-v1.5
-          # 单个输入超过模型 context length 时由 Ollama 截断，避免上传链路直接失败。
+          # Let Ollama truncate inputs beyond the model context window instead of failing ingestion.
           truncate: true
     vectorstore:
       pgvector:
-        # 向量索引类型
         index-type: HNSW
-        # 距离度量，余弦值
         distance-type: COSINE_DISTANCE
-        # 向量维度
         dimensions: 512
-        # 批量处理大小
         max-document-batch-size: 9
-        # 启动时是否自动创建表
         initialize-schema: true
-        # 创建表名
         table-name: vector_store
 
 storage:
@@ -46,7 +40,7 @@ ingestion:
     max-tokens: 320
     overlap-tokens: 32
   vector:
-    # 控制业务侧每次调用 VectorStore.add 的 chunk 数量，降低单次 Ollama embedding 请求压力。
+    # Limit chunks per VectorStore.add call to reduce pressure on each Ollama embedding request.
     add-batch-size: 9
 
 elasticsearch:
@@ -60,7 +54,7 @@ springmind:
     issuer: springmind
     access-token-expire-minutes: 30
     refresh-token-expire-days: 14
-    # 仅开发环境兜底，生产环境仍应显式配置安全密钥。
+    # Development-only fallback; production must provide an explicit secure secret.
     jwt-secret: ${SPRINGMIND_JWT_SECRET:springmind-dev-jwt-secret-2026-04-20-32bytes}
     refresh-cookie-name: SPRINGMIND_REFRESH_TOKEN
     refresh-cookie-secure: false

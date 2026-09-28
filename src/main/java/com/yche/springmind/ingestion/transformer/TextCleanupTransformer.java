@@ -8,11 +8,6 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-/**
- * 清理不可见字符、异常空白和格式噪声，同时尽量保留有意义的文档结构。
- *
- * <p>位于文档转换阶段：对解析后的文本进行清洗或结构化切分，为索引建立准备稳定数据。</p>
- */
 public class TextCleanupTransformer implements DocumentTransformer {
 
     private static final int MAX_FENCE_INDENT = 3;
@@ -21,14 +16,6 @@ public class TextCleanupTransformer implements DocumentTransformer {
     private static final Pattern INLINE_WHITESPACE = Pattern.compile("[ \\t]+");
     private static final Pattern EXCESSIVE_BLANK_LINES = Pattern.compile("\\n{3,}");
 
-    /**
-     * 在文档处理链路中执行 {@code apply}。
-     * <p>
-     * 实现要点：清洗并规范化解析后的文本。
-     *
-     * @param documents 方法参数 {@code documents}
-     * @return 符合条件的结果集合；无结果时返回空集合
-     */
     @Override
     public List<Document> apply(List<Document> documents) {
         return documents.stream()
@@ -36,14 +23,6 @@ public class TextCleanupTransformer implements DocumentTransformer {
                 .toList();
     }
 
-    /**
-     * 在文档处理链路中执行 {@code cleanupDocument}。
-     * <p>
-     * 实现要点：清洗并规范化解析后的文本。
-     *
-     * @param document 当前处理的文档实体
-     * @return 方法执行结果，具体结构由返回类型 {@code Document} 表示
-     */
     private Document cleanupDocument(Document document) {
         if (document.getText() == null) {
             return document;
@@ -53,14 +32,6 @@ public class TextCleanupTransformer implements DocumentTransformer {
                 .build();
     }
 
-    /**
-     * 在文档处理链路中执行 {@code clean}。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param source 方法参数 {@code source}
-     * @return 处理后得到的字符串结果
-     */
     String clean(String source) {
         if (source == null || source.isEmpty()) {
             return "";
@@ -71,14 +42,6 @@ public class TextCleanupTransformer implements DocumentTransformer {
         return cleanLines(normalized);
     }
 
-    /**
-     * 在文档处理链路中执行 {@code normalizeLine}。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param line 方法参数 {@code line}
-     * @return 处理后得到的字符串结果
-     */
     private String normalizeLine(String line) {
         String trimmed = line.strip();
         if (trimmed.isEmpty()) {
@@ -87,14 +50,6 @@ public class TextCleanupTransformer implements DocumentTransformer {
         return INLINE_WHITESPACE.matcher(trimmed).replaceAll(" ");
     }
 
-    /**
-     * 在文档处理链路中执行 {@code cleanLines}。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param normalized 方法参数 {@code normalized}
-     * @return 处理后得到的字符串结果
-     */
     private String cleanLines(String normalized) {
         List<String> segments = new ArrayList<>();
         List<String> plainLines = new ArrayList<>();
@@ -133,12 +88,6 @@ public class TextCleanupTransformer implements DocumentTransformer {
         return String.join("\n", segments);
     }
 
-    /**
-     * 在文档处理链路中执行 {@code parseOpeningFence}。
-     *
-     * @param line 方法参数 {@code line}
-     * @return 方法执行结果，具体结构由返回类型 {@code FenceMarker} 表示
-     */
     private FenceMarker parseOpeningFence(String line) {
         int contentStart = countLeadingSpaces(line);
         if (contentStart < 0 || contentStart >= line.length()) {
@@ -153,13 +102,6 @@ public class TextCleanupTransformer implements DocumentTransformer {
         return new FenceMarker(marker, fenceLength);
     }
 
-    /**
-     * 判断当前数据是否满足 {@code closingFence} 条件。
-     *
-     * @param line 方法参数 {@code line}
-     * @param openingFence 方法参数 {@code openingFence}
-     * @return 满足条件时返回 {@code true}，否则返回 {@code false}
-     */
     private boolean isClosingFence(String line, FenceMarker openingFence) {
         int contentStart = countLeadingSpaces(line);
         if (contentStart < 0 || contentStart >= line.length()) {
@@ -172,12 +114,6 @@ public class TextCleanupTransformer implements DocumentTransformer {
                 && hasOnlyTrailingWhitespace(line, contentStart + fenceLength);
     }
 
-    /**
-     * 在文档处理链路中执行 {@code countLeadingSpaces}。
-     *
-     * @param line 方法参数 {@code line}
-     * @return 计算或处理得到的数值结果
-     */
     private int countLeadingSpaces(String line) {
         int leadingSpaces = 0;
         while (leadingSpaces < line.length() && line.charAt(leadingSpaces) == ' ') {
@@ -186,14 +122,6 @@ public class TextCleanupTransformer implements DocumentTransformer {
         return leadingSpaces <= MAX_FENCE_INDENT ? leadingSpaces : -1;
     }
 
-    /**
-     * 在文档处理链路中执行 {@code countFenceLength}。
-     *
-     * @param line 方法参数 {@code line}
-     * @param startIndex 方法参数 {@code startIndex}
-     * @param marker 方法参数 {@code marker}
-     * @return 计算或处理得到的数值结果
-     */
     private int countFenceLength(String line, int startIndex, char marker) {
         int fenceLength = 0;
         while (startIndex + fenceLength < line.length() && line.charAt(startIndex + fenceLength) == marker) {
@@ -202,13 +130,6 @@ public class TextCleanupTransformer implements DocumentTransformer {
         return fenceLength;
     }
 
-    /**
-     * 判断当前对象是否具有 {@code onlyTrailingWhitespace} 特征。
-     *
-     * @param line 方法参数 {@code line}
-     * @param startIndex 方法参数 {@code startIndex}
-     * @return 满足条件时返回 {@code true}，否则返回 {@code false}
-     */
     private boolean hasOnlyTrailingWhitespace(String line, int startIndex) {
         for (int index = startIndex; index < line.length(); index++) {
             if (!Character.isWhitespace(line.charAt(index))) {
@@ -218,14 +139,6 @@ public class TextCleanupTransformer implements DocumentTransformer {
         return true;
     }
 
-    /**
-     * 在文档处理链路中执行 {@code appendPlainSegment}。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param segments 方法参数 {@code segments}
-     * @param plainLines 方法参数 {@code plainLines}
-     */
     private void appendPlainSegment(List<String> segments, List<String> plainLines) {
         if (plainLines.isEmpty()) {
             return;
@@ -238,11 +151,6 @@ public class TextCleanupTransformer implements DocumentTransformer {
         plainLines.clear();
     }
 
-    /**
-     * 表示清洗 Markdown 时识别到的代码围栏字符和长度。
-     *
-     * <p>仅在 {@code TextCleanupTransformer} 的实现过程中使用，用不可变数据结构收拢中间结果，避免参数和值的含义混淆。</p>
-     */
     private record FenceMarker(char marker, int length) {
     }
 }

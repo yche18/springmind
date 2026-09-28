@@ -21,9 +21,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * 在独立异步线程中执行文档入库，并记录成功或失败状态。
- *
- * <p>位于业务服务层：编排领域操作和基础设施调用，并集中维护事务、权限校验及失败处理边界。</p>
+ * Executes ingestion outside the request transaction and records terminal job
+ * state so interrupted or failed documents can be recovered safely.
  */
 @Service
 public class DocumentIngestionAsyncService {
@@ -37,17 +36,6 @@ public class DocumentIngestionAsyncService {
     private final VectorIngestionService vectorIngestionService;
     private final ElasticsearchChunkIndexService elasticsearchChunkIndexService;
 
-    /**
-     * 创建并初始化 {@link DocumentIngestionAsyncService}，保存该组件运行所需的依赖与配置。
-     * <p>
-     * 实现要点：写入或查询 pgvector 向量索引；维护或查询 Elasticsearch 关键词索引。
-     *
-     * @param documentMapper 方法参数 {@code documentMapper}
-     * @param documentIngestionProcessor 方法参数 {@code documentIngestionProcessor}
-     * @param documentChunkMapper 方法参数 {@code documentChunkMapper}
-     * @param vectorIngestionService 方法参数 {@code vectorIngestionService}
-     * @param elasticsearchChunkIndexService 方法参数 {@code elasticsearchChunkIndexService}
-     */
     public DocumentIngestionAsyncService(
             DocumentMapper documentMapper,
             DocumentIngestionProcessor documentIngestionProcessor,
@@ -63,12 +51,8 @@ public class DocumentIngestionAsyncService {
     }
 
     /**
-     * 执行 {@code ingestDocument} 对应的业务步骤。
-     * <p>
-     * 实现要点：对可恢复失败执行有限次数重试；使用事务保证多次数据库操作的一致性；先校验输入、状态或业务边界；清洗并规范化解析后的文本。
-     *
-     * @param documentId 文档唯一标识
-     * @param groupId 群组唯一标识
+     * Rebuild all processing artifacts and retry transient failures up to the
+     * configured limit before delegating to {@link #recover}.
      */
     @Retryable(
             retryFor = RuntimeException.class,
@@ -86,15 +70,7 @@ public class DocumentIngestionAsyncService {
         log.info("异步文档ETL完成: documentId={}, groupId={}, status={}", documentId, groupId, DocumentStatus.READY.name());
     }
 
-    /**
-     * 执行 {@code recover} 对应的业务步骤。
-     * <p>
-     * 实现要点：使用事务保证多次数据库操作的一致性；清洗并规范化解析后的文本。
-     *
-     * @param exception 方法参数 {@code exception}
-     * @param documentId 文档唯一标识
-     * @param groupId 群组唯一标识
-     */
+    /** Remove partial artifacts and mark the document failed after retry exhaustion. */
     @Recover
     @Transactional
     public void recover(RuntimeException exception, Long documentId, Long groupId) {
@@ -109,16 +85,6 @@ public class DocumentIngestionAsyncService {
         );
     }
 
-    /**
-     * 执行 {@code requireDocument} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界；读取数据库中的当前状态。
-     *
-     * @param documentId 文档唯一标识
-     * @param groupId 群组唯一标识
-     * @return 方法执行结果，具体结构由返回类型 {@code DocumentEntity} 表示
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private DocumentEntity requireDocument(Long documentId, Long groupId) {
         DocumentEntity document = documentMapper.selectByIdAndGroupId(documentId, groupId);
         if (document == null) {
@@ -127,13 +93,6 @@ public class DocumentIngestionAsyncService {
         return document;
     }
 
-    /**
-     * 执行 {@code cleanupProcessingArtifacts} 对应的业务步骤。
-     * <p>
-     * 实现要点：清洗并规范化解析后的文本；捕获依赖异常并转换、记录或执行降级策略；写入或查询 pgvector 向量索引；维护或查询 Elasticsearch 关键词索引。
-     *
-     * @param documentId 文档唯一标识
-     */
     private void cleanupProcessingArtifacts(Long documentId) {
         try {
             documentChunkMapper.deleteByDocumentId(documentId);
@@ -152,28 +111,11 @@ public class DocumentIngestionAsyncService {
         }
     }
 
-    /**
-     * 执行 {@code syncSearchIndex} 对应的业务步骤。
-     * <p>
-     * 实现要点：读取数据库中的当前状态；维护或查询 Elasticsearch 关键词索引。
-     *
-     * @param document 当前处理的文档实体
-     */
     private void syncSearchIndex(DocumentEntity document) {
         List<DocumentChunkEntity> chunks = documentChunkMapper.selectByDocumentId(document.getId());
         elasticsearchChunkIndexService.indexReadyChunks(document.getFileName(), chunks);
     }
 
-    /**
-     * 执行 {@code markDocumentStatus} 对应的业务步骤。
-     *
-     * @param documentId 文档唯一标识
-     * @param groupId 群组唯一标识
-     * @param status 目标业务状态
-     * @param failureReason 方法参数 {@code failureReason}
-     * @param processedAt 方法参数 {@code processedAt}
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private void markDocumentStatus(
             Long documentId,
             Long groupId,
@@ -187,12 +129,6 @@ public class DocumentIngestionAsyncService {
         }
     }
 
-    /**
-     * 执行 {@code truncateFailureReason} 对应的业务步骤。
-     *
-     * @param failureReason 方法参数 {@code failureReason}
-     * @return 处理后得到的字符串结果
-     */
     private String truncateFailureReason(String failureReason) {
         if (failureReason == null || failureReason.isBlank()) {
             return "文档处理失败";

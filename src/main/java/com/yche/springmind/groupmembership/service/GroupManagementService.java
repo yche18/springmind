@@ -19,11 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * 编排知识组创建、成员邀请、角色调整和移除成员等组主管理操作。
- *
- * <p>位于业务服务层：编排领域操作和基础设施调用，并集中维护事务、权限校验及失败处理边界。</p>
- */
+/** Manage membership state transitions that must remain atomic. */
 @Service
 public class GroupManagementService {
 
@@ -34,16 +30,6 @@ public class GroupManagementService {
     private final GroupMembershipService groupMembershipService;
     private final CurrentUserService currentUserService;
 
-    /**
-     * 创建并初始化 {@link GroupManagementService}，保存该组件运行所需的依赖与配置。
-     * <p>
-     * 实现要点：校验群组成员关系和角色权限；解析并确认当前登录用户。
-     *
-     * @param groupMembershipMapper 方法参数 {@code groupMembershipMapper}
-     * @param groupJoinRequestMapper 方法参数 {@code groupJoinRequestMapper}
-     * @param groupMembershipService 方法参数 {@code groupMembershipService}
-     * @param currentUserService 方法参数 {@code currentUserService}
-     */
     public GroupManagementService(
             GroupMembershipMapper groupMembershipMapper,
             GroupJoinRequestMapper groupJoinRequestMapper,
@@ -56,15 +42,7 @@ public class GroupManagementService {
         this.currentUserService = currentUserService;
     }
 
-    /**
-     * 执行 {@code createGroup} 对应的业务步骤。
-     * <p>
-     * 实现要点：使用事务保证多次数据库操作的一致性；解析并确认当前登录用户；先校验输入、状态或业务边界；校验群组成员关系和角色权限。
-     *
-     * @param request 已经通过控制器基础校验的请求对象
-     * @param createGroupRequest 创建群组请求参数
-     * @return 计算或处理得到的数值结果
-     */
+    /** Create a group and its owner membership in one transaction. */
     @Transactional
     public Long createGroup(HttpServletRequest request, CreateGroupRequest createGroupRequest) {
         CurrentUserService.CurrentUser currentUser = currentUserService.requireBusinessUser(request);
@@ -81,16 +59,6 @@ public class GroupManagementService {
         return groupId;
     }
 
-    /**
-     * 执行 {@code createInvitation} 对应的业务步骤。
-     * <p>
-     * 实现要点：使用事务保证多次数据库操作的一致性；先校验输入、状态或业务边界；校验群组成员关系和角色权限。
-     *
-     * @param request 已经通过控制器基础校验的请求对象
-     * @param groupId 群组唯一标识
-     * @param createInvitationRequest 创建邀请请求参数
-     * @return 计算或处理得到的数值结果
-     */
     @Transactional
     public Long createInvitation(
             HttpServletRequest request,
@@ -110,14 +78,7 @@ public class GroupManagementService {
         );
     }
 
-    /**
-     * 执行 {@code acceptInvitation} 对应的业务步骤。
-     * <p>
-     * 实现要点：使用事务保证多次数据库操作的一致性；解析并确认当前登录用户；先校验输入、状态或业务边界；校验群组成员关系和角色权限。
-     *
-     * @param request 已经通过控制器基础校验的请求对象
-     * @param invitationId 邀请唯一标识
-     */
+    /** Accept a pending invitation and create the membership atomically. */
     @Transactional
     public void acceptInvitation(HttpServletRequest request, Long invitationId) {
         CurrentUserService.CurrentUser currentUser = currentUserService.requireBusinessUser(request);
@@ -133,14 +94,6 @@ public class GroupManagementService {
         updateInvitationStatus(invitation.id(), GroupInvitationStatus.ACCEPTED);
     }
 
-    /**
-     * 执行 {@code rejectInvitation} 对应的业务步骤。
-     * <p>
-     * 实现要点：使用事务保证多次数据库操作的一致性；解析并确认当前登录用户；先校验输入、状态或业务边界。
-     *
-     * @param request 已经通过控制器基础校验的请求对象
-     * @param invitationId 邀请唯一标识
-     */
     @Transactional
     public void rejectInvitation(HttpServletRequest request, Long invitationId) {
         CurrentUserService.CurrentUser currentUser = currentUserService.requireBusinessUser(request);
@@ -150,14 +103,6 @@ public class GroupManagementService {
         updateInvitationStatus(invitation.id(), GroupInvitationStatus.REJECTED);
     }
 
-    /**
-     * 执行 {@code cancelInvitation} 对应的业务步骤。
-     * <p>
-     * 实现要点：使用事务保证多次数据库操作的一致性；校验群组成员关系和角色权限；先校验输入、状态或业务边界。
-     *
-     * @param request 已经通过控制器基础校验的请求对象
-     * @param invitationId 邀请唯一标识
-     */
     @Transactional
     public void cancelInvitation(HttpServletRequest request, Long invitationId) {
         Invitation invitation = loadInvitation(invitationId);
@@ -166,15 +111,6 @@ public class GroupManagementService {
         updateInvitationStatus(invitation.id(), GroupInvitationStatus.CANCELED);
     }
 
-    /**
-     * 执行 {@code listMembers} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界；校验群组成员关系和角色权限。
-     *
-     * @param request 已经通过控制器基础校验的请求对象
-     * @param groupId 群组唯一标识
-     * @return 符合条件的结果集合；无结果时返回空集合
-     */
     public List<GroupMemberVO> listMembers(HttpServletRequest request, Long groupId) {
         Long requiredGroupId = requirePositiveId(groupId, "groupId 非法");
         groupMembershipService.requireGroupOwner(request, requiredGroupId);
@@ -183,16 +119,7 @@ public class GroupManagementService {
                 .toList();
     }
 
-    /**
-     * 执行 {@code removeMember} 对应的业务步骤。
-     * <p>
-     * 实现要点：使用事务保证多次数据库操作的一致性；先校验输入、状态或业务边界；校验群组成员关系和角色权限。
-     *
-     * @param request 已经通过控制器基础校验的请求对象
-     * @param groupId 群组唯一标识
-     * @param userId 用户唯一标识
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
+    /** Remove a member while preventing removal of the group owner. */
     @Transactional
     public void removeMember(HttpServletRequest request, Long groupId, Long userId) {
         Long requiredGroupId = requirePositiveId(groupId, "groupId 非法");
@@ -208,15 +135,7 @@ public class GroupManagementService {
         groupMembershipMapper.deleteMembership(requiredGroupId, requiredUserId);
     }
 
-    /**
-     * 执行 {@code leaveGroup} 对应的业务步骤。
-     * <p>
-     * 实现要点：使用事务保证多次数据库操作的一致性；先校验输入、状态或业务边界；解析并确认当前登录用户；校验群组成员关系和角色权限。
-     *
-     * @param request 已经通过控制器基础校验的请求对象
-     * @param groupId 群组唯一标识
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
+    /** Leave a group while preventing an owner from orphaning it. */
     @Transactional
     public void leaveGroup(HttpServletRequest request, Long groupId) {
         Long requiredGroupId = requirePositiveId(groupId, "groupId 非法");
@@ -231,13 +150,6 @@ public class GroupManagementService {
         groupMembershipMapper.deleteMembership(requiredGroupId, currentUser.userId());
     }
 
-    /**
-     * 执行 {@code rejectDuplicateInvitationTarget} 对应的业务步骤。
-     *
-     * @param groupId 群组唯一标识
-     * @param inviteeUserId invitee用户唯一标识
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private void rejectDuplicateInvitationTarget(Long groupId, Long inviteeUserId) {
         rejectExistingMembership(groupId, inviteeUserId);
         if (hasRows(groupMembershipMapper.countPendingInvitation(groupId, inviteeUserId))) {
@@ -248,40 +160,18 @@ public class GroupManagementService {
         }
     }
 
-    /**
-     * 执行 {@code rejectExistingMembership} 对应的业务步骤。
-     *
-     * @param groupId 群组唯一标识
-     * @param inviteeUserId invitee用户唯一标识
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private void rejectExistingMembership(Long groupId, Long inviteeUserId) {
         if (hasRows(groupMembershipMapper.countMembershipByGroupIdAndUserId(groupId, inviteeUserId))) {
             throw new BusinessException("被邀请人已是群组成员");
         }
     }
 
-    /**
-     * 执行 {@code rejectMissingUser} 对应的业务步骤。
-     *
-     * @param userId 用户唯一标识
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private void rejectMissingUser(Long userId) {
         if (!hasRows(groupMembershipMapper.countUserById(userId))) {
             throw new BusinessException("被邀请用户不存在");
         }
     }
 
-    /**
-     * 执行 {@code loadInvitation} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param invitationId 邀请唯一标识
-     * @return 查询得到的邀请结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private Invitation loadInvitation(Long invitationId) {
         Long requiredInvitationId = requirePositiveId(invitationId, "邀请ID非法");
         Map<String, Object> row = groupMembershipMapper.selectInvitationById(requiredInvitationId);
@@ -297,42 +187,18 @@ public class GroupManagementService {
         );
     }
 
-    /**
-     * 执行 {@code requireInvitee} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param currentUser 当前已经通过认证的用户信息
-     * @param invitation 方法参数 {@code invitation}
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private void requireInvitee(CurrentUserService.CurrentUser currentUser, Invitation invitation) {
         if (!currentUser.userId().equals(invitation.inviteeUserId())) {
             throw new BusinessException("无权处理该邀请");
         }
     }
 
-    /**
-     * 执行 {@code requirePending} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param invitation 方法参数 {@code invitation}
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private void requirePending(Invitation invitation) {
         if (!GroupInvitationStatus.PENDING.name().equals(invitation.status())) {
             throw new BusinessException("邀请已处理");
         }
     }
 
-    /**
-     * 执行 {@code updateInvitationStatus} 对应的业务步骤。
-     *
-     * @param invitationId 邀请唯一标识
-     * @param status 目标业务状态
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private void updateInvitationStatus(Long invitationId, GroupInvitationStatus status) {
         int updated = groupMembershipMapper.updateInvitationStatus(
                 invitationId,
@@ -344,12 +210,6 @@ public class GroupManagementService {
         }
     }
 
-    /**
-     * 执行 {@code toGroupMember} 对应的业务步骤。
-     *
-     * @param row 方法参数 {@code row}
-     * @return 方法执行结果，具体结构由返回类型 {@code GroupMemberVO} 表示
-     */
     private GroupMemberVO toGroupMember(Map<String, Object> row) {
         return new GroupMemberVO(
                 toLong(row.get("userId")),
@@ -359,15 +219,6 @@ public class GroupManagementService {
         );
     }
 
-    /**
-     * 执行 {@code requireGroupName} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param name 方法参数 {@code name}
-     * @return 处理后得到的字符串结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private String requireGroupName(String name) {
         if (!StringUtils.hasText(name)) {
             throw new BusinessException("组名称不能为空");
@@ -379,15 +230,6 @@ public class GroupManagementService {
         return trimmedName;
     }
 
-    /**
-     * 执行 {@code normalizeDescription} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param description 方法参数 {@code description}
-     * @return 处理后得到的字符串结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private String normalizeDescription(String description) {
         if (!StringUtils.hasText(description)) {
             return null;
@@ -399,16 +241,6 @@ public class GroupManagementService {
         return trimmedDescription;
     }
 
-    /**
-     * 执行 {@code requirePositiveId} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param id 方法参数 {@code id}
-     * @param message 方法参数 {@code message}
-     * @return 计算或处理得到的数值结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private Long requirePositiveId(Long id, String message) {
         if (id == null || id <= 0) {
             throw new BusinessException(message);
@@ -416,40 +248,18 @@ public class GroupManagementService {
         return id;
     }
 
-    /**
-     * 执行 {@code buildGroupCode} 对应的业务步骤。
-     *
-     * @return 处理后得到的字符串结果
-     */
     private String buildGroupCode() {
         return "group-" + UUID.randomUUID().toString().replace("-", "");
     }
 
-    /**
-     * 判断当前对象是否具有 {@code rows} 特征。
-     *
-     * @param count 方法参数 {@code count}
-     * @return 满足条件时返回 {@code true}，否则返回 {@code false}
-     */
     private boolean hasRows(Long count) {
         return count != null && count > 0;
     }
 
-    /**
-     * 执行 {@code toLong} 对应的业务步骤。
-     *
-     * @param value 方法参数 {@code value}
-     * @return 计算或处理得到的数值结果
-     */
     private Long toLong(Object value) {
         return ((Number) value).longValue();
     }
 
-    /**
-     * 表示组主管理流程中加载的一条成员邀请记录。
-     *
-     * <p>仅在 {@code GroupManagementService} 的实现过程中使用，用不可变数据结构收拢中间结果，避免参数和值的含义混淆。</p>
-     */
     private record Invitation(
             Long id,
             Long groupId,

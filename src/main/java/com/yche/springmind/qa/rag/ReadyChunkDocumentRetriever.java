@@ -10,11 +10,6 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 
-/**
- * 通过 Spring AI Retriever 适配器检索已完成入库的文档切片。
- *
- * <p>位于 RAG 检索链路：把问题转换为受知识组权限约束的证据集合，供回答生成阶段使用。</p>
- */
 @Component
 public class ReadyChunkDocumentRetriever implements DocumentRetriever {
 
@@ -24,13 +19,6 @@ public class ReadyChunkDocumentRetriever implements DocumentRetriever {
     private final EvidenceRetriever evidenceRetriever;
     private final int topK;
 
-    /**
-     * 创建并初始化 {@link ReadyChunkDocumentRetriever}，保存该组件运行所需的依赖与配置。
-     * <p>
-     * 实现要点：执行混合检索与结果融合。
-     *
-     * @param evidenceRetriever 方法参数 {@code evidenceRetriever}
-     */
     @Autowired
     public ReadyChunkDocumentRetriever(
             EvidenceRetriever evidenceRetriever
@@ -38,14 +26,6 @@ public class ReadyChunkDocumentRetriever implements DocumentRetriever {
         this(evidenceRetriever, EvidenceRetriever.DEFAULT_TOP_K);
     }
 
-    /**
-     * 创建并初始化 {@link ReadyChunkDocumentRetriever}，保存该组件运行所需的依赖与配置。
-     * <p>
-     * 实现要点：执行混合检索与结果融合。
-     *
-     * @param evidenceRetriever 方法参数 {@code evidenceRetriever}
-     * @param topK 最多返回的候选结果数量
-     */
     public ReadyChunkDocumentRetriever(
             EvidenceRetriever evidenceRetriever,
             int topK
@@ -54,14 +34,6 @@ public class ReadyChunkDocumentRetriever implements DocumentRetriever {
         this.topK = topK > 0 ? topK : EvidenceRetriever.DEFAULT_TOP_K;
     }
 
-    /**
-     * 依据查询条件检索与当前群组相关的证据片段。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param query 用于检索或筛选的查询条件
-     * @return 符合条件的结果集合；无结果时返回空集合
-     */
     @Override
     public List<Document> retrieve(Query query) {
         Query validQuery = requireQuery(query);
@@ -73,41 +45,14 @@ public class ReadyChunkDocumentRetriever implements DocumentRetriever {
         return retrieve(groupId, query.text());
     }
 
-    /**
-     * 依据查询条件检索与当前群组相关的证据片段。
-     * <p>
-     * 实现要点：执行混合检索与结果融合。
-     *
-     * @param groupId 群组唯一标识
-     * @param question 用户提交的自然语言问题
-     * @return 符合条件的结果集合；无结果时返回空集合
-     */
     public List<Document> retrieve(Long groupId, String question) {
         return retrieveEvidence(groupId, question).documents();
     }
 
-    /**
-     * 执行 {@code retrieveEvidence} 对应的业务步骤。
-     * <p>
-     * 实现要点：执行混合检索与结果融合。
-     *
-     * @param groupId 群组唯一标识
-     * @param question 用户提交的自然语言问题
-     * @return 方法执行结果，具体结构由返回类型 {@code RetrievedEvidenceBundle} 表示
-     */
     public RetrievedEvidenceBundle retrieveEvidence(Long groupId, String question) {
         return evidenceRetriever.retrieve(groupId, question, topK);
     }
 
-    /**
-     * 执行 {@code requireQuery} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param query 用于检索或筛选的查询条件
-     * @return 方法执行结果，具体结构由返回类型 {@code Query} 表示
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private Query requireQuery(Query query) {
         if (query == null) {
             throw new BusinessException("检索请求不能为空");
@@ -115,15 +60,6 @@ public class ReadyChunkDocumentRetriever implements DocumentRetriever {
         return query;
     }
 
-    /**
-     * 执行 {@code requireGroupId} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界；捕获依赖异常并转换、记录或执行降级策略。
-     *
-     * @param query 用于检索或筛选的查询条件
-     * @return 计算或处理得到的数值结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private Long requireGroupId(Query query) {
         Object groupId = query.context().get(GROUP_ID_CONTEXT_KEY);
         if (groupId instanceof Number) {
@@ -139,13 +75,6 @@ public class ReadyChunkDocumentRetriever implements DocumentRetriever {
         throw new BusinessException("检索上下文缺少 groupId");
     }
 
-    /**
-     * 执行 {@code readPrefetchedDocuments} 对应的业务步骤。
-     *
-     * @param query 用于检索或筛选的查询条件
-     * @return 符合条件的结果集合；无结果时返回空集合
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private List<Document> readPrefetchedDocuments(Query query) {
         Object documents = query.context().get(PREFETCHED_DOCUMENTS_CONTEXT_KEY);
         if (documents == null) {
@@ -164,15 +93,6 @@ public class ReadyChunkDocumentRetriever implements DocumentRetriever {
         return List.copyOf(castedDocuments);
     }
 
-    /**
-     * 执行 {@code requirePositiveGroupId} 对应的业务步骤。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param groupId 群组唯一标识
-     * @return 计算或处理得到的数值结果
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private Long requirePositiveGroupId(long groupId) {
         if (groupId <= 0) {
             throw new BusinessException("groupId 非法");

@@ -13,9 +13,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * 仅在 dev 环境确保一个可预测的管理员账号存在，避免本地调试还要额外手工开户。
- */
 @Component
 @Profile("dev")
 public class DevAdminInitializer implements ApplicationRunner {
@@ -30,19 +27,6 @@ public class DevAdminInitializer implements ApplicationRunner {
     private final String password;
     private final String userCode;
 
-    /**
-     * 创建并初始化 {@link DevAdminInitializer}，保存该组件运行所需的依赖与配置。
-     * <p>
-     * 实现要点：使用安全哈希校验或保存密码。
-     *
-     * @param jdbcTemplate 方法参数 {@code jdbcTemplate}
-     * @param passwordHasher 方法参数 {@code passwordHasher}
-     * @param username 用户登录名
-     * @param email 用户邮箱地址
-     * @param displayName 面向界面展示的用户名称
-     * @param password 用户提交的明文密码，仅用于本次校验或哈希计算
-     * @param userCode 方法参数 {@code userCode}
-     */
     public DevAdminInitializer(
             JdbcTemplate jdbcTemplate,
             PasswordHasher passwordHasher,
@@ -61,13 +45,6 @@ public class DevAdminInitializer implements ApplicationRunner {
         this.userCode = userCode.trim();
     }
 
-    /**
-     * 在应用生命周期的指定阶段执行初始化或恢复任务。
-     * <p>
-     * 实现要点：使用事务保证多次数据库操作的一致性；读取数据库中的当前状态；持久化数据库状态变更；使用安全哈希校验或保存密码。
-     *
-     * @param args 方法参数 {@code args}
-     */
     @Override
     @Transactional
     public void run(ApplicationArguments args) {

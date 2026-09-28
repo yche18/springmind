@@ -6,11 +6,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-/**
- * 承载管理员创建用户时提交的账号资料和初始密码。
- *
- * <p>这是接口输入契约，只承载并校验调用方提交的数据，不在对象内部实现业务流程。</p>
- */
 public record CreateUserRequest(
         @NotBlank(message = "用户名不能为空")
         @Size(max = 64, message = "用户名长度不能超过 64")

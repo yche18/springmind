@@ -17,11 +17,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-/**
- * 从请求头提取 Bearer Token，校验后把认证用户写入 Spring Security 上下文。
- *
- * <p>位于认证安全边界：负责令牌、Cookie 或安全上下文处理，为业务服务提供可信的用户身份。</p>
- */
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
@@ -37,14 +32,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtAccessTokenService jwtAccessTokenService;
     private final ObjectMapper objectMapper;
 
-    /**
-     * 创建并初始化 {@link JwtAuthenticationFilter}，保存该组件运行所需的依赖与配置。
-     * <p>
-     * 实现要点：签发或解析 JWT 访问令牌。
-     *
-     * @param jwtAccessTokenService 方法参数 {@code jwtAccessTokenService}
-     * @param objectMapper 方法参数 {@code objectMapper}
-     */
     public JwtAuthenticationFilter(
             JwtAccessTokenService jwtAccessTokenService,
             ObjectMapper objectMapper
@@ -53,17 +40,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         this.objectMapper = objectMapper;
     }
 
-    /**
-     * 完成 {@code doFilterInternal} 对应的处理。
-     * <p>
-     * 实现要点：签发或解析 JWT 访问令牌；按文档类型解析正文内容；捕获依赖异常并转换、记录或执行降级策略。
-     *
-     * @param request 已经通过控制器基础校验的请求对象
-     * @param response 方法参数 {@code response}
-     * @param filterChain 方法参数 {@code filterChain}
-     * @throws ServletException 当输入、状态或依赖不满足方法约束时抛出
-     * @throws IOException 当输入、状态或依赖不满足方法约束时抛出
-     */
     @Override
     protected void doFilterInternal(
             HttpServletRequest request,
@@ -98,12 +74,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
     }
 
-    /**
-     * 完成 {@code shouldNotFilter} 对应的处理。
-     *
-     * @param request 已经通过控制器基础校验的请求对象
-     * @return 满足条件时返回 {@code true}，否则返回 {@code false}
-     */
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String requestUri = request.getRequestURI();
@@ -113,13 +83,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 || LOGOUT_PATH.equals(requestUri);
     }
 
-    /**
-     * 完成 {@code writeUnauthorized} 对应的处理。
-     *
-     * @param response 方法参数 {@code response}
-     * @param message 方法参数 {@code message}
-     * @throws IOException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private void writeUnauthorized(HttpServletResponse response, String message) throws IOException {
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
@@ -127,11 +90,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         objectMapper.writeValue(response.getWriter(), new ApiResponse<>(false, null, message));
     }
 
-    /**
-     * 表示访问令牌验证后写入安全上下文的用户身份。
-     *
-     * <p>仅在 {@code JwtAuthenticationFilter} 的实现过程中使用，用不可变数据结构收拢中间结果，避免参数和值的含义混淆。</p>
-     */
     public record AuthenticatedUser(
             Long userId,
             String userCode,

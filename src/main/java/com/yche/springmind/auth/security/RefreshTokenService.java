@@ -15,11 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-/**
- * 管理刷新令牌的签发、哈希存储、轮换、撤销与过期校验。
- *
- * <p>位于认证安全边界：负责令牌、Cookie 或安全上下文处理，为业务服务提供可信的用户身份。</p>
- */
+/** Issue, look up, rotate, and revoke hashed refresh tokens. */
 @Service
 public class RefreshTokenService {
 
@@ -42,16 +38,6 @@ public class RefreshTokenService {
     private final Clock clock;
     private final SecureRandom secureRandom = new SecureRandom();
 
-    /**
-     * 创建并初始化 {@link RefreshTokenService}，保存该组件运行所需的依赖与配置。
-     * <p>
-     * 实现要点：使用安全哈希校验或保存密码。
-     *
-     * @param jdbcTemplate 方法参数 {@code jdbcTemplate}
-     * @param passwordHasher 方法参数 {@code passwordHasher}
-     * @param authProperties 方法参数 {@code authProperties}
-     * @param clock 用于生成可测试时间的时钟
-     */
     public RefreshTokenService(
             JdbcTemplate jdbcTemplate,
             PasswordHasher passwordHasher,
@@ -64,12 +50,7 @@ public class RefreshTokenService {
         this.clock = clock;
     }
 
-    /**
-     * 判断当前数据是否满足 {@code sueToken} 条件。
-     *
-     * @param userId 用户唯一标识
-     * @return 方法执行结果，具体结构由返回类型 {@code IssuedRefreshToken} 表示
-     */
+    /** Issue a random refresh token while persisting only its hash. */
     public IssuedRefreshToken issueToken(Long userId) {
         LocalDateTime now = LocalDateTime.now(clock);
         String tokenId = UUID.randomUUID().toString().replace("-", "");
@@ -91,14 +72,6 @@ public class RefreshTokenService {
         return new IssuedRefreshToken(refreshToken, findById(id).orElseThrow());
     }
 
-    /**
-     * 完成 {@code findActiveToken} 对应的处理。
-     * <p>
-     * 实现要点：读取数据库中的当前状态；使用安全哈希校验或保存密码。
-     *
-     * @param refreshToken 客户端提交的刷新令牌
-     * @return 可能存在的查询结果；不存在时返回空 {@code Optional}
-     */
     public Optional<RefreshTokenRecord> findActiveToken(String refreshToken) {
         Optional<ParsedRefreshToken> parsedToken = parseToken(refreshToken);
         if (parsedToken.isEmpty()) {
@@ -118,13 +91,7 @@ public class RefreshTokenService {
         return Optional.of(record);
     }
 
-    /**
-     * 完成 {@code revokeActiveTokens} 对应的处理。
-     * <p>
-     * 实现要点：持久化数据库状态变更。
-     *
-     * @param userId 用户唯一标识
-     */
+    /** Revoke every active refresh token for a user after a security-sensitive change. */
     public void revokeActiveTokens(Long userId) {
         LocalDateTime now = LocalDateTime.now(clock);
         jdbcTemplate.update(
@@ -141,13 +108,6 @@ public class RefreshTokenService {
         );
     }
 
-    /**
-     * 完成 {@code revokeToken} 对应的处理。
-     * <p>
-     * 实现要点：持久化数据库状态变更。
-     *
-     * @param refreshToken 客户端提交的刷新令牌
-     */
     public void revokeToken(String refreshToken) {
         Optional<RefreshTokenRecord> activeToken = findActiveToken(refreshToken);
         if (activeToken.isEmpty()) {
@@ -160,14 +120,6 @@ public class RefreshTokenService {
         );
     }
 
-    /**
-     * 完成 {@code countActiveTokens} 对应的处理。
-     * <p>
-     * 实现要点：读取数据库中的当前状态。
-     *
-     * @param userId 用户唯一标识
-     * @return 计算或处理得到的数值结果
-     */
     public long countActiveTokens(Long userId) {
         Long count = jdbcTemplate.queryForObject(
                 """
@@ -184,14 +136,6 @@ public class RefreshTokenService {
         return count == null ? 0 : count;
     }
 
-    /**
-     * 完成 {@code findById} 对应的处理。
-     * <p>
-     * 实现要点：读取数据库中的当前状态。
-     *
-     * @param id 方法参数 {@code id}
-     * @return 可能存在的查询结果；不存在时返回空 {@code Optional}
-     */
     private Optional<RefreshTokenRecord> findById(Long id) {
         List<RefreshTokenRecord> tokens = jdbcTemplate.query(
                 """
@@ -205,14 +149,6 @@ public class RefreshTokenService {
         return tokens.stream().findFirst();
     }
 
-    /**
-     * 完成 {@code findByTokenId} 对应的处理。
-     * <p>
-     * 实现要点：读取数据库中的当前状态。
-     *
-     * @param tokenId 令牌唯一标识
-     * @return 可能存在的查询结果；不存在时返回空 {@code Optional}
-     */
     private Optional<RefreshTokenRecord> findByTokenId(String tokenId) {
         List<RefreshTokenRecord> tokens = jdbcTemplate.query(
                 """
@@ -226,12 +162,6 @@ public class RefreshTokenService {
         return tokens.stream().findFirst();
     }
 
-    /**
-     * 完成 {@code parseToken} 对应的处理。
-     *
-     * @param refreshToken 客户端提交的刷新令牌
-     * @return 可能存在的查询结果；不存在时返回空 {@code Optional}
-     */
     private Optional<ParsedRefreshToken> parseToken(String refreshToken) {
         if (refreshToken == null || refreshToken.isBlank()) {
             return Optional.empty();
@@ -243,30 +173,15 @@ public class RefreshTokenService {
         return Optional.of(new ParsedRefreshToken(segments[0], segments[1]));
     }
 
-    /**
-     * 完成 {@code newTokenSecret} 对应的处理。
-     *
-     * @return 处理后得到的字符串结果
-     */
     private String newTokenSecret() {
         byte[] bytes = new byte[SECRET_BYTES];
         secureRandom.nextBytes(bytes);
         return Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
     }
 
-    /**
-     * 保存刷新令牌拆分得到的公开标识和待校验秘密值。
-     *
-     * <p>仅在 {@code RefreshTokenService} 的实现过程中使用，用不可变数据结构收拢中间结果，避免参数和值的含义混淆。</p>
-     */
     private record ParsedRefreshToken(String tokenId, String secret) {
     }
 
-    /**
-     * 同时返回客户端可用的刷新令牌和对应持久化记录。
-     *
-     * <p>仅在 {@code RefreshTokenService} 的实现过程中使用，用不可变数据结构收拢中间结果，避免参数和值的含义混淆。</p>
-     */
     public record IssuedRefreshToken(String refreshToken, RefreshTokenRecord record) {
     }
 }

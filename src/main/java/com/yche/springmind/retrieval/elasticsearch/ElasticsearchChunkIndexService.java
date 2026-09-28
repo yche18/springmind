@@ -24,11 +24,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * 管理文档切片的 Elasticsearch 索引、批量写入、删除和 BM25 关键词检索。
- *
- * <p>封装 Elasticsearch 关键词索引与检索细节，为混合检索提供 BM25 召回结果。</p>
- */
+/** Maintain and query the keyword-search index for ready document chunks. */
 @Service
 public class ElasticsearchChunkIndexService {
 
@@ -43,17 +39,6 @@ public class ElasticsearchChunkIndexService {
     private final String indexName;
     private volatile boolean indexInitialized;
 
-    /**
-     * 创建并初始化 {@link ElasticsearchChunkIndexService}，保存该组件运行所需的依赖与配置。
-     * <p>
-     * 实现要点：维护或查询 Elasticsearch 关键词索引。
-     *
-     * @param objectMapper 方法参数 {@code objectMapper}
-     * @param host 方法参数 {@code host}
-     * @param port 方法参数 {@code port}
-     * @param scheme 方法参数 {@code scheme}
-     * @param indexName 方法参数 {@code indexName}
-     */
     @Autowired
     public ElasticsearchChunkIndexService(
             ObjectMapper objectMapper,
@@ -74,16 +59,6 @@ public class ElasticsearchChunkIndexService {
         );
     }
 
-    /**
-     * 创建并初始化 {@link ElasticsearchChunkIndexService}，保存该组件运行所需的依赖与配置。
-     *
-     * @param objectMapper 方法参数 {@code objectMapper}
-     * @param httpClient 方法参数 {@code httpClient}
-     * @param host 方法参数 {@code host}
-     * @param port 方法参数 {@code port}
-     * @param scheme 方法参数 {@code scheme}
-     * @param indexName 方法参数 {@code indexName}
-     */
     ElasticsearchChunkIndexService(
             ObjectMapper objectMapper,
             HttpClient httpClient,
@@ -98,14 +73,6 @@ public class ElasticsearchChunkIndexService {
         this.indexName = indexName;
     }
 
-    /**
-     * 校验就绪切片后逐条写入 Elasticsearch 关键词索引。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param fileName 原始文件名
-     * @param chunks 待处理的文档切片集合
-     */
     public void indexReadyChunks(String fileName, List<DocumentChunkEntity> chunks) {
         if (!StringUtils.hasText(fileName) || chunks == null || chunks.isEmpty()) {
             return;
@@ -116,13 +83,6 @@ public class ElasticsearchChunkIndexService {
         }
     }
 
-    /**
-     * 按文档标识删除 Elasticsearch 中的全部切片；索引不可用时记录告警而不阻断主流程。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界；捕获依赖异常并转换、记录或执行降级策略。
-     *
-     * @param documentId 文档唯一标识
-     */
     public void deleteDocumentChunks(Long documentId) {
         if (documentId == null || documentId <= 0) {
             return;
@@ -140,16 +100,7 @@ public class ElasticsearchChunkIndexService {
         }
     }
 
-    /**
-     * 在限定群组范围内执行关键词检索，并返回归一化后的候选切片。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界；捕获依赖异常并转换、记录或执行降级策略。
-     *
-     * @param groupId 群组唯一标识
-     * @param question 用户提交的自然语言问题
-     * @param topK 最多返回的候选结果数量
-     * @return 符合条件的结果集合；无结果时返回空集合
-     */
+    /** Search only within one group and return normalized keyword hits in rank order. */
     public List<KeywordHit> search(Long groupId, String question, int topK) {
         if (groupId == null || groupId <= 0 || !StringUtils.hasText(question) || topK <= 0) {
             return List.of();
@@ -188,14 +139,6 @@ public class ElasticsearchChunkIndexService {
         }
     }
 
-    /**
-     * 完成 {@code indexChunk} 对应的处理。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param fileName 原始文件名
-     * @param chunk 方法参数 {@code chunk}
-     */
     private void indexChunk(String fileName, DocumentChunkEntity chunk) {
         validateChunk(chunk);
         Map<String, Object> requestBody = new LinkedHashMap<>();
@@ -215,14 +158,6 @@ public class ElasticsearchChunkIndexService {
         );
     }
 
-    /**
-     * 完成 {@code validateChunk} 对应的处理。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param chunk 方法参数 {@code chunk}
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private void validateChunk(DocumentChunkEntity chunk) {
         if (chunk == null
                 || chunk.getId() == null
@@ -234,11 +169,6 @@ public class ElasticsearchChunkIndexService {
         }
     }
 
-    /**
-     * 以线程安全方式检查并初始化 Elasticsearch 索引、分词器和字段映射。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     */
     private void ensureIndexInitialized() {
         if (indexInitialized) {
             return;
@@ -254,14 +184,6 @@ public class ElasticsearchChunkIndexService {
         }
     }
 
-    /**
-     * 完成 {@code indexExists} 对应的处理。
-     * <p>
-     * 实现要点：捕获依赖异常并转换、记录或执行降级策略。
-     *
-     * @return 满足条件时返回 {@code true}，否则返回 {@code false}
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private boolean indexExists() {
         try {
             HttpRequest request = HttpRequest.newBuilder()
@@ -286,19 +208,11 @@ public class ElasticsearchChunkIndexService {
         }
     }
 
-    /**
-     * 完成 {@code createIndex} 对应的处理。
-     */
     private void createIndex() {
         sendJsonRequest("PUT", "/%s".formatted(indexName), buildCreateIndexRequestBody(), false);
         log.info("ES 索引初始化完成: {}", indexName);
     }
 
-    /**
-     * 完成 {@code buildCreateIndexRequestBody} 对应的处理。
-     *
-     * @return 方法执行结果，具体结构由返回类型 {@code Map&lt;String, Object&gt;} 表示
-     */
     Map<String, Object> buildCreateIndexRequestBody() {
         return Map.of(
                 "settings", Map.of(
@@ -344,14 +258,6 @@ public class ElasticsearchChunkIndexService {
         );
     }
 
-    /**
-     * 完成 {@code buildKeywordSearchRequestBody} 对应的处理。
-     *
-     * @param groupId 群组唯一标识
-     * @param question 用户提交的自然语言问题
-     * @param topK 最多返回的候选结果数量
-     * @return 方法执行结果，具体结构由返回类型 {@code Map&lt;String, Object&gt;} 表示
-     */
     Map<String, Object> buildKeywordSearchRequestBody(Long groupId, String question, int topK) {
         Map<String, Object> boolQuery = Map.of(
                 "filter", List.of(
@@ -383,12 +289,6 @@ public class ElasticsearchChunkIndexService {
         );
     }
 
-    /**
-     * 完成 {@code buildKeywordShouldClauses} 对应的处理。
-     *
-     * @param question 用户提交的自然语言问题
-     * @return 符合条件的结果集合；无结果时返回空集合
-     */
     private List<Map<String, Object>> buildKeywordShouldClauses(String question) {
         return List.of(
                 Map.of("match_phrase", Map.of("fileName", Map.of("query", question, "boost", 8))),
@@ -398,12 +298,6 @@ public class ElasticsearchChunkIndexService {
         );
     }
 
-    /**
-     * 完成 {@code buildKeywordRescoreShouldClauses} 对应的处理。
-     *
-     * @param question 用户提交的自然语言问题
-     * @return 符合条件的结果集合；无结果时返回空集合
-     */
     private List<Map<String, Object>> buildKeywordRescoreShouldClauses(String question) {
         return List.of(
                 Map.of("match_phrase", Map.of("fileName", Map.of("query", question, "boost", 8))),
@@ -413,18 +307,6 @@ public class ElasticsearchChunkIndexService {
         );
     }
 
-    /**
-     * 完成 {@code sendJsonRequest} 对应的处理。
-     * <p>
-     * 实现要点：捕获依赖异常并转换、记录或执行降级策略。
-     *
-     * @param method 方法参数 {@code method}
-     * @param path 方法参数 {@code path}
-     * @param requestBody 方法参数 {@code requestBody}
-     * @param ignoreMissingIndex 方法参数 {@code ignoreMissingIndex}
-     * @return 方法执行结果，具体结构由返回类型 {@code JsonNode} 表示
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private JsonNode sendJsonRequest(
             String method,
             String path,
@@ -456,14 +338,6 @@ public class ElasticsearchChunkIndexService {
         }
     }
 
-    /**
-     * 完成 {@code abbreviate} 对应的处理。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param text 方法参数 {@code text}
-     * @return 处理后得到的字符串结果
-     */
     private String abbreviate(String text) {
         if (!StringUtils.hasText(text)) {
             return "";
@@ -472,14 +346,6 @@ public class ElasticsearchChunkIndexService {
         return normalized.length() <= 120 ? normalized : normalized.substring(0, 120) + "...";
     }
 
-    /**
-     * 完成 {@code normalizeKeywordScore} 对应的处理。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param rawScore 方法参数 {@code rawScore}
-     * @return 计算或处理得到的数值结果
-     */
     private double normalizeKeywordScore(double rawScore) {
         if (rawScore <= 0D) {
             return 0D;
@@ -487,11 +353,6 @@ public class ElasticsearchChunkIndexService {
         return Math.min(1D, Math.log1p(rawScore) / Math.log1p(KEYWORD_SCORE_REFERENCE));
     }
 
-    /**
-     * 表示一次 BM25 关键词召回命中的切片及其相关性分数。
-     *
-     * <p>仅在 {@code ElasticsearchChunkIndexService} 的实现过程中使用，用不可变数据结构收拢中间结果，避免参数和值的含义混淆。</p>
-     */
     public record KeywordHit(
             Long documentId,
             Long chunkId,

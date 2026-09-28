@@ -23,11 +23,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-/**
- * 将文档切片写入 pgvector，并在重建或失败时维护旧向量数据的一致性。
- *
- * <p>位于向量入库阶段：把文档切片转换为向量并写入向量存储，同时维护索引一致性。</p>
- */
+/** Keep vector-store entries synchronized with persisted document chunks. */
 @Service
 public class VectorIngestionService {
 
@@ -39,14 +35,6 @@ public class VectorIngestionService {
     private final int addBatchSize;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    /**
-     * 创建并初始化 {@link VectorIngestionService}，保存该组件运行所需的依赖与配置。
-     * <p>
-     * 实现要点：写入或查询 pgvector 向量索引；先校验输入、状态或业务边界。
-     *
-     * @param vectorStore 方法参数 {@code vectorStore}
-     * @param addBatchSize 方法参数 {@code addBatchSize}
-     */
     @Autowired
     public VectorIngestionService(
             VectorStore vectorStore,
@@ -57,23 +45,12 @@ public class VectorIngestionService {
         this.addBatchSize = normalizeBatchSize(addBatchSize);
     }
 
-    // 保留单测和手工构造入口，生产环境走带配置的构造器。
-    /**
-     * 创建并初始化 {@link VectorIngestionService}，保存该组件运行所需的依赖与配置。
-     * <p>
-     * 实现要点：写入或查询 pgvector 向量索引。
-     *
-     * @param vectorStore 方法参数 {@code vectorStore}
-     */
+    // Kept for tests and manual construction; production uses the configuration-aware constructor.
     public VectorIngestionService(VectorStore vectorStore) {
         this(vectorStore, DEFAULT_ADD_BATCH_SIZE);
     }
 
-    /**
-     * 完成 {@code ingestChunks} 对应的处理。
-     *
-     * @param chunks 待处理的文档切片集合
-     */
+    /** Replace vectors for the affected documents before writing the new chunks in bounded batches. */
     public void ingestChunks(List<DocumentChunkEntity> chunks) {
         if (chunks == null || chunks.isEmpty()) {
             return;
@@ -85,13 +62,6 @@ public class VectorIngestionService {
         log.info("向量写入结束: chunkCount={}", documents.size());
     }
 
-    /**
-     * 完成 {@code deleteDocumentVectors} 对应的处理。
-     * <p>
-     * 实现要点：写入或查询 pgvector 向量索引；持久化数据库状态变更。
-     *
-     * @param documentId 文档唯一标识
-     */
     public void deleteDocumentVectors(Long documentId) {
         if (documentId == null || documentId <= 0) {
             return;
@@ -101,13 +71,7 @@ public class VectorIngestionService {
         log.info("文档向量删除完成: documentId={}", documentId);
     }
 
-    /**
-     * 完成 {@code embedAndStore} 对应的处理。
-     * <p>
-     * 实现要点：写入或查询 pgvector 向量索引。
-     *
-     * @param documents 方法参数 {@code documents}
-     */
+    /** Embed and store documents in batches sized to protect the local embedding service. */
     public void embedAndStore(List<Document> documents) {
         if (CollectionUtils.isEmpty(documents)) {
             return;
@@ -119,26 +83,10 @@ public class VectorIngestionService {
         }
     }
 
-    /**
-     * 完成 {@code normalizeBatchSize} 对应的处理。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param configuredBatchSize 方法参数 {@code configuredBatchSize}
-     * @return 计算或处理得到的数值结果
-     */
     private int normalizeBatchSize(int configuredBatchSize) {
         return configuredBatchSize > 0 ? configuredBatchSize : DEFAULT_ADD_BATCH_SIZE;
     }
 
-    /**
-     * 完成 {@code toVectorDocument} 对应的处理。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param chunk 方法参数 {@code chunk}
-     * @return 方法执行结果，具体结构由返回类型 {@code Document} 表示
-     */
     private Document toVectorDocument(DocumentChunkEntity chunk) {
         validateChunk(chunk);
         Map<String, Object> metadata = new LinkedHashMap<>();
@@ -154,13 +102,6 @@ public class VectorIngestionService {
                 .build();
     }
 
-    /**
-     * 完成 {@code deleteExistingVectors} 对应的处理。
-     * <p>
-     * 实现要点：写入或查询 pgvector 向量索引；持久化数据库状态变更。
-     *
-     * @param documentIds 文档标识集合
-     */
     private void deleteExistingVectors(Set<Long> documentIds) {
         FilterExpressionBuilder builder = new FilterExpressionBuilder();
         for (Long documentId : documentIds) {
@@ -169,14 +110,6 @@ public class VectorIngestionService {
         }
     }
 
-    /**
-     * 完成 {@code extractDocumentIds} 对应的处理。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param chunks 待处理的文档切片集合
-     * @return 符合条件的结果集合；无结果时返回空集合
-     */
     private Set<Long> extractDocumentIds(List<DocumentChunkEntity> chunks) {
         Set<Long> documentIds = new LinkedHashSet<>();
         for (DocumentChunkEntity chunk : chunks) {
@@ -186,25 +119,11 @@ public class VectorIngestionService {
         return documentIds;
     }
 
-    /**
-     * 完成 {@code buildStableDocumentId} 对应的处理。
-     *
-     * @param chunk 方法参数 {@code chunk}
-     * @return 处理后得到的字符串结果
-     */
     private String buildStableDocumentId(DocumentChunkEntity chunk) {
         String rawId = chunk.getDocumentId() + ":" + chunk.getChunkIndex();
         return UUID.nameUUIDFromBytes(rawId.getBytes(StandardCharsets.UTF_8)).toString();
     }
 
-    /**
-     * 完成 {@code validateChunk} 对应的处理。
-     * <p>
-     * 实现要点：先校验输入、状态或业务边界。
-     *
-     * @param chunk 方法参数 {@code chunk}
-     * @throws BusinessException 当输入、状态或依赖不满足方法约束时抛出
-     */
     private void validateChunk(DocumentChunkEntity chunk) {
         if (chunk == null || chunk.getId() == null) {
             throw new BusinessException("向量写入前必须先完成 chunk 落库");
@@ -217,14 +136,6 @@ public class VectorIngestionService {
         }
     }
 
-    /**
-     * 完成 {@code extractOptionalMetadata} 对应的处理。
-     * <p>
-     * 实现要点：捕获依赖异常并转换、记录或执行降级策略。
-     *
-     * @param metadataJson 方法参数 {@code metadataJson}
-     * @return 方法执行结果，具体结构由返回类型 {@code Map&lt;String, Object&gt;} 表示
-     */
     private Map<String, Object> extractOptionalMetadata(String metadataJson) {
         if (metadataJson == null || metadataJson.isBlank()) {
             return Map.of();
@@ -243,12 +154,6 @@ public class VectorIngestionService {
         }
     }
 
-    /**
-     * 完成 {@code readLegacyCompatibleFileName} 对应的处理。
-     *
-     * @param sourceMetadata 方法参数 {@code sourceMetadata}
-     * @return 处理后得到的字符串结果
-     */
     private String readLegacyCompatibleFileName(Map<String, Object> sourceMetadata) {
         Object fileName = sourceMetadata.get("fileName");
         if (fileName instanceof String text && !text.isBlank()) {

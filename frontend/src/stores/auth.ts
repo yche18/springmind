@@ -86,7 +86,7 @@ export const useAuthStore = defineStore('auth', {
       try {
         await logoutRequest()
       } catch {
-        // 远端退出失败时仍清理本地会话，避免界面残留登录态。
+        // Clear local state even if remote logout fails so the UI cannot retain a stale session.
       } finally {
         this.clearSession()
       }
