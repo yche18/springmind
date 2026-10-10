@@ -17,6 +17,7 @@ The platform provides an end-to-end workflow covering document ingestion, hybrid
 - Traceable citations: answers include source metadata such as document name, document ID, chunk position, and retrieval score.
 - Answer diagnostics: expand the answer details to inspect planned queries, retrieval timings, selected evidence, and permission-checked source passages. [Trace contract](docs/answer-traces.md).
 - Executable quality gates: harness tests enforce core business rules for authentication, group permissions, document lifecycle management, and Q&A retrieval.
+- Repeatable rerank evaluation: fixed-candidate replay with ranking metrics, fallback counts and opt-in provider latency measurements. Includes 30 synthetic bilingual examples, not a production benchmark. [Evaluation guide](evaluation/rerank/README.md).
 
 ## How It Works
 
