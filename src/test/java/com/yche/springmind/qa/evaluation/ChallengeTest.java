@@ -27,4 +27,21 @@ class ChallengeTest {
         assertThat(ChallengeData.coverage(q, List.of("d77--c000"), ChallengeData.corpus())).isEqualTo(1);
         assertThat(ChallengeData.coverage(q, List.of("d79--c000"), ChallengeData.corpus())).isEqualTo(1);
     }
+
+    @Test
+    void unionIsDeduplicatedAndTracksComplementaryEvidenceAndCappingLoss() throws Exception {
+        var q = ChallengeData.fixture().cases().stream().filter(value -> value.id().equals("c27")).findFirst().orElseThrow();
+        var corpus = ChallengeData.corpus();
+        var union = ChallengeEvaluation.union(q, List.of("d84--c000", "d86--c000"), List.of("d85--c000", "d86--c000"),
+                List.of("d84--c000", "d86--c000"), 25, corpus);
+        assertThat(union.size()).isEqualTo(3);
+        assertThat(union.recall()).isEqualTo(1);
+        assertThat(union.factCoverage()).isEqualTo(1);
+        assertThat(union.vectorExclusiveRelevant()).containsExactly("d84--c000");
+        assertThat(union.keywordExclusiveRelevant()).containsExactly("d85--c000");
+        assertThat(union.lostAtRrf30()).containsExactly("d85--c000");
+        var reversed = ChallengeEvaluation.union(q, List.of("d86--c000", "d84--c000"), List.of("d86--c000", "d85--c000"),
+                List.of("d84--c000", "d86--c000"), 25, corpus);
+        assertThat(reversed).isEqualTo(union);
+    }
 }
