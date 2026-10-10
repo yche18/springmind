@@ -15,6 +15,7 @@ The platform provides an end-to-end workflow covering document ingestion, hybrid
 - Query planning: the model chooses whether to search directly, rewrite the query, or decompose it; planning failures fall back to the original question without interrupting the Q&A flow.
 - Evidence-constrained answers: retrieved evidence is graded as `NONE / WEAK / PARTIAL / SUFFICIENT`, and the model is restricted to answering from that evidence.
 - Traceable citations: answers include source metadata such as document name, document ID, chunk position, and retrieval score.
+- Answer diagnostics: expand the answer details to inspect planned queries, retrieval timings, selected evidence, and permission-checked source passages. [Trace contract](docs/answer-traces.md).
 - Executable quality gates: harness tests enforce core business rules for authentication, group permissions, document lifecycle management, and Q&A retrieval.
 
 ## How It Works

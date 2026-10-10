@@ -5,6 +5,7 @@ import com.yche.springmind.ingestion.mapper.DocumentChunkMapper;
 import com.yche.springmind.ingestion.model.entity.DocumentChunkEntity;
 import com.yche.springmind.qa.model.EvidenceLevel;
 import com.yche.springmind.qa.model.QueryPlanResult;
+import com.yche.springmind.qa.model.vo.RetrievalTrace;
 import com.yche.springmind.qa.service.QueryPlanningService;
 import com.yche.springmind.retrieval.elasticsearch.ElasticsearchChunkIndexService;
 import com.yche.springmind.retrieval.vectorstore.PgVectorRetrievalAdapter;
@@ -82,16 +83,30 @@ public class HybridEvidenceRetriever implements EvidenceRetriever {
         Long validGroupId = requirePositiveGroupId(groupId);
         String normalizedQuestion = requireQuestion(question);
         int validTopK = topK > 0 ? topK : EvidenceRetriever.DEFAULT_TOP_K;
+        long start = System.nanoTime();
         QueryPlanResult queryPlan = queryPlanningService.plan(userId, normalizedQuestion);
+        Map<String, Long> timings = new LinkedHashMap<>();
+        timings.put("planning", elapsedMs(start));
         Map<Long, RetrievalCandidate> candidates = new LinkedHashMap<>();
+        int vectorHits = 0;
+        int keywordHits = 0;
+        long vectorNanos = 0;
+        long keywordNanos = 0;
 
         for (String plannedQuery : queryPlan.queries()) {
-            mergeVectorHits(candidates, validGroupId, plannedQuery);
-            mergeKeywordHits(candidates, validGroupId, plannedQuery);
+            long channelStart = System.nanoTime();
+            vectorHits += mergeVectorHits(candidates, validGroupId, plannedQuery);
+            vectorNanos += System.nanoTime() - channelStart;
+            channelStart = System.nanoTime();
+            keywordHits += mergeKeywordHits(candidates, validGroupId, plannedQuery);
+            keywordNanos += System.nanoTime() - channelStart;
         }
+        timings.put("vector", vectorNanos / 1_000_000);
+        timings.put("keyword", keywordNanos / 1_000_000);
+        long assemblyStart = System.nanoTime();
 
         if (candidates.isEmpty()) {
-            return RetrievedEvidenceBundle.empty();
+            return tracedBundle(List.of(), queryPlan, timings, vectorHits, keywordHits, 0, assemblyStart);
         }
 
         List<RetrievalCandidate> rankedCandidates = candidates.values().stream()
@@ -121,14 +136,22 @@ public class HybridEvidenceRetriever implements EvidenceRetriever {
             documents.add(document);
             evidenceIndex++;
         }
-        if (documents.isEmpty()) {
-            return RetrievedEvidenceBundle.empty();
-        }
-        EvidenceLevel evidenceLevel = evaluateEvidenceLevel(documents);
-        return new RetrievedEvidenceBundle(documents, evidenceLevel, buildEvidenceGuidance(evidenceLevel));
+        return tracedBundle(documents, queryPlan, timings, vectorHits, keywordHits, candidates.size(), assemblyStart);
     }
 
-    private void mergeVectorHits(
+    private RetrievedEvidenceBundle tracedBundle(List<Document> documents, QueryPlanResult queryPlan,
+            Map<String, Long> timings, int vectorHits, int keywordHits, int candidates, long assemblyStart) {
+        timings.put("assembly", elapsedMs(assemblyStart));
+        EvidenceLevel evidenceLevel = evaluateEvidenceLevel(documents);
+        return new RetrievedEvidenceBundle(documents, evidenceLevel, buildEvidenceGuidance(evidenceLevel),
+                new RetrievalTrace(queryPlan, timings, vectorHits, keywordHits, candidates));
+    }
+
+    private static long elapsedMs(long start) {
+        return (System.nanoTime() - start) / 1_000_000;
+    }
+
+    private int mergeVectorHits(
             Map<Long, RetrievalCandidate> candidates,
             Long groupId,
             String query
@@ -142,9 +165,10 @@ public class HybridEvidenceRetriever implements EvidenceRetriever {
             );
             candidate.mergeVectorHit(hit, index + 1);
         }
+        return vectorHits.size();
     }
 
-    private void mergeKeywordHits(
+    private int mergeKeywordHits(
             Map<Long, RetrievalCandidate> candidates,
             Long groupId,
             String query
@@ -159,6 +183,7 @@ public class HybridEvidenceRetriever implements EvidenceRetriever {
             );
             candidate.mergeKeywordHit(hit, index + 1);
         }
+        return keywordHits.size();
     }
 
     private Map<Long, Map<String, Object>> indexRows(List<Map<String, Object>> rows) {

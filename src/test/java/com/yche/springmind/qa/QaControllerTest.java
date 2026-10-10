@@ -125,6 +125,17 @@ class QaControllerTest {
     }
 
     @Test
+    void shouldRejectEvidenceReadForNonMember() throws Exception {
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get("/api/qa/evidence")
+                        .param("groupId", "2002").param("documentId", "3001")
+                        .param("start", "0").param("end", "1")
+                        .header(HttpHeaders.AUTHORIZATION, bearerToken(1001L, "u1001")))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("当前用户不是目标群组成员"));
+        verifyNoInteractions(evidenceRetriever, chatModel);
+    }
+
+    @Test
     void shouldAllowMemberToAskWithinReadableGroup() throws Exception {
         given(evidenceRetriever.retrieve(1002L, 2001L, "产品迭代周期多久？"))
                 .willReturn(RetrievedEvidenceBundle.empty());

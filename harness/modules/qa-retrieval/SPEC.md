@@ -12,6 +12,8 @@ Protects group-scoped retrieval, query planning, evidence assembly, answer parsi
 - Hybrid retrieval must merge vector and keyword results deterministically.
 - Answer parsing must handle invalid model output explicitly.
 - Citations must be assembled from retrieved evidence, not invented answer text.
+- Answer traces contain only the current request's retrieved evidence and stage timings.
+- Source passage reads recheck group membership and filter out deleted/unready documents.
 
 ## Gate Status
 

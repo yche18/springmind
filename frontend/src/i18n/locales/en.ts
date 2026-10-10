@@ -1,4 +1,17 @@
 export default {
+  trace: {
+    title: 'How this answer was produced', note: 'These are the retrieved sources, not the model’s private reasoning. Scores are ranking signals, not confidence percentages.',
+    evidenceLevel: 'Evidence coverage', retrieval: 'Retrieval', generation: 'Answer generation', total: 'Total',
+    queries: 'Search queries', hits: 'Vector hits: {vector} · Keyword hits: {keyword} · Unique candidates: {candidates}',
+    noEvidence: 'No ready evidence was found. The answer model was not called.', score: 'RRF score',
+    range: 'Source chunks {start}–{end}', chunk: 'Chunk {index}', openSource: 'View source passages', loading: 'Loading…',
+    sourceError: 'Unable to load source passages. Check your access and try again.',
+    sourceUnavailable: 'This source is no longer available or ready.', requestId: 'Request ID',
+    levels: { NONE: 'None', WEAK: 'Limited', PARTIAL: 'Partial', SUFFICIENT: 'Sufficient' },
+    strategies: { DIRECT: 'Direct', REWRITE: 'Rewritten', DECOMPOSE: 'Decomposed' },
+    sources: { VECTOR: 'Semantic retrieval', KEYWORD: 'Keyword retrieval', BOTH: 'Both retrieval channels', UNKNOWN: 'Retrieved evidence' },
+    stages: { planning: 'Query planning', vector: 'Semantic search', keyword: 'Keyword search', assembly: 'Evidence assembly' },
+  },
   common: {
     appName: 'SpringMind',
     cancel: 'Cancel',

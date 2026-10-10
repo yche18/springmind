@@ -66,6 +66,24 @@ class FlywayMigrationTest {
     @Autowired
     private ApplicationEventPublisher events;
 
+    @Autowired
+    private com.yche.springmind.ingestion.mapper.DocumentChunkMapper chunkMapper;
+
+    @Test
+    void evidenceWindowMustRespectGroupReadyStateDeletionAndBounds() {
+        seedDocument(5201L, 2501L, 2502L, 3401L);
+        insertChunk(5201L, 2501L, 0);
+        insertChunk(5201L, 2501L, 1);
+        assertThat(chunkMapper.selectEvidenceWindow(2501L, 5201L, 0, 1)).isEmpty();
+        jdbcTemplate.update("update documents set status = 'READY' where id = 5201");
+        assertThat(chunkMapper.selectEvidenceWindow(2501L, 5201L, 1, 1))
+                .extracting(com.yche.springmind.ingestion.model.entity.DocumentChunkEntity::getChunkText)
+                .containsExactly("chunk-1");
+        assertThat(chunkMapper.selectEvidenceWindow(2502L, 5201L, 0, 1)).isEmpty();
+        jdbcTemplate.update("update documents set deleted = true where id = 5201");
+        assertThat(chunkMapper.selectEvidenceWindow(2501L, 5201L, 0, 1)).isEmpty();
+    }
+
     @DynamicPropertySource
     static void registerDatasourceProperties(DynamicPropertyRegistry registry) {
         createDatabase(TEST_DATABASE);

@@ -10,8 +10,18 @@ public record AskQuestionResponse(
         String answer,
         String reasonCode,
         String reasonMessage,
-        List<Citation> citations
+        List<Citation> citations,
+        AnswerTrace trace
 ) {
+
+    public AskQuestionResponse(boolean answered, String answer, String reasonCode, String reasonMessage,
+                               List<Citation> citations) {
+        this(answered, answer, reasonCode, reasonMessage, citations, null);
+    }
+
+    public AskQuestionResponse withTrace(AnswerTrace trace) {
+        return new AskQuestionResponse(answered, answer, reasonCode, reasonMessage, citations, trace);
+    }
 
     public static AskQuestionResponse answered(String answer, List<Citation> citations) {
         return new AskQuestionResponse(true, answer, null, null, citations);

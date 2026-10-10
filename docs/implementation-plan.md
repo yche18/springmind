@@ -21,3 +21,5 @@ Cross-language model migration is a separate follow-up.
 
 - Stage 1: Java 21; 24 tests passed, including 9 PostgreSQL migration/queue tests.
   Temporary test database removed by the suite. External model/index calls mocked.
+- Stage 2: Java 21 QA tests, QA/document harnesses and PostgreSQL source filtering
+  passed. Frontend TypeScript check and production build passed.
