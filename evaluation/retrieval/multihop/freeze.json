@@ -1,0 +1,22 @@
+{
+  "chunks" : 26110,
+  "frozenAt" : "2026-10-10T22:57:22.538079100Z",
+  "documents" : 609,
+  "hashes" : {
+    "evaluation/retrieval/multihop/README.md" : "4c5f068e1907c0a0386d08028d0b6674083f2fb18f195d09a6b9c15a1199558c",
+    "evaluation/retrieval/multihop/sample.json" : "42aec15217fa65f11dc694b305603040b2a9b95a818c440d7bd7312007b9671c",
+    "evaluation/retrieval/multilingual-embedding/model-lock.json" : "8729bd75d98141f464761c529f0a989ca5c8d92ed780180d3f74fb0462d3806e",
+    "src/main/java/com/yche/springmind/ingestion/transformer/ChunkingProperties.java" : "f044bd35afa5a3174157fb9275a8d8986d794a646a0f8b6910a1dbf0fe4293f7",
+    "src/main/java/com/yche/springmind/ingestion/transformer/StructureAwareChunkTransformer.java" : "4a5c7743a409b207772617e3c85fab6546924e37803f2fb086b5ff2e305c70d1",
+    "src/main/java/com/yche/springmind/qa/rag/EvidenceSelector.java" : "53fd766eb2a89872c9e3a372681c541346b28b833ae101470399cfb78bb7f739",
+    "src/main/java/com/yche/springmind/qa/rag/HybridEvidenceRetriever.java" : "591766883db6bb416b648c9eb1e7de76856ce944372d8e931286ff5258d36f55",
+    "src/main/java/com/yche/springmind/retrieval/elasticsearch/ElasticsearchChunkIndexService.java" : "e2a3ce7110ed4c9bdfc36a4f79537af9e2005f91ababa76186b08b5a4b7b835c",
+    "src/main/resources/application-dev.yml" : "767d21f73d9dbb0d2b0fd854b3759a1b1c15c113cd6e0a35efe4854b6a1cfa63",
+    "src/test/java/com/yche/springmind/qa/evaluation/MultiHopData.java" : "e32e6ef3703608024f0fa2568861790e384fa38ffbf7bdf05586a37b0bc7a43e",
+    "target/multihop-downloads/MultiHopRAG.json" : "03cfb4926461f868684903aadc8024447bdda5bb3f6804741424cce338515bff",
+    "target/multihop-downloads/README.md" : "f671db44cf1802f359451e466d82c68c5059d58451b8976ce8329b74d8b89001",
+    "target/multihop-downloads/corpus.json" : "20b61b5ab84de84a927420c5d265b7ec8d859ae49980699958a787ade9e4d28f"
+  },
+  "chunksSha256" : "9df4fa20efc9d9358da27ed06cfa737982befa53bfd69e51711e33cae79573e2",
+  "sourceRevision" : "71ac0d0bd1f951d2d6b70311f7d2ae404e1ffa82"
+}

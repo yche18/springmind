@@ -1,0 +1,1206 @@
+{
+  "revision" : "71ac0d0bd1f951d2d6b70311f7d2ae404e1ffa82",
+  "annotationStatus" : "OFFICIAL_REFERENCE_PENDING_LOCAL_REVIEW",
+  "questions" : [ {
+    "id" : "m1436",
+    "sourceRow" : 1436,
+    "split" : "FORMAL",
+    "type" : "inference_query",
+    "query" : "Which company is at the center of antitrust cases reported by TechCrunch for both spending billions to secure default search engine status on various platforms and for harming news publishers' bottom lines by siphoning off their content, readers, and ad revenue?",
+    "answer" : "Google",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 238,
+      "quote" : "Monday’s trial hearing revealed plenty of juicy tidbits, including the $26.3 billion Google spent making itself the default search engine across platforms in 2021, how Google tried to take it further and have Chrome preinstalled on iPhones and more.",
+      "alternatives" : [ [ 11297 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 34,
+      "quote" : "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means.",
+      "alternatives" : [ [ 1143, 1144 ] ]
+    } ]
+  }, {
+    "id" : "m2521",
+    "sourceRow" : 2521,
+    "split" : "FORMAL",
+    "type" : "inference_query",
+    "query" : "Considering the information provided by TechCrunch that Meta's advertising subscription model may conflict with GDPR regulations and the separate issue of Palestinian users experiencing frustration with Meta's moderation practices, what is the name of the company that is facing both legal scrutiny in Europe and allegations of biased moderation?",
+    "answer" : "Meta",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 141,
+      "quote" : "“The company’s approach also raises concerns regarding the GDPR,” Pachl further noted.",
+      "alternatives" : [ [ 6731 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 107,
+      "quote" : "Al Saadi said that her frustration with Meta is common among Palestinians, both in occupied territories and across the diaspora.",
+      "alternatives" : [ [ 5122 ] ]
+    } ]
+  }, {
+    "id" : "m2314",
+    "sourceRow" : 2314,
+    "split" : "FORMAL",
+    "type" : "inference_query",
+    "query" : "Who is the individual that, prior to the downfall of a major crypto exchange, was portrayed as a reliable figure in the cryptocurrency sector, but is now accused by prosecutors of achieving prominence and financial success through deceptive practices, as reported by Fortune, The Verge, and TechCrunch?",
+    "answer" : "Sam Bankman-Fried",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 32,
+      "quote" : "But “all of that, all of it, was built on lies,” Rehn declared to the jury.",
+      "alternatives" : [ [ 1094 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 176,
+      "quote" : "Before his fall, Bankman-Fried made himself out to be the Good Boy of crypto — the trustworthy face of a sometimes-shady industry.",
+      "alternatives" : [ [ 8402 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 12,
+      "quote" : "The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.",
+      "alternatives" : [ [ 412, 413 ] ]
+    } ]
+  }, {
+    "id" : "m0252",
+    "sourceRow" : 252,
+    "split" : "FORMAL",
+    "type" : "inference_query",
+    "query" : "Who is the individual implicated in decisions involving the misuse of $1 billion of customer funds for a buyout and $14 billion for debt repayment as reported by The Verge and TechCrunch, and is also facing allegations of committing fraud for personal gain according to another TechCrunch article?",
+    "answer" : "Sam Bankman-Fried",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 87,
+      "quote" : "It was Bankman-Fried’s decision, she said, as he was the CEO of FTX.",
+      "alternatives" : [ [ 4052 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 10,
+      "quote" : "The second week of the trial’s standout testimony came from Alameda Research’s former CEO Caroline Ellison, who claimed she took $14 billion from customers to repay debts to lenders, using them as a line of credit under the instruction of SBF.",
+      "alternatives" : [ [ 346 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 12,
+      "quote" : "The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.",
+      "alternatives" : [ [ 412, 413 ] ]
+    } ]
+  }, {
+    "id" : "m0097",
+    "sourceRow" : 97,
+    "split" : "FORMAL",
+    "type" : "inference_query",
+    "query" : "Which company, according to articles from TechCrunch and The Age, has not only invested billions to remain the default search engine on various devices but is also accused of manipulating search results for ad revenue and harming news publishers' revenues through anticompetitive practices?",
+    "answer" : "Google",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 238,
+      "quote" : "When Google’s search head Prabhakar Raghavan testified in court on October 28, he revealed that the tech giant had paid $26.3 billion in 2021 to multiple browsers, phones and platforms, from companies including Apple, Samsung and Mozilla, The Verge reports.",
+      "alternatives" : [ [ 11299 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 33,
+      "quote" : "She admits that she may have misinterpreted the evidence, but maintains that Google manipulates Search to maximise ad revenue.",
+      "alternatives" : [ [ 1130 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 34,
+      "quote" : "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means.",
+      "alternatives" : [ [ 1143, 1144 ] ]
+    } ]
+  }, {
+    "id" : "m1594",
+    "sourceRow" : 1594,
+    "split" : "FORMAL",
+    "type" : "inference_query",
+    "query" : "Which company, defended in court for being the only viable option for search engine services according to Eddy Cue, also held an annual hardware event showcasing new developments and is accused of harming news publishers' revenue through anticompetitive practices, as reported by The Verge and TechCrunch?",
+    "answer" : "Apple",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 15,
+      "quote" : "“Certainly there wasn’t a valid alternative to Google at the time,” Cue said.",
+      "alternatives" : [ [ 473 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 12,
+      "quote" : "Google unveils new hardware: This week was Google’s annual hardware event, where the search and consumer tech giant showed off what it’s been working on.",
+      "alternatives" : [ [ 389 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 34,
+      "quote" : "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means.",
+      "alternatives" : [ [ 1143, 1144 ] ]
+    } ]
+  }, {
+    "id" : "m2302",
+    "sourceRow" : 2302,
+    "split" : "FORMAL",
+    "type" : "inference_query",
+    "query" : "Who became a notable figure in generative AI for impacting public awareness through ChatGPT, is supporting a teen's AI startup, and is at the center of theories suggesting a lack of full transparency with the board, as reported by Fortune and TechCrunch?",
+    "answer" : "Sam Altman",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 333,
+      "quote" : "But it was ChatGPT’s explosion into public consciousness that thrust Altman into the spotlight as a face of generative AI — technology that can produce novel imagery, passages of text and other media.",
+      "alternatives" : [ [ 15204 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 12,
+      "quote" : "This week, we cover Sam Altman backing a teen’s AI startup, Google’s hardware event (and first impressions of the Pixel 8 Pro), Flexport drama, and the ongoing FTX fallout.",
+      "alternatives" : [ [ 385 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 334,
+      "quote" : "Based on the board’s language and the way these giant tech companies work, this is the prevailing theory floating around right now.",
+      "alternatives" : [ [ 15227 ] ]
+    } ]
+  }, {
+    "id" : "m0335",
+    "sourceRow" : 335,
+    "split" : "FORMAL",
+    "type" : "inference_query",
+    "query" : "Which football club, recently discussed in articles by The New York Times, The Guardian, and Sky Sports, experienced a home defeat in the Premier League, has a player named Reece James who may undergo a late fitness check, and is expanding its U.S. presence under Todd Boehly's co-ownership?",
+    "answer" : "Chelsea",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 109,
+      "quote" : "Under American Todd Boehly’s co-ownership, expanding Chelsea’s profile and reach in the U.S. would make sense, especially with USWNT internationals Catarina Macario and Mia Fishel playing their club football there — and CBS Sports holding WSL rights.",
+      "alternatives" : [ [ 5208, 5209 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 110,
+      "quote" : "It was 24 September, Chelsea’s second home Premier League defeat on the spin after the one against Nottingham Forest and they were booed off again.",
+      "alternatives" : [ [ 5214 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 111,
+      "quote" : "Late checks will be made on the fitness of Reece James, Axel Disasi and Nicolas Jackson, while Benoit Badiashile could return from a long-term injury.",
+      "alternatives" : [ [ 5261 ] ]
+    } ]
+  }, {
+    "id" : "m0077",
+    "sourceRow" : 77,
+    "split" : "FORMAL",
+    "type" : "inference_query",
+    "query" : "Which company, recently scrutinized by TechCrunch for both its antitrust legal defense involving document disclosure and the alleged harm its AI has caused to news publishers' revenue, also claims that its new generative AI model Gemini has capabilities that rival or exceed those of OpenAI's models?",
+    "answer" : "Google",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 127,
+      "quote" : "In blog posts and press materials, Google touted Gemini’s superior architecture and capabilities, claiming that the model meets or exceeds the performance of other leading gen AI models like OpenAI’s GPT-4.",
+      "alternatives" : [ [ 6059, 6060 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 43,
+      "quote" : "Epic will also suggest that Google hid items from discovery by allowing execs and employees to have “off the record” chats, but Google will counter this as well, saying it has provided the court with thousands of chat logs and millions of documents.",
+      "alternatives" : [ [ 1611 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 127,
+      "quote" : "Google compared the performance of Gemini Pro to GPT-4’s predecessor, GPT-3.5, a model that’s around a year old.",
+      "alternatives" : [ [ 6079 ] ]
+    }, {
+      "id" : "f4",
+      "documentId" : 34,
+      "quote" : "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means.",
+      "alternatives" : [ [ 1143, 1144 ] ]
+    } ]
+  }, {
+    "id" : "m1682",
+    "sourceRow" : 1682,
+    "split" : "FORMAL",
+    "type" : "inference_query",
+    "query" : "Which company is at the center of concerns from different sectors, where a media expert from 'The Age' argues it manipulates search results for profit, deals with major tech firms like Apple, as reported by 'The Verge', to remain their default search service without a valid alternative, and is accused by news publishers in a 'TechCrunch' article of harming their business through anticompetitive practices?",
+    "answer" : "Google",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 33,
+      "quote" : "She admits that she may have misinterpreted the evidence, but maintains that Google manipulates Search to maximise ad revenue.",
+      "alternatives" : [ [ 1130 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 15,
+      "quote" : "The Justice Department is focused on the deals Google makes — with Apple but also with Samsung and Mozilla and many others — to ensure it is the default search engine on practically every platform.",
+      "alternatives" : [ [ 474, 475 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 15,
+      "quote" : "“Certainly there wasn’t a valid alternative to Google at the time,” Cue said.",
+      "alternatives" : [ [ 473 ] ]
+    }, {
+      "id" : "f4",
+      "documentId" : 34,
+      "quote" : "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means.",
+      "alternatives" : [ [ 1143, 1144 ] ]
+    } ]
+  }, {
+    "id" : "m1823",
+    "sourceRow" : 1823,
+    "split" : "FORMAL",
+    "type" : "inference_query",
+    "query" : "Who is the individual under 30, previously considered the richest in the world, who is accused of building a crypto exchange empire on falsehoods, using customer funds to buy out a competitor, and seeking to exert influence with his fortune, as reported by Fortune, The Verge, and TechCrunch?",
+    "answer" : "Sam Bankman-Fried",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 32,
+      "quote" : "But “all of that, all of it, was built on lies,” Rehn declared to the jury.",
+      "alternatives" : [ [ 1094 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 87,
+      "quote" : "It was Bankman-Fried’s decision, she said, as he was the CEO of FTX.",
+      "alternatives" : [ [ 4052 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 31,
+      "quote" : "He was the richest person in the world under 30 [and] he was going to spend it to save humanity from extinction,” he said.",
+      "alternatives" : [ [ 1064 ] ]
+    }, {
+      "id" : "f4",
+      "documentId" : 12,
+      "quote" : "The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.",
+      "alternatives" : [ [ 412, 413 ] ]
+    } ]
+  }, {
+    "id" : "m1350",
+    "sourceRow" : 1350,
+    "split" : "FORMAL",
+    "type" : "inference_query",
+    "query" : "Who is the individual facing a criminal trial for fraud and conspiracy, who previously persuaded a colleague from Jane Street to join his ventures at Alameda and FTX, is accused of misusing a billion dollars of customer funds to settle with Binance, and whose alleged fraudulent activities were aimed at gaining wealth, power, and influence, as reported by TechCrunch, Fortune, The Verge, and again by TechCrunch?",
+    "answer" : "Sam Bankman-Fried",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 11,
+      "quote" : "The highly anticipated criminal trial for Sam Bankman-Fried, former CEO of bankrupt crypto exchange FTX, started Tuesday to determine whether he’s guilty of seven counts of fraud and conspiracy.",
+      "alternatives" : [ [ 361 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 32,
+      "quote" : "And after Bankman-Fried left Jane Street, the high-frequency trading firm where the former billionaire got his start in finance after MIT, he persuaded Yedidia to join him as a trader at Alameda and then as a developer at FTX.",
+      "alternatives" : [ [ 1109, 1110 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 87,
+      "quote" : "It was Bankman-Fried’s decision, she said, as he was the CEO of FTX.",
+      "alternatives" : [ [ 4052 ] ]
+    }, {
+      "id" : "f4",
+      "documentId" : 12,
+      "quote" : "The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.",
+      "alternatives" : [ [ 412, 413 ] ]
+    } ]
+  }, {
+    "id" : "m0594",
+    "sourceRow" : 594,
+    "split" : "FORMAL",
+    "type" : "inference_query",
+    "query" : "Which company, featured in multiple TechCrunch articles, is not only responsible for introducing GPT-4 Turbo and planning to make GPT-4 with vision available but is also predicted to dominate the AI tools platform market, overshadowing competitors like Hugging Face, and is known for creating the popular generative AI, ChatGPT?",
+    "answer" : "OpenAI",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 117,
+      "quote" : "Some of the more notable items announced were tools to create custom “GPTs” (i.e., domain-specific chatbots), new text-to-speech models, an API for the text-to-image model DALL-E 3, and an improved version of OpenAI’s flagship model, GPT-4, called GPT-4 Turbo.",
+      "alternatives" : [ [ 5579, 5580 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 366,
+      "quote" : "The “app store for AI” will be pushed hard as the platform to get your AI toys and tools from, and never mind Hugging Face or any open source models.",
+      "alternatives" : [ [ 16359 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 55,
+      "quote" : "It has been a whirlwind four days for OpenAI, the generative AI poster child behind the smash hit ChatGPT.",
+      "alternatives" : [ [ 2332 ] ]
+    }, {
+      "id" : "f4",
+      "documentId" : 49,
+      "quote" : "OpenAI announced that GPT-4 with vision will become available alongside the upcoming launch of GPT-4 Turbo API.",
+      "alternatives" : [ [ 1827 ] ]
+    } ]
+  }, {
+    "id" : "m2449",
+    "sourceRow" : 2449,
+    "split" : "FORMAL",
+    "type" : "inference_query",
+    "query" : "Who is the individual that was portrayed as a reliable figure in the cryptocurrency sector by The Verge, yet is accused by Fortune of constructing a prosperous crypto exchange on deceit, and is alleged by TechCrunch to have consciously perpetrated fraud for personal gain, despite admitting to a financial discrepancy after a judge's intervention as reported by The Verge?",
+    "answer" : "Sam Bankman-Fried",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 32,
+      "quote" : "But “all of that, all of it, was built on lies,” Rehn declared to the jury.",
+      "alternatives" : [ [ 1094 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 176,
+      "quote" : "Before his fall, Bankman-Fried made himself out to be the Good Boy of crypto — the trustworthy face of a sometimes-shady industry.",
+      "alternatives" : [ [ 8402 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 84,
+      "quote" : "It was not until Judge Lewis Kaplan intervened to ask if Bankman-Fried had ever been told by Yedidia about that money, in words or in substance, that Bankman-Fried admitted he’d been told.",
+      "alternatives" : [ [ 3904 ] ]
+    }, {
+      "id" : "f4",
+      "documentId" : 12,
+      "quote" : "The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.",
+      "alternatives" : [ [ 412, 413 ] ]
+    } ]
+  }, {
+    "id" : "m0310",
+    "sourceRow" : 310,
+    "split" : "FORMAL",
+    "type" : "inference_query",
+    "query" : "Who is the individual whose trial is imminent, as reported by TechCrunch, was once considered a reliable representative of the cryptocurrency sector according to The Verge, is accused of fraud and conspiracy involving a financial discrepancy acknowledged after a judge's intervention, also mentioned by The Verge, and is alleged by the prosecution to have pursued wealth, power, and influence through deliberate fraudulent actions, a claim further discussed by TechCrunch?",
+    "answer" : "Sam Bankman-Fried",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 11,
+      "quote" : "The highly anticipated criminal trial for Sam Bankman-Fried, former CEO of bankrupt crypto exchange FTX, started Tuesday to determine whether he’s guilty of seven counts of fraud and conspiracy.",
+      "alternatives" : [ [ 361 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 176,
+      "quote" : "Before his fall, Bankman-Fried made himself out to be the Good Boy of crypto — the trustworthy face of a sometimes-shady industry.",
+      "alternatives" : [ [ 8402 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 84,
+      "quote" : "It was not until Judge Lewis Kaplan intervened to ask if Bankman-Fried had ever been told by Yedidia about that money, in words or in substance, that Bankman-Fried admitted he’d been told.",
+      "alternatives" : [ [ 3904 ] ]
+    }, {
+      "id" : "f4",
+      "documentId" : 12,
+      "quote" : "The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.",
+      "alternatives" : [ [ 412, 413 ] ]
+    } ]
+  }, {
+    "id" : "m1228",
+    "sourceRow" : 1228,
+    "split" : "FORMAL",
+    "type" : "inference_query",
+    "query" : "Which individual, covered by both 'The Verge' and 'TechCrunch', is implicated in using customer funds for a buyout, faced challenges managing two companies due to rapid growth, and is accused of committing fraud for personal gain?",
+    "answer" : "Sam Bankman-Fried",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 122,
+      "quote" : "Wang testified that he heard Bankman-Fried tell another trader that it was okay to continue withdrawing money from the account as long as the amount was less than FTX’s total trading revenue.",
+      "alternatives" : [ [ 5885, 5886 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 54,
+      "quote" : "Because FTX had grown so much, he could no longer run both companies, he said.",
+      "alternatives" : [ [ 2320 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 87,
+      "quote" : "It was Bankman-Fried’s decision, she said, as he was the CEO of FTX.",
+      "alternatives" : [ [ 4052 ] ]
+    }, {
+      "id" : "f4",
+      "documentId" : 12,
+      "quote" : "The prosecution painted Bankman-Fried as someone who knowingly committed fraud to achieve great wealth, power and influence, while the defense countered that the FTX founder acted in good faith, never meant to commit fraud or steal and basically got in over his head.",
+      "alternatives" : [ [ 412, 413 ] ]
+    } ]
+  }, {
+    "id" : "m1514",
+    "sourceRow" : 1514,
+    "split" : "FORMAL",
+    "type" : "comparison_query",
+    "query" : "Does the article from Cnbc | World Business News Leader suggest that businesses selling on Amazon are setting non-competitive prices, while the article from The Verge indicates that eBay offers a price-matching policy that includes a coupon for the difference plus an additional incentive?",
+    "answer" : "Yes",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 3,
+      "quote" : "“Even with those tools, some of the businesses selling on Amazon might still choose to set prices that aren’t competitive,” Zapolsky said.",
+      "alternatives" : [ [ 57 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 404,
+      "quote" : "That means eBay will give you an eBay coupon for the difference in price between what you bought the item for and what the competitor is selling it for, plus an additional 10 percent of that price difference.",
+      "alternatives" : [ [ 17730, 17731 ] ]
+    } ]
+  }, {
+    "id" : "m0735",
+    "sourceRow" : 735,
+    "split" : "FORMAL",
+    "type" : "comparison_query",
+    "query" : "Does the Sporting News article about the Marshall Thundering Herd indicate a starting quarterback change to Cole Pennington, a freshman, while the same source, Sporting News, suggests that Drew Lock would replace Geno Smith for the Seahawks if Smith is unable to play?",
+    "answer" : "True",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 6,
+      "quote" : "Instead, Marshall will start freshman Cole Pennington, who is the son of former Marshall star QB Chad Pennington.",
+      "alternatives" : [ [ 184 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 387,
+      "quote" : "In the event that he doesn't play, however, we will turn to Drew Lock ($9,200) in his place.",
+      "alternatives" : [ [ 17170, 17171 ] ]
+    } ]
+  }, {
+    "id" : "m0201",
+    "sourceRow" : 201,
+    "split" : "FORMAL",
+    "type" : "comparison_query",
+    "query" : "Does the article from Cnbc | World Business News Leader claim that selling on Amazon is a life-changing opportunity, while the article from The Sydney Morning Herald reports a stock price fall due to an antitrust lawsuit, indicating differing impacts of Amazon's business practices on sellers and stockholders?",
+    "answer" : "Yes",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 3,
+      "quote" : "“Selling on Amazon is a life-changing opportunity and the amount of sellers that throw stones at the platform is astounding,” one user wrote.",
+      "alternatives" : [ [ 64, 65 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 2,
+      "quote" : "Amazon tumbled 4 per cent after the Federal Trade Commission and 17 state attorneys general filed an antitrust lawsuit against it.",
+      "alternatives" : [ [ 42 ] ]
+    } ]
+  }, {
+    "id" : "m0599",
+    "sourceRow" : 599,
+    "split" : "FORMAL",
+    "type" : "comparison_query",
+    "query" : "Does the Sporting News article suggest that Dylan Cease, Corbin Burnes, and Tyler Glasnow are potential trade options for MLB teams, while Essentially Sports discusses the financial challenges The Los Angeles Angels might face in affording Mike Trout?",
+    "answer" : "Yes",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 423,
+      "quote" : "The trade market is also expected to be active once more dominoes fall, with Dylan Cease, Corbin Burnes and Tyler Glasnow among starters who could be moved this winter.",
+      "alternatives" : [ [ 18517, 18518 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 424,
+      "quote" : "However, it seems that the Angels will have a hard time affording a player like Trout in the foreseeable future, as they have to win a good number of games to stay in the playoffs and keep a steady income of revenue throughout the seasons.",
+      "alternatives" : [ [ 18625, 18626 ] ]
+    } ]
+  }, {
+    "id" : "m1693",
+    "sourceRow" : 1693,
+    "split" : "FORMAL",
+    "type" : "comparison_query",
+    "query" : "Did the article from The Verge defending Apple's Google Search deal suggest that there were valid alternatives to Google for search engine services, while the other article from The Verge about the public and media's understanding of search engines imply a satisfaction with the public's knowledge of how search engines work?",
+    "answer" : "no",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 15,
+      "quote" : "“Certainly there wasn’t a valid alternative to Google at the time,” Cue said.",
+      "alternatives" : [ [ 473 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 116,
+      "quote" : "Sullivan is mad that the public and the media don’t really understand what he considers to be basic precepts about how search works, leading him to adopt a rather scolding tone online.",
+      "alternatives" : [ [ 5509 ] ]
+    } ]
+  }, {
+    "id" : "m1787",
+    "sourceRow" : 1787,
+    "split" : "FORMAL",
+    "type" : "comparison_query",
+    "query" : "Does the Sporting News article claim that FC Cincinnati failed to win the Supporters' Shield for the regular season, while The Guardian article discusses Ratcliffe's approach to communication with Manchester United supporters, without mentioning any achievement by the team?",
+    "answer" : "no",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 89,
+      "quote" : "FC Cincinnati won the Supporters' Shield as the regular season champion, confirmed on Wednesday despite suffering defeat.",
+      "alternatives" : [ [ 4166 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 90,
+      "quote" : "A tap-in, then, for Ratcliffe is to remedy this by opening and maintaining a regular line into supporters.",
+      "alternatives" : [ [ 4204, 4205 ] ]
+    } ]
+  }, {
+    "id" : "m2503",
+    "sourceRow" : 2503,
+    "split" : "FORMAL",
+    "type" : "comparison_query",
+    "query" : "Does 'The Guardian' article on the Sydney Swans' game day experience focus on different aspects of fan engagement compared to 'The Guardian' article discussing Mikel Arteta's comments on the importance of enduring challenging moments in a game?",
+    "answer" : "Yes",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 211,
+      "quote" : "“Our team has put a lot of work into sourcing some wonderful food offerings, entertainment and activities for kids, while we’ve had a local focus in promoting our games,” she said.",
+      "alternatives" : [ [ 9779 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 477,
+      "quote" : "These were the moments Arteta had meant, stressing the importance of knowing that they will always come and having the capacity to withstand them.",
+      "alternatives" : [ [ 20491 ] ]
+    } ]
+  }, {
+    "id" : "m1591",
+    "sourceRow" : 1591,
+    "split" : "FORMAL",
+    "type" : "comparison_query",
+    "query" : "Does the TechCrunch article on Spill's new social media platform suggest a different approach to social networking from what TechCrunch reports consumers desire according to Mozilla's perspective, with Spill focusing on a unique platform and Mozilla emphasizing trust and decentralization?",
+    "answer" : "No",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 489,
+      "quote" : "But while Pebble sought to essentially clone Twitter, Spill’s team is building something that looks very little like it.",
+      "alternatives" : [ [ 20929 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 27,
+      "quote" : "Consumers are hungry for a new way of social networking, where trust and safety are paramount and power isn’t centralized with a Big Tech CEO in charge… or at least that’s what Mozilla believes.",
+      "alternatives" : [ [ 884 ] ]
+    } ]
+  }, {
+    "id" : "m0800",
+    "sourceRow" : 800,
+    "split" : "FORMAL",
+    "type" : "comparison_query",
+    "query" : "Does 'The Guardian' describe 'the match' as a showcase of equal financial power between teams, while 'CBSSports.com' focuses on the current performance of the 'Dallas team' without mentioning their financial status?",
+    "answer" : "no",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 102,
+      "quote" : "“It was the millionaires of the Premier League against the youngsters of the Championship,” reflected the former Denmark forward.",
+      "alternatives" : [ [ 4863 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 344,
+      "quote" : "The Commanders are coming off a dud last week against the Giants, while Dallas is flying high.",
+      "alternatives" : [ [ 15535 ] ]
+    } ]
+  }, {
+    "id" : "m1797",
+    "sourceRow" : 1797,
+    "split" : "FORMAL",
+    "type" : "comparison_query",
+    "query" : "Did the article from Fortune suggest that Sam Bankman-Fried had no access to FTX customers' money through Alameda Research, while the report from Cnbc | World Business News Leader indicates that there was a concern about the risk to FTX customers' funds without specifying secret access?",
+    "answer" : "no",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 32,
+      "quote" : "Using Caroline Ellison, his on-again off-again girlfriend and the CEO of Alameda, as a front, Bankman-Fried had “secret access” to customer money—both cash and crypto—the government claimed.",
+      "alternatives" : [ [ 1096 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 227,
+      "quote" : "He was concerned because it \"seemed like a lot of money\" from FTX customers was at risk.",
+      "alternatives" : [ [ 10818, 10819 ] ]
+    } ]
+  }, {
+    "id" : "m1402",
+    "sourceRow" : 1402,
+    "split" : "FORMAL",
+    "type" : "comparison_query",
+    "query" : "Does the 'Sporting News' article suggest that the Dallas Cowboys' offensive effectiveness against the 49ers came later in the game, while the same source indicates that Joe Mixon's offensive role for the Cincinnati Bengals has increased due to Joe Burrow's absence?",
+    "answer" : "Yes",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 276,
+      "quote" : "10:59 p.m. — The Cowboys are moving the ball now, when it's a bit too late.",
+      "alternatives" : [ [ 12963 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 277,
+      "quote" : "Mixon has been forced to step up without Burrow under center, doubling as a runner and receiver for Cincinnati.",
+      "alternatives" : [ [ 13012 ] ]
+    } ]
+  }, {
+    "id" : "m0454",
+    "sourceRow" : 454,
+    "split" : "FORMAL",
+    "type" : "comparison_query",
+    "query" : "Does 'The Verge' article on Prime Big Deal Days indicate that there are no gaming deals for the same range of gaming platforms as 'Polygon' staff play games on, including PlayStation 5, PS4, Xbox Series X / S, Nintendo Switch, and PC?",
+    "answer" : "no",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 236,
+      "quote" : "Here, we’ll go over all the best gaming deals we can scrounge up during Prime Big Deal Days across PlayStation 5, PS4, Xbox Series X / S, Nintendo Switch, and PC.",
+      "alternatives" : [ [ 11194 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 237,
+      "quote" : "At Polygon, we play games on a lot of consoles and platforms — both new and old.",
+      "alternatives" : [ [ 11246 ] ]
+    } ]
+  }, {
+    "id" : "m1711",
+    "sourceRow" : 1711,
+    "split" : "FORMAL",
+    "type" : "comparison_query",
+    "query" : "Does the TechCrunch article reporting on the EU's investigation into X over alleged disinformation disagree with the TechCrunch article warning Elon Musk's X (formerly Twitter) about illegal content and disinformation in terms of the type of content being circulated, with both mentioning the circulation of false information and manipulated content?",
+    "answer" : "no",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 25,
+      "quote" : "Since Saturday’s attacks in Israel, posts identified as false have been spotted circulating on X — including, in one example, a clip that purported to show Hamas missile attacks on Israel but was actually footage from a video game.",
+      "alternatives" : [ [ 823 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 26,
+      "quote" : "“Public media and civil society organisations widely report instances of fake and manipulated images and facts circulating on your platform in the EU, such as repurposed old images of unrelated armed conflicts or military footage that actually originated from video games.",
+      "alternatives" : [ [ 869 ] ]
+    } ]
+  }, {
+    "id" : "m2488",
+    "sourceRow" : 2488,
+    "split" : "FORMAL",
+    "type" : "comparison_query",
+    "query" : "Does the TechCrunch article claim that Google's anticompetitive behavior affects the app distribution and payment processing markets for Android, while The Verge article focuses on the market definition in an antitrust case involving Google, and another TechCrunch article alleges Google's anticompetitive actions impact news publishers' content, readers, and ad revenue?",
+    "answer" : "Yes",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 356,
+      "quote" : "This whole line of argument is called “market definition.” If the court decides the relevant market is phones and app stores, not specifically Android ones, then Google’s on the road to victory.",
+      "alternatives" : [ [ 15984 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 43,
+      "quote" : "It will attempt to argue that Google restrains competition within two separate markets, including the distribution of apps to Android users and the market for payment processing solutions for content inside Android apps.",
+      "alternatives" : [ [ 1589, 1590 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 34,
+      "quote" : "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means.",
+      "alternatives" : [ [ 1143, 1144 ] ]
+    } ]
+  }, {
+    "id" : "m0196",
+    "sourceRow" : 196,
+    "split" : "FORMAL",
+    "type" : "comparison_query",
+    "query" : "Does the article from The Verge suggest that Apple's choice of Google as a search engine provider was due to a lack of alternatives, while the TechCrunch articles allege that Google's practices in app distribution, payment processing, and news publishing are anticompetitive, implying that there are alternatives that are being suppressed by Google's behavior?",
+    "answer" : "Yes",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 15,
+      "quote" : "“Certainly there wasn’t a valid alternative to Google at the time,” Cue said.",
+      "alternatives" : [ [ 473 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 43,
+      "quote" : "It will attempt to argue that Google restrains competition within two separate markets, including the distribution of apps to Android users and the market for payment processing solutions for content inside Android apps.",
+      "alternatives" : [ [ 1589, 1590 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 34,
+      "quote" : "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means.",
+      "alternatives" : [ [ 1143, 1144 ] ]
+    } ]
+  }, {
+    "id" : "m0640",
+    "sourceRow" : 640,
+    "split" : "FORMAL",
+    "type" : "comparison_query",
+    "query" : "Do the articles from Sporting News discussing MLB, NBA, and general sports betting all agree that Sportsbooks adjust their policies or odds in response to external events such as weather conditions, player injuries, or other significant information?",
+    "answer" : "Yes",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 265,
+      "quote" : "These delays may lead to bets being refunded depending on the circumstances and the specific rules of your sportsbook.",
+      "alternatives" : [ [ 12608 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 61,
+      "quote" : "Every sportsbook jumps on board when a line moves or odds change for a legitimate reason, like an injury or roster move.",
+      "alternatives" : [ [ 2885 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 63,
+      "quote" : "But sportsbooks are also gathering this information, and they begin to tighten the NBA Rookie of the Year lines in response.",
+      "alternatives" : [ [ 2980 ] ]
+    } ]
+  }, {
+    "id" : "m2425",
+    "sourceRow" : 2425,
+    "split" : "FORMAL",
+    "type" : "comparison_query",
+    "query" : "Does the TechCrunch article suggest that Google's Gemini Pro is being compared to OpenAI's GPT-3.5 in terms of performance, while the other TechCrunch article accuses Google of anticompetitive behavior towards news publishers, and does The Verge article discuss different criteria used by Google for local search rankings?",
+    "answer" : "Yes",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 127,
+      "quote" : "Google compared the performance of Gemini Pro to GPT-4’s predecessor, GPT-3.5, a model that’s around a year old.",
+      "alternatives" : [ [ 6079 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 128,
+      "quote" : "Google’s public documentation says it uses three categories to rank results that are local to a searcher: relevance, distance, and prominence.",
+      "alternatives" : [ [ 6115 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 34,
+      "quote" : "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means.",
+      "alternatives" : [ [ 1143, 1144 ] ]
+    } ]
+  }, {
+    "id" : "m1727",
+    "sourceRow" : 1727,
+    "split" : "FORMAL",
+    "type" : "temporal_query",
+    "query" : "Did TechCrunch report on Flipboard's integration of the ActivityPub protocol after The Verge discussed the structure of the ActivityPub protocol in social media contexts?",
+    "answer" : "no",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 508,
+      "quote" : "“What we’re announcing on Monday is basically our roadmap for how we will be rolling out ActivityPub, and effectively tearing down the walls around our own walled garden,” he added.",
+      "alternatives" : [ [ 21607 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 509,
+      "quote" : "In the world of ActivityPub, every post everywhere is made up of a sender, a message, and a URL.",
+      "alternatives" : [ [ 21652 ] ]
+    } ]
+  }, {
+    "id" : "m2398",
+    "sourceRow" : 2398,
+    "split" : "FORMAL",
+    "type" : "temporal_query",
+    "query" : "Has the coverage of ski resorts by 'The Independent - Travel' remained consistent after their report on the 'Swiss slopes of Zermatt and pistes of Vail in Colorado' on October 13th, 2023, compared to their subsequent report on 'Tremblant Ski Resort' on October 25th, 2023?",
+    "answer" : "Yes",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 573,
+      "quote" : "Quebec’s premier ski resort sits at the foot of the eponymous mountain, whose pistes cater well to all abilities.",
+      "alternatives" : [ [ 24420 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 574,
+      "quote" : "From the Swiss slopes of Zermatt to the pistes of Vail in Colorado, it’s not just the snow that sparkles.",
+      "alternatives" : [ [ 24459 ] ]
+    } ]
+  }, {
+    "id" : "m1273",
+    "sourceRow" : 1273,
+    "split" : "FORMAL",
+    "type" : "temporal_query",
+    "query" : "Between the Sporting News article published on September 28, 2023, highlighting bettors' opportunities with Travis Kelce & Taylor Swift-inspired props and the November 1, 2023, article explaining point spread betting, has the Sporting News' portrayal of the influence of news or sentiment on bettors and sportsbooks remained consistent or inconsistent?",
+    "answer" : "Consistent",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 312,
+      "quote" : "For bettors, where there is hype, there's also an opportunity to make some money.",
+      "alternatives" : [ [ 14292 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 360,
+      "quote" : "If a piece of news or a prevailing sentiment starts to gain traction about a particular team's increased chances of winning, this can influence how people bet, leading sportsbooks to adjust their lines accordingly.",
+      "alternatives" : [ [ 16122 ] ]
+    } ]
+  }, {
+    "id" : "m0926",
+    "sourceRow" : 926,
+    "split" : "FORMAL",
+    "type" : "temporal_query",
+    "query" : "Between the TalkSport report on Manchester United's future plans published on October 16, 2023, and the Sporting News report on Manchester United's performance in European competitions published on December 12, 2023, was there no change in the narrative regarding Manchester United's success and planning?",
+    "answer" : "no",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 167,
+      "quote" : "Erik ten Hag is a top coach from Ajax but they need a top blueprint not only for now but for the next five years, and work towards that, and sometimes on that journey there are hard moments when you don't get the right results, even though you're doing the right things.",
+      "alternatives" : [ [ 8091, 8092 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 188,
+      "quote" : "Manchester United are out of Europe altogether after a limp display against Bayern at Old Trafford, where Kingsley Coman sealed a 1-0 win for Thomas Tuchel's side.",
+      "alternatives" : [ [ 8889 ] ]
+    } ]
+  }, {
+    "id" : "m0500",
+    "sourceRow" : 500,
+    "split" : "FORMAL",
+    "type" : "temporal_query",
+    "query" : "Between the Sporting News report on NBA Rookie of the Year odds published on October 4, 2023, and the Sporting News report on line shopping in sports betting published on November 6, 2023, was the role of sportsbooks in setting betting lines and odds inconsistent?",
+    "answer" : "no",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 63,
+      "quote" : "But sportsbooks are also gathering this information, and they begin to tighten the NBA Rookie of the Year lines in response.",
+      "alternatives" : [ [ 2980 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 61,
+      "quote" : "That allows sportsbooks to earn the profit built into the odds and lines without worrying about which side wins.",
+      "alternatives" : [ [ 2859 ] ]
+    } ]
+  }, {
+    "id" : "m0461",
+    "sourceRow" : 461,
+    "split" : "FORMAL",
+    "type" : "temporal_query",
+    "query" : "Did the Federal Reserve change its stance on basing its interest rate decisions on incoming economic data after The Sydney Morning Herald reported on it before October 1, 2023, and did their influence on global financial markets differ from what The Sydney Morning Herald highlighted in a subsequent report?",
+    "answer" : "no",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 358,
+      "quote" : "For investors around the world, the “Fed matters more than other central banks,” and weak US data is “the only game-changer for markets”, foreign-exchange strategists at Bank of America wrote in a BofA Global Research report.",
+      "alternatives" : [ [ 16067, 16068 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 88,
+      "quote" : "Postponements of such reports could complicate things for the Fed, which has insisted it will make upcoming decisions on interest rates based on what incoming data say about the economy.",
+      "alternatives" : [ [ 4080 ] ]
+    } ]
+  }, {
+    "id" : "m1987",
+    "sourceRow" : 1987,
+    "split" : "FORMAL",
+    "type" : "temporal_query",
+    "query" : "Between the TechCrunch report on the Google antitrust case published before November 5, 2023, and the TechCrunch report on the class action antitrust suit against Google, was the consistency in reporting Google's anticompetitive behavior maintained?",
+    "answer" : "Yes",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 356,
+      "quote" : "This whole line of argument is called “market definition.” If the court decides the relevant market is phones and app stores, not specifically Android ones, then Google’s on the road to victory.",
+      "alternatives" : [ [ 15984 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 238,
+      "quote" : "Monday’s trial hearing revealed plenty of juicy tidbits, including the $26.3 billion Google spent making itself the default search engine across platforms in 2021, how Google tried to take it further and have Chrome preinstalled on iPhones and more.",
+      "alternatives" : [ [ 11297 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 34,
+      "quote" : "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means.",
+      "alternatives" : [ [ 1143, 1144 ] ]
+    } ]
+  }, {
+    "id" : "m1748",
+    "sourceRow" : 1748,
+    "split" : "FORMAL",
+    "type" : "temporal_query",
+    "query" : "Between the report from 'The Age' on Taylor Swift's NFL takeover published on September 26, 2023, and the report from 'The Independent - Life and Style' on Taylor Swift's relationship with Travis Kelce published on December 6, 2023, was there no change in the reporting of Taylor Swift's interactions with Travis Kelce?",
+    "answer" : "no",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 45,
+      "quote" : "In July, speaking on the podcast he shares with his brother, New Heights, Kelce said he intended to give Swift a friendship bracelet with his number on it during her Eras Tour concert in Kansas City.",
+      "alternatives" : [ [ 1650, 1651 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 46,
+      "quote" : "On his podcast, he later invited the “Anti-Hero” singer to one of his games at Arrowhead Stadium - an invitation she famously accepted on 24 September.",
+      "alternatives" : [ [ 1686 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 47,
+      "quote" : "Now, Swift has shared that she has nothing to hide in her new relationship with Kelce.",
+      "alternatives" : [ [ 1707 ] ]
+    } ]
+  }, {
+    "id" : "m1293",
+    "sourceRow" : 1293,
+    "split" : "FORMAL",
+    "type" : "temporal_query",
+    "query" : "Between the article from The Verge on October 26, 2023, discussing Google's local search ranking criteria and the TechCrunch article on October 31, 2023, regarding Google's expenditures to remain the default search engine, was there inconsistency in the portrayal of Google's influence over search-related practices?",
+    "answer" : "no",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 128,
+      "quote" : "Google’s public documentation says it uses three categories to rank results that are local to a searcher: relevance, distance, and prominence.",
+      "alternatives" : [ [ 6115 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 238,
+      "quote" : "Monday’s trial hearing revealed plenty of juicy tidbits, including the $26.3 billion Google spent making itself the default search engine across platforms in 2021, how Google tried to take it further and have Chrome preinstalled on iPhones and more.",
+      "alternatives" : [ [ 11297 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 34,
+      "quote" : "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means.",
+      "alternatives" : [ [ 1143, 1144 ] ]
+    } ]
+  }, {
+    "id" : "m0117",
+    "sourceRow" : 117,
+    "split" : "FORMAL",
+    "type" : "temporal_query",
+    "query" : "Between the report from The Independent - Life and Style published on October 30, 2023, stating Taylor Swift's commitment to her tour schedule, and the report from The Independent - Life and Style published on December 6, 2023, revealing her openness about her relationship with Travis Kelce, was there a change in the narrative regarding her personal life and professional commitments?",
+    "answer" : "Yes",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 296,
+      "quote" : "Elsewhere in the conversation with Time, the “Anti-Hero” singer said that she tries not to let the paparazzi get to her, even though so many of her outings with pals go on to make headlines.",
+      "alternatives" : [ [ 13753 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 175,
+      "quote" : "“She’s got the Eras Tour booked all through next year, and she’d rather die than cancel a show.",
+      "alternatives" : [ [ 8380 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 47,
+      "quote" : "Now, Swift has shared that she has nothing to hide in her new relationship with Kelce.",
+      "alternatives" : [ [ 1707 ] ]
+    } ]
+  }, {
+    "id" : "m0179",
+    "sourceRow" : 179,
+    "split" : "FORMAL",
+    "type" : "temporal_query",
+    "query" : "Between the Zee Business report on the India national cricket team's performance in the ICC World Cup semi-finals published on November 11, 2023, and the Zee Business report on the India national cricket team's head-to-head record with Australia in ODI World Cup matches published on November 18, 2023, was the reporting on India's past encounters with Australia in the World Cup consistent?",
+    "answer" : "Yes",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 247,
+      "quote" : "It is only time to tell if the Aussies will repeat history or if it will be India who will write history by winning their third ODI World Cup.",
+      "alternatives" : [ [ 11852 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 247,
+      "quote" : "India met with Australia for the very first time in this World Cup and lost the match by 162 runs.",
+      "alternatives" : [ [ 11855 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 134,
+      "quote" : "India were playing against Australia in the second semi-final of the 2015 World Cup in Sydney on March 26.",
+      "alternatives" : [ [ 6336 ] ]
+    } ]
+  }, {
+    "id" : "m0955",
+    "sourceRow" : 955,
+    "split" : "FORMAL",
+    "type" : "null_query",
+    "query" : "Considering the information from an article by The Verge on the expansion of Fixed Wireless Access in rural areas and another by CNET discussing the technological advancements in Fixed Wireless Access equipment, which company, starting with the letter 'A', was mentioned as both expanding its rural Fixed Wireless Access network and introducing new equipment to enhance connectivity speeds?",
+    "answer" : "Insufficient information.",
+    "facts" : [ ]
+  }, {
+    "id" : "m1487",
+    "sourceRow" : 1487,
+    "split" : "FORMAL",
+    "type" : "null_query",
+    "query" : "Considering the information from an article by The Verge and another by Search Engine Land on Danny Sullivan, which letter represents both the first initial of the search engine company he joined after retiring from his publication and the first letter of the feature he helped to introduce that allows public figures to post directly on the search results page?",
+    "answer" : "Insufficient information.",
+    "facts" : [ ]
+  }, {
+    "id" : "m0128",
+    "sourceRow" : 128,
+    "split" : "FORMAL",
+    "type" : "null_query",
+    "query" : "Based on a report by Bloomberg and a separate article by Reuters, what is the first letter of the name of the company that ACI Worldwide Inc. is reportedly in advanced talks to acquire, which also recently partnered with a major European bank to enhance its payment solutions?",
+    "answer" : "Insufficient information.",
+    "facts" : [ ]
+  }, {
+    "id" : "m1879",
+    "sourceRow" : 1879,
+    "split" : "FORMAL",
+    "type" : "null_query",
+    "query" : "Considering the information from a BBC News article and a Reuters report on The Global Fund, which country, identified as a significant beneficiary of the fund's aid in the BBC article, was also mentioned in the Reuters report as having made a substantial pledge to The Global Fund's recent fundraising campaign?",
+    "answer" : "Insufficient information.",
+    "facts" : [ ]
+  }, {
+    "id" : "m1415",
+    "sourceRow" : 1415,
+    "split" : "FORMAL",
+    "type" : "null_query",
+    "query" : "Considering the information from a New York Times article discussing Steve Schwarzman's philanthropic efforts and a Bloomberg article detailing his business strategies, which university, known for its prestigious business program and mentioned in both articles, did Schwarzman donate a significant sum to for the establishment of a student center?",
+    "answer" : "Insufficient information.",
+    "facts" : [ ]
+  }, {
+    "id" : "m0374",
+    "sourceRow" : 374,
+    "split" : "FORMAL",
+    "type" : "null_query",
+    "query" : "Based on the information from a New York Times article and a report by The Verge on Microsoft Project, which feature, identified by a single letter, was highlighted as a significant addition in the New York Times piece and was also noted for its potential impact on collaboration in The Verge's analysis?",
+    "answer" : "Insufficient information.",
+    "facts" : [ ]
+  }, {
+    "id" : "m2258",
+    "sourceRow" : 2258,
+    "split" : "CALIBRATION",
+    "type" : "inference_query",
+    "query" : "Which company, recently reviewed by TechCrunch for its generative AI model Gemini, is also accused by The Age of manipulating its primary service to maximize ad revenue, and is facing a class action antitrust suit as reported by TechCrunch for harming news publishers’ bottom lines through anticompetitive practices?",
+    "answer" : "Google",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 127,
+      "quote" : "In blog posts and press materials, Google touted Gemini’s superior architecture and capabilities, claiming that the model meets or exceeds the performance of other leading gen AI models like OpenAI’s GPT-4.",
+      "alternatives" : [ [ 6059, 6060 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 33,
+      "quote" : "She admits that she may have misinterpreted the evidence, but maintains that Google manipulates Search to maximise ad revenue.",
+      "alternatives" : [ [ 1130 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 34,
+      "quote" : "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means.",
+      "alternatives" : [ [ 1143, 1144 ] ]
+    } ]
+  }, {
+    "id" : "m0331",
+    "sourceRow" : 331,
+    "split" : "CALIBRATION",
+    "type" : "inference_query",
+    "query" : "What company is at the center of claims involving manipulation of search results to maximize ad revenue according to Megan Grey in 'The Age', ranking local search results based on relevance, distance, and prominence as reported by 'The Verge', and is accused by a news publisher in a class action antitrust suit covered by 'TechCrunch' for harming their bottom line through anticompetitive practices?",
+    "answer" : "Google",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 33,
+      "quote" : "She admits that she may have misinterpreted the evidence, but maintains that Google manipulates Search to maximise ad revenue.",
+      "alternatives" : [ [ 1130 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 128,
+      "quote" : "Google’s public documentation says it uses three categories to rank results that are local to a searcher: relevance, distance, and prominence.",
+      "alternatives" : [ [ 6115 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 33,
+      "quote" : "Wired removed the article for not meeting its standards, but the degree to which it was shared on social media and boosted in write-ups at other outlets shows just how willing people are to accept foul play on Google’s part.",
+      "alternatives" : [ [ 1128, 1129 ] ]
+    }, {
+      "id" : "f4",
+      "documentId" : 34,
+      "quote" : "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means.",
+      "alternatives" : [ [ 1143, 1144 ] ]
+    } ]
+  }, {
+    "id" : "m0487",
+    "sourceRow" : 487,
+    "split" : "CALIBRATION",
+    "type" : "inference_query",
+    "query" : "Which company, known for being more responsive to consumer feedback in recent years and is planning to appeal an ITC decision on a patent dispute, is expected to focus on Macs and new chipsets at an upcoming event and has been criticized for enforcing uniform terms on developers, OEMs, and carriers through its store and payment system according to TechCrunch, Engadget, and two articles from The Verge?",
+    "answer" : "Apple",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 527,
+      "quote" : "Along with building new chips, Apple has spent the last few years listening to consumers in a way it hadn’t for decades.",
+      "alternatives" : [ [ 22494 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 288,
+      "quote" : "But, if rumors are to be believed, Apple's focus during the Scary Fast event will be on Macs and a fresh batch of chipsets to power them.",
+      "alternatives" : [ [ 13338, 13339 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 242,
+      "quote" : "Apple has already indicated that it plans to appeal, but appealing is a lengthy process that can take around 18 months.",
+      "alternatives" : [ [ 11541 ] ]
+    }, {
+      "id" : "f4",
+      "documentId" : 171,
+      "quote" : "They use their store, their payments, they force developers to all have the same terms, they force OEMs and carriers to all have the same terms.",
+      "alternatives" : [ [ 8243 ] ]
+    } ]
+  }, {
+    "id" : "m0939",
+    "sourceRow" : 939,
+    "split" : "CALIBRATION",
+    "type" : "comparison_query",
+    "query" : "Does 'The New York Times' article suggest that Connor Bedard lacks the potential to dominate in the NHL, while the 'Sporting News' article indicates that the USC basketball team has the potential to become a National Championship contender, or do both articles suggest a similar potential for their respective subjects?",
+    "answer" : "no",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 103,
+      "quote" : "“It’s not the NHL that he was playing in the last few years,” Davidson said, “but the level of performance and how he could control a game and dominate a game in junior — it indicated he was going to be able to do that at some point in the NHL.",
+      "alternatives" : [ [ 4934 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 104,
+      "quote" : "They’re listed as high as to win the National Championship depending on where you shop, so there’s definitely an opportunity to cash in on them if you’re bullish on their ability to improve and blossom into a title contender.",
+      "alternatives" : [ [ 4947 ] ]
+    } ]
+  }, {
+    "id" : "m0343",
+    "sourceRow" : 343,
+    "split" : "CALIBRATION",
+    "type" : "comparison_query",
+    "query" : "Does the 'Zee Business' article claim that the India national cricket team played against Australia in the 2015 World Cup semi-final, while the 'TalkSport' article states that the England national teams are facing South Africa in both the Rugby World Cup and the ODI Cricket World Cup semi-finals, indicating different opponents for each country's national teams in their respective semi-final matches?",
+    "answer" : "Yes",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 134,
+      "quote" : "India were playing against Australia in the second semi-final of the 2015 World Cup in Sydney on March 26.",
+      "alternatives" : [ [ 6336 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 301,
+      "quote" : "It's crunch time for England in the World Cups as they face South Africa in the semi-final of the Rugby World Cup and in the ODI Cricket World Cup.",
+      "alternatives" : [ [ 13891 ] ]
+    } ]
+  }, {
+    "id" : "m0090",
+    "sourceRow" : 90,
+    "split" : "CALIBRATION",
+    "type" : "comparison_query",
+    "query" : "Does 'The Verge' claim that Google has the ability to resolve issues related to Android app distribution and in-app payment systems, while 'TechCrunch' accuses Google of anticompetitive behavior towards news publishers, indicating a difference in Google's impact on different industries?",
+    "answer" : "Yes",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 171,
+      "quote" : "For all the other benefits they get from Android, Google could solve this problem today if they wanted to.",
+      "alternatives" : [ [ 8234 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 15,
+      "quote" : "The Justice Department is focused on the deals Google makes — with Apple but also with Samsung and Mozilla and many others — to ensure it is the default search engine on practically every platform.",
+      "alternatives" : [ [ 474, 475 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 34,
+      "quote" : "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means.",
+      "alternatives" : [ [ 1143, 1144 ] ]
+    } ]
+  }, {
+    "id" : "m1527",
+    "sourceRow" : 1527,
+    "split" : "CALIBRATION",
+    "type" : "temporal_query",
+    "query" : "After Sporting News reported on Alejandro Mata's successful 31-yard field goal for Colorado on October 28, 2023, did the same news source report a successful or unsuccessful field goal attempt by Jayden Fielding in a later article?",
+    "answer" : "Unsuccessful",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 225,
+      "quote" : "The Buckeyes settled for a 52-yard field goal late in the first half, which Jayden Fielding missed wide left.",
+      "alternatives" : [ [ 10740 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 226,
+      "quote" : "His 31-yard field goal is good, and the Buffs take the first lead of the game on their first drive.",
+      "alternatives" : [ [ 10780 ] ]
+    } ]
+  }, {
+    "id" : "m0871",
+    "sourceRow" : 871,
+    "split" : "CALIBRATION",
+    "type" : "temporal_query",
+    "query" : "Has the redemption option for cash back rewards as statement credits for cardholders changed between the 'American Express Cash Magnet® card' as reported by Fortune before November 3, 2023, or the 'Fifth Third 1.67% Card' as reported by the same news source?",
+    "answer" : "no",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 471,
+      "quote" : "When you earn points with the Fifth Third 1.67% Card, you can use them toward a statement credit on your card to offset your balance.",
+      "alternatives" : [ [ 20298 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 472,
+      "quote" : "If you have the American Express Cash Magnet® card, you can redeem your cash back rewards for statement credits to your account.",
+      "alternatives" : [ [ 20342 ] ]
+    } ]
+  }, {
+    "id" : "m1256",
+    "sourceRow" : 1256,
+    "split" : "CALIBRATION",
+    "type" : "temporal_query",
+    "query" : "Between the report by The Verge on Apple's defense of its Google Search deal published before September 26, 2023, and the report by TechCrunch on the class action antitrust suit against Google published after that date, was there a change in the portrayal of Google's business practices from a perspective of necessity to one of alleged anticompetitive behavior?",
+    "answer" : "Yes",
+    "facts" : [ {
+      "id" : "f1",
+      "documentId" : 300,
+      "quote" : "But while this will probably come up later in the trial, Epic chose to focus more on simply painting Google as the bad guy on day one.",
+      "alternatives" : [ [ 13848, 13849 ] ]
+    }, {
+      "id" : "f2",
+      "documentId" : 15,
+      "quote" : "“Certainly there wasn’t a valid alternative to Google at the time,” Cue said.",
+      "alternatives" : [ [ 473 ] ]
+    }, {
+      "id" : "f3",
+      "documentId" : 34,
+      "quote" : "The case, filed by Arkansas-based publisher Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means.",
+      "alternatives" : [ [ 1143, 1144 ] ]
+    } ]
+  }, {
+    "id" : "m1865",
+    "sourceRow" : 1865,
+    "split" : "CALIBRATION",
+    "type" : "null_query",
+    "query" : "Considering the information from a CNBC article detailing Visa Inc's latest strategic partnership and a Bloomberg report on Visa Inc's financial performance in the last quarter, which single letter grade represents the combined assessment of Visa's market strategy effectiveness and its financial health as inferred from both sources?",
+    "answer" : "Insufficient information.",
+    "facts" : [ ]
+  } ],
+  "exclusions" : [ "CALIBRATION:row-2314:duplicate-question:m2314", "CALIBRATION:row-252:duplicate-question:m0252", "CALIBRATION:row-97:duplicate-question:m0097", "CALIBRATION:row-1594:duplicate-question:m1594", "CALIBRATION:row-2302:duplicate-question:m2302", "CALIBRATION:row-335:duplicate-question:m0335", "CALIBRATION:row-77:duplicate-question:m0077", "CALIBRATION:row-1682:duplicate-question:m1682", "CALIBRATION:row-1823:duplicate-question:m1823", "CALIBRATION:row-1350:duplicate-question:m1350", "CALIBRATION:row-594:duplicate-question:m0594", "CALIBRATION:row-2449:duplicate-question:m2449", "CALIBRATION:row-310:duplicate-question:m0310", "CALIBRATION:row-1228:duplicate-question:m1228", "CALIBRATION:row-1514:duplicate-question:m1514", "CALIBRATION:row-735:duplicate-question:m0735", "CALIBRATION:row-201:duplicate-question:m0201", "CALIBRATION:row-599:duplicate-question:m0599", "CALIBRATION:row-1693:duplicate-question:m1693", "CALIBRATION:row-1787:duplicate-question:m1787", "CALIBRATION:row-2503:duplicate-question:m2503", "CALIBRATION:row-1591:duplicate-question:m1591", "CALIBRATION:row-800:duplicate-question:m0800", "CALIBRATION:row-1797:duplicate-question:m1797", "CALIBRATION:row-1402:duplicate-question:m1402", "CALIBRATION:row-454:duplicate-question:m0454", "CALIBRATION:row-1711:duplicate-question:m1711", "CALIBRATION:row-2488:duplicate-question:m2488", "CALIBRATION:row-196:duplicate-question:m0196", "CALIBRATION:row-640:duplicate-question:m0640", "CALIBRATION:row-2425:duplicate-question:m2425", "CALIBRATION:row-1454:cross-split-related:m1682", "CALIBRATION:row-1727:duplicate-question:m1727", "CALIBRATION:row-2398:duplicate-question:m2398", "CALIBRATION:row-1273:duplicate-question:m1273", "CALIBRATION:row-926:duplicate-question:m0926", "CALIBRATION:row-500:duplicate-question:m0500", "CALIBRATION:row-461:duplicate-question:m0461", "CALIBRATION:row-574:cross-split-related:m0926", "CALIBRATION:row-1987:duplicate-question:m1987", "CALIBRATION:row-1748:duplicate-question:m1748", "CALIBRATION:row-1293:duplicate-question:m1293", "CALIBRATION:row-117:duplicate-question:m0117", "CALIBRATION:row-179:duplicate-question:m0179", "CALIBRATION:row-955:duplicate-question:m0955", "CALIBRATION:row-1487:duplicate-question:m1487", "CALIBRATION:row-128:duplicate-question:m0128", "CALIBRATION:row-1879:duplicate-question:m1879", "CALIBRATION:row-1415:duplicate-question:m1415", "CALIBRATION:row-374:duplicate-question:m0374" ]
+}
