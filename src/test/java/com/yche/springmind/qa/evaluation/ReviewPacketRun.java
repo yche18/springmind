@@ -27,6 +27,12 @@ class ReviewPacketRun {
         String hash = HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(snapshotBytes));
         if (!hash.equals(report.path("datasetSha256").asText())) throw new IllegalArgumentException("Report does not match captured snapshot");
         Map<String, String> notes = mapper.readValue(Path.of("evaluation/rerank/review-notes.json").toFile(), new TypeReference<>() {});
+        writePacket(capture, fixture, snapshot, report, notes);
+    }
+
+    static void writePacket(Path capture, RerankEvaluation.Dataset fixture, RerankEvaluation.Dataset snapshot,
+            com.fasterxml.jackson.databind.JsonNode report, Map<String, String> notes) throws Exception {
+        var mapper = RerankEvaluationRun.datasetMapper();
         String html = AnnotationReview.render(fixture, snapshot, report, notes);
         Files.writeString(capture.resolve("review.html"), html);
         List<Map<String, Object>> review = new ArrayList<>();

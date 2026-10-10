@@ -25,6 +25,6 @@ class AnnotationReviewTest {
         var report = new ObjectMapper().readTree("{\"rows\":[{\"id\":\"q1\",\"status\":\"APPLIED\",\"outputOrder\":[\"q1__b\"]}]}");
         String html = AnnotationReview.render(fixture, snapshot, report, Map.of("q1", "Review <this>"));
         assertThat(html).contains("标签尚未经过人工确认", "&lt;script&gt;", "&lt;private&gt;", "Distractor &amp; source",
-                "初始 0 分", "未召回", "本页没有模型生成的答案").doesNotContain("<script>", "<private>");
+                "当前 0 分", "未召回", "本页没有模型生成的答案").doesNotContain("<script>", "<private>");
     }
 }

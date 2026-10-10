@@ -132,6 +132,21 @@ six unanswerable cases. Do not change labels to match the model's preferences.
 The saved output ordering can be rescored after label corrections without another
 provider call. The capture remains synthetic even though its retrieval is real.
 
+For the recorded Northstar run, after editing only labels in `sample.json`:
+
+```bash
+mvn "-Dtest=OfflineRelabelRun" test
+```
+
+This offline-only entry point rejects changes to question/source text, verifies the
+original snapshot hash, and reuses recorded rankings. It writes `snapshot-v2.json`
+and `qwen-2s-v2.json` / `qwen-5s-v2.json`, then updates the review page/template.
+Original `snapshot.json` and Qwen reports remain byte-for-byte unchanged. Derived
+reports record source hashes, changed grades, zero new provider requests, and keep
+the original measured status/latency rather than timing the offline replay. The
+original capture's fixture hash is historical: do not bypass it in `ReviewPacketRun`
+after editing labels; use this explicit relabeling path instead.
+
 ### Custom dataset format
 
 Create a JSON file under `evaluation/rerank/local/`. The shape is:
@@ -164,8 +179,11 @@ The answer UI contains only selected evidence and is not a complete candidate
 - `candidates`: unique IDs in their original pre-rerank order (0..50 per question).
   Freeze query, candidates and labels for both sides. A relevant passage absent
   from the pool must remain absent; do not insert it to improve results.
-- `relevance`: integer human judgments, 0 irrelevant, 1 contextual, 2 partially
-  answering, 3 directly answering. Every positive grade counts as relevant for
+- `relevance`: integer judgments: 0 irrelevant; 1 background only, not direct
+  answer support; 2 directly supports part of the answer but requires additional
+  evidence; 3 a single passage suffices to answer the whole question. Multiple
+  retrieved passages do not automatically imply grade 2: independently sufficient
+  passages still get 3. Every positive grade counts as relevant for
   Hit/Recall/MRR; nDCG uses the graded values. Omitted IDs count as irrelevant.
   Judge the entire pool and include known relevant corpus passages outside it.
   Incomplete judgments make the reported recall conditional on those judgments.

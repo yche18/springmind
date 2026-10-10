@@ -40,6 +40,39 @@ synthetic-data artifacts are recorded here; no credentials are included.
 
 ## Observed results
 
+### Current grading revision: complete-answer-v2 (offline only)
+
+The user confirmed a uniform rubric: 3 = one passage suffices for the whole
+question; 2 = directly supports only part of the answer and needs other evidence;
+1 = background only; 0 = irrelevant. q17–q21 and q24 each require two complementary
+passages, now both graded 2. This changes 11 grades (q24's `support-hours` was
+already 2). q16 retains 3 for `external-ai`, which independently answers its
+yes/no question, and 1 for `group-access` background. Other labels are unchanged.
+
+The review page/template now use v2 labels. This rubric alignment does **not**
+claim all judgments have been independently human-reviewed. No Qwen request was
+made for this revision. The original texts, questions, input/output ordering,
+statuses, latency and raw reports are unchanged; v2 reports are derived artifacts.
+
+| Metric at k=5 | RRF with v2 labels | Qwen 2s with v2 labels | Qwen 5s with v2 labels |
+| --- | ---: | ---: | ---: |
+| Hit | 1.0000 | 1.0000 | 1.0000 |
+| Recall | 0.9583 | 1.0000 | 1.0000 |
+| MRR | 0.8764 | 1.0000 | 1.0000 |
+| nDCG | 0.8844 | 0.9967 | 0.9967 |
+
+Only nDCG changes: its macro delta is now 0.1123, previously 0.1174. q17–q21
+change both relevant grades equally, so their normalized scores are unchanged.
+q24 changes from unequal 2/3 to equal 2/2; its RRF nDCG becomes 0.6934 and Qwen
+nDCG becomes 0.9197. Equal weighting penalizes the second required passage being
+ranked third more than the old unequal weighting did. This is a judgment-rubric
+correction, not a change in model performance. Hit/Recall/MRR are unchanged.
+
+Reproduce without network calls: `mvn "-Dtest=OfflineRelabelRun" test`.
+The source-report hashes and 11 individual edits are embedded in both v2 reports.
+
+### Original recorded results (v1 labels, retained for audit)
+
 Metrics are macro-averaged over the 24 provisionally answerable questions. Every
 positive grade, including background grade 1, counts as relevant for Hit/Recall/MRR.
 The six unanswerable questions are excluded, not treated as correct refusals.
@@ -87,9 +120,9 @@ unknown; check the provider console rather than treating this experiment as free
 ## Review priorities and limits
 
 1. q16: whether `group-access` deserves background grade 1 or should be irrelevant.
-2. q17–q21 and q24: make the 2/3 grading convention consistent for multi-evidence
-   questions. q24 currently has grades 2 and 3 while several other multi-source
-   cases use two grade-3 labels. nDCG is sensitive to this choice.
+2. q17–q21 and q24: the 2/3 convention has now been aligned in v2 as documented
+   above. Continue checking the factual evidence; do not change grades to favor
+   the model. The original v1 labels remain in the frozen snapshot for audit.
 3. q25–q30: verify the whole corpus lacks the requested answer; do not confuse
    unanswerability with a retrieval miss or an actual model refusal.
 4. Review implicit zero grades too. The packet exposes all 480 question/source
@@ -105,8 +138,11 @@ improvements from these numbers. No chat model generated answers in this experim
 - `snapshot.json`: exact frozen candidate text/order plus provisional judgments.
 - `qwen-2s.json` / `qwen-5s.json`: unmodified evaluator outputs, including per-case
   ranks, statuses, measurements and the matching snapshot hash.
-- `review.html`: Chinese review packet based on the complete 5s replay.
-- `review-template.json`: pending human judgments, with all source grades explicit.
+- `snapshot-v2.json`: same frozen text/order, with the unified grading rubric.
+- `qwen-2s-v2.json` / `qwen-5s-v2.json`: offline rescoring of the recorded ranks,
+  including original report hashes and a label-change audit trail.
+- `review.html`: Chinese review packet based on the complete 5s replay, with v2 grades.
+- `review-template.json`: pending human judgments, with all current source grades explicit.
 
 JSON bytes are preserved by `.gitattributes` so the snapshot hash remains valid on
 different operating systems. Existing input order, output order and labels allow

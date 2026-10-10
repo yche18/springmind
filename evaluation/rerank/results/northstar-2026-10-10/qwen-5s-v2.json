@@ -1,0 +1,649 @@
+{
+  "schemaVersion" : 1,
+  "createdAt" : "2026-10-10T10:17:49.082998100Z",
+  "datasetSha256" : "6fc5869de0b06c3f7f9b00ff498ada9c085785131a0a38810c291bdaf4d46d35",
+  "provenance" : "RRF_SNAPSHOT",
+  "baseline" : "supplied RRF snapshot order",
+  "mode" : "OFFLINE_RELABEL",
+  "k" : 5,
+  "model" : "qwen3-rerank",
+  "timeoutMs" : 5000,
+  "plannedProviderRequests" : 0,
+  "previewCodePointLimit" : 4096,
+  "billedCost" : null,
+  "limitations" : "Ranking replay only; no generation, refusal, evidence-budget or end-to-end QA measurement. Unanswerable cases excluded from ranking averages. Fallbacks included. Cost unknown: consult provider billing; local token estimates are not billed usage. All relevant labels must be supplied, including missed candidates.",
+  "summary" : {
+    "cases" : 30,
+    "judgedAnswerableCases" : 24,
+    "unanswerableCases" : 6,
+    "statuses" : {
+      "APPLIED" : 30
+    },
+    "candidateRecall" : 1.0,
+    "baseline" : {
+      "hit" : 1.0,
+      "recall" : 0.9583333333333334,
+      "mrr" : 0.8763888888888888,
+      "ndcg" : 0.8843896502267969
+    },
+    "reranked" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 0.9966550328811744
+    },
+    "delta" : {
+      "hit" : 0.0,
+      "recall" : 0.04166666666666663,
+      "mrr" : 0.12361111111111123,
+      "ndcg" : 0.11226538265437747
+    },
+    "latencyP50Ms" : 346.4829,
+    "latencyP95Ms" : 400.9981
+  },
+  "rows" : [ {
+    "id" : "q01",
+    "category" : "direct-zh",
+    "inputOrder" : [ "q01__travel-domestic", "q01__travel-international", "q01__expense-deadline", "q01__support-hours", "q01__audit-retention", "q01__incident-p1", "q01__lost-device", "q01__backup-restore", "q01__password-reset", "q01__incident-p2", "q01__remote-standard", "q01__remote-exception", "q01__expense-receipt", "q01__document-delete", "q01__external-ai", "q01__group-access" ],
+    "outputOrder" : [ "q01__travel-domestic", "q01__travel-international", "q01__expense-receipt", "q01__expense-deadline", "q01__external-ai", "q01__incident-p2", "q01__remote-exception", "q01__remote-standard", "q01__backup-restore", "q01__document-delete", "q01__audit-retention", "q01__lost-device", "q01__password-reset", "q01__support-hours", "q01__group-access", "q01__incident-p1" ],
+    "status" : "APPLIED",
+    "latencyMs" : 1112.57,
+    "candidateRecall" : 1.0,
+    "baseline" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    },
+    "reranked" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "q02",
+    "category" : "direct-en",
+    "inputOrder" : [ "q02__travel-international", "q02__travel-domestic", "q02__expense-deadline", "q02__lost-device", "q02__incident-p2", "q02__backup-restore", "q02__remote-exception", "q02__remote-standard", "q02__support-hours", "q02__expense-receipt", "q02__audit-retention", "q02__external-ai", "q02__password-reset", "q02__incident-p1", "q02__document-delete", "q02__group-access" ],
+    "outputOrder" : [ "q02__travel-international", "q02__travel-domestic", "q02__expense-deadline", "q02__expense-receipt", "q02__remote-standard", "q02__lost-device", "q02__audit-retention", "q02__incident-p2", "q02__support-hours", "q02__remote-exception", "q02__backup-restore", "q02__external-ai", "q02__password-reset", "q02__group-access", "q02__incident-p1", "q02__document-delete" ],
+    "status" : "APPLIED",
+    "latencyMs" : 371.7281,
+    "candidateRecall" : 1.0,
+    "baseline" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    },
+    "reranked" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "q03",
+    "category" : "direct-zh",
+    "inputOrder" : [ "q03__remote-standard", "q03__remote-exception", "q03__support-hours", "q03__backup-restore", "q03__expense-deadline", "q03__document-delete", "q03__travel-domestic", "q03__travel-international", "q03__incident-p2", "q03__audit-retention", "q03__incident-p1", "q03__lost-device", "q03__password-reset", "q03__expense-receipt", "q03__group-access", "q03__external-ai" ],
+    "outputOrder" : [ "q03__remote-standard", "q03__support-hours", "q03__remote-exception", "q03__backup-restore", "q03__expense-deadline", "q03__lost-device", "q03__incident-p2", "q03__document-delete", "q03__expense-receipt", "q03__external-ai", "q03__travel-international", "q03__audit-retention", "q03__travel-domestic", "q03__group-access", "q03__password-reset", "q03__incident-p1" ],
+    "status" : "APPLIED",
+    "latencyMs" : 343.0614,
+    "candidateRecall" : 1.0,
+    "baseline" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    },
+    "reranked" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "q04",
+    "category" : "direct-en",
+    "inputOrder" : [ "q04__remote-exception", "q04__remote-standard", "q04__expense-receipt", "q04__external-ai", "q04__incident-p2", "q04__travel-international", "q04__password-reset", "q04__incident-p1", "q04__document-delete", "q04__backup-restore", "q04__expense-deadline", "q04__lost-device", "q04__audit-retention", "q04__support-hours", "q04__group-access", "q04__travel-domestic" ],
+    "outputOrder" : [ "q04__remote-exception", "q04__remote-standard", "q04__expense-receipt", "q04__travel-international", "q04__external-ai", "q04__backup-restore", "q04__support-hours", "q04__travel-domestic", "q04__expense-deadline", "q04__incident-p2", "q04__audit-retention", "q04__lost-device", "q04__incident-p1", "q04__group-access", "q04__password-reset", "q04__document-delete" ],
+    "status" : "APPLIED",
+    "latencyMs" : 337.0939,
+    "candidateRecall" : 1.0,
+    "baseline" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    },
+    "reranked" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "q05",
+    "category" : "direct-zh",
+    "inputOrder" : [ "q05__travel-international", "q05__travel-domestic", "q05__expense-deadline", "q05__backup-restore", "q05__audit-retention", "q05__support-hours", "q05__remote-exception", "q05__document-delete", "q05__remote-standard", "q05__lost-device", "q05__incident-p1", "q05__incident-p2", "q05__expense-receipt", "q05__password-reset", "q05__external-ai", "q05__group-access" ],
+    "outputOrder" : [ "q05__expense-deadline", "q05__expense-receipt", "q05__travel-international", "q05__incident-p2", "q05__travel-domestic", "q05__remote-exception", "q05__remote-standard", "q05__lost-device", "q05__audit-retention", "q05__support-hours", "q05__document-delete", "q05__backup-restore", "q05__incident-p1", "q05__external-ai", "q05__password-reset", "q05__group-access" ],
+    "status" : "APPLIED",
+    "latencyMs" : 400.9981,
+    "candidateRecall" : 1.0,
+    "baseline" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 0.3333333333333333,
+      "ndcg" : 0.5
+    },
+    "reranked" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "q06",
+    "category" : "direct-en",
+    "inputOrder" : [ "q06__expense-deadline", "q06__expense-receipt", "q06__incident-p2", "q06__external-ai", "q06__lost-device", "q06__remote-exception", "q06__document-delete", "q06__travel-international", "q06__incident-p1", "q06__password-reset", "q06__audit-retention", "q06__backup-restore", "q06__remote-standard", "q06__travel-domestic", "q06__support-hours", "q06__group-access" ],
+    "outputOrder" : [ "q06__expense-receipt", "q06__expense-deadline", "q06__travel-domestic", "q06__travel-international", "q06__incident-p2", "q06__audit-retention", "q06__lost-device", "q06__backup-restore", "q06__remote-exception", "q06__incident-p1", "q06__password-reset", "q06__remote-standard", "q06__external-ai", "q06__support-hours", "q06__group-access", "q06__document-delete" ],
+    "status" : "APPLIED",
+    "latencyMs" : 362.7413,
+    "candidateRecall" : 1.0,
+    "baseline" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 0.5,
+      "ndcg" : 0.6309297535714574
+    },
+    "reranked" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "q07",
+    "category" : "direct-zh",
+    "inputOrder" : [ "q07__group-access", "q07__external-ai", "q07__travel-domestic", "q07__incident-p2", "q07__audit-retention", "q07__travel-international", "q07__password-reset", "q07__remote-exception", "q07__backup-restore", "q07__support-hours", "q07__remote-standard", "q07__document-delete", "q07__lost-device", "q07__expense-receipt", "q07__expense-deadline", "q07__incident-p1" ],
+    "outputOrder" : [ "q07__group-access", "q07__external-ai", "q07__document-delete", "q07__remote-exception", "q07__support-hours", "q07__remote-standard", "q07__incident-p2", "q07__lost-device", "q07__backup-restore", "q07__password-reset", "q07__audit-retention", "q07__travel-domestic", "q07__expense-receipt", "q07__incident-p1", "q07__expense-deadline", "q07__travel-international" ],
+    "status" : "APPLIED",
+    "latencyMs" : 367.1931,
+    "candidateRecall" : 1.0,
+    "baseline" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    },
+    "reranked" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "q08",
+    "category" : "direct-en",
+    "inputOrder" : [ "q08__document-delete", "q08__backup-restore", "q08__remote-exception", "q08__group-access", "q08__support-hours", "q08__external-ai", "q08__expense-receipt", "q08__password-reset", "q08__lost-device", "q08__incident-p2", "q08__incident-p1", "q08__expense-deadline", "q08__remote-standard", "q08__audit-retention", "q08__travel-domestic", "q08__travel-international" ],
+    "outputOrder" : [ "q08__document-delete", "q08__backup-restore", "q08__audit-retention", "q08__incident-p2", "q08__remote-exception", "q08__lost-device", "q08__incident-p1", "q08__travel-domestic", "q08__external-ai", "q08__expense-deadline", "q08__support-hours", "q08__password-reset", "q08__remote-standard", "q08__group-access", "q08__expense-receipt", "q08__travel-international" ],
+    "status" : "APPLIED",
+    "latencyMs" : 377.2999,
+    "candidateRecall" : 1.0,
+    "baseline" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    },
+    "reranked" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "q09",
+    "category" : "direct-zh",
+    "inputOrder" : [ "q09__document-delete", "q09__backup-restore", "q09__audit-retention", "q09__incident-p1", "q09__external-ai", "q09__incident-p2", "q09__group-access", "q09__lost-device", "q09__password-reset", "q09__support-hours", "q09__expense-deadline", "q09__expense-receipt", "q09__remote-exception", "q09__remote-standard", "q09__travel-domestic", "q09__travel-international" ],
+    "outputOrder" : [ "q09__backup-restore", "q09__document-delete", "q09__audit-retention", "q09__lost-device", "q09__support-hours", "q09__incident-p2", "q09__remote-exception", "q09__expense-deadline", "q09__travel-domestic", "q09__expense-receipt", "q09__remote-standard", "q09__external-ai", "q09__group-access", "q09__incident-p1", "q09__password-reset", "q09__travel-international" ],
+    "status" : "APPLIED",
+    "latencyMs" : 342.8738,
+    "candidateRecall" : 1.0,
+    "baseline" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 0.5,
+      "ndcg" : 0.6309297535714574
+    },
+    "reranked" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "q10",
+    "category" : "direct-en",
+    "inputOrder" : [ "q10__audit-retention", "q10__external-ai", "q10__travel-domestic", "q10__remote-exception", "q10__expense-receipt", "q10__incident-p2", "q10__remote-standard", "q10__expense-deadline", "q10__support-hours", "q10__lost-device", "q10__document-delete", "q10__incident-p1", "q10__group-access", "q10__password-reset", "q10__backup-restore", "q10__travel-international" ],
+    "outputOrder" : [ "q10__audit-retention", "q10__backup-restore", "q10__document-delete", "q10__lost-device", "q10__expense-deadline", "q10__incident-p2", "q10__remote-exception", "q10__expense-receipt", "q10__incident-p1", "q10__external-ai", "q10__support-hours", "q10__remote-standard", "q10__group-access", "q10__travel-domestic", "q10__travel-international", "q10__password-reset" ],
+    "status" : "APPLIED",
+    "latencyMs" : 341.375,
+    "candidateRecall" : 1.0,
+    "baseline" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    },
+    "reranked" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "q11",
+    "category" : "paraphrase-zh",
+    "inputOrder" : [ "q11__lost-device", "q11__audit-retention", "q11__document-delete", "q11__support-hours", "q11__incident-p2", "q11__remote-exception", "q11__incident-p1", "q11__expense-deadline", "q11__backup-restore", "q11__remote-standard", "q11__external-ai", "q11__expense-receipt", "q11__password-reset", "q11__group-access", "q11__travel-domestic", "q11__travel-international" ],
+    "outputOrder" : [ "q11__lost-device", "q11__incident-p2", "q11__support-hours", "q11__incident-p1", "q11__remote-standard", "q11__expense-deadline", "q11__backup-restore", "q11__remote-exception", "q11__audit-retention", "q11__password-reset", "q11__document-delete", "q11__expense-receipt", "q11__travel-international", "q11__travel-domestic", "q11__group-access", "q11__external-ai" ],
+    "status" : "APPLIED",
+    "latencyMs" : 361.8973,
+    "candidateRecall" : 1.0,
+    "baseline" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    },
+    "reranked" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "q12",
+    "category" : "paraphrase-en",
+    "inputOrder" : [ "q12__password-reset", "q12__incident-p2", "q12__expense-receipt", "q12__lost-device", "q12__incident-p1", "q12__external-ai", "q12__audit-retention", "q12__remote-exception", "q12__expense-deadline", "q12__support-hours", "q12__group-access", "q12__travel-domestic", "q12__remote-standard", "q12__document-delete", "q12__travel-international", "q12__backup-restore" ],
+    "outputOrder" : [ "q12__password-reset", "q12__lost-device", "q12__remote-exception", "q12__group-access", "q12__incident-p2", "q12__travel-domestic", "q12__expense-deadline", "q12__backup-restore", "q12__expense-receipt", "q12__travel-international", "q12__incident-p1", "q12__document-delete", "q12__support-hours", "q12__external-ai", "q12__audit-retention", "q12__remote-standard" ],
+    "status" : "APPLIED",
+    "latencyMs" : 361.9487,
+    "candidateRecall" : 1.0,
+    "baseline" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    },
+    "reranked" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "q13",
+    "category" : "direct-zh",
+    "inputOrder" : [ "q13__incident-p1", "q13__support-hours", "q13__incident-p2", "q13__audit-retention", "q13__backup-restore", "q13__expense-deadline", "q13__lost-device", "q13__remote-exception", "q13__document-delete", "q13__remote-standard", "q13__expense-receipt", "q13__external-ai", "q13__password-reset", "q13__travel-domestic", "q13__travel-international", "q13__group-access" ],
+    "outputOrder" : [ "q13__incident-p1", "q13__incident-p2", "q13__support-hours", "q13__lost-device", "q13__remote-exception", "q13__backup-restore", "q13__expense-deadline", "q13__audit-retention", "q13__remote-standard", "q13__document-delete", "q13__password-reset", "q13__expense-receipt", "q13__external-ai", "q13__travel-domestic", "q13__group-access", "q13__travel-international" ],
+    "status" : "APPLIED",
+    "latencyMs" : 346.4829,
+    "candidateRecall" : 1.0,
+    "baseline" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    },
+    "reranked" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "q14",
+    "category" : "direct-en",
+    "inputOrder" : [ "q14__incident-p2", "q14__incident-p1", "q14__expense-deadline", "q14__external-ai", "q14__expense-receipt", "q14__remote-exception", "q14__backup-restore", "q14__audit-retention", "q14__support-hours", "q14__document-delete", "q14__lost-device", "q14__remote-standard", "q14__password-reset", "q14__travel-domestic", "q14__group-access", "q14__travel-international" ],
+    "outputOrder" : [ "q14__incident-p2", "q14__incident-p1", "q14__lost-device", "q14__expense-deadline", "q14__support-hours", "q14__backup-restore", "q14__remote-exception", "q14__audit-retention", "q14__expense-receipt", "q14__remote-standard", "q14__document-delete", "q14__group-access", "q14__external-ai", "q14__password-reset", "q14__travel-domestic", "q14__travel-international" ],
+    "status" : "APPLIED",
+    "latencyMs" : 344.0311,
+    "candidateRecall" : 1.0,
+    "baseline" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    },
+    "reranked" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "q15",
+    "category" : "direct-zh",
+    "inputOrder" : [ "q15__support-hours", "q15__remote-standard", "q15__incident-p2", "q15__remote-exception", "q15__travel-international", "q15__incident-p1", "q15__travel-domestic", "q15__expense-deadline", "q15__backup-restore", "q15__lost-device", "q15__audit-retention", "q15__password-reset", "q15__document-delete", "q15__external-ai", "q15__expense-receipt", "q15__group-access" ],
+    "outputOrder" : [ "q15__support-hours", "q15__remote-standard", "q15__incident-p2", "q15__lost-device", "q15__travel-domestic", "q15__external-ai", "q15__password-reset", "q15__group-access", "q15__backup-restore", "q15__incident-p1", "q15__expense-receipt", "q15__remote-exception", "q15__travel-international", "q15__document-delete", "q15__expense-deadline", "q15__audit-retention" ],
+    "status" : "APPLIED",
+    "latencyMs" : 362.6163,
+    "candidateRecall" : 1.0,
+    "baseline" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    },
+    "reranked" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "q16",
+    "category" : "paraphrase-en",
+    "inputOrder" : [ "q16__external-ai", "q16__group-access", "q16__document-delete", "q16__travel-domestic", "q16__expense-receipt", "q16__incident-p2", "q16__password-reset", "q16__remote-exception", "q16__expense-deadline", "q16__incident-p1", "q16__support-hours", "q16__audit-retention", "q16__lost-device", "q16__backup-restore", "q16__remote-standard", "q16__travel-international" ],
+    "outputOrder" : [ "q16__external-ai", "q16__group-access", "q16__remote-standard", "q16__remote-exception", "q16__backup-restore", "q16__expense-deadline", "q16__travel-domestic", "q16__incident-p2", "q16__lost-device", "q16__document-delete", "q16__audit-retention", "q16__support-hours", "q16__travel-international", "q16__incident-p1", "q16__password-reset", "q16__expense-receipt" ],
+    "status" : "APPLIED",
+    "latencyMs" : 369.4241,
+    "candidateRecall" : 1.0,
+    "baseline" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    },
+    "reranked" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "q17",
+    "category" : "multi-evidence-zh",
+    "inputOrder" : [ "q17__travel-domestic", "q17__travel-international", "q17__expense-deadline", "q17__support-hours", "q17__incident-p1", "q17__backup-restore", "q17__password-reset", "q17__remote-standard", "q17__group-access", "q17__incident-p2", "q17__remote-exception", "q17__external-ai", "q17__audit-retention", "q17__expense-receipt", "q17__lost-device", "q17__document-delete" ],
+    "outputOrder" : [ "q17__travel-domestic", "q17__travel-international", "q17__expense-receipt", "q17__expense-deadline", "q17__remote-exception", "q17__incident-p2", "q17__external-ai", "q17__remote-standard", "q17__support-hours", "q17__backup-restore", "q17__lost-device", "q17__group-access", "q17__audit-retention", "q17__incident-p1", "q17__document-delete", "q17__password-reset" ],
+    "status" : "APPLIED",
+    "latencyMs" : 360.0139,
+    "candidateRecall" : 1.0,
+    "baseline" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    },
+    "reranked" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "q18",
+    "category" : "multi-evidence-en",
+    "inputOrder" : [ "q18__remote-exception", "q18__remote-standard", "q18__lost-device", "q18__expense-receipt", "q18__backup-restore", "q18__document-delete", "q18__travel-domestic", "q18__support-hours", "q18__external-ai", "q18__expense-deadline", "q18__incident-p2", "q18__audit-retention", "q18__incident-p1", "q18__password-reset", "q18__travel-international", "q18__group-access" ],
+    "outputOrder" : [ "q18__remote-exception", "q18__remote-standard", "q18__audit-retention", "q18__expense-deadline", "q18__incident-p2", "q18__backup-restore", "q18__support-hours", "q18__incident-p1", "q18__travel-international", "q18__lost-device", "q18__password-reset", "q18__travel-domestic", "q18__expense-receipt", "q18__document-delete", "q18__external-ai", "q18__group-access" ],
+    "status" : "APPLIED",
+    "latencyMs" : 381.7085,
+    "candidateRecall" : 1.0,
+    "baseline" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    },
+    "reranked" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "q19",
+    "category" : "multi-evidence-zh",
+    "inputOrder" : [ "q19__backup-restore", "q19__incident-p1", "q19__expense-deadline", "q19__support-hours", "q19__audit-retention", "q19__remote-standard", "q19__remote-exception", "q19__document-delete", "q19__incident-p2", "q19__external-ai", "q19__group-access", "q19__expense-receipt", "q19__lost-device", "q19__travel-international", "q19__password-reset", "q19__travel-domestic" ],
+    "outputOrder" : [ "q19__backup-restore", "q19__document-delete", "q19__audit-retention", "q19__support-hours", "q19__expense-deadline", "q19__incident-p2", "q19__remote-exception", "q19__lost-device", "q19__expense-receipt", "q19__travel-domestic", "q19__group-access", "q19__remote-standard", "q19__external-ai", "q19__incident-p1", "q19__password-reset", "q19__travel-international" ],
+    "status" : "APPLIED",
+    "latencyMs" : 351.2899,
+    "candidateRecall" : 1.0,
+    "baseline" : {
+      "hit" : 1.0,
+      "recall" : 0.5,
+      "mrr" : 1.0,
+      "ndcg" : 0.6131471927654584
+    },
+    "reranked" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "q20",
+    "category" : "multi-evidence-en",
+    "inputOrder" : [ "q20__incident-p2", "q20__expense-deadline", "q20__incident-p1", "q20__support-hours", "q20__audit-retention", "q20__remote-exception", "q20__expense-receipt", "q20__backup-restore", "q20__lost-device", "q20__remote-standard", "q20__travel-domestic", "q20__travel-international", "q20__external-ai", "q20__password-reset", "q20__document-delete", "q20__group-access" ],
+    "outputOrder" : [ "q20__incident-p2", "q20__incident-p1", "q20__support-hours", "q20__expense-deadline", "q20__lost-device", "q20__external-ai", "q20__audit-retention", "q20__remote-standard", "q20__remote-exception", "q20__group-access", "q20__travel-domestic", "q20__expense-receipt", "q20__backup-restore", "q20__password-reset", "q20__travel-international", "q20__document-delete" ],
+    "status" : "APPLIED",
+    "latencyMs" : 343.9049,
+    "candidateRecall" : 1.0,
+    "baseline" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 0.9197207891481876
+    },
+    "reranked" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "q21",
+    "category" : "multi-evidence-zh",
+    "inputOrder" : [ "q21__password-reset", "q21__incident-p2", "q21__support-hours", "q21__incident-p1", "q21__expense-deadline", "q21__audit-retention", "q21__group-access", "q21__expense-receipt", "q21__travel-international", "q21__remote-exception", "q21__external-ai", "q21__travel-domestic", "q21__document-delete", "q21__remote-standard", "q21__lost-device", "q21__backup-restore" ],
+    "outputOrder" : [ "q21__expense-deadline", "q21__expense-receipt", "q21__travel-domestic", "q21__audit-retention", "q21__external-ai", "q21__travel-international", "q21__remote-exception", "q21__support-hours", "q21__incident-p2", "q21__lost-device", "q21__backup-restore", "q21__document-delete", "q21__incident-p1", "q21__password-reset", "q21__remote-standard", "q21__group-access" ],
+    "status" : "APPLIED",
+    "latencyMs" : 326.166,
+    "candidateRecall" : 1.0,
+    "baseline" : {
+      "hit" : 1.0,
+      "recall" : 0.5,
+      "mrr" : 0.2,
+      "ndcg" : 0.23719771276929622
+    },
+    "reranked" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "q22",
+    "category" : "paraphrase-en",
+    "inputOrder" : [ "q22__group-access", "q22__document-delete", "q22__external-ai", "q22__remote-exception", "q22__incident-p2", "q22__password-reset", "q22__expense-receipt", "q22__audit-retention", "q22__lost-device", "q22__support-hours", "q22__incident-p1", "q22__backup-restore", "q22__remote-standard", "q22__expense-deadline", "q22__travel-domestic", "q22__travel-international" ],
+    "outputOrder" : [ "q22__group-access", "q22__document-delete", "q22__external-ai", "q22__lost-device", "q22__incident-p2", "q22__audit-retention", "q22__incident-p1", "q22__password-reset", "q22__remote-standard", "q22__support-hours", "q22__backup-restore", "q22__travel-international", "q22__travel-domestic", "q22__remote-exception", "q22__expense-deadline", "q22__expense-receipt" ],
+    "status" : "APPLIED",
+    "latencyMs" : 345.6864,
+    "candidateRecall" : 1.0,
+    "baseline" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    },
+    "reranked" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "q23",
+    "category" : "paraphrase-zh",
+    "inputOrder" : [ "q23__document-delete", "q23__external-ai", "q23__group-access", "q23__expense-receipt", "q23__backup-restore", "q23__incident-p1", "q23__password-reset", "q23__incident-p2", "q23__lost-device", "q23__remote-exception", "q23__audit-retention", "q23__expense-deadline", "q23__support-hours", "q23__travel-domestic", "q23__remote-standard", "q23__travel-international" ],
+    "outputOrder" : [ "q23__document-delete", "q23__backup-restore", "q23__lost-device", "q23__incident-p2", "q23__expense-receipt", "q23__audit-retention", "q23__support-hours", "q23__incident-p1", "q23__group-access", "q23__password-reset", "q23__external-ai", "q23__expense-deadline", "q23__travel-international", "q23__remote-standard", "q23__remote-exception", "q23__travel-domestic" ],
+    "status" : "APPLIED",
+    "latencyMs" : 344.0002,
+    "candidateRecall" : 1.0,
+    "baseline" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    },
+    "reranked" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "q24",
+    "category" : "multi-evidence-en",
+    "inputOrder" : [ "q24__incident-p2", "q24__support-hours", "q24__incident-p1", "q24__lost-device", "q24__backup-restore", "q24__document-delete", "q24__remote-exception", "q24__expense-receipt", "q24__remote-standard", "q24__group-access", "q24__expense-deadline", "q24__external-ai", "q24__password-reset", "q24__audit-retention", "q24__travel-domestic", "q24__travel-international" ],
+    "outputOrder" : [ "q24__incident-p1", "q24__incident-p2", "q24__support-hours", "q24__lost-device", "q24__backup-restore", "q24__remote-exception", "q24__expense-deadline", "q24__password-reset", "q24__remote-standard", "q24__expense-receipt", "q24__document-delete", "q24__audit-retention", "q24__external-ai", "q24__group-access", "q24__travel-domestic", "q24__travel-international" ],
+    "status" : "APPLIED",
+    "latencyMs" : 341.5433,
+    "candidateRecall" : 1.0,
+    "baseline" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 0.5,
+      "ndcg" : 0.6934264036172708
+    },
+    "reranked" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 0.9197207891481876
+    }
+  }, {
+    "id" : "q25",
+    "category" : "unanswerable-zh",
+    "inputOrder" : [ "q25__expense-deadline", "q25__travel-international", "q25__remote-standard", "q25__remote-exception", "q25__travel-domestic", "q25__backup-restore", "q25__audit-retention", "q25__support-hours", "q25__incident-p2", "q25__document-delete", "q25__lost-device", "q25__incident-p1", "q25__group-access", "q25__password-reset", "q25__expense-receipt", "q25__external-ai" ],
+    "outputOrder" : [ "q25__remote-exception", "q25__expense-receipt", "q25__audit-retention", "q25__backup-restore", "q25__travel-domestic", "q25__password-reset", "q25__travel-international", "q25__remote-standard", "q25__external-ai", "q25__support-hours", "q25__incident-p2", "q25__expense-deadline", "q25__document-delete", "q25__lost-device", "q25__group-access", "q25__incident-p1" ],
+    "status" : "APPLIED",
+    "latencyMs" : 345.513,
+    "candidateRecall" : null,
+    "baseline" : null,
+    "reranked" : null
+  }, {
+    "id" : "q26",
+    "category" : "unanswerable-en",
+    "inputOrder" : [ "q26__external-ai", "q26__travel-domestic", "q26__remote-exception", "q26__incident-p2", "q26__expense-receipt", "q26__remote-standard", "q26__password-reset", "q26__expense-deadline", "q26__incident-p1", "q26__document-delete", "q26__support-hours", "q26__backup-restore", "q26__travel-international", "q26__lost-device", "q26__group-access", "q26__audit-retention" ],
+    "outputOrder" : [ "q26__expense-deadline", "q26__expense-receipt", "q26__external-ai", "q26__audit-retention", "q26__group-access", "q26__document-delete", "q26__remote-exception", "q26__remote-standard", "q26__incident-p2", "q26__backup-restore", "q26__password-reset", "q26__travel-domestic", "q26__travel-international", "q26__incident-p1", "q26__support-hours", "q26__lost-device" ],
+    "status" : "APPLIED",
+    "latencyMs" : 340.4425,
+    "candidateRecall" : null,
+    "baseline" : null,
+    "reranked" : null
+  }, {
+    "id" : "q27",
+    "category" : "unanswerable-zh",
+    "inputOrder" : [ "q27__support-hours", "q27__travel-international", "q27__remote-standard", "q27__travel-domestic", "q27__remote-exception", "q27__lost-device", "q27__incident-p2", "q27__expense-deadline", "q27__incident-p1", "q27__backup-restore", "q27__audit-retention", "q27__document-delete", "q27__password-reset", "q27__external-ai", "q27__group-access", "q27__expense-receipt" ],
+    "outputOrder" : [ "q27__support-hours", "q27__expense-receipt", "q27__external-ai", "q27__travel-domestic", "q27__remote-exception", "q27__incident-p2", "q27__remote-standard", "q27__audit-retention", "q27__incident-p1", "q27__travel-international", "q27__group-access", "q27__lost-device", "q27__password-reset", "q27__expense-deadline", "q27__backup-restore", "q27__document-delete" ],
+    "status" : "APPLIED",
+    "latencyMs" : 339.4632,
+    "candidateRecall" : null,
+    "baseline" : null,
+    "reranked" : null
+  }, {
+    "id" : "q28",
+    "category" : "unanswerable-en",
+    "inputOrder" : [ "q28__lost-device", "q28__external-ai", "q28__document-delete", "q28__support-hours", "q28__password-reset", "q28__travel-domestic", "q28__remote-exception", "q28__group-access", "q28__expense-receipt", "q28__remote-standard", "q28__expense-deadline", "q28__travel-international", "q28__incident-p2", "q28__audit-retention", "q28__incident-p1", "q28__backup-restore" ],
+    "outputOrder" : [ "q28__support-hours", "q28__expense-deadline", "q28__travel-domestic", "q28__incident-p2", "q28__travel-international", "q28__group-access", "q28__expense-receipt", "q28__incident-p1", "q28__lost-device", "q28__password-reset", "q28__document-delete", "q28__remote-standard", "q28__audit-retention", "q28__backup-restore", "q28__external-ai", "q28__remote-exception" ],
+    "status" : "APPLIED",
+    "latencyMs" : 335.8371,
+    "candidateRecall" : null,
+    "baseline" : null,
+    "reranked" : null
+  }, {
+    "id" : "q29",
+    "category" : "unanswerable-zh",
+    "inputOrder" : [ "q29__backup-restore", "q29__document-delete", "q29__incident-p1", "q29__expense-deadline", "q29__travel-international", "q29__travel-domestic", "q29__audit-retention", "q29__lost-device", "q29__incident-p2", "q29__remote-exception", "q29__support-hours", "q29__remote-standard", "q29__password-reset", "q29__external-ai", "q29__expense-receipt", "q29__group-access" ],
+    "outputOrder" : [ "q29__incident-p2", "q29__support-hours", "q29__expense-deadline", "q29__expense-receipt", "q29__lost-device", "q29__document-delete", "q29__remote-exception", "q29__password-reset", "q29__audit-retention", "q29__remote-standard", "q29__incident-p1", "q29__backup-restore", "q29__travel-domestic", "q29__travel-international", "q29__group-access", "q29__external-ai" ],
+    "status" : "APPLIED",
+    "latencyMs" : 361.7274,
+    "candidateRecall" : null,
+    "baseline" : null,
+    "reranked" : null
+  }, {
+    "id" : "q30",
+    "category" : "unanswerable-en",
+    "inputOrder" : [ "q30__remote-exception", "q30__expense-receipt", "q30__incident-p2", "q30__lost-device", "q30__remote-standard", "q30__expense-deadline", "q30__support-hours", "q30__document-delete", "q30__password-reset", "q30__audit-retention", "q30__incident-p1", "q30__backup-restore", "q30__travel-international", "q30__travel-domestic", "q30__group-access", "q30__external-ai" ],
+    "outputOrder" : [ "q30__support-hours", "q30__external-ai", "q30__incident-p2", "q30__expense-receipt", "q30__audit-retention", "q30__remote-exception", "q30__expense-deadline", "q30__travel-international", "q30__incident-p1", "q30__backup-restore", "q30__remote-standard", "q30__travel-domestic", "q30__lost-device", "q30__group-access", "q30__password-reset", "q30__document-delete" ],
+    "status" : "APPLIED",
+    "latencyMs" : 351.7792,
+    "candidateRecall" : null,
+    "baseline" : null,
+    "reranked" : null
+  } ],
+  "originalMode" : "LIVE_FIXED_POOL",
+  "newProviderRequests" : 0,
+  "originalPlannedProviderRequests" : 30,
+  "annotationRevision" : "complete-answer-v2",
+  "annotationStatus" : "RUBRIC_ALIGNED_OTHER_JUDGMENTS_PENDING_REVIEW",
+  "sourceDatasetSha256" : "864c3ed7f88bfec7ba46093a385f1e6e440760684dd35faa04ffdf2a38773883",
+  "sourceReportSha256" : "079d8ed2cb30028781a3f131d364439a221e2ae9577949212b5cd1296bdce294",
+  "recomputedAt" : "2026-10-10T11:14:31.793867800Z",
+  "labelChanges" : [ {
+    "after" : 2,
+    "before" : 3,
+    "questionId" : "q17",
+    "evidenceId" : "q17__travel-domestic"
+  }, {
+    "after" : 2,
+    "before" : 3,
+    "questionId" : "q17",
+    "evidenceId" : "q17__travel-international"
+  }, {
+    "after" : 2,
+    "before" : 3,
+    "questionId" : "q18",
+    "evidenceId" : "q18__remote-exception"
+  }, {
+    "after" : 2,
+    "before" : 3,
+    "questionId" : "q18",
+    "evidenceId" : "q18__remote-standard"
+  }, {
+    "after" : 2,
+    "before" : 3,
+    "questionId" : "q19",
+    "evidenceId" : "q19__backup-restore"
+  }, {
+    "after" : 2,
+    "before" : 3,
+    "questionId" : "q19",
+    "evidenceId" : "q19__document-delete"
+  }, {
+    "after" : 2,
+    "before" : 3,
+    "questionId" : "q20",
+    "evidenceId" : "q20__incident-p1"
+  }, {
+    "after" : 2,
+    "before" : 3,
+    "questionId" : "q20",
+    "evidenceId" : "q20__incident-p2"
+  }, {
+    "after" : 2,
+    "before" : 3,
+    "questionId" : "q21",
+    "evidenceId" : "q21__expense-deadline"
+  }, {
+    "after" : 2,
+    "before" : 3,
+    "questionId" : "q21",
+    "evidenceId" : "q21__expense-receipt"
+  }, {
+    "after" : 2,
+    "before" : 3,
+    "questionId" : "q24",
+    "evidenceId" : "q24__incident-p1"
+  } ]
+}

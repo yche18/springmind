@@ -36,6 +36,11 @@ final class AnnotationReview {
         html.append("<p>模型：<code>").append(escape(report.path("model").asText())).append("</code>；截止 k=")
                 .append(report.path("k").asInt()).append("；超时 ").append(report.path("timeoutMs").asInt())
                 .append(" ms；调用状态：<code>").append(escape(report.path("summary").path("statuses").toString())).append("</code></p>");
+        if ("OFFLINE_RELABEL".equals(report.path("mode").asText())) {
+            html.append("<p class='notice'>当前采用统一分级 v2：q17–q21、q24 的两份必要证据均为 2 分。")
+                    .append("只更新标签并离线重算，未再次调用 Qwen；排名、状态和耗时均沿用原始实测。")
+                    .append("评分口径已按用户要求统一，但不表示其余标签全部经过人工确认。</p>");
+        }
         html.append("<table class='metric'><tr><th>指标（").append(report.path("summary").path("judgedAnswerableCases").asInt())
                 .append(" 道有答案题）</th><th>原始 RRF</th><th>Qwen 后</th><th>差值</th></tr>");
         for (String metric : List.of("hit", "recall", "mrr", "ndcg")) {
@@ -48,9 +53,9 @@ final class AnnotationReview {
                 .append(" / ").append(number(report.path("summary").path("latencyP95Ms"))).append(" ms。</p>")
                 .append("<p>1～3 分在当前 Hit/Recall/MRR 中都计为相关；nDCG 区分等级。6 道无答案题不计入这些平均分，也未测拒答率。")
                 .append("候选仅 16 份短英文资料，全部召回不是大规模检索能力的证明。费用以服务商账单为准。</p></div>")
-                .append("<div class='card'><h2>复核口径</h2><p>3：直接支持答案；2：支持部分答案；1：背景相关但不足以回答；0：不支持。")
-                .append("多证据题的 2/3 分必须统一。所有未列为正相关的资料当前默认 0 分，这些也是待审判断。</p>")
-                .append("<p class='flag'>优先检查 q16 的背景证据，以及 q17–q21、q24 的多证据分级；q25–q30 需核对整个语料确实无答案。</p><nav>");
+                .append("<div class='card'><h2>复核口径</h2><p>3：单份证据足以完整回答整个问题；2：直接支持部分答案，完整回答还需要其他证据；1：仅提供背景，不能直接支持答案；0：无关。")
+                .append("不能因检索到多份证据就自动降分：若单份已能完整回答，仍为 3 分。所有默认 0 分项也需要复核。</p>")
+                .append("<p class='flag'>优先检查 q16 的背景证据；q25–q30 需核对整个语料确实无答案。多证据题的分级已按统一口径修订。</p><nav>");
         for (var example : snapshot.cases()) html.append("<a href='#").append(escape(example.id())).append("'>").append(escape(example.id())).append("</a>");
         html.append("</nav></div>");
         for (var example : snapshot.cases()) {
@@ -62,7 +67,7 @@ final class AnnotationReview {
                     .append(escape(example.query())).append("</h2><p><strong>待确认：</strong>").append(escape(notes.get(example.id())))
                     .append("</p><p class='muted'>分类：").append(escape(example.category())).append("；精排状态：")
                     .append(escape(row.path("status").asText())).append("。本页没有模型生成的答案。</p>")
-                    .append("<table><tr><th>初始正相关证据</th><th>初始分数</th><th>RRF 排名</th><th>精排排名</th></tr>");
+                    .append("<table><tr><th>当前正相关证据</th><th>当前分数</th><th>RRF 排名</th><th>精排排名</th></tr>");
             if (example.relevance().isEmpty()) html.append("<tr><td colspan='4'>当前判断：无答案，全部证据为 0 分。需人工确认。</td></tr>");
             example.relevance().forEach((id, grade) -> html.append("<tr><td>").append(escape(sourceId(id))).append("</td><td>")
                     .append(grade).append("</td><td>").append(rank(example.candidates(), id)).append("</td><td>")
@@ -70,11 +75,11 @@ final class AnnotationReview {
             html.append("</table><details><summary>查看精排前后 Top 5（只用于定位，不用于决定标签）</summary><p>RRF：")
                     .append(escape(example.candidates().stream().limit(5).map(AnnotationReview::sourceId).toList().toString()))
                     .append("</p><p>Qwen：").append(escape(output.stream().limit(5).map(AnnotationReview::sourceId).toList().toString()))
-                    .append("</p></details><details><summary>复核全部 16 份原文与初始标签（包含默认 0 分项）</summary>");
+                    .append("</p></details><details><summary>复核全部 16 份原文与当前标签（包含默认 0 分项）</summary>");
             for (var source : fixture.documents().entrySet()) {
                 String id = RetrievalSnapshot.key(example.id(), source.getKey());
                 int grade = example.relevance().getOrDefault(id, 0);
-                html.append("<h3>").append(escape(source.getKey())).append(" · 初始 ").append(grade).append(" 分</h3><blockquote>")
+                html.append("<h3>").append(escape(source.getKey())).append(" · 当前 ").append(grade).append(" 分</h3><blockquote>")
                         .append(escape(source.getValue())).append("</blockquote>");
             }
             html.append("</details><p>复核结论：□ 保持初稿　□ 修改相关性　□ 修改有/无答案判断　□ 问题需要重写</p>")
