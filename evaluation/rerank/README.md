@@ -12,6 +12,11 @@ English. Candidate ordering is hand-authored, **not measured RRF output**. Use i
 to exercise the tooling/API, not as evidence of production quality.
 Some relevant passages are deliberately below rank five.
 
+An initial run through the real local ingestion/retrieval stack and Qwen is now
+recorded in [the Northstar experiment](results/northstar-2026-10-10/README.md),
+including both timeout rounds and a [Chinese annotation-review packet](results/northstar-2026-10-10/review.html).
+Those labels are still provisional; the measurements are not production claims.
+
 ## 1. Offline smoke check (no credentials or charges)
 
 Use Java 21 from the repository root:
