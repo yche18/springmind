@@ -6,7 +6,7 @@ import java.time.Instant;
 import java.util.*;
 import static org.assertj.core.api.Assertions.*;
 
-/** Verifies the new provisional experiment without contacting models or local infrastructure. */
+/** Verifies the reviewed experiment without contacting models or local infrastructure. */
 class RecordedExtensionTest {
     private static final Path ROOT = Path.of("evaluation/retrieval/results/harborview-2026-10-10");
 
@@ -19,8 +19,9 @@ class RecordedExtensionTest {
     }
 
     private ExtensionEvaluation.Comparison recompute() throws Exception {
-        return ExtensionEvaluation.compare(ExtensionFixture.read(), corpus(), capture(), RetrievalAblation.hash(ROOT.resolve("corpus.json")),
+        var comparison = ExtensionEvaluation.compare(ExtensionFixture.read(), corpus(), capture(), RetrievalAblation.hash(ROOT.resolve("corpus.json")),
                 RetrievalAblation.hash(ROOT.resolve("capture.json")));
+        return ExtensionReviewApproval.apply(ROOT, corpus(), comparison);
     }
 
     @Test
@@ -28,7 +29,7 @@ class RecordedExtensionTest {
         var mapper = RerankEvaluationRun.datasetMapper();
         var actual = recompute();
         assertThat(mapper.valueToTree(actual).toString()).isEqualTo(mapper.readTree(ROOT.resolve("comparison.json").toFile()).toString());
-        assertThat(actual.annotationStatus()).isEqualTo("PENDING_HUMAN_REVIEW");
+        assertThat(actual.annotationStatus()).isEqualTo("HUMAN_REVIEWED");
         assertThat(actual.newProviderRequests()).isZero();
         assertThat(actual.rows()).hasSize(24);
         assertThat(Instant.parse(corpus().frozenAt())).isBefore(Instant.parse(capture().completedAt()));
@@ -69,24 +70,58 @@ class RecordedExtensionTest {
     }
 
     @Test
-    void reviewExposesEveryPendingJudgmentAndMatchesGeneratedPages() throws Exception {
+    void reviewExposesEveryConfirmedJudgmentAndMatchesGeneratedPages() throws Exception {
         var mapper = RerankEvaluationRun.datasetMapper();
         var corpus = corpus();
         var fixture = ExtensionFixture.read();
         var review = mapper.readTree(ROOT.resolve("review-template.json").toFile());
         assertThat(review).hasSize(24);
         for (var row : review) {
-            assertThat(row.path("status").asText()).isEqualTo("PENDING_HUMAN_REVIEW");
+            assertThat(row.path("status").asText()).isEqualTo("HUMAN_REVIEWED");
             assertThat(row.path("chunkGrades")).hasSize(corpus.chunks().size());
             assertThat(row.path("chunkGrades")).isEqualTo(mapper.valueToTree(corpus.grades().get(row.path("id").asText())));
         }
-        assertThat(normalize(Files.readString(ROOT.resolve("review.html")))).isEqualTo(normalize(ExtensionReport.review(fixture, corpus)));
+        assertThat(normalize(Files.readString(ROOT.resolve("review.html")))).isEqualTo(normalize(ExtensionReport.review(fixture, corpus, true)))
+                .contains("人工复核已通过").doesNotContain("待确认", "未获人工确认", "待人工复核");
         assertThat(normalize(Files.readString(ROOT.resolve("report.html")))).isEqualTo(normalize(ExtensionReport.report(fixture, recompute(), capture())));
         try (var files = Files.list(ROOT)) {
             assertThat(files.map(path -> path.getFileName().toString()).toList()).containsExactlyInAnyOrder(
-                    "README.md", "corpus.json", "capture.json", "comparison.json", "review.html", "report.html", "review-template.json");
+                    "README.md", "corpus.json", "capture.json", "comparison.json", "review.html", "report.html", "review-template.json", "review-approval.json");
+        }
+    }
+
+    @Test
+    void approvalCannotChangeMetricsOrApplyToDifferentAnnotations() throws Exception {
+        var corpus = corpus();
+        var initial = ExtensionEvaluation.compare(ExtensionFixture.read(), corpus, capture(), RetrievalAblation.hash(ROOT.resolve("corpus.json")),
+                RetrievalAblation.hash(ROOT.resolve("capture.json")));
+        var approval = (com.fasterxml.jackson.databind.node.ObjectNode) RerankEvaluationRun.datasetMapper()
+                .readTree(ROOT.resolve("review-approval.json").toFile());
+        var reviewed = ExtensionReviewApproval.apply(approval, corpus, initial);
+        assertThat(initial.annotationStatus()).isEqualTo("PENDING_HUMAN_REVIEW");
+        assertThat(corpus.annotationStatus()).isEqualTo("PENDING_HUMAN_REVIEW");
+        assertThat(reviewed.groups()).isEqualTo(initial.groups());
+        assertThat(reviewed.rows()).isEqualTo(initial.rows());
+        for (String field : List.of("fixtureSha256", "corpusSha256", "status", "confirmationText", "reviewer")) {
+            var invalid = approval.deepCopy();
+            invalid.put(field, "");
+            assertThatThrownBy(() -> ExtensionReviewApproval.apply(invalid, corpus, initial)).isInstanceOf(IllegalArgumentException.class);
+        }
+        for (String field : List.of("reviewedCases", "reviewedChunkGrades")) {
+            var invalid = approval.deepCopy();
+            invalid.put(field, 1);
+            assertThatThrownBy(() -> ExtensionReviewApproval.apply(invalid, corpus, initial)).isInstanceOf(IllegalArgumentException.class);
         }
     }
 
     private static String normalize(String text) { return text.replace("\r\n", "\n"); }
+
+    @Test
+    void absentApprovalLeavesNewRunsPending(@org.junit.jupiter.api.io.TempDir Path directory) throws Exception {
+        var corpus = corpus();
+        var initial = ExtensionEvaluation.compare(ExtensionFixture.read(), corpus, capture(), RetrievalAblation.hash(ROOT.resolve("corpus.json")),
+                RetrievalAblation.hash(ROOT.resolve("capture.json")));
+        assertThat(ExtensionReviewApproval.apply(directory, corpus, initial)).isSameAs(initial);
+        assertThat(initial.annotationStatus()).isEqualTo("PENDING_HUMAN_REVIEW");
+    }
 }

@@ -1,6 +1,6 @@
 [ {
   "id" : "e01",
-  "status" : "PENDING_HUMAN_REVIEW",
+  "status" : "HUMAN_REVIEWED",
   "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
   "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
   "expected" : "先同步设备时间，再刷新登录令牌；不要误用 v2 的证书处理办法。",
@@ -120,7 +120,7 @@
   "reviewerNotes" : ""
 }, {
   "id" : "e02",
-  "status" : "PENDING_HUMAN_REVIEW",
+  "status" : "HUMAN_REVIEWED",
   "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
   "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
   "expected" : "120 requests per minute per tenant, not the legacy v1 limit or order API quota.",
@@ -240,7 +240,7 @@
   "reviewerNotes" : ""
 }, {
   "id" : "e03",
-  "status" : "PENDING_HUMAN_REVIEW",
+  "status" : "HUMAN_REVIEWED",
   "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
   "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
   "expected" : "到期前十四天，不要用服务器证书的三十天变更流程。",
@@ -360,7 +360,7 @@
   "reviewerNotes" : ""
 }, {
   "id" : "e04",
-  "status" : "PENDING_HUMAN_REVIEW",
+  "status" : "HUMAN_REVIEWED",
   "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
   "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
   "expected" : "Within twelve minutes under the Bristol production S1 procedure.",
@@ -480,7 +480,7 @@
   "reviewerNotes" : ""
 }, {
   "id" : "e05",
-  "status" : "PENDING_HUMAN_REVIEW",
+  "status" : "HUMAN_REVIEWED",
   "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
   "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
   "expected" : "五万行；管理员二十万行的限额不适用。",
@@ -600,7 +600,7 @@
   "reviewerNotes" : ""
 }, {
   "id" : "e06",
-  "status" : "PENDING_HUMAN_REVIEW",
+  "status" : "HUMAN_REVIEWED",
   "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
   "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
   "expected" : "Twenty-one days, not Seattle's fourteen-day policy.",
@@ -720,7 +720,7 @@
   "reviewerNotes" : ""
 }, {
   "id" : "e07",
-  "status" : "PENDING_HUMAN_REVIEW",
+  "status" : "HUMAN_REVIEWED",
   "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
   "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
   "expected" : "经理批准后周二和周三，每周最多两天。",
@@ -840,7 +840,7 @@
   "reviewerNotes" : ""
 }, {
   "id" : "e08",
-  "status" : "PENDING_HUMAN_REVIEW",
+  "status" : "HUMAN_REVIEWED",
   "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
   "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
   "expected" : "Both HR and the manager must approve the extended remote exception.",
@@ -960,7 +960,7 @@
   "reviewerNotes" : ""
 }, {
   "id" : "e09",
-  "status" : "PENDING_HUMAN_REVIEW",
+  "status" : "HUMAN_REVIEWED",
   "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
   "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
   "expected" : "不能等；发现笔记本丢失后二十分钟内致电安全值班组。",
@@ -1080,7 +1080,7 @@
   "reviewerNotes" : ""
 }, {
   "id" : "e10",
-  "status" : "PENDING_HUMAN_REVIEW",
+  "status" : "HUMAN_REVIEWED",
   "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
   "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
   "expected" : "No. An itemized receipt is required, not just a banking screenshot.",
@@ -1200,7 +1200,7 @@
   "reviewerNotes" : ""
 }, {
   "id" : "e11",
-  "status" : "PENDING_HUMAN_REVIEW",
+  "status" : "HUMAN_REVIEWED",
   "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
   "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
   "expected" : "不可以，接待员工必须全程陪同。",
@@ -1320,7 +1320,7 @@
   "reviewerNotes" : ""
 }, {
   "id" : "e12",
-  "status" : "PENDING_HUMAN_REVIEW",
+  "status" : "HUMAN_REVIEWED",
   "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
   "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
   "expected" : "No. Do not wait for the daily email; the urgent notification procedure applies to an active outage. Review the adjacent boundary fragment for additional support.",
@@ -1440,7 +1440,7 @@
   "reviewerNotes" : ""
 }, {
   "id" : "e13",
-  "status" : "PENDING_HUMAN_REVIEW",
+  "status" : "HUMAN_REVIEWED",
   "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
   "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
   "expected" : "十四天；本题需要阅读英文 Seattle 规则。",
@@ -1560,7 +1560,7 @@
   "reviewerNotes" : ""
 }, {
   "id" : "e14",
-  "status" : "PENDING_HUMAN_REVIEW",
+  "status" : "HUMAN_REVIEWED",
   "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
   "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
   "expected" : "Forty-five days; the supporting policy is in Chinese.",
@@ -1680,7 +1680,7 @@
   "reviewerNotes" : ""
 }, {
   "id" : "e15",
-  "status" : "PENDING_HUMAN_REVIEW",
+  "status" : "HUMAN_REVIEWED",
   "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
   "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
   "expected" : "Ordinary: manager approval, Tuesday/Wednesday, at most two days weekly. Exception: at most three weeks, HR and manager approval. Both Chinese policies are needed.",
@@ -1805,7 +1805,7 @@
   "reviewerNotes" : ""
 }, {
   "id" : "e16",
-  "status" : "PENDING_HUMAN_REVIEW",
+  "status" : "HUMAN_REVIEWED",
   "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
   "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
   "expected" : "需要明细收据，不能仅用银行截图；购买后十二个自然日内提交。两份英文政策共同支持。",
@@ -1930,7 +1930,7 @@
   "reviewerNotes" : ""
 }, {
   "id" : "e17",
-  "status" : "PENDING_HUMAN_REVIEW",
+  "status" : "HUMAN_REVIEWED",
   "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
   "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
   "expected" : "正式发票，只有银行截图不够；十五个自然日内提交。",
@@ -2055,7 +2055,7 @@
   "reviewerNotes" : ""
 }, {
   "id" : "e18",
-  "status" : "PENDING_HUMAN_REVIEW",
+  "status" : "HUMAN_REVIEWED",
   "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
   "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
   "expected" : "Ordinary: Monday/Friday, up to two days weekly, manager approval. Extended: up to six weeks, HR and manager approval.",
@@ -2180,7 +2180,7 @@
   "reviewerNotes" : ""
 }, {
   "id" : "e19",
-  "status" : "PENDING_HUMAN_REVIEW",
+  "status" : "HUMAN_REVIEWED",
   "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
   "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
   "expected" : "Service owner and security officer approval; keep approval records ninety days after closure. The two facts occur in separated handbook sections.",
@@ -2305,7 +2305,7 @@
   "reviewerNotes" : ""
 }, {
   "id" : "e20",
-  "status" : "PENDING_HUMAN_REVIEW",
+  "status" : "HUMAN_REVIEWED",
   "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
   "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
   "expected" : "发布负责人和业务验收人共同批准；确认失败后十分钟内完成回滚。两项位于手册不同章节。",
@@ -2430,7 +2430,7 @@
   "reviewerNotes" : ""
 }, {
   "id" : "e21",
-  "status" : "PENDING_HUMAN_REVIEW",
+  "status" : "HUMAN_REVIEWED",
   "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
   "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
   "expected" : "语料未规定带薪年假天数；远程办公天数不是年假。",
@@ -2545,7 +2545,7 @@
   "reviewerNotes" : ""
 }, {
   "id" : "e22",
-  "status" : "PENDING_HUMAN_REVIEW",
+  "status" : "HUMAN_REVIEWED",
   "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
   "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
   "expected" : "No pet insurance provider is specified anywhere in the corpus.",
@@ -2660,7 +2660,7 @@
   "reviewerNotes" : ""
 }, {
   "id" : "e23",
-  "status" : "PENDING_HUMAN_REVIEW",
+  "status" : "HUMAN_REVIEWED",
   "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
   "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
   "expected" : "语料只有其他错误码，未说明 HBR-999，不能套用 HBR-417。",
@@ -2775,7 +2775,7 @@
   "reviewerNotes" : ""
 }, {
   "id" : "e24",
-  "status" : "PENDING_HUMAN_REVIEW",
+  "status" : "HUMAN_REVIEWED",
   "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
   "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
   "expected" : "The corpus covers subscription approval and physical equipment returns, not a subscription refund deadline.",

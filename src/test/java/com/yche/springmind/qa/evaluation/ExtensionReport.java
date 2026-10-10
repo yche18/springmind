@@ -6,23 +6,31 @@ final class ExtensionReport {
     private ExtensionReport() {}
 
     static String review(ExtensionFixture fixture, ExtensionEvaluation.Corpus corpus) {
-        StringBuilder html = start("Harborview 扩展集：待人工复核");
+        return review(fixture, corpus, false);
+    }
+
+    static String review(ExtensionFixture fixture, ExtensionEvaluation.Corpus corpus, boolean reviewed) {
+        StringBuilder html = start(reviewed ? "Harborview 扩展集：人工复核已通过" : "Harborview 扩展集：待人工复核");
         html.append("<p class='notice'>24 道新题、66 份虚构文档、").append(corpus.chunks().size())
-                .append(" 个实际切片。全部标注仍为<strong>待人工复核</strong>，不是已经确认的真实标准答案。原有 30 题及其结果未修改。</p>")
-                .append("<h2>你需要核对什么？</h2><ol><li>问题是否清楚，地区、版本、环境是否明确；应答要点是否正确且完整。</li>")
-                .append("<li>3 分：单个切片足以回答整题；2 分：直接支持部分答案；1 分：仅背景；0 分：无关。当前按精确证据短句自动投影，可能漏掉间接支持或边界片段。</li>")
+                .append(reviewed ? " 个实际切片。<strong>人工复核已通过，全部标注保持不变。</strong>确认覆盖 24 题、2,520 个切片分级及无答案判断；不代表真实业务准确率。<a href='review-approval.json'>查看确认记录</a>。原有 30 题及其结果未修改。</p>"
+                        : " 个实际切片。全部标注仍为<strong>待人工复核</strong>，不是已经确认的真实标准答案。原有 30 题及其结果未修改。</p>")
+                .append(reviewed ? "<h2>已复核的范围与分级口径</h2>" : "<h2>你需要核对什么？</h2>")
+                .append("<ol><li>问题是否清楚，地区、版本、环境是否明确；应答要点是否正确且完整。</li>")
+                .append("<li>3 分：单个切片足以回答整题；2 分：直接支持部分答案；1 分：仅背景；0 分：无关。初稿按精确证据短句自动投影，人工复核范围包含间接支持或边界片段。</li>")
                 .append("<li>核对正向标注，也检查默认 0 分，尤其是相似规则和长文相邻片段；多证据题应包含全部必要事实。</li>")
                 .append("<li>e21–e24 要检查全部语料是否真的无答案，不能因为某路没检索到就认定无答案。</li></ol>")
                 .append("<p>可直接反馈：<code>e04：问题限定不足……</code> 或 <code>e19：restore-guide-en--c003 改为 2，原因……</code>。")
-                .append("建议先看证据，再打开 <a href='report.html'>临时对照结果</a>；不需要编辑 JSON，也不要为了让某种方案胜出而改标签。</p>")
-                .append("<p>本页标注对应：<code>").append(esc(corpus.fixtureSha256())).append("</code>。所有题的结论确认后再记录人工通过状态。</p><nav>");
+                .append("可查看 <a href='report.html'>三组对照结果</a>；不需要编辑 JSON，也不要为了让某种方案胜出而改标签。</p>")
+                .append("<p>本页标注对应：<code>").append(esc(corpus.fixtureSha256())).append("</code>。")
+                .append(reviewed ? "人工确认记录绑定原始语料哈希；未重新检索或调用模型。</p><nav>" : "所有题的结论确认后再记录人工通过状态。</p><nav>");
         for (var question : fixture.cases()) html.append("<a href='#").append(question.id()).append("'>").append(question.id()).append("</a> ");
         html.append(" · <a href='#corpus'>完整原文</a></nav>");
         for (var question : fixture.cases()) {
             html.append("<section id='").append(question.id()).append("'><h2>").append(esc(question.id() + " · " + question.query())).append("</h2>")
-                    .append("<p class='muted'>").append(esc(category(question.category()) + " / " + question.language())).append(" · 待确认</p><p><strong>应答要点：</strong>")
-                    .append(esc(question.expected())).append("</p><h3>初始证据定位（未获人工确认）</h3>");
-            if (question.evidence().isEmpty()) html.append("<p>初稿判为无答案：请核对所有文档，而非仅查看检索前五名。</p>");
+                    .append("<p class='muted'>").append(esc(category(question.category()) + " / " + question.language()))
+                    .append(reviewed ? " · 已确认</p><p><strong>应答要点：</strong>" : " · 待确认</p><p><strong>应答要点：</strong>")
+                    .append(esc(question.expected())).append(reviewed ? "</p><h3>已确认的证据定位</h3>" : "</p><h3>初始证据定位（未获人工确认）</h3>");
+            if (question.evidence().isEmpty()) html.append(reviewed ? "<p>已确认：本语料中无答案；不是依据某路检索失败判定。</p>" : "<p>初稿判为无答案：请核对所有文档，而非仅查看检索前五名。</p>");
             for (var evidence : question.evidence()) html.append("<blockquote><a href='#doc-").append(esc(evidence.document())).append("'>")
                     .append(esc(evidence.document())).append("</a> · 事实 ").append(esc(evidence.id())).append("<p>")
                     .append(esc(evidence.quote())).append("</p></blockquote>");
@@ -31,7 +39,7 @@ final class ExtensionReport {
             for (var entry : corpus.chunks().entrySet()) if (grades.get(entry.getKey()) > 0) chunk(html, entry.getKey(), entry.getValue(), grades.get(entry.getKey()));
             html.append("<details><summary>检查全部 ").append(corpus.chunks().size()).append(" 个实际切片（含默认 0 分）</summary>");
             for (var entry : corpus.chunks().entrySet()) chunk(html, entry.getKey(), entry.getValue(), grades.get(entry.getKey()));
-            html.append("</details><p>复核结论：□ 保持初稿　□ 修改分级/证据　□ 修改有无答案判断　□ 问题需澄清</p></section>");
+            html.append(reviewed ? "</details><p>复核结论：已确认，保持初稿。</p></section>" : "</details><p>复核结论：□ 保持初稿　□ 修改分级/证据　□ 修改有无答案判断　□ 问题需澄清</p></section>");
         }
         html.append("<section id='corpus'><h2>完整语料原文（66 份）</h2><p>标签投影基于实际切片；这里保留原文，便于检查切片边界或漏标。</p>");
         for (var entry : fixture.documents().entrySet()) html.append("<details id='doc-").append(esc(entry.getKey())).append("'><summary>")
@@ -41,8 +49,10 @@ final class ExtensionReport {
 
     static String report(ExtensionFixture fixture, ExtensionEvaluation.Comparison comparison,
                          ExtensionEvaluation.Capture capture) {
-        StringBuilder html = start("Harborview 扩展集：三组对照（临时指标）");
-        html.append("<p class='notice'><strong>初始标注尚待人工复核。</strong>先看 <a href='review.html'>复核页面</a>。三组均使用同一组真实检索命中；未调用 Qwen 或聊天模型。</p>")
+        boolean reviewed = "HUMAN_REVIEWED".equals(comparison.annotationStatus());
+        StringBuilder html = start(reviewed ? "Harborview 扩展集：三组对照（标注已复核）" : "Harborview 扩展集：三组对照（临时指标）");
+        html.append(reviewed ? "<p class='notice'><strong>标注人工复核已通过，分级与指标不变。</strong>查看 <a href='review.html'>复核页面</a>及 <a href='review-approval.json'>确认记录</a>。仍为诊断性合成数据，不代表生产效果。三组均使用原始真实检索命中；未重新调用模型。</p>"
+                        : "<p class='notice'><strong>初始标注尚待人工复核。</strong>先看 <a href='review.html'>复核页面</a>。三组均使用同一组真实检索命中；未调用 Qwen 或聊天模型。</p>")
                 .append("<p>主要排名指标按<strong>聚类与窗口扩展前的切片</strong>计算：每路最多 50 个，候选池最多 30 个，评估前 5 名。")
                 .append("语料和标签在查询前冻结。窗口事实覆盖单列，不与切片排名混算。</p>")
                 .append("<p>20 道有答案题参与排序均值，4 道无答案题不算正确拒答。事实覆盖按不同答案要点去重；重叠切片不会增加事实数量。")

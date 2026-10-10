@@ -17,14 +17,15 @@ class ExtensionReportRun {
         var capture = mapper.readValue(root.resolve("capture.json").toFile(), ExtensionEvaluation.Capture.class);
         var comparison = ExtensionEvaluation.compare(fixture, corpus, capture, RetrievalAblation.hash(root.resolve("corpus.json")),
                 RetrievalAblation.hash(root.resolve("capture.json")));
+        comparison = ExtensionReviewApproval.apply(root, corpus, comparison);
         mapper.writerWithDefaultPrettyPrinter().writeValue(root.resolve("comparison.json").toFile(), comparison);
-        Files.writeString(root.resolve("review.html"), ExtensionReport.review(fixture, corpus));
+        Files.writeString(root.resolve("review.html"), ExtensionReport.review(fixture, corpus, "HUMAN_REVIEWED".equals(comparison.annotationStatus())));
         Files.writeString(root.resolve("report.html"), ExtensionReport.report(fixture, comparison, capture));
         List<Map<String, Object>> template = new ArrayList<>();
         for (var question : fixture.cases()) {
             Map<String, Object> item = new LinkedHashMap<>();
             item.put("id", question.id());
-            item.put("status", "PENDING_HUMAN_REVIEW");
+            item.put("status", comparison.annotationStatus());
             item.put("fixtureSha256", corpus.fixtureSha256());
             item.put("corpusSha256", comparison.corpusSha256());
             item.put("expected", question.expected());
@@ -34,6 +35,6 @@ class ExtensionReportRun {
             template.add(item);
         }
         mapper.writerWithDefaultPrettyPrinter().writeValue(root.resolve("review-template.json").toFile(), template);
-        System.out.println("Extension reports generated: 24 pending reviews; newProviderRequests=0; " + root.toAbsolutePath());
+        System.out.println("Extension reports generated: " + comparison.annotationStatus() + "; newProviderRequests=0; " + root.toAbsolutePath());
     }
 }

@@ -1,5 +1,5 @@
 {
-  "annotationStatus" : "PENDING_HUMAN_REVIEW",
+  "annotationStatus" : "HUMAN_REVIEWED",
   "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
   "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
   "captureSha256" : "88e2bb087851744e4fc1c754e74a4a80440f5b7fc283e10db21c45a5b7e65383",

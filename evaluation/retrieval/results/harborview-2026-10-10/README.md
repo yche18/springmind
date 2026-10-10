@@ -1,14 +1,17 @@
-# Harborview extension: provisional three-way retrieval comparison
+# Harborview extension: annotation-reviewed three-way retrieval comparison
 
-**All new annotations are pending human review.** These numbers are diagnostic,
-not approved benchmark conclusions. Start with the [Chinese review packet](review.html),
+**The project owner confirmed all 24 cases and 2,520 chunk grades without changes.**
+The [approval record](review-approval.json) binds the exact fixture and corpus hashes.
+Metrics are unchanged; no retrieval or model calls were repeated. These numbers remain
+diagnostic synthetic-data results, not production accuracy or general superiority claims.
+Start with the [Chinese review packet](review.html),
 then open the [three-way comparison](report.html). The original Northstar 30 questions,
 labels and measured results are unchanged.
 
 ## What was frozen and run
 
 - New fictional corpus: 66 documents (33 Chinese, 33 English), 24 questions
-  (12 Chinese, 12 English), 20 provisionally answerable and four unanswerable.
+  (12 Chinese, 12 English), 20 answerable and four unanswerable, now human-confirmed.
 - Predeclared categories: six exact-match, six paraphrase, four cross-language,
   two multi-evidence, two long-document and four unanswerable questions. Six
   answerable cases require two complementary facts, including cross-language/long cases.
@@ -38,7 +41,7 @@ labels and measured results are unchanged.
   unused. ETL and query embeddings used the local Ollama model. There is no
   reranker or answer-generation arm in this extension.
 
-## Provisional chunk-ranking results
+## Chunk-ranking results with reviewed annotations
 
 Metrics here refer to **chunks before clustering and neighbor expansion**, not
 the final evidence windows. All modes use a full-corpus judgment set and a
@@ -51,7 +54,7 @@ supporting chunks are distinct for chunk metrics but deduplicated for fact cover
 | Vector only | 0.8000 | 0.7750 | 0.7500 | 0.7397 | 0.8500 | 3/6 |
 | Hybrid RRF | 0.8500 | 0.8500 | 0.7767 | 0.7863 | 0.9750 | 4/6 |
 
-On this initial annotation version, **keyword-only wins overall**. Hybrid improves
+On this unchanged, human-reviewed annotation version, **keyword-only wins overall**. Hybrid improves
 Recall@5 by 7.5 percentage points and nDCG@5 by 0.0466 over vector-only, but is
 5 percentage points below keyword-only in Recall@5 and 0.0540 below in nDCG@5.
 Against vector-only, nDCG improves on e10/e13/e19, regresses on e08, and is unchanged
@@ -82,7 +85,7 @@ chunk miss must not be reported as a missing final answer context (e19 below).
 ### e08: semantic paraphrase, hybrid regression
 
 The Bristol employee asks whose permission is needed to work from another city
-for a month. `remote-exception-en--c000` has provisional grade 3. Its ranks are
+for a month. `remote-exception-en--c000` has confirmed grade 3. Its ranks are
 vector 2, keyword 13, hybrid 3. Adding lexical evidence promotes unrelated routine
 notification material ahead of it. nDCG@5 falls from 0.6309 to 0.5000, although
 the required fact remains in the top five and selected context for both modes.
@@ -124,12 +127,12 @@ However, production neighbor expansion already includes `c004` in the vector
 context via nearby hits. **All three finally selected contexts cover both facts.**
 Claiming that hybrid alone makes the final context complete would be incorrect.
 
-## Review checklist for the owner
+## Completed review and retained checklist
 
-Please review all 24 cases using [review.html](review.html). No JSON editing is
-required: report the question ID, the chunk/source ID, the proposed grade or
-corrected expected answer, and the reason. The template exposes all **2,520**
-question/chunk grades (24 × 105), including implicit zeros.
+The owner confirmed the complete [review packet](review.html) with no requested
+changes. This covers expected answers, evidence, all **2,520** question/chunk grades
+(24 × 105), including zeros, and all four no-answer judgments. The original checklist
+below is retained for audit and any future corrections.
 
 Priority checks (not a substitute for reviewing the remaining cases):
 
@@ -167,7 +170,7 @@ version and rescore the same raw results for all three modes, without Qwen.
   extension separates raw chunk ranks from window fact coverage. **Do not merge
   the two experiment averages or compare their absolute scores as a progress curve.**
 - Only 20 answerable cases contribute ranking means. The data are synthetic,
-  provisional and not a statistically established held-out production benchmark.
+  human-reviewed but not a statistically established held-out production benchmark.
 - Timings are single-pass local diagnostics, not end-to-end P95 or a production SLA.
   No answers were generated; no refusal/citation accuracy was measured.
 
@@ -180,12 +183,19 @@ mvn "-Dtest=ExtensionFixtureTest,ExtensionEvaluationTest,RecordedExtensionTest" 
 
 Use Java 21. The report/tests need no services or credentials.
 
+Report generation applies `review-approval.json` only when its fixture/corpus
+hashes and reviewed counts match. The original `corpus.json` deliberately retains
+its pre-query pending status; the separate approval records the later confirmation.
+Regeneration preserves the reviewed page/report/template status without altering
+the frozen labels or retrieval capture. The pre-review version remains in Git.
+
 - `corpus.json`: actual READY text/identities and all initial judgments, frozen before queries.
 - `capture.json`: real raw channel ranks/scores, three-mode raw candidate orders,
   production candidate/selected windows, timings and model provenance.
 - `comparison.json`: provisional aggregates, language/type slices, per-case metrics,
   and input hashes.
-- `review-template.json`: all 24 pending review entries with all chunk grades.
+- `review-template.json`: all 24 confirmed review entries with unchanged chunk grades.
+- `review-approval.json`: owner confirmation bound to the exact fixture/corpus hashes.
 - `review.html`: annotation-first Chinese review packet, full source texts and actual chunks.
 - `report.html`: Chinese results, every case and actual selected evidence.
 
