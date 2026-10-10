@@ -18,6 +18,7 @@ final class MultiHopReplay {
     static Map<String, Context> run(MultiHopData.Corpus corpus, MultiHopData.Question q,
                                    List<MultiHopEvaluation.Hit> keyword, List<MultiHopEvaluation.Hit> vector) throws Exception {
         Map<String, Context> results = new LinkedHashMap<>();
+        var scoreNormalizer = new ElasticsearchChunkIndexService(MultiHopData.M, "localhost", 9200, "http", "unused_offline");
         for (String mode : List.of("KEYWORD", "VECTOR", "RRF")) {
             var v = mock(PgVectorRetrievalAdapter.class);
             var k = mock(ElasticsearchChunkIndexService.class);
@@ -30,7 +31,8 @@ final class MultiHopReplay {
             }).toList());
             when(k.search(1L, q.query(), 50)).thenReturn(mode.equals("VECTOR") ? List.of() : keyword.stream().map(h -> {
                 var c = corpus.chunks().get(h.id());
-                return new ElasticsearchChunkIndexService.KeywordHit(c.documentId(), c.id(), c.index(), c.title(), c.text(), h.score(), h.score() / (1 + h.score()));
+                Double normalized = org.springframework.test.util.ReflectionTestUtils.invokeMethod(scoreNormalizer, "normalizeKeywordScore", h.score());
+                return new ElasticsearchChunkIndexService.KeywordHit(c.documentId(), c.id(), c.index(), c.title(), c.text(), h.score(), normalized);
             }).toList());
             when(store.selectQaReadyChunksByIds(eq(1L), anyList())).thenAnswer(call -> {
                 List<Long> ids = call.getArgument(1);
