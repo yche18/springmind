@@ -1,0 +1,1016 @@
+{
+  "annotationStatus" : "HUMAN_REVIEWED",
+  "captureSha256" : "cccefe1e6f4f30f48669cae29171a6cf1eaf5de135cb6c19d790b321bac8fcb6",
+  "newModelRequests" : 0,
+  "originalOrderMatches" : 24,
+  "originalScoreMatches" : 24,
+  "groups" : {
+    "ALL" : {
+      "BODY_ONLY" : {
+        "cases" : 24,
+        "answerable" : 20,
+        "metrics" : {
+          "hit" : 0.75,
+          "recall" : 0.75,
+          "mrr" : 0.725,
+          "ndcg" : 0.7315464876785729
+        },
+        "recall30" : 0.9,
+        "recall50" : 0.9,
+        "factCoverage5" : 0.75,
+        "complementaryCases" : 6,
+        "completeComplementaryCases" : 4
+      },
+      "BODY_AND_FILENAME" : {
+        "cases" : 24,
+        "answerable" : 20,
+        "metrics" : {
+          "hit" : 0.9,
+          "recall" : 0.9,
+          "mrr" : 0.8166666666666667,
+          "ndcg" : 0.840281540814747
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 0.9,
+        "complementaryCases" : 6,
+        "completeComplementaryCases" : 5
+      }
+    },
+    "zh" : {
+      "BODY_ONLY" : {
+        "cases" : 12,
+        "answerable" : 10,
+        "metrics" : {
+          "hit" : 0.8,
+          "recall" : 0.8,
+          "mrr" : 0.8,
+          "ndcg" : 0.8
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 0.8,
+        "complementaryCases" : 3,
+        "completeComplementaryCases" : 2
+      },
+      "BODY_AND_FILENAME" : {
+        "cases" : 12,
+        "answerable" : 10,
+        "metrics" : {
+          "hit" : 0.9,
+          "recall" : 0.9,
+          "mrr" : 0.85,
+          "ndcg" : 0.8630929753571458
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 0.9,
+        "complementaryCases" : 3,
+        "completeComplementaryCases" : 2
+      }
+    },
+    "en" : {
+      "BODY_ONLY" : {
+        "cases" : 12,
+        "answerable" : 10,
+        "metrics" : {
+          "hit" : 0.7,
+          "recall" : 0.7,
+          "mrr" : 0.65,
+          "ndcg" : 0.6630929753571457
+        },
+        "recall30" : 0.8,
+        "recall50" : 0.8,
+        "factCoverage5" : 0.7,
+        "complementaryCases" : 3,
+        "completeComplementaryCases" : 2
+      },
+      "BODY_AND_FILENAME" : {
+        "cases" : 12,
+        "answerable" : 10,
+        "metrics" : {
+          "hit" : 0.9,
+          "recall" : 0.9,
+          "mrr" : 0.7833333333333333,
+          "ndcg" : 0.8174701062723482
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 0.9,
+        "complementaryCases" : 3,
+        "completeComplementaryCases" : 3
+      }
+    },
+    "exact" : {
+      "BODY_ONLY" : {
+        "cases" : 6,
+        "answerable" : 6,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 0,
+        "completeComplementaryCases" : 0
+      },
+      "BODY_AND_FILENAME" : {
+        "cases" : 6,
+        "answerable" : 6,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 0,
+        "completeComplementaryCases" : 0
+      }
+    },
+    "semantic" : {
+      "BODY_ONLY" : {
+        "cases" : 6,
+        "answerable" : 6,
+        "metrics" : {
+          "hit" : 0.8333333333333334,
+          "recall" : 0.8333333333333334,
+          "mrr" : 0.75,
+          "ndcg" : 0.7718216255952429
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 0.8333333333333334,
+        "complementaryCases" : 0,
+        "completeComplementaryCases" : 0
+      },
+      "BODY_AND_FILENAME" : {
+        "cases" : 6,
+        "answerable" : 6,
+        "metrics" : {
+          "hit" : 0.8333333333333334,
+          "recall" : 0.8333333333333334,
+          "mrr" : 0.8333333333333334,
+          "ndcg" : 0.8333333333333334
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 0.8333333333333334,
+        "complementaryCases" : 0,
+        "completeComplementaryCases" : 0
+      }
+    },
+    "cross-language" : {
+      "BODY_ONLY" : {
+        "cases" : 4,
+        "answerable" : 4,
+        "metrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "recall30" : 0.5,
+        "recall50" : 0.5,
+        "factCoverage5" : 0.0,
+        "complementaryCases" : 2,
+        "completeComplementaryCases" : 0
+      },
+      "BODY_AND_FILENAME" : {
+        "cases" : 4,
+        "answerable" : 4,
+        "metrics" : {
+          "hit" : 0.75,
+          "recall" : 0.75,
+          "mrr" : 0.3333333333333333,
+          "ndcg" : 0.4514077040737351
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 0.75,
+        "complementaryCases" : 2,
+        "completeComplementaryCases" : 1
+      }
+    },
+    "multi-evidence" : {
+      "BODY_ONLY" : {
+        "cases" : 2,
+        "answerable" : 2,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 2,
+        "completeComplementaryCases" : 2
+      },
+      "BODY_AND_FILENAME" : {
+        "cases" : 2,
+        "answerable" : 2,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 2,
+        "completeComplementaryCases" : 2
+      }
+    },
+    "long-document" : {
+      "BODY_ONLY" : {
+        "cases" : 2,
+        "answerable" : 2,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 2,
+        "completeComplementaryCases" : 2
+      },
+      "BODY_AND_FILENAME" : {
+        "cases" : 2,
+        "answerable" : 2,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 2,
+        "completeComplementaryCases" : 2
+      }
+    },
+    "unanswerable" : {
+      "BODY_ONLY" : {
+        "cases" : 4,
+        "answerable" : 0,
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "complementaryCases" : 0,
+        "completeComplementaryCases" : 0
+      },
+      "BODY_AND_FILENAME" : {
+        "cases" : 4,
+        "answerable" : 0,
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "complementaryCases" : 0,
+        "completeComplementaryCases" : 0
+      }
+    }
+  },
+  "rows" : [ {
+    "id" : "e01",
+    "category" : "exact",
+    "language" : "zh",
+    "scores" : {
+      "BODY_ONLY" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BODY_AND_FILENAME" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "originalKeywordOrderMatches" : true,
+    "originalKeywordScoresMatch" : true
+  }, {
+    "id" : "e02",
+    "category" : "exact",
+    "language" : "en",
+    "scores" : {
+      "BODY_ONLY" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BODY_AND_FILENAME" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "originalKeywordOrderMatches" : true,
+    "originalKeywordScoresMatch" : true
+  }, {
+    "id" : "e03",
+    "category" : "exact",
+    "language" : "zh",
+    "scores" : {
+      "BODY_ONLY" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BODY_AND_FILENAME" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "originalKeywordOrderMatches" : true,
+    "originalKeywordScoresMatch" : true
+  }, {
+    "id" : "e04",
+    "category" : "exact",
+    "language" : "en",
+    "scores" : {
+      "BODY_ONLY" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BODY_AND_FILENAME" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "originalKeywordOrderMatches" : true,
+    "originalKeywordScoresMatch" : true
+  }, {
+    "id" : "e05",
+    "category" : "exact",
+    "language" : "zh",
+    "scores" : {
+      "BODY_ONLY" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BODY_AND_FILENAME" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "originalKeywordOrderMatches" : true,
+    "originalKeywordScoresMatch" : true
+  }, {
+    "id" : "e06",
+    "category" : "exact",
+    "language" : "en",
+    "scores" : {
+      "BODY_ONLY" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BODY_AND_FILENAME" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "originalKeywordOrderMatches" : true,
+    "originalKeywordScoresMatch" : true
+  }, {
+    "id" : "e07",
+    "category" : "semantic",
+    "language" : "zh",
+    "scores" : {
+      "BODY_ONLY" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BODY_AND_FILENAME" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "originalKeywordOrderMatches" : true,
+    "originalKeywordScoresMatch" : true
+  }, {
+    "id" : "e08",
+    "category" : "semantic",
+    "language" : "en",
+    "scores" : {
+      "BODY_ONLY" : {
+        "metrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 0.0,
+        "allFacts5" : null
+      },
+      "BODY_AND_FILENAME" : {
+        "metrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 0.0,
+        "allFacts5" : null
+      }
+    },
+    "originalKeywordOrderMatches" : true,
+    "originalKeywordScoresMatch" : true
+  }, {
+    "id" : "e09",
+    "category" : "semantic",
+    "language" : "zh",
+    "scores" : {
+      "BODY_ONLY" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BODY_AND_FILENAME" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "originalKeywordOrderMatches" : true,
+    "originalKeywordScoresMatch" : true
+  }, {
+    "id" : "e10",
+    "category" : "semantic",
+    "language" : "en",
+    "scores" : {
+      "BODY_ONLY" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.5,
+          "ndcg" : 0.6309297535714574
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BODY_AND_FILENAME" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "originalKeywordOrderMatches" : true,
+    "originalKeywordScoresMatch" : true
+  }, {
+    "id" : "e11",
+    "category" : "semantic",
+    "language" : "zh",
+    "scores" : {
+      "BODY_ONLY" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BODY_AND_FILENAME" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "originalKeywordOrderMatches" : true,
+    "originalKeywordScoresMatch" : true
+  }, {
+    "id" : "e12",
+    "category" : "semantic",
+    "language" : "en",
+    "scores" : {
+      "BODY_ONLY" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BODY_AND_FILENAME" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "originalKeywordOrderMatches" : true,
+    "originalKeywordScoresMatch" : true
+  }, {
+    "id" : "e13",
+    "category" : "cross-language",
+    "language" : "zh",
+    "scores" : {
+      "BODY_ONLY" : {
+        "metrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 0.0,
+        "allFacts5" : null
+      },
+      "BODY_AND_FILENAME" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.5,
+          "ndcg" : 0.6309297535714574
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "originalKeywordOrderMatches" : true,
+    "originalKeywordScoresMatch" : true
+  }, {
+    "id" : "e14",
+    "category" : "cross-language",
+    "language" : "en",
+    "scores" : {
+      "BODY_ONLY" : {
+        "metrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "recall30" : 0.0,
+        "recall50" : 0.0,
+        "factCoverage5" : 0.0,
+        "allFacts5" : null
+      },
+      "BODY_AND_FILENAME" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.5,
+          "ndcg" : 0.6309297535714574
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "originalKeywordOrderMatches" : true,
+    "originalKeywordScoresMatch" : true
+  }, {
+    "id" : "e15",
+    "category" : "cross-language",
+    "language" : "en",
+    "scores" : {
+      "BODY_ONLY" : {
+        "metrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "recall30" : 0.0,
+        "recall50" : 0.0,
+        "factCoverage5" : 0.0,
+        "allFacts5" : false
+      },
+      "BODY_AND_FILENAME" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.3333333333333333,
+          "ndcg" : 0.5437713091520254
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      }
+    },
+    "originalKeywordOrderMatches" : true,
+    "originalKeywordScoresMatch" : true
+  }, {
+    "id" : "e16",
+    "category" : "cross-language",
+    "language" : "zh",
+    "scores" : {
+      "BODY_ONLY" : {
+        "metrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 0.0,
+        "allFacts5" : false
+      },
+      "BODY_AND_FILENAME" : {
+        "metrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 0.0,
+        "allFacts5" : false
+      }
+    },
+    "originalKeywordOrderMatches" : true,
+    "originalKeywordScoresMatch" : true
+  }, {
+    "id" : "e17",
+    "category" : "multi-evidence",
+    "language" : "zh",
+    "scores" : {
+      "BODY_ONLY" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      },
+      "BODY_AND_FILENAME" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      }
+    },
+    "originalKeywordOrderMatches" : true,
+    "originalKeywordScoresMatch" : true
+  }, {
+    "id" : "e18",
+    "category" : "multi-evidence",
+    "language" : "en",
+    "scores" : {
+      "BODY_ONLY" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      },
+      "BODY_AND_FILENAME" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      }
+    },
+    "originalKeywordOrderMatches" : true,
+    "originalKeywordScoresMatch" : true
+  }, {
+    "id" : "e19",
+    "category" : "long-document",
+    "language" : "en",
+    "scores" : {
+      "BODY_ONLY" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      },
+      "BODY_AND_FILENAME" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      }
+    },
+    "originalKeywordOrderMatches" : true,
+    "originalKeywordScoresMatch" : true
+  }, {
+    "id" : "e20",
+    "category" : "long-document",
+    "language" : "zh",
+    "scores" : {
+      "BODY_ONLY" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      },
+      "BODY_AND_FILENAME" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      }
+    },
+    "originalKeywordOrderMatches" : true,
+    "originalKeywordScoresMatch" : true
+  }, {
+    "id" : "e21",
+    "category" : "unanswerable",
+    "language" : "zh",
+    "scores" : {
+      "BODY_ONLY" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      },
+      "BODY_AND_FILENAME" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      }
+    },
+    "originalKeywordOrderMatches" : true,
+    "originalKeywordScoresMatch" : true
+  }, {
+    "id" : "e22",
+    "category" : "unanswerable",
+    "language" : "en",
+    "scores" : {
+      "BODY_ONLY" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      },
+      "BODY_AND_FILENAME" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      }
+    },
+    "originalKeywordOrderMatches" : true,
+    "originalKeywordScoresMatch" : true
+  }, {
+    "id" : "e23",
+    "category" : "unanswerable",
+    "language" : "zh",
+    "scores" : {
+      "BODY_ONLY" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      },
+      "BODY_AND_FILENAME" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      }
+    },
+    "originalKeywordOrderMatches" : true,
+    "originalKeywordScoresMatch" : true
+  }, {
+    "id" : "e24",
+    "category" : "unanswerable",
+    "language" : "en",
+    "scores" : {
+      "BODY_ONLY" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      },
+      "BODY_AND_FILENAME" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      }
+    },
+    "originalKeywordOrderMatches" : true,
+    "originalKeywordScoresMatch" : true
+  } ]
+}
