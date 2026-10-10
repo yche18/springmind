@@ -1,0 +1,9 @@
+{
+  "fixture.json" : "fa9a8f462d7a8346ef7a2bb66a167f63003d6b826d37cedaed12df8b8d5d5eaf",
+  "corpus.json" : "765eafd72990846410c8ba9b3669f8d3cbf146ef0b080481973522f49f9d7a6c",
+  "README.md" : "ef7d0f87969ca30c5c1ab2989fe7211372da9be465e10251fa0cf68df8daf827",
+  "model-lock" : "8729bd75d98141f464761c529f0a989ca5c8d92ed780180d3f74fb0462d3806e",
+  "ingestion/transformer/StructureAwareChunkTransformer.java" : "4a5c7743a409b207772617e3c85fab6546924e37803f2fb086b5ff2e305c70d1",
+  "ingestion/transformer/ChunkingProperties.java" : "f044bd35afa5a3174157fb9275a8d8986d794a646a0f8b6910a1dbf0fe4293f7",
+  "retrieval/elasticsearch/ElasticsearchChunkIndexService.java" : "e2a3ce7110ed4c9bdfc36a4f79537af9e2005f91ababa76186b08b5a4b7b835c"
+}
