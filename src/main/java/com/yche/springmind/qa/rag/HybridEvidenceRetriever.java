@@ -38,8 +38,16 @@ public class HybridEvidenceRetriever implements EvidenceRetriever {
     private final DocumentChunkMapper documentChunkMapper;
     private final QueryPlanningService queryPlanningService;
     private final int neighborWindow;
+    private final EvidenceSelector evidenceSelector;
 
     @Autowired
+    public HybridEvidenceRetriever(PgVectorRetrievalAdapter vectorRetrievalAdapter,
+            ElasticsearchChunkIndexService elasticsearchChunkIndexService, DocumentChunkMapper documentChunkMapper,
+            QueryPlanningService queryPlanningService, EvidenceSelector evidenceSelector) {
+        this(vectorRetrievalAdapter, elasticsearchChunkIndexService, documentChunkMapper,
+                queryPlanningService, DEFAULT_NEIGHBOR_WINDOW, evidenceSelector);
+    }
+
     public HybridEvidenceRetriever(
             PgVectorRetrievalAdapter vectorRetrievalAdapter,
             ElasticsearchChunkIndexService elasticsearchChunkIndexService,
@@ -62,11 +70,19 @@ public class HybridEvidenceRetriever implements EvidenceRetriever {
             QueryPlanningService queryPlanningService,
             int neighborWindow
     ) {
+        this(vectorRetrievalAdapter, elasticsearchChunkIndexService, documentChunkMapper,
+                queryPlanningService, neighborWindow, EvidenceSelector.defaults());
+    }
+
+    public HybridEvidenceRetriever(PgVectorRetrievalAdapter vectorRetrievalAdapter,
+            ElasticsearchChunkIndexService elasticsearchChunkIndexService, DocumentChunkMapper documentChunkMapper,
+            QueryPlanningService queryPlanningService, int neighborWindow, EvidenceSelector evidenceSelector) {
         this.vectorRetrievalAdapter = vectorRetrievalAdapter;
         this.elasticsearchChunkIndexService = elasticsearchChunkIndexService;
         this.documentChunkMapper = documentChunkMapper;
         this.queryPlanningService = queryPlanningService;
         this.neighborWindow = Math.max(0, neighborWindow);
+        this.evidenceSelector = evidenceSelector;
     }
 
     @Override
@@ -82,7 +98,7 @@ public class HybridEvidenceRetriever implements EvidenceRetriever {
     public RetrievedEvidenceBundle retrieve(Long userId, Long groupId, String question, int topK) {
         Long validGroupId = requirePositiveGroupId(groupId);
         String normalizedQuestion = requireQuestion(question);
-        int validTopK = topK > 0 ? topK : EvidenceRetriever.DEFAULT_TOP_K;
+        int validTopK = topK > 0 ? Math.min(topK, 50) : EvidenceRetriever.DEFAULT_TOP_K;
         long start = System.nanoTime();
         QueryPlanResult queryPlan = queryPlanningService.plan(userId, normalizedQuestion);
         Map<String, Long> timings = new LinkedHashMap<>();
@@ -106,14 +122,14 @@ public class HybridEvidenceRetriever implements EvidenceRetriever {
         long assemblyStart = System.nanoTime();
 
         if (candidates.isEmpty()) {
-            return tracedBundle(List.of(), queryPlan, timings, vectorHits, keywordHits, 0, assemblyStart);
+            return tracedBundle(List.of(), queryPlan, timings, vectorHits, keywordHits, 0, assemblyStart, normalizedQuestion, validTopK);
         }
 
         List<RetrievalCandidate> rankedCandidates = candidates.values().stream()
                 .sorted(Comparator
                         .comparingDouble(RetrievalCandidate::rankingScore).reversed()
                         .thenComparing(RetrievalCandidate::chunkId))
-                .limit(validTopK)
+                .limit(Math.max(validTopK, evidenceSelector.candidateLimit()))
                 .toList();
         List<RetrievalCluster> rankedClusters = buildClusters(rankedCandidates);
 
@@ -136,15 +152,19 @@ public class HybridEvidenceRetriever implements EvidenceRetriever {
             documents.add(document);
             evidenceIndex++;
         }
-        return tracedBundle(documents, queryPlan, timings, vectorHits, keywordHits, candidates.size(), assemblyStart);
+        return tracedBundle(documents, queryPlan, timings, vectorHits, keywordHits, candidates.size(), assemblyStart, normalizedQuestion, validTopK);
     }
 
     private RetrievedEvidenceBundle tracedBundle(List<Document> documents, QueryPlanResult queryPlan,
-            Map<String, Long> timings, int vectorHits, int keywordHits, int candidates, long assemblyStart) {
+            Map<String, Long> timings, int vectorHits, int keywordHits, int candidates, long assemblyStart,
+            String question, int topK) {
         timings.put("assembly", elapsedMs(assemblyStart));
-        EvidenceLevel evidenceLevel = evaluateEvidenceLevel(documents);
-        return new RetrievedEvidenceBundle(documents, evidenceLevel, buildEvidenceGuidance(evidenceLevel),
-                new RetrievalTrace(queryPlan, timings, vectorHits, keywordHits, candidates));
+        EvidenceSelector.Result selection = evidenceSelector.select(question, documents, topK);
+        timings.put("reranking", selection.rerankMs());
+        timings.put("selection", selection.selectionMs());
+        EvidenceLevel evidenceLevel = evaluateEvidenceLevel(selection.documents());
+        return new RetrievedEvidenceBundle(selection.documents(), evidenceLevel, buildEvidenceGuidance(evidenceLevel),
+                new RetrievalTrace(queryPlan, timings, vectorHits, keywordHits, candidates, selection.trace()));
     }
 
     private static long elapsedMs(long start) {
@@ -227,6 +247,18 @@ public class HybridEvidenceRetriever implements EvidenceRetriever {
         if (!StringUtils.hasText(evidenceText)) {
             return null;
         }
+        List<EvidenceWindowChunk> windowChunks = chunkWindowCache.get(documentId).stream()
+                .filter(chunk -> chunk.getChunkIndex() != null
+                        && chunk.getChunkIndex() >= cluster.expandedStartChunkIndex(neighborWindow)
+                        && chunk.getChunkIndex() <= cluster.expandedEndChunkIndex(neighborWindow))
+                .map(chunk -> new EvidenceWindowChunk(chunk.getId(), chunk.getChunkIndex(), chunk.getChunkText(),
+                        cluster.members.stream().filter(hit -> hit.chunkId().equals(chunk.getId()))
+                                .map(RetrievalCandidate::source).findFirst().orElse("CONTEXT")))
+                .toList();
+        if (windowChunks.stream().noneMatch(chunk -> cluster.primaryChunkId().equals(chunk.chunkId()))) {
+            return null;
+        }
+        metadata.put("windowChunks", windowChunks);
         return Document.builder()
                 .id(evidenceId)
                 .text(evidenceText)

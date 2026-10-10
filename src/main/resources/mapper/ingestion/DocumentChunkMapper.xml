@@ -10,7 +10,7 @@
         where c.group_id = #{groupId} and c.document_id = #{documentId}
           and c.chunk_index between #{start} and #{end}
           and d.status = 'READY' and d.deleted = false
-        order by c.chunk_index limit 20
+        order by c.chunk_index limit 64
     </select>
 
     <delete id="deleteByDocumentId">

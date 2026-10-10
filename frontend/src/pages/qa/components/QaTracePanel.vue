@@ -46,6 +46,10 @@ async function showSource(evidence: TraceEvidence) {
       <h4>{{ t('trace.queries') }} · {{ t(`trace.strategies.${trace.retrieval.queryPlan.strategy}`) }}</h4>
       <ul><li v-for="query in trace.retrieval.queryPlan.queries" :key="query">{{ query }}</li></ul>
       <p>{{ t('trace.hits', { vector: trace.retrieval.vectorHits, keyword: trace.retrieval.keywordHits, candidates: trace.retrieval.candidateCount }) }}</p>
+      <template v-if="trace.retrieval.selection">
+        <p>{{ t('trace.reranking') }}: {{ t(`trace.rerankStatuses.${trace.retrieval.selection.rerankStatus}`) }}</p>
+        <p>{{ t('trace.budget', { input: trace.retrieval.selection.inputTokens, selected: trace.retrieval.selection.selectedTokens, max: trace.retrieval.selection.maxTokens }) }}</p>
+      </template>
       <dl class="qa-trace__metrics">
         <div v-for="(ms, stage) in trace.retrieval.timingsMs" :key="stage">
           <dt>{{ t(`trace.stages.${stage}`) }}</dt><dd>{{ ms }} ms</dd>
@@ -56,6 +60,8 @@ async function showSource(evidence: TraceEvidence) {
     <article v-for="evidence in trace.evidence" :key="evidence.evidenceId" class="qa-trace__evidence">
       <h4>{{ evidence.evidenceId }} · {{ evidence.fileName }}</h4>
       <p>{{ t(`trace.sources.${evidence.source}`) }} · {{ t('trace.score') }} {{ evidence.score.toFixed(4) }}</p>
+      <p v-if="evidence.rrfRank && evidence.selectionRank">{{ t('trace.rankChange', { before: evidence.rrfRank, after: evidence.selectionRank }) }}</p>
+      <p v-if="evidence.rerankScore != null">{{ t('trace.rerankScore') }}: {{ evidence.rerankScore.toFixed(4) }}</p>
       <p v-if="evidence.startChunkIndex !== null && evidence.endChunkIndex !== null">
         {{ t('trace.range', { start: evidence.startChunkIndex + 1, end: evidence.endChunkIndex + 1 }) }}
       </p>

@@ -19,7 +19,7 @@ defineProps<{
     </header>
 
     <ul v-if="citations.length > 0" class="citation-list__items">
-      <li v-for="citation in citations" :key="citation.fileName">
+      <li v-for="citation in citations" :key="citation.documentId ?? citation.fileName">
         <article class="citation-card">
           <div class="citation-card__topline">
             <span class="citation-card__tag">Evidence</span>

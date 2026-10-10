@@ -16,7 +16,9 @@ public record AnswerTrace(String traceId, String evidenceLevel, RetrievalTrace r
                     number(metadata, "startChunkIndex"), number(metadata, "endChunkIndex"),
                     String.valueOf(metadata.getOrDefault("retrievalSource", "UNKNOWN")),
                     metadata.get("score") instanceof Number score ? score.doubleValue() : 0,
-                    content.substring(0, Math.min(600, content.length())), content.length() > 600);
+                    content.substring(0, Math.min(600, content.length())), content.length() > 600,
+                    number(metadata, "rrfRank"), number(metadata, "selectionRank"),
+                    metadata.get("rerankScore") instanceof Number score ? score.doubleValue() : null);
         }).toList();
     }
 
@@ -25,5 +27,6 @@ public record AnswerTrace(String traceId, String evidenceLevel, RetrievalTrace r
     }
 
     public record Evidence(String evidenceId, Long documentId, String fileName, Long startChunkIndex,
-                           Long endChunkIndex, String source, double score, String excerpt, boolean truncated) { }
+                           Long endChunkIndex, String source, double score, String excerpt, boolean truncated,
+                           Long rrfRank, Long selectionRank, Double rerankScore) { }
 }

@@ -20,8 +20,8 @@ public class EvidenceSourceService {
     public List<SourceChunk> read(HttpServletRequest request, Long groupId, Long documentId, int start, int end) {
         membership.requireGroupReadable(request, groupId);
         if (groupId == null || groupId <= 0 || documentId == null || documentId <= 0
-                || start < 0 || end < start || (long) end - start >= 20) {
-            throw new BusinessException("Invalid evidence range (maximum 20 chunks)");
+                || start < 0 || end < start || (long) end - start >= 64) {
+            throw new BusinessException("Invalid evidence range (maximum 64 chunks)");
         }
         return chunks.selectEvidenceWindow(groupId, documentId, start, end).stream()
                 .map(chunk -> new SourceChunk(chunk.getId(), chunk.getChunkIndex(), chunk.getChunkText())).toList();

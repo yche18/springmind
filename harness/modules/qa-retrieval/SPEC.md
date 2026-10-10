@@ -14,6 +14,9 @@ Protects group-scoped retrieval, query planning, evidence assembly, answer parsi
 - Citations must be assembled from retrieved evidence, not invented answer text.
 - Answer traces contain only the current request's retrieved evidence and stage timings.
 - Source passage reads recheck group membership and filter out deleted/unready documents.
+- Optional reranking may only reorder authorized evidence; failures preserve RRF ordering.
+- The selected evidence context stays within its tokenizer budget, retains primary source
+  positions, and does not repeat already selected chunks. Recompute coverage after selection.
 
 ## Gate Status
 

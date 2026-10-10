@@ -33,6 +33,9 @@ export interface TraceEvidence {
   score: number
   excerpt: string
   truncated: boolean
+  rrfRank?: number | null
+  selectionRank?: number | null
+  rerankScore?: number | null
 }
 
 export interface AnswerTrace {
@@ -44,6 +47,14 @@ export interface AnswerTrace {
     vectorHits: number
     keywordHits: number
     candidateCount: number
+    selection?: {
+      rerankStatus: string
+      inputCandidates: number
+      selectedCount: number
+      inputTokens: number
+      selectedTokens: number
+      maxTokens: number
+    }
   } | null
   retrievalMs: number
   generationMs: number

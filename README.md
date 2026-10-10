@@ -11,7 +11,7 @@ The platform provides an end-to-end workflow covering document ingestion, hybrid
 - Group-level data isolation: every retrieval request carries an authenticated user and knowledge-group context; documents, chunks, and search results are isolated by `groupId`.
 - Complete document lifecycle: standard and resumable multipart uploads, MinIO object storage, transactionally persisted ingestion jobs, bounded retries, and crash recovery. See [durable ingestion](docs/durable-ingestion.md).
 - Structure-aware parsing: PDF, DOCX, Markdown, and TXT support, with text normalization and structured chunking using overlapping windows.
-- Hybrid retrieval: pgvector semantic search and Elasticsearch keyword search run in parallel, with Reciprocal Rank Fusion (RRF) combining their results.
+- Hybrid retrieval: pgvector semantic search and Elasticsearch keyword search are combined with Reciprocal Rank Fusion (RRF), optional HTTP reranking, and a deduplicated evidence token budget. [Configuration and limitations](docs/evidence-selection.md).
 - Query planning: the model chooses whether to search directly, rewrite the query, or decompose it; planning failures fall back to the original question without interrupting the Q&A flow.
 - Evidence-constrained answers: retrieved evidence is graded as `NONE / WEAK / PARTIAL / SUFFICIENT`, and the model is restricted to answering from that evidence.
 - Traceable citations: answers include source metadata such as document name, document ID, chunk position, and retrieval score.

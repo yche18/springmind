@@ -3,16 +3,19 @@ import en from './en'
 export default {
   ...en,
   trace: {
+    reranking: '重排序', rerankScore: '重排序分数', rankChange: 'RRF 第 {before} 名 → 选择排序第 {after} 名',
+    budget: '候选上下文 {input} tokens · 已选 {selected} / {max} tokens（cl100k_base 估算）',
+    rerankStatuses: { DISABLED: '未启用，采用 RRF 排序', SKIPPED: '候选少于两条，无需重排', APPLIED: '已应用', FALLBACK: '服务不可用，回退至 RRF 排序' },
     title: '查看回答依据与过程', note: '这里展示实际检索结果，不包含模型的内部思考。排名分数不等于答案正确率。',
     evidenceLevel: '证据覆盖程度', retrieval: '检索耗时', generation: '回答生成', total: '总耗时',
     queries: '实际检索问题', hits: '向量命中 {vector} 条 · 关键词命中 {keyword} 条 · 去重候选 {candidates} 条',
-    noEvidence: '未找到就绪证据，未调用回答模型。', score: 'RRF 分数',
+    noEvidence: '未选出可用证据，未调用回答模型。', score: 'RRF 分数',
     range: '原文第 {start}–{end} 个片段', chunk: '第 {index} 个片段', openSource: '查看原文片段', loading: '加载中…',
     sourceError: '原文加载失败，请确认访问权限后重试。', sourceUnavailable: '原文已不可用或尚未就绪。', requestId: '请求编号',
     levels: { NONE: '无证据', WEAK: '有限', PARTIAL: '部分覆盖', SUFFICIENT: '较充分' },
     strategies: { DIRECT: '直接检索', REWRITE: '问题改写', DECOMPOSE: '问题拆分' },
     sources: { VECTOR: '语义检索', KEYWORD: '关键词检索', BOTH: '双路命中', UNKNOWN: '检索证据' },
-    stages: { planning: '查询规划', vector: '语义检索', keyword: '关键词检索', assembly: '证据组织' },
+    stages: { planning: '查询规划', vector: '语义检索', keyword: '关键词检索', assembly: '证据组织', reranking: '重排序', selection: '上下文选择' },
   },
   common: {
     ...en.common,

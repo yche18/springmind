@@ -11,7 +11,7 @@ SpringMind 围绕“文档入库—混合检索—证据分级—可追溯回答
 - 组织级数据隔离：检索请求必须携带真实用户与知识组上下文，文档、切片和检索结果按 `groupId` 隔离。
 - 完整文档生命周期：支持普通上传与分片续传、MinIO 对象存储、事务内持久化入库任务、有限次数重试和崩溃恢复。详见[可靠入库设计](docs/durable-ingestion.md)。
 - 结构感知解析：支持 PDF、DOCX、Markdown、TXT，经过文本清洗和带重叠窗口的结构化切片。
-- 混合检索：pgvector 语义检索与 Elasticsearch 关键词检索并行召回，使用 RRF 融合排名。
+- 混合检索：结合 pgvector 语义检索与 Elasticsearch 关键词检索，使用 RRF 融合排名，支持可选 HTTP 重排序、证据去重和 token 预算。[配置与边界](docs/evidence-selection.md)。
 - 查询规划：模型根据问题选择直接检索、改写或拆解；规划失败时自动回退原问题，不阻断问答。
 - 证据约束回答：对召回结果划分 `NONE / WEAK / PARTIAL / SUFFICIENT`，限制模型只能基于证据作答。
 - 可追溯引用：答案返回文档名、文档 ID、切片位置和检索分数等引用信息。
