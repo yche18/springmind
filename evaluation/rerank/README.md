@@ -72,6 +72,45 @@ conditions before making latency claims. Hosted model revisions can also change.
 
 ## 3. Replace the fixture with a real RRF snapshot
 
+### Capture the bundled corpus through the real local services
+
+With the normal local Compose stack and backend ingestion worker running, Java 21:
+
+```bash
+mvn "-Dtest=LiveRetrievalCaptureRun" "-Deval.capture=true" "-Deval.confirmLocalWrites=true" test
+```
+
+This explicitly creates a dedicated ordinary account, a knowledge group, and 16
+TXT uploads through the real controllers/auth filters (MockMvc transport only).
+MinIO, database, asynchronous ingestion, Ollama embeddings and Elasticsearch are
+real, not mocks. The runner's own worker and startup recovery are suppressed to
+avoid claiming/backfilling unrelated jobs. The running backend ingests the uploads.
+It waits up to five minutes for all documents to become READY and requires exact
+one-chunk text preservation before transferring the provisional fixture labels.
+
+For each question it checks group membership and calls the production hybrid
+retriever, intercepting the exact inputs at `EvidenceReranker`. It uses the original
+query via the production no-user planning fallback: **no query rewriting, paid
+planning, reranking or answer-generation calls occur during capture**. This is a
+controlled retrieval/rerank experiment, not full QA accuracy testing. The current
+embedding model remains whatever the local application configuration specifies.
+
+Artifacts go to ignored `evaluation/rerank/local/northstar-<run>/`: `snapshot.json`
+for the existing evaluator, `candidates.json` for exact windows/metadata,
+`traces.json` for channel counts and timings, and `manifest.json` for group/document
+IDs and provenance. `account.json` contains the generated test-account credentials;
+**never commit it**. The group/account/documents are retained for inspection, not
+automatically deleted. A new capture creates a new isolated group. If interrupted,
+use its manifest to inspect only those created resources before rerunning.
+
+Run the captured snapshot with the existing explicit live flags and
+`-Deval.dataset=evaluation/rerank/local/northstar-<run>/snapshot.json`. Labels remain
+provisional until a reviewer checks all questions against all 16 source passages.
+The collector fails on foreign-group sources, foreign documents, split chunks or
+ambiguous repeated windows instead of silently assigning misleading labels.
+
+### Bring your own dataset
+
 Create a JSON file under `evaluation/rerank/local/`. The shape is:
 
 ```json
