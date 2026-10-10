@@ -1,0 +1,16 @@
+{
+  "CURRENT": {
+    "tag": "qllama/bge-small-zh-v1.5:latest",
+    "digest": "9a2067741c2aacd74a623b0e09b40ab437bc4a5ebe9cd59a776376e414931c89",
+    "dimensions": 512,
+    "contextLength": 512,
+    "precision": "Q8_0"
+  },
+  "BGE_M3": {
+    "tag": "bge-m3:567m",
+    "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+    "dimensions": 1024,
+    "contextLength": 8192,
+    "precision": "F16"
+  }
+}
