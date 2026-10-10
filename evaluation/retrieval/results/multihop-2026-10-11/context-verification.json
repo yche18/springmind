@@ -1,0 +1,7 @@
+{
+  "replaySourceSha256" : "b028e9634dac3b36771fec7b2715c8415cd4cd655955d476ba44b00bdc3c0e03",
+  "captureSha256" : "6fdab4548c47b197c95cc5f99b653aae393ceae347f1734ffdbf4d7280f87c78",
+  "verifiedAt" : "2026-10-10T23:07:44.357502900Z",
+  "newModelCalls" : 0,
+  "contextsReproduced" : 180
+}
