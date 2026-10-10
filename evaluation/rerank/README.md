@@ -109,7 +109,25 @@ provisional until a reviewer checks all questions against all 16 source passages
 The collector fails on foreign-group sources, foreign documents, split chunks or
 ambiguous repeated windows instead of silently assigning misleading labels.
 
-### Bring your own dataset
+### Generate a human-review packet after replay
+
+```bash
+mvn "-Dtest=ReviewPacketRun" "-Deval.captureDir=evaluation/rerank/local/northstar-<run>" "-Deval.report=target/rerank-evaluation/report-<timestamp>.json" test
+```
+
+This makes no model calls. It checks the fixture and snapshot hashes, then writes
+`review.html` and `review-template.json` inside the capture directory. The HTML
+contains each question, expected-answer notes, provisional positive labels,
+before/after ranks, and all 16 source texts including implicit zero grades. The
+template expands all 480 question/source grades for explicit review. Nothing is
+marked human-reviewed automatically. Review notes are reading aids, not generated
+answers or ground truth. Pay special attention to multi-evidence grading and the
+six unanswerable cases. Do not change labels to match the model's preferences.
+
+The saved output ordering can be rescored after label corrections without another
+provider call. The capture remains synthetic even though its retrieval is real.
+
+### Custom dataset format
 
 Create a JSON file under `evaluation/rerank/local/`. The shape is:
 
@@ -136,7 +154,7 @@ Create a JSON file under `evaluation/rerank/local/`. The shape is:
 - `documents`: candidate-window IDs to exact text, not filenames. For real data,
   capture the **authorized, READY, clustered/windowed list immediately before
   `EvidenceReranker.rerank`**, using a local debugger or a controlled test fixture.
-  The answer UI contains only selected evidence and is not a complete candidate
+The answer UI contains only selected evidence and is not a complete candidate
   export. No production raw-text logging/export endpoint is introduced here.
 - `candidates`: unique IDs in their original pre-rerank order (0..50 per question).
   Freeze query, candidates and labels for both sides. A relevant passage absent
