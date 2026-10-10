@@ -60,10 +60,11 @@ class EmbeddingComparisonReportRun {
             }
             html.append("</table><p>* RRF 候选池最多 30，故不报告它的 Recall@50；不是 0。</p></section>");
         }
-        html.append("<section><h2>逐题变化：BGE-M3 相对当前模型</h2><table><tr><th>题号</th><th>向量 nDCG@5</th><th>双路 nDCG@5</th><th>历史与本轮当前向量排名</th></tr>");
+        html.append("<section><h2>逐题变化（nDCG@5）</h2><table><tr><th>题号</th><th>向量：旧模型→BGE-M3</th><th>双路：旧模型→BGE-M3</th><th>BGE-M3：单路→双路</th><th>历史与本轮当前向量排名</th></tr>");
         for (var row : comparison.rows()) {
             html.append("<tr><td><a href='#").append(row.id()).append("'>").append(row.id()).append("</a></td><td>")
-                    .append(change(row, "VECTOR")).append("</td><td>").append(change(row, "HYBRID")).append("</td><td>")
+                    .append(change(row, "CURRENT_VECTOR", "BGE_M3_VECTOR")).append("</td><td>").append(change(row, "CURRENT_HYBRID", "BGE_M3_HYBRID")).append("</td><td>")
+                    .append(change(row, "BGE_M3_VECTOR", "BGE_M3_HYBRID")).append("</td><td>")
                     .append(row.historicalVectorOrderMatches() ? "前50完全一致" : "有差异，单独诊断").append("</td></tr>");
         }
         html.append("</table></section>");
@@ -95,9 +96,9 @@ class EmbeddingComparisonReportRun {
         return html.append("<p>两个实际模型配置的对照，不是只改变语言能力的因果实验。模型大小、架构、精度和维度均不同；该合成集已经被分析过，不是独立保留测试集。报告保留所有退化案例。</p></main></html>").toString();
     }
 
-    private static String change(EmbeddingComparison.Row row, String suffix) {
-        var before = row.scores().get("CURRENT_" + suffix).metrics();
-        var after = row.scores().get("BGE_M3_" + suffix).metrics();
+    private static String change(EmbeddingComparison.Row row, String beforeMode, String afterMode) {
+        var before = row.scores().get(beforeMode).metrics();
+        var after = row.scores().get(afterMode).metrics();
         if (before == null) return "无答案，不评分";
         double delta = after.ndcg() - before.ndcg();
         return (delta > 1e-12 ? "改善 " : delta < -1e-12 ? "退化 " : "不变 ") + number(before.ndcg()) + " → " + number(after.ndcg());
