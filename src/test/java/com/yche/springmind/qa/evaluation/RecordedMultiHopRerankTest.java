@@ -11,7 +11,7 @@ class RecordedMultiHopRerankTest {
         var capture = m.readValue(MultiHopRerank.OUT.resolve("capture.json").toFile(), MultiHopRerank.Capture.class);
         assertEquals(0, capture.generationCalls()); assertEquals(180, capture.providerAttempts());
         var computed = MultiHopRerankAnalysis.analyze(capture);
-        assertEquals(m.readTree(MultiHopRerank.OUT.resolve("comparison.json").toFile()), m.valueToTree(computed));
+        assertEquals(m.readValue(MultiHopRerank.OUT.resolve("comparison.json").toFile(), MultiHopRerankAnalysis.Report.class), computed);
         var verification = m.readTree(MultiHopRerank.OUT.resolve("verification.json").toFile());
         assertEquals(180, verification.path("contextsReproduced").asInt());
         assertEquals(0, verification.path("newProviderCalls").asInt());
