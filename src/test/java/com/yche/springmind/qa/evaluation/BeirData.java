@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.nio.file.*;
 import java.security.MessageDigest;
 import java.util.*;
+import java.util.zip.*;
 import static com.yche.springmind.qa.evaluation.RetrievalAblation.require;
 
 /** Original BEIR document IDs and official test qrels; no application label projection. */
@@ -13,6 +14,20 @@ final class BeirData {
     static final Path OUTPUT = Path.of("evaluation/retrieval/results/beir-2026-10-11");
     record Dataset(Map<String, String> documents, Map<String, String> queries, Map<String, Map<String, Integer>> qrels) {}
     private BeirData() {}
+    static Path capturePath(String name) { return OUTPUT.resolve(name + "-capture.json.gz"); }
+    static BeirEvaluation.Capture capture(String name) throws Exception {
+        try (var in = new GZIPInputStream(Files.newInputStream(capturePath(name)))) {
+            return RerankEvaluationRun.datasetMapper().readValue(in, BeirEvaluation.Capture.class);
+        }
+    }
+    static void writeCapture(String name, BeirEvaluation.Capture value) throws Exception {
+        require(!Files.exists(capturePath(name)), "Refuse to overwrite capture");
+        Path temporary = capturePath(name).resolveSibling(name + "-capture.partial");
+        try (var out = new GZIPOutputStream(Files.newOutputStream(temporary))) {
+            RerankEvaluationRun.datasetMapper().writeValue(out, value);
+        }
+        Files.move(temporary, capturePath(name));
+    }
     static Path source(String name) { require(DATASETS.contains(name), "Unknown BEIR dataset"); return Path.of("target/beir-downloads", name); }
     static Dataset read(String name) throws Exception {
         var root = source(name);
