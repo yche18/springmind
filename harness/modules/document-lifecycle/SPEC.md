@@ -13,7 +13,10 @@ Protects the document flow from upload initiation through chunk upload, completi
 - Document status transitions must remain observable and valid.
 - Ingestion parses supported formats, chunks content in order, preserves metadata, and writes vectors.
 - Failed parsing or ingestion must not leave half-written vector state.
-- Stale processing documents must be recoverable on startup.
+- Upload metadata and its ingestion job commit together. Publishing alone is not delivery.
+- Stale processing documents are requeued on startup, never failed solely because another instance starts.
+- Attempts are durable and bounded; an expired owner cannot execute or complete a reclaimed job.
+- A failed cleanup must prevent ingestion from exposing mixed index generations.
 
 ## Gate Status
 

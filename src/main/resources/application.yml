@@ -8,6 +8,11 @@ spring:
       max-file-size: 256MB
       max-request-size: 256MB
 
+document:
+  ingestion:
+    worker-enabled: true
+    poll-interval-ms: 2000
+
 app:
   ai:
     chat:

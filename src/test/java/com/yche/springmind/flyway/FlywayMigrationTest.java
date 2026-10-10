@@ -1,6 +1,13 @@
 package com.yche.springmind.flyway;
 
 import com.yche.springmind.ingestion.service.DocumentIngestionProcessor;
+import com.yche.springmind.ingestion.service.IngestionJobQueue;
+import com.yche.springmind.ingestion.vector.VectorIngestionService;
+import com.yche.springmind.retrieval.elasticsearch.ElasticsearchChunkIndexService;
+import com.yche.springmind.document.service.DocumentIngestionRequestedEvent;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.support.TransactionTemplate;
 import com.zaxxer.hikari.HikariDataSource;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
@@ -22,6 +29,7 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -43,6 +51,21 @@ class FlywayMigrationTest {
     @MockBean
     private DocumentIngestionProcessor documentIngestionProcessor;
 
+    @MockBean
+    private VectorIngestionService vectorIngestionService;
+
+    @MockBean
+    private ElasticsearchChunkIndexService elasticsearchChunkIndexService;
+
+    @Autowired
+    private IngestionJobQueue queue;
+
+    @Autowired
+    private PlatformTransactionManager transactionManager;
+
+    @Autowired
+    private ApplicationEventPublisher events;
+
     @DynamicPropertySource
     static void registerDatasourceProperties(DynamicPropertyRegistry registry) {
         createDatabase(TEST_DATABASE);
@@ -55,6 +78,7 @@ class FlywayMigrationTest {
         registry.add("spring.flyway.password", () -> DATABASE_PASSWORD);
         registry.add("springmind.auth.jwt-secret", () -> TEST_JWT_SECRET);
         registry.add("app.ai.chat.api-key", () -> "test-api-key");
+        registry.add("document.ingestion.worker-enabled", () -> "false");
     }
 
     @Test
@@ -88,7 +112,9 @@ class FlywayMigrationTest {
         );
 
         assertThat(jdbcTemplate.queryForObject("select current_database()", String.class)).isEqualTo(TEST_DATABASE);
-        assertThat(currentFlywayVersion()).isEqualTo("9");
+        assertThat(currentFlywayVersion()).isEqualTo("10");
+        assertThat(hasColumn("ingestion_jobs", "lease_until")).isTrue();
+        assertThat(hasIndex("uk_ingestion_jobs_active_document")).isTrue();
         assertThat(tables).allSatisfy(table -> assertThat(hasTable(table)).isTrue());
         assertThat(indexes).allSatisfy(index -> assertThat(hasIndex(index)).isTrue());
         assertThat(hasConstraint("ck_group_join_requests_status")).isTrue();
@@ -134,6 +160,139 @@ class FlywayMigrationTest {
         seedDocument(5002L, 2301L, 2302L, 3202L);
 
         assertThatThrownBy(() -> insertIngestionJob(4001L, 5002L, 2302L)).isInstanceOf(DataAccessException.class);
+    }
+
+    @Test
+    void shouldCommitOrRollBackDocumentAndJobTogether() {
+        TransactionTemplate tx = new TransactionTemplate(transactionManager);
+        tx.executeWithoutResult(status -> {
+            seedDocument(5101L, 2401L, 2402L, 3301L);
+            events.publishEvent(new DocumentIngestionRequestedEvent(5101L, 2401L));
+            assertThat(jobCount(5101L)).isEqualTo(1);
+            status.setRollbackOnly();
+        });
+        assertThat(jobCount(5101L)).isZero();
+        assertThat(jdbcTemplate.queryForObject("select count(*) from documents where id = 5101", Integer.class)).isZero();
+
+        seedProcessingDocument(5102L, 2411L, 3311L);
+        tx.executeWithoutResult(status -> {
+            events.publishEvent(new DocumentIngestionRequestedEvent(5102L, 2411L));
+            events.publishEvent(new DocumentIngestionRequestedEvent(5102L, 2411L));
+        });
+        assertThat(jobCount(5102L)).isEqualTo(1);
+        IngestionJobQueue.Job job = queue.claim();
+        assertThat(job.documentId()).isEqualTo(5102L);
+        assertThat(queue.claim()).isNull();
+        queue.execute(job);
+        queue.execute(job);
+        verify(documentIngestionProcessor, times(1)).process(5102L, 2411L);
+        assertThat(documentStatus(5102L)).isEqualTo("READY");
+        assertThat(jobStatus(job)).isEqualTo("SUCCEEDED");
+    }
+
+    @Test
+    void shouldRecoverExpiredClaimAndFencePreviousOwner() {
+        seedProcessingDocument(5103L, 2421L, 3321L);
+        assertThat(queue.recoverUnqueuedDocuments()).isEqualTo(1);
+        assertThat(queue.recoverUnqueuedDocuments()).isZero();
+        IngestionJobQueue.Job abandoned = queue.claim();
+        jdbcTemplate.update("update ingestion_jobs set lease_until = now() - interval '1 minute' where id = ?", abandoned.id());
+        IngestionJobQueue.Job replacement = queue.claim();
+        assertThat(replacement.id()).isEqualTo(abandoned.id());
+        assertThat(replacement.attempt()).isEqualTo(2);
+        queue.execute(abandoned);
+        queue.fail(abandoned, new IllegalStateException("late failure"));
+        verifyNoInteractions(documentIngestionProcessor);
+        queue.execute(replacement);
+        assertThat(documentStatus(5103L)).isEqualTo("READY");
+    }
+
+    @Test
+    void shouldNotReclaimLockedAttemptEvenWhenItsLeaseExpired() throws Exception {
+        seedProcessingDocument(5104L, 2431L, 3331L);
+        queue.recoverUnqueuedDocuments();
+        IngestionJobQueue.Job job = queue.claim();
+        jdbcTemplate.update("update ingestion_jobs set lease_until = now() - interval '1 minute' where id = ?", job.id());
+        java.util.concurrent.CountDownLatch entered = new java.util.concurrent.CountDownLatch(1);
+        java.util.concurrent.CountDownLatch release = new java.util.concurrent.CountDownLatch(1);
+        doAnswer(invocation -> {
+            entered.countDown();
+            if (!release.await(5, java.util.concurrent.TimeUnit.SECONDS)) {
+                throw new IllegalStateException("test worker did not release");
+            }
+            return null;
+        }).when(documentIngestionProcessor).process(5104L, 2431L);
+        try (var executor = java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor()) {
+            var work = executor.submit(() -> queue.execute(job));
+            try {
+                assertThat(entered.await(5, java.util.concurrent.TimeUnit.SECONDS)).isTrue();
+                assertThat(queue.claim()).isNull();
+            } finally {
+                release.countDown();
+            }
+            work.get(5, java.util.concurrent.TimeUnit.SECONDS);
+        }
+        assertThat(jobStatus(job)).isEqualTo("SUCCEEDED");
+    }
+
+    @Test
+    void shouldPersistBackoffAndFailAfterThreeAttempts() {
+        seedProcessingDocument(5105L, 2441L, 3341L);
+        queue.recoverUnqueuedDocuments();
+        doThrow(new IllegalStateException("index unavailable")).when(documentIngestionProcessor).process(5105L, 2441L);
+        for (int attempt = 1; attempt <= 3; attempt++) {
+            IngestionJobQueue.Job job = queue.claim();
+            assertThat(job.attempt()).isEqualTo(attempt);
+            assertThatThrownBy(() -> queue.execute(job)).isInstanceOf(IllegalStateException.class);
+            queue.fail(job, new IllegalStateException("index unavailable"));
+            assertThat(queue.claim()).isNull();
+            if (attempt < 3) {
+                assertThat(jobStatus(job)).isEqualTo("PENDING");
+                assertThat(documentStatus(5105L)).isEqualTo("PROCESSING");
+                jdbcTemplate.update("update ingestion_jobs set next_retry_at = now() where id = ?", job.id());
+            } else {
+                assertThat(jobStatus(job)).isEqualTo("FAILED");
+                assertThat(documentStatus(5105L)).isEqualTo("FAILED");
+            }
+        }
+        verify(vectorIngestionService, times(4)).deleteDocumentVectors(5105L);
+    }
+
+    @Test
+    void shouldSkipDeletedDocumentAndRejectCleanupFailure() {
+        seedProcessingDocument(5106L, 2451L, 3351L);
+        queue.recoverUnqueuedDocuments();
+        IngestionJobQueue.Job job = queue.claim();
+        jdbcTemplate.update("update documents set deleted = true where id = 5106");
+        queue.execute(job);
+        verifyNoInteractions(documentIngestionProcessor, vectorIngestionService, elasticsearchChunkIndexService);
+        assertThat(jobStatus(job)).isEqualTo("FAILED");
+
+        seedProcessingDocument(5107L, 2461L, 3361L);
+        queue.recoverUnqueuedDocuments();
+        IngestionJobQueue.Job failing = queue.claim();
+        doThrow(new IllegalStateException("cleanup unavailable")).when(vectorIngestionService).deleteDocumentVectors(5107L);
+        assertThatThrownBy(() -> queue.execute(failing)).isInstanceOf(IllegalStateException.class);
+        verifyNoInteractions(documentIngestionProcessor);
+        jdbcTemplate.update("update documents set deleted = true where id = 5107");
+        queue.fail(failing, new IllegalStateException("cleanup unavailable"));
+    }
+
+    private void seedProcessingDocument(long documentId, long groupId, long userId) {
+        seedDocument(documentId, groupId, groupId + 1, userId);
+        jdbcTemplate.update("update documents set status = 'PROCESSING' where id = ?", documentId);
+    }
+
+    private int jobCount(long documentId) {
+        return jdbcTemplate.queryForObject("select count(*) from ingestion_jobs where document_id = ?", Integer.class, documentId);
+    }
+
+    private String documentStatus(long documentId) {
+        return jdbcTemplate.queryForObject("select status from documents where id = ?", String.class, documentId);
+    }
+
+    private String jobStatus(IngestionJobQueue.Job job) {
+        return jdbcTemplate.queryForObject("select status from ingestion_jobs where id = ?", String.class, job.id());
     }
 
     @AfterAll

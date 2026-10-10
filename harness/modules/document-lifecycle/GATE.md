@@ -41,6 +41,10 @@ mvn "-Dtest=DocumentLifecycleHarnessTest" test
 - Missing chunks must not compose object, finalize document, or mark the session completed.
 - Ingestion must delete old chunks, vectors, and search index entries before processing.
 - Recovery must delete partial artifacts and persist `FAILED` with a failure reason.
+- Durable queue integration is verified with `mvn -Dtest=FlywayMigrationTest test`
+  against PostgreSQL on port 5433. Tests create and remove their own temporary database.
+- The queue commits with the upload, fences expired workers, skips locked attempts,
+  and persists backoff. Only exhausted attempts fail the document.
 
 ## FAIL/PASS Rule
 

@@ -12,6 +12,9 @@ import java.util.List;
 @Mapper
 public interface DocumentMapper {
 
+    @org.apache.ibatis.annotations.Select("select id, status from documents where id = #{documentId} and group_id = #{groupId} and deleted = false for update")
+    DocumentEntity selectForUpdate(@Param("documentId") Long documentId, @Param("groupId") Long groupId);
+
     int insert(DocumentEntity document);
 
     List<DocumentListItemVO> selectReadableDocuments(DocumentQuery query);

@@ -9,7 +9,7 @@ SpringMind 围绕“文档入库—混合检索—证据分级—可追溯回答
 ## 核心亮点
 
 - 组织级数据隔离：检索请求必须携带真实用户与知识组上下文，文档、切片和检索结果按 `groupId` 隔离。
-- 完整文档生命周期：支持普通上传与分片续传、MinIO 对象存储、异步入库、失败重试和卡死任务恢复。
+- 完整文档生命周期：支持普通上传与分片续传、MinIO 对象存储、事务内持久化入库任务、有限次数重试和崩溃恢复。详见[可靠入库设计](docs/durable-ingestion.md)。
 - 结构感知解析：支持 PDF、DOCX、Markdown、TXT，经过文本清洗和带重叠窗口的结构化切片。
 - 混合检索：pgvector 语义检索与 Elasticsearch 关键词检索并行召回，使用 RRF 融合排名。
 - 查询规划：模型根据问题选择直接检索、改写或拆解；规划失败时自动回退原问题，不阻断问答。
@@ -147,7 +147,7 @@ frontend/src/
 可以按以下顺序跟随文档入库与问答主链路：
 
 1. `DocumentController` → `DocumentService` / `DocumentUploadService`
-2. `DocumentIngestionAsyncListener` → `EtlDocumentIngestionProcessor`
+2. `IngestionJobQueue` → `IngestionJobWorker` → `DocumentIngestionAsyncService` → `EtlDocumentIngestionProcessor`
 3. `StructureAwareChunkTransformer` → `VectorIngestionService` / `ElasticsearchChunkIndexService`
 4. `QaController` → `QaService` → `QueryPlanningService`
 5. `HybridEvidenceRetriever` → `QaChatService` → `CitationAssembler`

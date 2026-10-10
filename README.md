@@ -9,7 +9,7 @@ The platform provides an end-to-end workflow covering document ingestion, hybrid
 ## Key Features
 
 - Group-level data isolation: every retrieval request carries an authenticated user and knowledge-group context; documents, chunks, and search results are isolated by `groupId`.
-- Complete document lifecycle: standard and resumable multipart uploads, MinIO object storage, asynchronous ingestion, retry handling, and recovery for stalled jobs.
+- Complete document lifecycle: standard and resumable multipart uploads, MinIO object storage, transactionally persisted ingestion jobs, bounded retries, and crash recovery. See [durable ingestion](docs/durable-ingestion.md).
 - Structure-aware parsing: PDF, DOCX, Markdown, and TXT support, with text normalization and structured chunking using overlapping windows.
 - Hybrid retrieval: pgvector semantic search and Elasticsearch keyword search run in parallel, with Reciprocal Rank Fusion (RRF) combining their results.
 - Query planning: the model chooses whether to search directly, rewrite the query, or decompose it; planning failures fall back to the original question without interrupting the Q&A flow.
@@ -147,7 +147,7 @@ frontend/src/
 Follow the main document-ingestion and Q&A flows in this order:
 
 1. `DocumentController` → `DocumentService` / `DocumentUploadService`
-2. `DocumentIngestionAsyncListener` → `EtlDocumentIngestionProcessor`
+2. `IngestionJobQueue` → `IngestionJobWorker` → `DocumentIngestionAsyncService` → `EtlDocumentIngestionProcessor`
 3. `StructureAwareChunkTransformer` → `VectorIngestionService` / `ElasticsearchChunkIndexService`
 4. `QaController` → `QaService` → `QueryPlanningService`
 5. `HybridEvidenceRetriever` → `QaChatService` → `CitationAssembler`
