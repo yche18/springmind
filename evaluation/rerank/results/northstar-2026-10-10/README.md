@@ -9,6 +9,11 @@ questions and their 480 question/source grades. The owner's explicit conversatio
 confirmation is preserved in [the approval record](review-approval.json), bound to
 the v2 dataset hash. This confirms annotations, not answer-generation accuracy.
 
+A subsequent [single-channel versus hybrid ablation](../../../retrieval/results/northstar-2026-10-10/README.md)
+reuses these reviewed labels and both Qwen rounds without new provider calls.
+It measures hybrid's coverage improvement and its ranking regression against
+vector-only; it does not replace or alter the results below.
+
 ## Setup and provenance
 
 - Captured on 2026-10-10, run `northstar-d41905eb`, using collector commit `6575b9e`.

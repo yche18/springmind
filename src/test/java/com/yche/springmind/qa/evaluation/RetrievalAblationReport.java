@@ -21,6 +21,22 @@ final class RetrievalAblationReport {
                 <p class="muted">限制：仅 16 篇英文短文，每题向量通道都召回全库；中文查询与英文关键词存在语言错配。
                 本报告不证明大规模召回、最终答案、权限安全或生产延迟。不能据此声称双路必然优于单路。</p>
                 """);
+        var overall = report.groups().get("ALL");
+        var vector = overall.get("VECTOR");
+        var hybrid = overall.get("HYBRID");
+        long improved = report.rows().stream().filter(row -> row.metrics().get("VECTOR") != null
+                && row.metrics().get("HYBRID").ndcg() > row.metrics().get("VECTOR").ndcg() + 1e-12).count();
+        long regressed = report.rows().stream().filter(row -> row.metrics().get("VECTOR") != null
+                && row.metrics().get("HYBRID").ndcg() < row.metrics().get("VECTOR").ndcg() - 1e-12).count();
+        html.append("<section><h2>结论：双路有收益，也有退化</h2><p>向量 → 双路：Recall@5 ")
+                .append(format(vector.metrics().recall())).append(" → ").append(format(hybrid.metrics().recall()))
+                .append("；nDCG@5 ").append(format(vector.metrics().ndcg())).append(" → ").append(format(hybrid.metrics().ndcg()))
+                .append("；多证据齐全 ").append(vector.multiEvidenceComplete()).append(" / ").append(vector.multiEvidenceQuestions())
+                .append(" → ").append(hybrid.multiEvidenceComplete()).append(" / ").append(hybrid.multiEvidenceQuestions())
+                .append("。</p><p>按 nDCG@5：").append(improved).append(" 题改善，").append(regressed).append(" 题退化，")
+                .append(vector.answerable() - improved - regressed).append(" 道有答案题不变。指标不变不代表全部排名不变。")
+                .append("<a href='#q20'>q20：补齐 P1 / P2 证据</a>；<a href='#q06'>q06：报销凭证证据被挤到第二名</a>。</p>")
+                .append("<p>没有测试“向量单路 + 精排”，因此不能把精排后的全部收益归因于双路，也不能证明关键词通道是精排取得该结果的必要条件。</p></section>");
         for (var group : report.groups().entrySet()) {
             html.append("<section><h2>").append(escape(groupName(group.getKey()))).append("</h2><table><thead><tr><th>方案</th><th>有答案 / 全部</th><th>Hit@5</th><th>Recall@5</th><th>MRR@5</th><th>nDCG@5</th><th>候选召回率</th><th>多证据齐全</th></tr></thead><tbody>");
             for (var entry : group.getValue().entrySet()) {
@@ -35,9 +51,9 @@ final class RetrievalAblationReport {
         }
         html.append("<section><h2>逐题变化：双路 RRF 对比向量单路</h2><p>按 nDCG@5 判断改善 / 退化，所有题目均保留，不只展示正面案例。</p><ul>");
         for (var row : report.rows()) {
-            var vector = row.metrics().get("VECTOR");
-            var hybrid = row.metrics().get("HYBRID");
-            String change = vector == null ? "无答案：不评分" : hybrid.ndcg() > vector.ndcg() + 1e-12 ? "改善" : hybrid.ndcg() < vector.ndcg() - 1e-12 ? "退化" : "不变";
+            var vectorMetrics = row.metrics().get("VECTOR");
+            var hybridMetrics = row.metrics().get("HYBRID");
+            String change = vectorMetrics == null ? "无答案：不评分" : hybridMetrics.ndcg() > vectorMetrics.ndcg() + 1e-12 ? "改善" : hybridMetrics.ndcg() < vectorMetrics.ndcg() - 1e-12 ? "退化" : "不变";
             html.append("<li><a href='#").append(escape(row.id())).append("'>").append(escape(row.id())).append("</a> · ").append(change)
                     .append(" · ").append(escape(row.query())).append("</li>");
         }

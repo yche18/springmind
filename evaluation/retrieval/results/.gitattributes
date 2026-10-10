@@ -1,0 +1,2 @@
+# Preserve captured JSON bytes and their SHA-256 values across platforms.
+*.json -text whitespace=trailing-space,space-before-tab,cr-at-eol

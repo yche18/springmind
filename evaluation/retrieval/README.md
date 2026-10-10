@@ -5,6 +5,9 @@ This experiment reuses the 30 reviewed Northstar questions, 16 source passages a
 It compares keyword-only, vector-only, hybrid RRF, and both previously recorded
 Qwen timeout rounds. It does not call Qwen or a chat model.
 
+The [recorded Northstar comparison](results/northstar-2026-10-10/README.md) includes
+all 30 cases, a coverage/ranking trade-off, and both improved and regressed examples.
+
 ## Capture from the existing local corpus (Java 21)
 
 Start the normal PostgreSQL, Elasticsearch and Ollama services. The original
@@ -47,7 +50,7 @@ latencies. Do not add historical Qwen latency to them or claim an end-to-end SLA
 
 ```bash
 mvn "-Dtest=RetrievalAblationReportRun" test
-mvn "-Dtest=RetrievalAblationTest,RecordedEvaluationTest" test
+mvn "-Dtest=RetrievalAblationTest,RecordedRetrievalAblationTest,RecordedEvaluationTest" test
 ```
 
 `-Deval.ablationDir=<directory>` selects a directory containing `capture.json` for
