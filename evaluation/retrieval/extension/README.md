@@ -3,6 +3,13 @@
 This is a new, fictional corpus, not a replacement for the reviewed Northstar
 30-question experiment. All earlier data and results remain unchanged.
 
+Pre-retrieval boundary check: the production chunker splits e12's original long
+quote at a semicolon. Before any retrieval measurement, its evidence locator was
+shortened to the complete answer clause "do not wait for the email digest." and
+the expected-answer note was narrowed to the actual yes/no question. Neither its
+query nor any source text changed. The neighboring fragment remains a review
+priority; this correction was based on chunk boundaries, not retrieval outcomes.
+
 ## Predeclared design
 
 - 66 documents: 32 short Chinese policies, 32 short English policies, and two
@@ -62,3 +69,30 @@ Metrics remain provisional until that review is explicitly confirmed.
 This is a diagnostic extension, not a representative or statistically established
 production benchmark. No parameter sweep, external judge, Qwen call or chat call
 is authorized or needed for this experiment.
+
+## Commands (Java 21)
+
+```bash
+mvn "-Dtest=ExtensionFixtureTest,ExtensionEvaluationTest" test
+mvn "-Dtest=LiveExtensionRun" "-Deval.extension=true" "-Deval.confirmLocalWrites=true" test
+mvn "-Dtest=ExtensionReportRun" test
+```
+
+The manual `*Run` entry points do not run in ordinary tests. A live run saves its
+private account/manifest under ignored `evaluation/rerank/local/harborview-<id>/`.
+It writes `corpus.json` (actual chunks and provisional judgments) **before** the
+first retrieval query, then `capture.json` under `target/retrieval-extension/`.
+Both files bind the fixture by SHA-256. All paid-model beans are replaced and
+verified unused; the running ingestion worker uses the local embedding model.
+
+To resume an interrupted upload/ingestion, pass
+`-Deval.extensionLocal=evaluation/rerank/local/harborview-<id>` and the same live
+flags. Only missing uploads from that manifest are added. If a corpus/capture
+already exists, use a new `-Deval.extensionOutput=<directory>` rather than replacing
+the pre-query records. Retain unsuccessful attempts and document retries.
+
+The offline report command also accepts `-Deval.extensionOutput=<directory>` and
+reads only saved JSON plus the frozen fixture. It creates `comparison.json`,
+`review-template.json`, `review.html` and `report.html`. No database, model or
+credential is needed for report generation. The review page comes before results
+and exposes every question/chunk judgment, including default zero grades.
