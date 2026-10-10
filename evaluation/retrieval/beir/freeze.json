@@ -1,0 +1,12 @@
+{
+  "protocol" : "20a9eb19379af33b3faf3671900fe74ef47ebce88d5a1400515923eb6910c3d1",
+  "model-lock" : "8729bd75d98141f464761c529f0a989ca5c8d92ed780180d3f74fb0462d3806e",
+  "scifact/archive-md5" : "5f7d1de60b170fc8027bb7898e2efca1",
+  "scifact/corpus.jsonl" : "dec31c8182f3d744c7d2c09423756fd1d17cbef75808db13ba01cc0aab4d1ac6",
+  "scifact/queries.jsonl" : "8ff84a7c903f722981cd8d595c022660140c51867b27608a6d4910db86080313",
+  "scifact/qrels/test.tsv" : "0864bb985e0ca2367ba217977e72004d549054b2b06666ed9d4825ac7c21284c",
+  "nfcorpus/archive-md5" : "a89dba18a62ef92f7d323ec890a0d38d",
+  "nfcorpus/corpus.jsonl" : "10cc83ef1826b1425e6a87090b5140b39b27755d5a27e48215a88611c899991f",
+  "nfcorpus/queries.jsonl" : "d024e6621b84925d485ae473d316a0c3af31c62c8068a59fb29d22f7613aef2a",
+  "nfcorpus/qrels/test.tsv" : "f8fba6ef3d4dd9c3a242a8ba4ae38276fc3622fce7dcbae764766d564542fd2a"
+}
