@@ -1,0 +1,1690 @@
+{
+  "annotationStatus" : "PENDING_HUMAN_REVIEW",
+  "fixtureSha256" : "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
+  "corpusSha256" : "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
+  "captureSha256" : "88e2bb087851744e4fc1c754e74a4a80440f5b7fc283e10db21c45a5b7e65383",
+  "newProviderRequests" : 0,
+  "groups" : {
+    "ALL" : {
+      "KEYWORD" : {
+        "cases" : 24,
+        "answerable" : 20,
+        "unanswerable" : 4,
+        "chunkMetrics" : {
+          "hit" : 0.9,
+          "recall" : 0.9,
+          "mrr" : 0.8166666666666667,
+          "ndcg" : 0.840281540814747
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 0.9,
+        "complementaryCases" : 6,
+        "completeComplementaryTop5" : 5,
+        "windowTop5FactCoverage" : 0.9,
+        "selectedFactCoverage" : 0.9
+      },
+      "VECTOR" : {
+        "cases" : 24,
+        "answerable" : 20,
+        "unanswerable" : 4,
+        "chunkMetrics" : {
+          "hit" : 0.8,
+          "recall" : 0.775,
+          "mrr" : 0.75,
+          "ndcg" : 0.739736374452828
+        },
+        "candidateChunkRecall" : 0.85,
+        "rawChannelFactCoverage" : 0.875,
+        "candidateFactCoverage" : 0.85,
+        "top5FactCoverage" : 0.775,
+        "complementaryCases" : 6,
+        "completeComplementaryTop5" : 3,
+        "windowTop5FactCoverage" : 0.8,
+        "selectedFactCoverage" : 0.8
+      },
+      "HYBRID" : {
+        "cases" : 24,
+        "answerable" : 20,
+        "unanswerable" : 4,
+        "chunkMetrics" : {
+          "hit" : 0.85,
+          "recall" : 0.85,
+          "mrr" : 0.7766666666666666,
+          "ndcg" : 0.7863147192765458
+        },
+        "candidateChunkRecall" : 0.975,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 0.975,
+        "top5FactCoverage" : 0.85,
+        "complementaryCases" : 6,
+        "completeComplementaryTop5" : 4,
+        "windowTop5FactCoverage" : 0.85,
+        "selectedFactCoverage" : 0.85
+      }
+    },
+    "zh" : {
+      "KEYWORD" : {
+        "cases" : 12,
+        "answerable" : 10,
+        "unanswerable" : 2,
+        "chunkMetrics" : {
+          "hit" : 0.9,
+          "recall" : 0.9,
+          "mrr" : 0.85,
+          "ndcg" : 0.8630929753571458
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 0.9,
+        "complementaryCases" : 3,
+        "completeComplementaryTop5" : 2,
+        "windowTop5FactCoverage" : 0.9,
+        "selectedFactCoverage" : 0.9
+      },
+      "VECTOR" : {
+        "cases" : 12,
+        "answerable" : 10,
+        "unanswerable" : 2,
+        "chunkMetrics" : {
+          "hit" : 0.8,
+          "recall" : 0.8,
+          "mrr" : 0.8,
+          "ndcg" : 0.7919720789148188
+        },
+        "candidateChunkRecall" : 0.9,
+        "rawChannelFactCoverage" : 0.95,
+        "candidateFactCoverage" : 0.9,
+        "top5FactCoverage" : 0.8,
+        "complementaryCases" : 3,
+        "completeComplementaryTop5" : 2,
+        "windowTop5FactCoverage" : 0.8,
+        "selectedFactCoverage" : 0.8
+      },
+      "HYBRID" : {
+        "cases" : 12,
+        "answerable" : 10,
+        "unanswerable" : 2,
+        "chunkMetrics" : {
+          "hit" : 0.9,
+          "recall" : 0.9,
+          "mrr" : 0.82,
+          "ndcg" : 0.830657359638273
+        },
+        "candidateChunkRecall" : 0.95,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 0.95,
+        "top5FactCoverage" : 0.9,
+        "complementaryCases" : 3,
+        "completeComplementaryTop5" : 2,
+        "windowTop5FactCoverage" : 0.9,
+        "selectedFactCoverage" : 0.9
+      }
+    },
+    "en" : {
+      "KEYWORD" : {
+        "cases" : 12,
+        "answerable" : 10,
+        "unanswerable" : 2,
+        "chunkMetrics" : {
+          "hit" : 0.9,
+          "recall" : 0.9,
+          "mrr" : 0.7833333333333333,
+          "ndcg" : 0.8174701062723482
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 0.9,
+        "complementaryCases" : 3,
+        "completeComplementaryTop5" : 3,
+        "windowTop5FactCoverage" : 0.9,
+        "selectedFactCoverage" : 0.9
+      },
+      "VECTOR" : {
+        "cases" : 12,
+        "answerable" : 10,
+        "unanswerable" : 2,
+        "chunkMetrics" : {
+          "hit" : 0.8,
+          "recall" : 0.75,
+          "mrr" : 0.7,
+          "ndcg" : 0.6875006699908373
+        },
+        "candidateChunkRecall" : 0.8,
+        "rawChannelFactCoverage" : 0.8,
+        "candidateFactCoverage" : 0.8,
+        "top5FactCoverage" : 0.75,
+        "complementaryCases" : 3,
+        "completeComplementaryTop5" : 1,
+        "windowTop5FactCoverage" : 0.8,
+        "selectedFactCoverage" : 0.8
+      },
+      "HYBRID" : {
+        "cases" : 12,
+        "answerable" : 10,
+        "unanswerable" : 2,
+        "chunkMetrics" : {
+          "hit" : 0.8,
+          "recall" : 0.8,
+          "mrr" : 0.7333333333333333,
+          "ndcg" : 0.7419720789148188
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 0.8,
+        "complementaryCases" : 3,
+        "completeComplementaryTop5" : 2,
+        "windowTop5FactCoverage" : 0.8,
+        "selectedFactCoverage" : 0.8
+      }
+    },
+    "exact" : {
+      "KEYWORD" : {
+        "cases" : 6,
+        "answerable" : 6,
+        "unanswerable" : 0,
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "complementaryCases" : 0,
+        "completeComplementaryTop5" : 0,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "VECTOR" : {
+        "cases" : 6,
+        "answerable" : 6,
+        "unanswerable" : 0,
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "complementaryCases" : 0,
+        "completeComplementaryTop5" : 0,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "HYBRID" : {
+        "cases" : 6,
+        "answerable" : 6,
+        "unanswerable" : 0,
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "complementaryCases" : 0,
+        "completeComplementaryTop5" : 0,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      }
+    },
+    "semantic" : {
+      "KEYWORD" : {
+        "cases" : 6,
+        "answerable" : 6,
+        "unanswerable" : 0,
+        "chunkMetrics" : {
+          "hit" : 0.8333333333333334,
+          "recall" : 0.8333333333333334,
+          "mrr" : 0.8333333333333334,
+          "ndcg" : 0.8333333333333334
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 0.8333333333333334,
+        "complementaryCases" : 0,
+        "completeComplementaryTop5" : 0,
+        "windowTop5FactCoverage" : 0.8333333333333334,
+        "selectedFactCoverage" : 0.8333333333333334
+      },
+      "VECTOR" : {
+        "cases" : 6,
+        "answerable" : 6,
+        "unanswerable" : 0,
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.8333333333333334,
+          "ndcg" : 0.8769765845238191
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "complementaryCases" : 0,
+        "completeComplementaryTop5" : 0,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "HYBRID" : {
+        "cases" : 6,
+        "answerable" : 6,
+        "unanswerable" : 0,
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.8888888888888888,
+          "ndcg" : 0.9166666666666666
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "complementaryCases" : 0,
+        "completeComplementaryTop5" : 0,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      }
+    },
+    "cross-language" : {
+      "KEYWORD" : {
+        "cases" : 4,
+        "answerable" : 4,
+        "unanswerable" : 0,
+        "chunkMetrics" : {
+          "hit" : 0.75,
+          "recall" : 0.75,
+          "mrr" : 0.3333333333333333,
+          "ndcg" : 0.4514077040737351
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 0.75,
+        "complementaryCases" : 2,
+        "completeComplementaryTop5" : 1,
+        "windowTop5FactCoverage" : 0.75,
+        "selectedFactCoverage" : 0.75
+      },
+      "VECTOR" : {
+        "cases" : 4,
+        "answerable" : 4,
+        "unanswerable" : 0,
+        "chunkMetrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "candidateChunkRecall" : 0.25,
+        "rawChannelFactCoverage" : 0.375,
+        "candidateFactCoverage" : 0.25,
+        "top5FactCoverage" : 0.0,
+        "complementaryCases" : 2,
+        "completeComplementaryTop5" : 0,
+        "windowTop5FactCoverage" : 0.0,
+        "selectedFactCoverage" : 0.0
+      },
+      "HYBRID" : {
+        "cases" : 4,
+        "answerable" : 4,
+        "unanswerable" : 0,
+        "chunkMetrics" : {
+          "hit" : 0.25,
+          "recall" : 0.25,
+          "mrr" : 0.05,
+          "ndcg" : 0.09671320180863541
+        },
+        "candidateChunkRecall" : 0.875,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 0.875,
+        "top5FactCoverage" : 0.25,
+        "complementaryCases" : 2,
+        "completeComplementaryTop5" : 0,
+        "windowTop5FactCoverage" : 0.25,
+        "selectedFactCoverage" : 0.25
+      }
+    },
+    "multi-evidence" : {
+      "KEYWORD" : {
+        "cases" : 2,
+        "answerable" : 2,
+        "unanswerable" : 0,
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "complementaryCases" : 2,
+        "completeComplementaryTop5" : 2,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "VECTOR" : {
+        "cases" : 2,
+        "answerable" : 2,
+        "unanswerable" : 0,
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "complementaryCases" : 2,
+        "completeComplementaryTop5" : 2,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "HYBRID" : {
+        "cases" : 2,
+        "answerable" : 2,
+        "unanswerable" : 0,
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "complementaryCases" : 2,
+        "completeComplementaryTop5" : 2,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      }
+    },
+    "long-document" : {
+      "KEYWORD" : {
+        "cases" : 2,
+        "answerable" : 2,
+        "unanswerable" : 0,
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "complementaryCases" : 2,
+        "completeComplementaryTop5" : 2,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "VECTOR" : {
+        "cases" : 2,
+        "answerable" : 2,
+        "unanswerable" : 0,
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 0.75,
+          "mrr" : 1.0,
+          "ndcg" : 0.766433990956823
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 0.75,
+        "complementaryCases" : 2,
+        "completeComplementaryTop5" : 1,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "HYBRID" : {
+        "cases" : 2,
+        "answerable" : 2,
+        "unanswerable" : 0,
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 0.9197207891481876
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "complementaryCases" : 2,
+        "completeComplementaryTop5" : 2,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      }
+    },
+    "unanswerable" : {
+      "KEYWORD" : {
+        "cases" : 4,
+        "answerable" : 0,
+        "unanswerable" : 4,
+        "chunkMetrics" : null,
+        "candidateChunkRecall" : null,
+        "rawChannelFactCoverage" : null,
+        "candidateFactCoverage" : null,
+        "top5FactCoverage" : null,
+        "complementaryCases" : 0,
+        "completeComplementaryTop5" : 0,
+        "windowTop5FactCoverage" : null,
+        "selectedFactCoverage" : null
+      },
+      "VECTOR" : {
+        "cases" : 4,
+        "answerable" : 0,
+        "unanswerable" : 4,
+        "chunkMetrics" : null,
+        "candidateChunkRecall" : null,
+        "rawChannelFactCoverage" : null,
+        "candidateFactCoverage" : null,
+        "top5FactCoverage" : null,
+        "complementaryCases" : 0,
+        "completeComplementaryTop5" : 0,
+        "windowTop5FactCoverage" : null,
+        "selectedFactCoverage" : null
+      },
+      "HYBRID" : {
+        "cases" : 4,
+        "answerable" : 0,
+        "unanswerable" : 4,
+        "chunkMetrics" : null,
+        "candidateChunkRecall" : null,
+        "rawChannelFactCoverage" : null,
+        "candidateFactCoverage" : null,
+        "top5FactCoverage" : null,
+        "complementaryCases" : 0,
+        "completeComplementaryTop5" : 0,
+        "windowTop5FactCoverage" : null,
+        "selectedFactCoverage" : null
+      }
+    }
+  },
+  "rows" : [ {
+    "id" : "e01",
+    "category" : "exact",
+    "language" : "zh",
+    "scores" : {
+      "KEYWORD" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "VECTOR" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "HYBRID" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      }
+    }
+  }, {
+    "id" : "e02",
+    "category" : "exact",
+    "language" : "en",
+    "scores" : {
+      "KEYWORD" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "VECTOR" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "HYBRID" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      }
+    }
+  }, {
+    "id" : "e03",
+    "category" : "exact",
+    "language" : "zh",
+    "scores" : {
+      "KEYWORD" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "VECTOR" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "HYBRID" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      }
+    }
+  }, {
+    "id" : "e04",
+    "category" : "exact",
+    "language" : "en",
+    "scores" : {
+      "KEYWORD" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "VECTOR" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "HYBRID" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      }
+    }
+  }, {
+    "id" : "e05",
+    "category" : "exact",
+    "language" : "zh",
+    "scores" : {
+      "KEYWORD" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "VECTOR" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "HYBRID" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      }
+    }
+  }, {
+    "id" : "e06",
+    "category" : "exact",
+    "language" : "en",
+    "scores" : {
+      "KEYWORD" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "VECTOR" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "HYBRID" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      }
+    }
+  }, {
+    "id" : "e07",
+    "category" : "semantic",
+    "language" : "zh",
+    "scores" : {
+      "KEYWORD" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "VECTOR" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "HYBRID" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      }
+    }
+  }, {
+    "id" : "e08",
+    "category" : "semantic",
+    "language" : "en",
+    "scores" : {
+      "KEYWORD" : {
+        "chunkMetrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 0.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 0.0,
+        "selectedFactCoverage" : 0.0
+      },
+      "VECTOR" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.5,
+          "ndcg" : 0.6309297535714574
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "HYBRID" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.3333333333333333,
+          "ndcg" : 0.5
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      }
+    }
+  }, {
+    "id" : "e09",
+    "category" : "semantic",
+    "language" : "zh",
+    "scores" : {
+      "KEYWORD" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "VECTOR" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "HYBRID" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      }
+    }
+  }, {
+    "id" : "e10",
+    "category" : "semantic",
+    "language" : "en",
+    "scores" : {
+      "KEYWORD" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "VECTOR" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.5,
+          "ndcg" : 0.6309297535714574
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "HYBRID" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      }
+    }
+  }, {
+    "id" : "e11",
+    "category" : "semantic",
+    "language" : "zh",
+    "scores" : {
+      "KEYWORD" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "VECTOR" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "HYBRID" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      }
+    }
+  }, {
+    "id" : "e12",
+    "category" : "semantic",
+    "language" : "en",
+    "scores" : {
+      "KEYWORD" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "VECTOR" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "HYBRID" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      }
+    }
+  }, {
+    "id" : "e13",
+    "category" : "cross-language",
+    "language" : "zh",
+    "scores" : {
+      "KEYWORD" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.5,
+          "ndcg" : 0.6309297535714574
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "VECTOR" : {
+        "chunkMetrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 0.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 0.0,
+        "selectedFactCoverage" : 0.0
+      },
+      "HYBRID" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.2,
+          "ndcg" : 0.38685280723454163
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      }
+    }
+  }, {
+    "id" : "e14",
+    "category" : "cross-language",
+    "language" : "en",
+    "scores" : {
+      "KEYWORD" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.5,
+          "ndcg" : 0.6309297535714574
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "VECTOR" : {
+        "chunkMetrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "candidateChunkRecall" : 0.0,
+        "rawChannelFactCoverage" : 0.0,
+        "candidateFactCoverage" : 0.0,
+        "top5FactCoverage" : 0.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 0.0,
+        "selectedFactCoverage" : 0.0
+      },
+      "HYBRID" : {
+        "chunkMetrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 0.0,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : 0.0,
+        "selectedFactCoverage" : 0.0
+      }
+    }
+  }, {
+    "id" : "e15",
+    "category" : "cross-language",
+    "language" : "en",
+    "scores" : {
+      "KEYWORD" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.3333333333333333,
+          "ndcg" : 0.5437713091520254
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : true,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "VECTOR" : {
+        "chunkMetrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "candidateChunkRecall" : 0.0,
+        "rawChannelFactCoverage" : 0.0,
+        "candidateFactCoverage" : 0.0,
+        "top5FactCoverage" : 0.0,
+        "allFactsTop5" : false,
+        "windowTop5FactCoverage" : 0.0,
+        "selectedFactCoverage" : 0.0
+      },
+      "HYBRID" : {
+        "chunkMetrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 0.0,
+        "allFactsTop5" : false,
+        "windowTop5FactCoverage" : 0.0,
+        "selectedFactCoverage" : 0.0
+      }
+    }
+  }, {
+    "id" : "e16",
+    "category" : "cross-language",
+    "language" : "zh",
+    "scores" : {
+      "KEYWORD" : {
+        "chunkMetrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 0.0,
+        "allFactsTop5" : false,
+        "windowTop5FactCoverage" : 0.0,
+        "selectedFactCoverage" : 0.0
+      },
+      "VECTOR" : {
+        "chunkMetrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "candidateChunkRecall" : 0.0,
+        "rawChannelFactCoverage" : 0.5,
+        "candidateFactCoverage" : 0.0,
+        "top5FactCoverage" : 0.0,
+        "allFactsTop5" : false,
+        "windowTop5FactCoverage" : 0.0,
+        "selectedFactCoverage" : 0.0
+      },
+      "HYBRID" : {
+        "chunkMetrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "candidateChunkRecall" : 0.5,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 0.5,
+        "top5FactCoverage" : 0.0,
+        "allFactsTop5" : false,
+        "windowTop5FactCoverage" : 0.0,
+        "selectedFactCoverage" : 0.0
+      }
+    }
+  }, {
+    "id" : "e17",
+    "category" : "multi-evidence",
+    "language" : "zh",
+    "scores" : {
+      "KEYWORD" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : true,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "VECTOR" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : true,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "HYBRID" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : true,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      }
+    }
+  }, {
+    "id" : "e18",
+    "category" : "multi-evidence",
+    "language" : "en",
+    "scores" : {
+      "KEYWORD" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : true,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "VECTOR" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : true,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "HYBRID" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : true,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      }
+    }
+  }, {
+    "id" : "e19",
+    "category" : "long-document",
+    "language" : "en",
+    "scores" : {
+      "KEYWORD" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : true,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "VECTOR" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 0.5,
+          "mrr" : 1.0,
+          "ndcg" : 0.6131471927654584
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 0.5,
+        "allFactsTop5" : false,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "HYBRID" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 0.9197207891481876
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : true,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      }
+    }
+  }, {
+    "id" : "e20",
+    "category" : "long-document",
+    "language" : "zh",
+    "scores" : {
+      "KEYWORD" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : true,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "VECTOR" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 0.9197207891481876
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : true,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      },
+      "HYBRID" : {
+        "chunkMetrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 0.9197207891481876
+        },
+        "candidateChunkRecall" : 1.0,
+        "rawChannelFactCoverage" : 1.0,
+        "candidateFactCoverage" : 1.0,
+        "top5FactCoverage" : 1.0,
+        "allFactsTop5" : true,
+        "windowTop5FactCoverage" : 1.0,
+        "selectedFactCoverage" : 1.0
+      }
+    }
+  }, {
+    "id" : "e21",
+    "category" : "unanswerable",
+    "language" : "zh",
+    "scores" : {
+      "KEYWORD" : {
+        "chunkMetrics" : null,
+        "candidateChunkRecall" : null,
+        "rawChannelFactCoverage" : null,
+        "candidateFactCoverage" : null,
+        "top5FactCoverage" : null,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : null,
+        "selectedFactCoverage" : null
+      },
+      "VECTOR" : {
+        "chunkMetrics" : null,
+        "candidateChunkRecall" : null,
+        "rawChannelFactCoverage" : null,
+        "candidateFactCoverage" : null,
+        "top5FactCoverage" : null,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : null,
+        "selectedFactCoverage" : null
+      },
+      "HYBRID" : {
+        "chunkMetrics" : null,
+        "candidateChunkRecall" : null,
+        "rawChannelFactCoverage" : null,
+        "candidateFactCoverage" : null,
+        "top5FactCoverage" : null,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : null,
+        "selectedFactCoverage" : null
+      }
+    }
+  }, {
+    "id" : "e22",
+    "category" : "unanswerable",
+    "language" : "en",
+    "scores" : {
+      "KEYWORD" : {
+        "chunkMetrics" : null,
+        "candidateChunkRecall" : null,
+        "rawChannelFactCoverage" : null,
+        "candidateFactCoverage" : null,
+        "top5FactCoverage" : null,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : null,
+        "selectedFactCoverage" : null
+      },
+      "VECTOR" : {
+        "chunkMetrics" : null,
+        "candidateChunkRecall" : null,
+        "rawChannelFactCoverage" : null,
+        "candidateFactCoverage" : null,
+        "top5FactCoverage" : null,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : null,
+        "selectedFactCoverage" : null
+      },
+      "HYBRID" : {
+        "chunkMetrics" : null,
+        "candidateChunkRecall" : null,
+        "rawChannelFactCoverage" : null,
+        "candidateFactCoverage" : null,
+        "top5FactCoverage" : null,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : null,
+        "selectedFactCoverage" : null
+      }
+    }
+  }, {
+    "id" : "e23",
+    "category" : "unanswerable",
+    "language" : "zh",
+    "scores" : {
+      "KEYWORD" : {
+        "chunkMetrics" : null,
+        "candidateChunkRecall" : null,
+        "rawChannelFactCoverage" : null,
+        "candidateFactCoverage" : null,
+        "top5FactCoverage" : null,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : null,
+        "selectedFactCoverage" : null
+      },
+      "VECTOR" : {
+        "chunkMetrics" : null,
+        "candidateChunkRecall" : null,
+        "rawChannelFactCoverage" : null,
+        "candidateFactCoverage" : null,
+        "top5FactCoverage" : null,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : null,
+        "selectedFactCoverage" : null
+      },
+      "HYBRID" : {
+        "chunkMetrics" : null,
+        "candidateChunkRecall" : null,
+        "rawChannelFactCoverage" : null,
+        "candidateFactCoverage" : null,
+        "top5FactCoverage" : null,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : null,
+        "selectedFactCoverage" : null
+      }
+    }
+  }, {
+    "id" : "e24",
+    "category" : "unanswerable",
+    "language" : "en",
+    "scores" : {
+      "KEYWORD" : {
+        "chunkMetrics" : null,
+        "candidateChunkRecall" : null,
+        "rawChannelFactCoverage" : null,
+        "candidateFactCoverage" : null,
+        "top5FactCoverage" : null,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : null,
+        "selectedFactCoverage" : null
+      },
+      "VECTOR" : {
+        "chunkMetrics" : null,
+        "candidateChunkRecall" : null,
+        "rawChannelFactCoverage" : null,
+        "candidateFactCoverage" : null,
+        "top5FactCoverage" : null,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : null,
+        "selectedFactCoverage" : null
+      },
+      "HYBRID" : {
+        "chunkMetrics" : null,
+        "candidateChunkRecall" : null,
+        "rawChannelFactCoverage" : null,
+        "candidateFactCoverage" : null,
+        "top5FactCoverage" : null,
+        "allFactsTop5" : null,
+        "windowTop5FactCoverage" : null,
+        "selectedFactCoverage" : null
+      }
+    }
+  } ]
+}

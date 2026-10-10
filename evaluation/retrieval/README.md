@@ -8,6 +8,10 @@ Qwen timeout rounds. It does not call Qwen or a chat model.
 The [recorded Northstar comparison](results/northstar-2026-10-10/README.md) includes
 all 30 cases, a coverage/ranking trade-off, and both improved and regressed examples.
 
+A separate [Harborview extension](results/harborview-2026-10-10/README.md) adds 24
+questions and 66 bilingual documents with real multi-chunk ingestion. Its new
+judgments are pending human review; the original Northstar experiment is unchanged.
+
 ## Capture from the existing local corpus (Java 21)
 
 Start the normal PostgreSQL, Elasticsearch and Ollama services. The original
