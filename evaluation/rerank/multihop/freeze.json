@@ -1,0 +1,21 @@
+{
+  "timeoutMs" : 10000,
+  "endpoint" : "https://maas.qianwenaiapi.com/compatible-api/v1/reranks",
+  "frozenAt" : "2026-10-10T23:28:02.380579400Z",
+  "estimatedInputTokensNotBilled" : 1395619,
+  "generationCalls" : 0,
+  "hashes" : {
+    "evaluation/rerank/multihop/README.md" : "e4eeadded549ab9440ee6760d2bbf5ba600b5e6e5f33ca289930e7406a601ec1",
+    "evaluation/rerank/multihop/inputs.json" : "6af6dbeddf63b67e0181389e1e770a38cd0f09eb91c1a3cb8ad8b13029fffb63",
+    "evaluation/retrieval/multihop/freeze.json" : "ebebd44668983689a4cdbabafffc041a30a3eace21b6a3994db2ccfd82b6f930",
+    "evaluation/retrieval/multihop/sample.json" : "42aec15217fa65f11dc694b305603040b2a9b95a818c440d7bd7312007b9671c",
+    "evaluation/retrieval/results/multihop-2026-10-11/capture.json" : "6fdab4548c47b197c95cc5f99b653aae393ceae347f1734ffdbf4d7280f87c78",
+    "evaluation/retrieval/results/multihop-2026-10-11/comparison.json" : "1ec40e347d6ab6d02c05e9328572874a98b1a03bcbb29109379166db132b80b2",
+    "evaluation/retrieval/results/multihop-2026-10-11/review-status.json" : "94e4d6f00cd774a88228299e81eee6815001bbbcb52658d22ed8499d9459559f",
+    "src/main/java/com/yche/springmind/qa/rag/HttpEvidenceReranker.java" : "1ae8454bb83b1681682a05fbe0ed9251182cdf9e58d43bef134e3d8aa0b10fde",
+    "src/test/java/com/yche/springmind/qa/evaluation/MultiHopReplay.java" : "ed3a4a9ab4daf5cd250cfb8a279f32a6786ec2cb76f9b414517b104a1e41fd64",
+    "src/test/java/com/yche/springmind/qa/evaluation/MultiHopRerank.java" : "8f8a2a1c7c46bbc6c779a2b0ea9f8d5cc1773ad5fdf641faa787d742d95212cc"
+  },
+  "model" : "qwen3-rerank",
+  "plannedProviderRequests" : 180
+}

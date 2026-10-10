@@ -17,6 +17,11 @@ final class MultiHopReplay {
     record Context(List<Long> chunks, int windows, int tokens, String textSha256) {}
     static Map<String, Context> run(MultiHopData.Corpus corpus, MultiHopData.Question q,
                                    List<MultiHopEvaluation.Hit> keyword, List<MultiHopEvaluation.Hit> vector) throws Exception {
+        return run(corpus, q, keyword, vector, (question, documents) -> new EvidenceReranker.Result(documents, "DISABLED"));
+    }
+    static Map<String, Context> run(MultiHopData.Corpus corpus, MultiHopData.Question q,
+                                   List<MultiHopEvaluation.Hit> keyword, List<MultiHopEvaluation.Hit> vector,
+                                   EvidenceReranker reranker) throws Exception {
         Map<String, Context> results = new LinkedHashMap<>();
         var scoreNormalizer = new ElasticsearchChunkIndexService(MultiHopData.M, "localhost", 9200, "http", "unused_offline");
         for (String mode : List.of("KEYWORD", "VECTOR", "RRF")) {
@@ -49,7 +54,8 @@ final class MultiHopReplay {
                     entity.setGroupId(1L); entity.setChunkIndex(c.index()); entity.setChunkText(c.text()); return entity;
                 }).toList();
             });
-            var result = new HybridEvidenceRetriever(v, k, store, planner, EvidenceSelector.defaults()).retrieve(1L, q.query(), 5);
+            var result = new HybridEvidenceRetriever(v, k, store, planner,
+                    new EvidenceSelector(EvidenceSelectionProperties.defaults(), reranker)).retrieve(1L, q.query(), 5);
             Set<Long> ids = new LinkedHashSet<>();
             for (var d : result.documents()) {
                 long doc = ((Number) d.getMetadata().get("documentId")).longValue();
