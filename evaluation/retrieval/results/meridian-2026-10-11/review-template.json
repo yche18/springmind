@@ -1,0 +1,187 @@
+{
+  "status" : "PENDING_HUMAN_REVIEW",
+  "fixtureSha256" : "fa9a8f462d7a8346ef7a2bb66a167f63003d6b826d37cedaed12df8b8d5d5eaf",
+  "corpusSha256" : "765eafd72990846410c8ba9b3669f8d3cbf146ef0b080481973522f49f9d7a6c",
+  "instructions" : "Review expected answers, all positive/negative grades and fact alternatives. Record corrections separately; do not edit frozen files. No approval is implied by generating this file.",
+  "questions" : [ {
+    "id" : "c01",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c02",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c03",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c04",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c05",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c06",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c07",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c08",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c09",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c10",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c11",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c12",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c13",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c14",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c15",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c16",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c17",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c18",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c19",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c20",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c21",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c22",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c23",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c24",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c25",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c26",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c27",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c28",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c29",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c30",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c31",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c32",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c33",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c34",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c35",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  }, {
+    "id" : "c36",
+    "gradeCorrections" : { },
+    "confirmed" : false,
+    "notes" : ""
+  } ]
+}

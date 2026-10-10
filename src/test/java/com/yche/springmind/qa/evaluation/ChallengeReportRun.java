@@ -28,7 +28,12 @@ class ChallengeReportRun {
         var html = page("Meridian 挑战集：单路、候选并集与 RRF");
         html.append("<p>96份合成资料、105个实际切片、36题（30道有答案、6道无答案）。282次本地非空 embedding、72次本地关键词搜索，云端调用0。</p>")
                 .append("<p>原模型与 BGE-M3 均只编码正文；关键词分别搜正文和正文＋文件名。RRF 等权、常数60，每路50，截断30，评价前5。不调权重、不删除失败题、不修改旧结果。</p>")
-                .append("<p><a href='review.html'>先复核标注</a> · <a href='README.md'>结果分析</a> · <a href='../../challenge/README.md'>检索前冻结协议</a> · <a href='comparison.json'>完整指标与排名</a></p>");
+                .append("<p><a href='review.html'>先复核标注</a> · <a href='README.md'>结果分析</a> · <a href='../../challenge/README.md'>检索前冻结协议</a> · <a href='comparison.json'>完整指标与排名</a></p>")
+                .append("<section><h2>本轮观察（标注待复核）</h2><p>新集不再是 BGE-M3 Recall@5 满分，但没有出现总体融合获胜：BGE-M3 单路 Recall@5 为98.33%、nDCG@5为0.9017；两种 RRF 均为86.67%、0.8002。原模型 Recall@5 融合前后均为86.67%，nDCG 从0.7677升至0.7967。</p>")
+                .append("<p>在每路前25和前50两个深度，关键词独有的初始相关切片数均为0；并集没有扩大对应向量单路的相关证据集合。这里的收益主要可能来自重排，而不是补回向量候选中完全不存在的证据。</p>")
+                .append("<p><a href='#c28'>c28</a> 是互补排序收益：两份证据从 BGE-M3 第8、4名变为RRF第5、1名，前五事实齐全率从5/6提高到6/6。");
+        html.append("但 <a href='#c08'>c08</a>、<a href='#c11'>c11</a>、<a href='#c12'>c12</a>、<a href='#c24'>c24</a> 的跨语言证据被挤出前五；<a href='#c03'>c03</a> 与 <a href='#c15'>c15</a> 则把相似但适用范围不对的切片排到了正确证据之前。</p>")
+                .append("<p>仍只有105个切片，每路取50已覆盖接近半库，候选召回仍接近天花板。不能把这次合成挑战集称为大规模真实流量基准，也不能据此断言混合检索普遍无效。</p></section>");
         for (var slice : result.groups().entrySet()) {
             html.append("<section><h2>").append(esc(slice.getKey())).append("</h2><div class='scroll'><table><tr><th>有序方案</th><th>计分/全部题</th><th>Hit@5</th><th>Recall@5</th><th>MRR@5</th><th>nDCG@5</th><th>Recall@30</th><th>Recall@50</th><th>事实覆盖@5</th><th>多事实齐全@5</th></tr>");
             for (var entry : slice.getValue().entrySet()) {
@@ -79,6 +84,12 @@ class ChallengeReportRun {
         html.append("<p>所有题目、引用和初始分级均在检索前冻结；下列仅展示结果，不自动修改标注。请逐题确认应答要点、全部正例、疑似漏标和无答案判断。</p>")
                 .append("<p>3＝独立完整支持；2＝必要的部分支持；1＝有用但不足的背景；0＝无关、错误适用范围或不适用的历史版本。不能因为检索排名高就改成相关。</p>")
                 .append("<p>c24 两份证据是同一事实的替代支持，不要求同时召回。c25–c30 是互补事实，需检查是否全部找齐。c32/c35 的会议纪要只能支持‘未批准’，不能提供保险额度/供应商：请确认这类题应维持无实质答案还是另设拒答证据标签。</p>")
+                .append("<section><h2>建议优先复核</h2><ul><li><a href='#c23'>c23</a>：d75--c000 旧规明确写了7月15日前签发为180天，对本题旧证书仍适用；初始0分可能漏标，请判定能否独立支持或部分支持。</li>")
+                .append("<li><a href='#c12'>c12</a>：d42--c000 也说明设置不会重建已删备份，但没有独立导出的恢复建议。初始0分是否应改为部分支持？</li>")
+                .append("<li><a href='#c16'>c16</a>：d55--c000 说明 Export Operator 的下载权限，但讨论的是 Auditor 而非 Viewer。初始0分是否应保留，或属于1/2分背景支持？</li>")
+                .append("<li><a href='#c24'>c24</a>：两份替代证据是否都可独立标3？它们是同一事实，不能按两个必要事实计算。</li>")
+                .append("<li><a href='#c25'>c25–c30</a>：互补事实均标2，检查是否有相邻切片也能支持、是否应增加替代证据。</li>")
+                .append("<li><a href='#c32'>c32/c35</a>：会议纪要明确说未批准；‘没有实质答案’与‘可以据此拒答’需区分，本次未测拒答质量。</li></ul><p>以上均为复核建议，尚未改动冻结分级或据此重算成绩。其余题目的零分与正例同样需要确认。</p></section>")
                 .append("<p>每题展开“全库初始分级”可检查全部105个切片（共3780个题-切片判断）。零分但被检索命中的列表只是复核线索，不代表标错。正文位于页末，可点击证据编号跳转。</p>")
                 .append("<p><a href='report.html'>指标报告（暂定）</a> · <a href='review-template.json'>复核记录模板</a></p><nav>");
         for (var q : fixture.cases()) html.append("<a href='#").append(q.id()).append("'>").append(q.id()).append("</a> ");

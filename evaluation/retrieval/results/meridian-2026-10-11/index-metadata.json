@@ -1,0 +1,77 @@
+{
+  "springmind_eval_meridian_20261011" : {
+    "aliases" : { },
+    "mappings" : {
+      "_meta" : {
+        "freezeSha256" : "2b5a7348820ad27ca584b017647336e89f10eb4b2aa1c24fc50db7a972e277f1"
+      },
+      "properties" : {
+        "chunkId" : {
+          "type" : "long"
+        },
+        "chunkIndex" : {
+          "type" : "integer"
+        },
+        "chunkText" : {
+          "type" : "text",
+          "analyzer" : "springmind_ik_index",
+          "search_analyzer" : "springmind_ik_search"
+        },
+        "deleted" : {
+          "type" : "boolean"
+        },
+        "documentId" : {
+          "type" : "long"
+        },
+        "fileName" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          },
+          "analyzer" : "springmind_ik_index",
+          "search_analyzer" : "springmind_ik_search"
+        },
+        "groupId" : {
+          "type" : "long"
+        },
+        "status" : {
+          "type" : "keyword"
+        }
+      }
+    },
+    "settings" : {
+      "index" : {
+        "routing" : {
+          "allocation" : {
+            "include" : {
+              "_tier_preference" : "data_content"
+            }
+          }
+        },
+        "number_of_shards" : "1",
+        "provided_name" : "springmind_eval_meridian_20261011",
+        "creation_date" : "1791668770249",
+        "analysis" : {
+          "analyzer" : {
+            "springmind_ik_index" : {
+              "type" : "custom",
+              "tokenizer" : "ik_max_word"
+            },
+            "springmind_ik_search" : {
+              "type" : "custom",
+              "tokenizer" : "ik_smart"
+            }
+          }
+        },
+        "number_of_replicas" : "0",
+        "uuid" : "o34B0JEGQUmiLtpW__i-vA",
+        "version" : {
+          "created" : "8512000"
+        }
+      }
+    }
+  }
+}
