@@ -7,8 +7,12 @@ import com.yche.springmind.qa.rag.HttpEvidenceReranker;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.springframework.boot.test.system.CapturedOutput;
+import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.springframework.ai.document.Document;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
@@ -21,6 +25,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import static org.assertj.core.api.Assertions.*;
 
+@ExtendWith(OutputCaptureExtension.class)
 class HttpEvidenceRerankerTest {
     private HttpServer server;
     private ExecutorService executor;
@@ -125,6 +130,36 @@ class HttpEvidenceRerankerTest {
             assertThat(reranker.rerank("question", documents.subList(0, 1)).status()).isEqualTo("SKIPPED");
         }
         assertThat(requests).hasValue(0);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"401,AUTHENTICATION", "403,PERMISSION", "404,ENDPOINT", "405,ENDPOINT",
+            "429,RATE_LIMIT", "503,PROVIDER", "400,HTTP_ERROR"})
+    void logsSafeActionableHttpDiagnostics(int code, String reason, CapturedOutput output) {
+        status = code;
+        response.set("private-provider-response");
+        try (var reranker = new HttpEvidenceReranker(new EvidenceSelectionProperties(4096, 30, true,
+                "http://127.0.0.1:" + server.getAddress().getPort() + "/rerank?secret=private-query",
+                "private-api-key", "test-model", Duration.ofSeconds(2)), new ObjectMapper())) {
+            assertThat(reranker.rerank("private-question", documents).documents()).containsExactlyElementsOf(documents);
+            assertThat(output.getOut()).contains("reason=" + reason, "httpStatus=" + code)
+                    .doesNotContain("private-provider-response", "private-query", "private-api-key",
+                            "private-question", "Authorized first source");
+        }
+    }
+
+    @Test
+    void distinguishesMalformedResponseFromTimeout(CapturedOutput output) {
+        response.set("not-json");
+        try (var reranker = reranker(true, Duration.ofSeconds(2))) {
+            reranker.rerank("question", documents);
+        }
+        assertThat(output.getOut()).contains("reason=INVALID_RESPONSE");
+        delay = 500;
+        try (var reranker = reranker(true, Duration.ofMillis(100))) {
+            reranker.rerank("question", documents);
+        }
+        assertThat(output.getOut()).contains("reason=TIMEOUT");
     }
 
     @Test

@@ -31,6 +31,7 @@ public class HttpEvidenceReranker implements EvidenceReranker, AutoCloseable {
     public Result rerank(String question, List<Document> documents) {
         if (!properties.rerankEnabled()) return new Result(documents, "DISABLED");
         if (documents.size() < 2) return new Result(documents, "SKIPPED");
+        boolean responseReceived = false;
         try {
             Map<String, Object> body = new LinkedHashMap<>();
             body.put("query", question);
@@ -44,7 +45,19 @@ public class HttpEvidenceReranker implements EvidenceReranker, AutoCloseable {
                 request.header("Authorization", "Bearer " + properties.rerankApiKey());
             }
             HttpResponse<String> response = send(request.build());
-            if (response.statusCode() != 200 || response.body().length() > 1_000_000) {
+            responseReceived = true;
+            if (response.statusCode() != 200) {
+                String reason = switch (response.statusCode()) {
+                    case 401 -> "AUTHENTICATION";
+                    case 403 -> "PERMISSION";
+                    case 404, 405 -> "ENDPOINT";
+                    case 429 -> "RATE_LIMIT";
+                    default -> response.statusCode() >= 500 ? "PROVIDER" : "HTTP_ERROR";
+                };
+                log.warn("Reranking unavailable; preserving RRF order. reason={} httpStatus={}", reason, response.statusCode());
+                return new Result(documents, "FALLBACK");
+            }
+            if (response.body().length() > 1_000_000) {
                 throw new IllegalStateException("Invalid rerank response");
             }
             JsonNode results = mapper.readTree(response.body()).path("results");
@@ -75,10 +88,19 @@ public class HttpEvidenceReranker implements EvidenceReranker, AutoCloseable {
             return new Result(ranked, "APPLIED");
         } catch (InterruptedException failure) {
             Thread.currentThread().interrupt();
+            log.warn("Reranking unavailable; preserving RRF order. reason=INTERRUPTED");
             return new Result(documents, "FALLBACK");
         } catch (Exception failure) {
             // Do not log endpoint credentials, request documents, or provider response bodies.
-            log.warn("Reranking unavailable; preserving RRF order. errorType={}", failure.getClass().getSimpleName());
+            Throwable cause = failure;
+            while (cause instanceof java.util.concurrent.ExecutionException && cause.getCause() != null) {
+                cause = cause.getCause();
+            }
+            String reason = responseReceived ? "INVALID_RESPONSE"
+                    : cause instanceof TimeoutException || cause instanceof java.net.http.HttpTimeoutException ? "TIMEOUT"
+                    : cause instanceof java.io.IOException ? "NETWORK" : "REQUEST_ERROR";
+            log.warn("Reranking unavailable; preserving RRF order. reason={} errorType={}",
+                    reason, cause.getClass().getSimpleName());
             return new Result(documents, "FALLBACK");
         }
     }

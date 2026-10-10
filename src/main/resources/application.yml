@@ -16,7 +16,7 @@ qa:
     rerank-url: ${RERANK_URL:}
     rerank-api-key: ${RERANK_API_KEY:}
     rerank-model: ${RERANK_MODEL:}
-    rerank-timeout: 2s
+    rerank-timeout: ${RERANK_TIMEOUT:2s}
 
 document:
   ingestion:

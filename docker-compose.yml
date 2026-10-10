@@ -117,6 +117,7 @@ services:
       RERANK_URL: ${RERANK_URL:-}
       RERANK_API_KEY: ${RERANK_API_KEY:-}
       RERANK_MODEL: ${RERANK_MODEL:-}
+      RERANK_TIMEOUT: ${RERANK_TIMEOUT:-2s}
       MAVEN_OPTS: -Dfile.encoding=UTF-8
     ports:
       - "${BACKEND_PORT:-18080}:8080"
