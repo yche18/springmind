@@ -7,7 +7,11 @@
 
 The channels are complementary on this fixed sample, but candidate complementarity
 is only partially retained in final contexts. This is evidence retrieval, NOT
-answer accuracy. Official annotations remain `OFFICIAL_REFERENCE_PENDING_LOCAL_REVIEW`.
+answer accuracy. Current review status is `OFFICIAL_REFERENCE_USER_SPOT_CHECKED`:
+the user reported no issues in a partial spot-check; specific question IDs and count
+were not supplied. This is not exhaustive human review. See `review-status.json`.
+Frozen annotations and capture-time status are retained unchanged; all numerical
+metrics are unchanged. This confirmation does not authorize paid inference.
 
 The full 609-article corpus produces 26,110 production chunks. The formal set has
 50 questions (44 answerable, 6 null); calibration has 10 (9 answerable, 1 null).

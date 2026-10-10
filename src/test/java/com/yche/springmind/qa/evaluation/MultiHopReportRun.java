@@ -31,8 +31,21 @@ class MultiHopReportRun {
         return String.valueOf(value).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;").replace("'", "&#39;");
     }
     static String pct(Double value) { return value == null ? "—" : String.format(Locale.ROOT, "%.2f%%", value * 100); }
+    static String reviewNotice() throws Exception {
+        Path path = MultiHopData.OUT.resolve("review-status.json");
+        if (!Files.exists(path)) return "官方标注尚待本地复核。";
+        var status = MultiHopData.M.readTree(path.toFile());
+        require(status.path("status").asText().equals("OFFICIAL_REFERENCE_USER_SPOT_CHECKED")
+                && status.path("scope").asText().equals("PARTIAL_SPOT_CHECK")
+                && !status.path("allQuestionsReviewed").asBoolean()
+                && status.path("labelChanges").asInt() == 0
+                && status.path("sampleSha256").asText().equals(RetrievalAblation.hash(MultiHopData.ROOT.resolve("sample.json")))
+                && status.path("captureSha256").asText().equals(RetrievalAblation.hash(MultiHopData.OUT.resolve("capture.json"))),
+                "Invalid or unrelated spot-check record");
+        return "沿用官方标注；用户已部分抽查，未发现问题（未提供具体题号或数量，不代表60题全部人工复核）。下方复核提示保留作参考，无需逐题完成。";
+    }
     static String html(MultiHopData.Sample sample, MultiHopEvaluation.Capture capture, MultiHopEvaluation.Report report,
-                       MultiHopData.Corpus corpus, boolean review) {
+                       MultiHopData.Corpus corpus, boolean review) throws Exception {
         StringBuilder h = new StringBuilder("""
                 <!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
                 <title>MultiHop-RAG · 本地检索诊断</title><style>
@@ -48,7 +61,7 @@ class MultiHopReportRun {
                 <p>50题正式集 + 10题校准集 · 全量609篇文章 · 26,110切片 · 本地 BGE-M3 · 云端调用 0</p>
                 <p class="note">这不是回答准确率评测。这里只测官方证据是否被检索并保留；未生成答案、未调用 Qwen 精排。
                 官方标注尚待本地复核。不能把“找到相关文章”当成“找齐了回答证据”。</p>
-                """);
+                """.replace("官方标注尚待本地复核。", reviewNotice()));
         h.append("<p><a href=\"").append(review ? "../../evaluation/retrieval/results/multihop-2026-10-11/report.html" : "../../../../target/multihop-review/review.html")
                 .append("\">").append(review ? "返回报告" : "打开详细复核页（含本地原文切片）").append("</a> · ")
                 .append("<a href=\"https://huggingface.co/datasets/yixuantt/MultiHopRAG/tree/").append(MultiHopData.REVISION).append("\">官方固定版本 / ODC-BY</a></p>");

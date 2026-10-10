@@ -29,4 +29,13 @@ class RecordedMultiHopTest {
     @Test void htmlEscapesUntrustedDatasetText() {
         assertEquals("&lt;script&gt;&amp;&quot;&#39;", MultiHopReportRun.esc("<script>&\"'"));
     }
+    @Test void partialReviewDoesNotPromoteFrozenLabelsToFullHumanReview() throws Exception {
+        var status = MultiHopData.M.readTree(MultiHopData.OUT.resolve("review-status.json").toFile());
+        assertTrue(status.path("reviewedQuestionIds").isNull());
+        assertTrue(status.path("reviewedQuestionCount").isNull());
+        assertEquals("OFFICIAL_REFERENCE_PENDING_LOCAL_REVIEW", MultiHopData.sample().annotationStatus());
+        String notice = MultiHopReportRun.reviewNotice();
+        assertTrue(notice.contains("用户已部分抽查"));
+        assertTrue(Files.readString(MultiHopData.OUT.resolve("report.html")).contains(notice));
+    }
 }

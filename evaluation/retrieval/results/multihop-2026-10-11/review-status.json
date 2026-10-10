@@ -1,0 +1,13 @@
+{
+  "status": "OFFICIAL_REFERENCE_USER_SPOT_CHECKED",
+  "recordedAt": "2026-10-10T23:22:22Z",
+  "userStatement": "我抽查了几个，感觉没问题",
+  "scope": "PARTIAL_SPOT_CHECK",
+  "reviewedQuestionIds": null,
+  "reviewedQuestionCount": null,
+  "allQuestionsReviewed": false,
+  "labelChanges": 0,
+  "sampleSha256": "42aec15217fa65f11dc694b305603040b2a9b95a818c440d7bd7312007b9671c",
+  "captureSha256": "6fdab4548c47b197c95cc5f99b653aae393ceae347f1734ffdbf4d7280f87c78",
+  "note": "The user reported no issues in an unspecified subset. This does not assert exhaustive review, statistical validation, or approval for paid model calls. Frozen labels and numerical results are unchanged."
+}
