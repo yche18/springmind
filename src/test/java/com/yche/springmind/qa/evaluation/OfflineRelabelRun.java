@@ -41,6 +41,7 @@ class OfflineRelabelRun {
             report.put("sourceReportSha256", hash(reportBytes));
             report.put("recomputedAt", Instant.now().toString());
             report.set("labelChanges", mapper.valueToTree(changes));
+            ReviewApproval.apply(root, report);
             mapper.writerWithDefaultPrettyPrinter().writeValue(root.resolve(name + "-v2.json").toFile(), report);
         }
         Map<String, String> notes = mapper.readValue(Path.of("evaluation/rerank/review-notes.json").toFile(), new TypeReference<>() {});

@@ -15,7 +15,8 @@ Some relevant passages are deliberately below rank five.
 An initial run through the real local ingestion/retrieval stack and Qwen is now
 recorded in [the Northstar experiment](results/northstar-2026-10-10/README.md),
 including both timeout rounds and a [Chinese annotation-review packet](results/northstar-2026-10-10/review.html).
-Those labels are still provisional; the measurements are not production claims.
+The project owner has confirmed all v2 annotations; these synthetic-set measurements
+are still not production claims.
 
 ## 1. Offline smoke check (no credentials or charges)
 
@@ -146,6 +147,13 @@ reports record source hashes, changed grades, zero new provider requests, and ke
 the original measured status/latency rather than timing the offline replay. The
 original capture's fixture hash is historical: do not bypass it in `ReviewPacketRun`
 after editing labels; use this explicit relabeling path instead.
+
+The Northstar owner's explicit confirmation is recorded in `review-approval.json`,
+bound to the reviewed dataset SHA-256 and annotation revision. Apply this existing
+confirmation with `mvn "-Dtest=ReviewSignoffRun" test`: it updates only review
+metadata and the review packet, without rescoring or provider calls. Offline
+relabeling retains approval only when both the hash and revision still match.
+Changed annotations require a new explicit human confirmation.
 
 ### Custom dataset format
 

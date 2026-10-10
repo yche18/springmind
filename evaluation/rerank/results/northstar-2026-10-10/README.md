@@ -1,19 +1,21 @@
 # Northstar: real-retrieval / Qwen rerank experiment
 
-**Provisional results: synthetic corpus, labels awaiting human review.**
+**Synthetic-corpus results: all v2 annotations confirmed by the project owner.**
 
 Start with [the Chinese review packet](review.html). It contains all 30 questions,
-expected-answer notes, provisional grades, source text and ranking comparisons.
-The [review template](review-template.json) has every question/source pair marked
-`PENDING_HUMAN_REVIEW`. No human approval or answer-generation accuracy is claimed.
+expected-answer notes, reviewed v2 grades, source text and ranking comparisons.
+The [review template](review-template.json) records `HUMAN_REVIEWED` for all 30
+questions and their 480 question/source grades. The owner's explicit conversation
+confirmation is preserved in [the approval record](review-approval.json), bound to
+the v2 dataset hash. This confirms annotations, not answer-generation accuracy.
 
 ## Setup and provenance
 
 - Captured on 2026-10-10, run `northstar-d41905eb`, using collector commit `6575b9e`.
   The collector code was validated and then committed immediately after capture.
 - Review generator commit: `f1ed77f`.
-- 16 short English policy documents, 30 Chinese/English questions, 24 provisionally
-  answerable and 6 provisionally unanswerable. These are fictional policies, not
+- 16 short English policy documents, 30 Chinese/English questions, 24 answerable
+  and 6 unanswerable under the reviewed v2 labels. These are fictional policies, not
   SpringMind product behavior or actual company rules.
 - Real registration/login/group/upload controllers and authentication filters
   (in-process MockMvc HTTP transport); real MinIO storage, durable asynchronous
@@ -49,10 +51,12 @@ passages, now both graded 2. This changes 11 grades (q24's `support-hours` was
 already 2). q16 retains 3 for `external-ai`, which independently answers its
 yes/no question, and 1 for `group-access` background. Other labels are unchanged.
 
-The review page/template now use v2 labels. This rubric alignment does **not**
-claim all judgments have been independently human-reviewed. No Qwen request was
-made for this revision. The original texts, questions, input/output ordering,
-statuses, latency and raw reports are unchanged; v2 reports are derived artifacts.
+The review page/template use v2 labels. After rubric alignment, the project owner
+confirmed the full review in the conversation; this is not an independent expert
+review. The sign-off updates review metadata only, not scores. No Qwen request was
+made for either the rubric correction or sign-off. The original texts, questions,
+input/output ordering, statuses, latency and raw reports are unchanged; v2 reports
+are derived artifacts.
 
 | Metric at k=5 | RRF with v2 labels | Qwen 2s with v2 labels | Qwen 5s with v2 labels |
 | --- | ---: | ---: | ---: |
@@ -117,16 +121,16 @@ unknown; check the provider console rather than treating this experiment as free
   returned 16 hits for every question. The two channels really ran, but they did not
   both contribute hits on every query.
 
-## Review priorities and limits
+## Review record and limits
 
-1. q16: whether `group-access` deserves background grade 1 or should be irrelevant.
-2. q17–q21 and q24: the 2/3 convention has now been aligned in v2 as documented
-   above. Continue checking the factual evidence; do not change grades to favor
-   the model. The original v1 labels remain in the frozen snapshot for audit.
-3. q25–q30: verify the whole corpus lacks the requested answer; do not confuse
-   unanswerability with a retrieval miss or an actual model refusal.
-4. Review implicit zero grades too. The packet exposes all 480 question/source
-   pairs, not just the initially positive evidence.
+1. q16: confirmed `external-ai` at grade 3 and `group-access` at background grade 1.
+2. q17–q21 and q24: confirmed the complementary-evidence grades of 2/2.
+   The original v1 labels remain in the frozen snapshot for audit.
+3. q25–q30: confirmed unanswerable against the corpus; this does not measure
+   whether an actual generated answer refuses appropriately.
+4. The owner's full-review confirmation covers all 480 question/source grades,
+   including zero grades, not only the initially positive evidence. Any later
+   annotation changes require fresh confirmation for the new dataset hash.
 
 This is a small, easy, single-topic synthetic set with short texts and inherited
 labels, not a held-out production benchmark. Do not claim general retrieval quality,
@@ -142,7 +146,8 @@ improvements from these numbers. No chat model generated answers in this experim
 - `qwen-2s-v2.json` / `qwen-5s-v2.json`: offline rescoring of the recorded ranks,
   including original report hashes and a label-change audit trail.
 - `review.html`: Chinese review packet based on the complete 5s replay, with v2 grades.
-- `review-template.json`: pending human judgments, with all current source grades explicit.
+- `review-template.json`: confirmed human judgments, with all current source grades explicit.
+- `review-approval.json`: owner's confirmation, scope, revision and reviewed dataset hash.
 
 JSON bytes are preserved by `.gitattributes` so the snapshot hash remains valid on
 different operating systems. Existing input order, output order and labels allow

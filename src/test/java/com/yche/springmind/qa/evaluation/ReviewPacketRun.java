@@ -40,14 +40,15 @@ class ReviewPacketRun {
             Map<String, Object> item = new LinkedHashMap<>();
             item.put("id", example.id());
             item.put("query", example.query());
-            item.put("status", "PENDING_HUMAN_REVIEW");
+            boolean reviewed = "HUMAN_REVIEWED".equals(report.path("annotationStatus").asText());
+            item.put("status", reviewed ? "HUMAN_REVIEWED" : "PENDING_HUMAN_REVIEW");
             item.put("expectedAnswerNotes", notes.get(example.id()));
             item.put("expectedAnswerable", example.relevance().values().stream().anyMatch(grade -> grade > 0));
             Map<String, Integer> grades = new LinkedHashMap<>();
             fixture.documents().keySet().forEach(source -> grades.put(source,
                     example.relevance().getOrDefault(RetrievalSnapshot.key(example.id(), source), 0)));
             item.put("sourceGrades", grades);
-            item.put("reviewerNotes", "");
+            item.put("reviewerNotes", reviewed ? "Project owner confirmed the v2 annotations in the project conversation; see review-approval.json." : "");
             review.add(item);
         }
         mapper.writerWithDefaultPrettyPrinter().writeValue(capture.resolve("review-template.json").toFile(), review);

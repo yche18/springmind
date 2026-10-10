@@ -54,10 +54,12 @@ class RecordedEvaluationTest {
         var examples = revised.cases().stream().collect(Collectors.toMap(RerankEvaluation.Example::id, Function.identity()));
         assertThat(review).hasSize(30);
         String html = Files.readString(ROOT.resolve("review.html"));
+        assertThat(html).contains("人工复核已通过", "本轮复核已完成", "review-approval.json")
+                .doesNotContain("待确认：", "标签尚未经过人工确认", "□ 保持初稿");
         Set<String> ids = new HashSet<>();
         for (var row : review) {
             assertThat(ids.add(row.path("id").asText())).isTrue();
-            assertThat(row.path("status").asText()).isEqualTo("PENDING_HUMAN_REVIEW");
+            assertThat(row.path("status").asText()).isEqualTo("HUMAN_REVIEWED");
             assertThat(row.path("sourceGrades")).hasSize(16);
             row.path("sourceGrades").fields().forEachRemaining(grade -> assertThat(grade.getValue().asInt())
                     .isEqualTo(examples.get(row.path("id").asText()).relevance()
@@ -67,7 +69,7 @@ class RecordedEvaluationTest {
         try (var files = Files.list(ROOT)) {
             assertThat(files.map(path -> path.getFileName().toString()).toList()).containsExactlyInAnyOrder(
                     "README.md", "snapshot.json", "qwen-2s.json", "qwen-5s.json", "review.html", "review-template.json",
-                    "snapshot-v2.json", "qwen-2s-v2.json", "qwen-5s-v2.json");
+                    "snapshot-v2.json", "qwen-2s-v2.json", "qwen-5s-v2.json", "review-approval.json");
         }
     }
 
@@ -93,6 +95,8 @@ class RecordedEvaluationTest {
             var current = mapper.readTree(ROOT.resolve(name + "-v2.json").toFile());
             assertThat(current.path("mode").asText()).isEqualTo("OFFLINE_RELABEL");
             assertThat(current.path("newProviderRequests").asInt()).isZero();
+            assertThat(current.path("annotationStatus").asText()).isEqualTo("HUMAN_REVIEWED");
+            assertThat(current.path("humanReview").path("datasetSha256")).isEqualTo(current.path("datasetSha256"));
             assertThat(current.path("sourceReportSha256").asText()).isEqualTo(HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(bytes)));
             assertThat(current.path("labelChanges")).hasSize(11);
             for (String field : List.of("statuses", "latencyP50Ms", "latencyP95Ms")) {

@@ -1,0 +1,12 @@
+{
+  "status": "HUMAN_REVIEWED",
+  "annotationRevision": "complete-answer-v2",
+  "datasetSha256": "6fc5869de0b06c3f7f9b00ff498ada9c085785131a0a38810c291bdaf4d46d35",
+  "reviewer": "project owner",
+  "confirmationSource": "User confirmation in the project conversation",
+  "confirmationText": "符合完毕，没啥问题",
+  "recordedAt": "2026-10-10T11:22:06Z",
+  "reviewedCases": 30,
+  "reviewedSourceGrades": 480,
+  "scope": "Human confirmation of the complete-answer-v2 annotations for this synthetic dataset only; not validation of generated answers, refusal accuracy or production performance."
+}

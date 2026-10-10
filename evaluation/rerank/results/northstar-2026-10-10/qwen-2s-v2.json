@@ -587,7 +587,7 @@
   "newProviderRequests" : 0,
   "originalPlannedProviderRequests" : 30,
   "annotationRevision" : "complete-answer-v2",
-  "annotationStatus" : "RUBRIC_ALIGNED_OTHER_JUDGMENTS_PENDING_REVIEW",
+  "annotationStatus" : "HUMAN_REVIEWED",
   "sourceDatasetSha256" : "864c3ed7f88bfec7ba46093a385f1e6e440760684dd35faa04ffdf2a38773883",
   "sourceReportSha256" : "727238cbd989966d35cdf25605435ffe3c914f5562e44835d24488f2e983f24a",
   "recomputedAt" : "2026-10-10T11:14:31.770867800Z",
@@ -646,5 +646,17 @@
     "before" : 3,
     "questionId" : "q24",
     "evidenceId" : "q24__incident-p1"
-  } ]
+  } ],
+  "humanReview" : {
+    "status" : "HUMAN_REVIEWED",
+    "annotationRevision" : "complete-answer-v2",
+    "datasetSha256" : "6fc5869de0b06c3f7f9b00ff498ada9c085785131a0a38810c291bdaf4d46d35",
+    "reviewer" : "project owner",
+    "confirmationSource" : "User confirmation in the project conversation",
+    "confirmationText" : "符合完毕，没啥问题",
+    "recordedAt" : "2026-10-10T11:22:06Z",
+    "reviewedCases" : 30,
+    "reviewedSourceGrades" : 480,
+    "scope" : "Human confirmation of the complete-answer-v2 annotations for this synthetic dataset only; not validation of generated answers, refusal accuracy or production performance."
+  }
 }

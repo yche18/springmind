@@ -85,7 +85,21 @@ final class AnnotationReview {
             html.append("</details><p>复核结论：□ 保持初稿　□ 修改相关性　□ 修改有/无答案判断　□ 问题需要重写</p>")
                     .append("<p class='muted'>请反馈题号、来源 ID、修改后的分数及原因；无需重新调用模型即可重算指标。</p></section>");
         }
-        return html.append("</main></html>").toString();
+        String page = html.append("</main></html>").toString();
+        if (!"HUMAN_REVIEWED".equals(report.path("annotationStatus").asText())) return page;
+        return page.replace("Northstar 精排评测：待复核标注", "Northstar 精排评测：人工复核已通过")
+                .replace("初步结果，标签尚未经过人工确认。", "30 题 v2 标注已由项目所有者人工复核确认。")
+                .replace("评分口径已按用户要求统一，但不表示其余标签全部经过人工确认。", "本版本的 30 题标注均已确认；确认记录与数据哈希保存在 review-approval.json。")
+                .replace("你不需要编辑 JSON。可直接反馈：<code>q16：group-access 改为 0；q25：确认无答案</code>。", "本轮复核已完成，无需继续标注。")
+                .replace("也可使用配套 review-template.json 记录修改。先复核证据，再看排序；不要为了让结果更好而修改标签。", "原始实测与分数保持不变。后续如修改标签，需要对新的数据版本重新确认。")
+                .replace("所有默认 0 分项也需要复核。", "本版本包含默认 0 分项的标注已一并确认。")
+                .replace("优先检查 q16 的背景证据；q25–q30 需核对整个语料确实无答案。多证据题的分级已按统一口径修订。", "已确认 q16 的背景证据、统一后的多证据分级，以及 q25–q30 的无答案判断。")
+                .replace("待确认：</strong>", "已确认：</strong>")
+                .replace("需人工确认。", "已人工确认。")
+                .replace("重点复核：", "已确认标注：")
+                .replace("请检查整个语料而非仅前五名。", "已按整个语料确认，无答案判断不等同于模型拒答正确率。")
+                .replace("复核结论：□ 保持初稿　□ 修改相关性　□ 修改有/无答案判断　□ 问题需要重写", "复核结论：已通过，保留当前 v2 标注。")
+                .replace("请反馈题号、来源 ID、修改后的分数及原因；无需重新调用模型即可重算指标。", "确认范围为本合成测试集的标注；未评测最终答案与拒答正确率。");
     }
 
     static String escape(String text) {
