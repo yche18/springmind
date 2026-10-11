@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "status": "USER_APPROVED_ASSISTANT_RECOMMENDATIONS",
+  "approval": "User approved the five proposed adjudications, preserving raw results and adding adjusted metrics and review pages without new model calls.",
+  "approvalRecordFormat": "SUMMARY_WITH_PERSONAL_CONTEXT_OMITTED",
+  "scope": "Five formal questions only; recommendations accepted by user, not a claim that every response was independently reviewed by the user.",
+  "allQuestionsReviewed": false,
+  "rawMetricsSha256": "5b88769eedf2472a917e45c51e840b325963846b46dbe8f990d4c8aff58b116f",
+  "rawCaptureSha256": "0ad772129168228f5451bdd047fde4ffe86bab3d91b947f6f318a6e0ffa119d2",
+  "rules": [
+    "Preserve official labels, raw responses, frozen strict EM, quote checks and reference-supported proxy unchanged.",
+    "For these five questions apply explicit per-arm adjudications; all other scores remain automatic, not human-verified.",
+    "Accept unambiguous same-question True/Yes equivalence; no global yes/no rewriting.",
+    "An explicit correct proposition in the answer field can pass semantic adjudication with a polarity warning. An explanation cannot replace an incorrect bare answer field.",
+    "Abstention on an answerable question remains incorrect even when evidence is insufficient.",
+    "Exclude ambiguous m2398 symmetrically from adjusted metrics; preserve original50-question result and a50-question sensitivity view.",
+    "Grounding judgments concern semantic support for the core answer under the stated question requirements, not literal quote matching or every explanatory sentence. No aggregate human-verified accuracy/faithfulness is claimed."
+  ],
+  "questions": [
+    {
+      "id": "m1594",
+      "action": "CORRECT_REFERENCE_ENTITY",
+      "originalAnswer": "Apple",
+      "adjudicatedAnswer": "Google",
+      "excluded": false,
+      "reason": "三条官方事实都指向 Google；Apple 是发表辩护意见的一方。向量组实体答对，但缺少硬件活动条件的证据；其他三组拒答仍记未答对。",
+      "correct": {
+        "VECTOR": true,
+        "RRF": false,
+        "VECTOR_QWEN": false,
+        "RRF_QWEN": false
+      },
+      "coreGrounding": {
+        "VECTOR": "NO",
+        "RRF": "NOT_APPLICABLE_REFUSAL",
+        "VECTOR_QWEN": "NOT_APPLICABLE_REFUSAL",
+        "RRF_QWEN": "NOT_APPLICABLE_REFUSAL"
+      }
+    },
+    {
+      "id": "m0735",
+      "action": "ACCEPT_BOOLEAN_PARAPHRASE",
+      "originalAnswer": "True",
+      "adjudicatedAnswer": "True / Yes",
+      "excluded": false,
+      "reason": "四组 Yes 与本题 True 语义等价。两个条件有来源支持；第二条引用被切片及重复元数据打断，逐字匹配仍失败，不能把它误算为捏造。Drew Lock 来源是梦幻体育阵容建议，不扩大成球队正式宣布。",
+      "correct": {
+        "VECTOR": true,
+        "RRF": true,
+        "VECTOR_QWEN": true,
+        "RRF_QWEN": true
+      },
+      "coreGrounding": {
+        "VECTOR": "YES",
+        "RRF": "YES",
+        "VECTOR_QWEN": "YES",
+        "RRF_QWEN": "YES"
+      }
+    },
+    {
+      "id": "m1727",
+      "action": "RETAIN_WRONG_ANSWER_POLARITY",
+      "originalAnswer": "no",
+      "adjudicatedAnswer": "No; TechCrunch was earlier",
+      "excluded": false,
+      "reason": "TechCrunch 为12月18日，The Verge 为12月19日（UTC）。四组 answer 都是 Yes，与先后顺序及其自身解释相反。解释不能替代错误的最终答案。",
+      "correct": {
+        "VECTOR": false,
+        "RRF": false,
+        "VECTOR_QWEN": false,
+        "RRF_QWEN": false
+      },
+      "coreGrounding": {
+        "VECTOR": "NO",
+        "RRF": "NO",
+        "VECTOR_QWEN": "NO",
+        "RRF_QWEN": "NO"
+      }
+    },
+    {
+      "id": "m1748",
+      "action": "ACCEPT_EXPLICIT_PROPOSITION_WITH_WARNING",
+      "originalAnswer": "no",
+      "adjudicatedAnswer": "There was a change",
+      "excluded": false,
+      "reason": "三组 answer 字段本身明确说 there was a change，与官方 no 对否定问句表达的命题相同；接受核心语义，但保留 Yes 回应不规范的警告。输入支持从尚未确认关系到明确谈及关系的变化。RRF 缺少前一来源而拒答，仍记未答对。向量精排的逐字引用问题不被人工语义裁定覆盖。",
+      "correct": {
+        "VECTOR": true,
+        "RRF": false,
+        "VECTOR_QWEN": true,
+        "RRF_QWEN": true
+      },
+      "coreGrounding": {
+        "VECTOR": "YES",
+        "RRF": "NOT_APPLICABLE_REFUSAL",
+        "VECTOR_QWEN": "YES",
+        "RRF_QWEN": "YES"
+      },
+      "warning": "ANSWER_POLARITY_WORDING_DEFECT"
+    },
+    {
+      "id": "m2398",
+      "action": "EXCLUDE_AMBIGUOUS_QUESTION",
+      "originalAnswer": "Yes",
+      "adjudicatedAnswer": null,
+      "excluded": true,
+      "reason": "consistent 未定义为主题、范围或事实/立场一致性。四组统一标为题意/标注存疑，不把官方答案直接改成 No，不奖励某一组，也不改写问题后沿用旧回答。",
+      "correct": {
+        "VECTOR": null,
+        "RRF": null,
+        "VECTOR_QWEN": null,
+        "RRF_QWEN": null
+      },
+      "coreGrounding": {
+        "VECTOR": "UNRESOLVED_AMBIGUITY",
+        "RRF": "UNRESOLVED_AMBIGUITY",
+        "VECTOR_QWEN": "UNRESOLVED_AMBIGUITY",
+        "RRF_QWEN": "UNRESOLVED_AMBIGUITY"
+      }
+    }
+  ]
+}

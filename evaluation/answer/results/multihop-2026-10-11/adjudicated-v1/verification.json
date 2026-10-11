@@ -1,0 +1,28 @@
+{
+  "newModelCalls": 0,
+  "originalHashesPreserved": {
+    "evaluation/answer/results/multihop-2026-10-11/calibration-capture.json": "0b94cb8ed4006eecf7f72a66cacd80356b16fcc86edcad170b8b5b087d05ead4",
+    "evaluation/answer/results/multihop-2026-10-11/calibration-metrics.json": "905ca83d7fcdf7730de6ad1c6cd2a15dec5f078d558b9fb6e1d8d4662b092bbb",
+    "evaluation/answer/results/multihop-2026-10-11/calibration-review-queue.json": "ea474c9c306e02e334a94667bc79eeee070a112fb7c59768953bc5b898412c2b",
+    "evaluation/answer/results/multihop-2026-10-11/calibration.html": "ed79ea5af467f15ca07a46b381bb196bbdfd6377c3f66a50910ac1723f5fbff1",
+    "evaluation/answer/results/multihop-2026-10-11/formal-capture.json": "0ad772129168228f5451bdd047fde4ffe86bab3d91b947f6f318a6e0ffa119d2",
+    "evaluation/answer/results/multihop-2026-10-11/formal-metrics.json": "5b88769eedf2472a917e45c51e840b325963846b46dbe8f990d4c8aff58b116f",
+    "evaluation/answer/results/multihop-2026-10-11/formal-review-queue.json": "63fa00a9fa3cf111f2b36137c66b2cea23b0e57dcd11fdc7c20c1b7cdab10c41",
+    "evaluation/answer/results/multihop-2026-10-11/README.md": "49cab0ba5af45ca769893b25b10ea37a46bfe447e9b61fabc37abc62d0ff68d2",
+    "evaluation/answer/results/multihop-2026-10-11/report.html": "1e378a596158d694d4048159af28cfe83e27809cd682c02259f75a53a26070f9",
+    "evaluation/answer/results/multihop-2026-10-11/request-ledger-hashes.json": "de6b3fc4665325b5612340a2d175e640abe1a5c99ce378b96c8f0e8b9435a043",
+    "evaluation/answer/results/multihop-2026-10-11/review-guide.html": "baaccd8c7e054922d5070173326ab8e6a5174b3dc7688b17936d79f31e799e32",
+    "evaluation/answer/results/multihop-2026-10-11/review-priorities.json": "fab819fdb68acf93a58477abf03af303014acfab9ee82c130f102a00aba8c0ff",
+    "evaluation/answer/results/multihop-2026-10-11/verification.json": "1a25dfcb3fd9983b3b70288d1b18542009db64d114a7b612454397796b6479fc",
+    "target/multihop-answer/review.html": "9984a655ab40b98aadcc696839c44b83aefcbc7e4dccba48c8a81b6c77cf8c84"
+  },
+  "decisionSha256": "5fe4f6f0734294557d1943c85e217472a544e1e534c45bc31bf508364ba805b6",
+  "implementationSha256": "dfe761a2ca6ae58b08b8ec8accc43021f75ef697a7eea4af45c47e8356911d72",
+  "derivedHashes": {
+    "evaluation/answer/results/multihop-2026-10-11/adjudicated-v1/metrics.json": "158e117337cdf55c407012218abd122354e700d623bb0d3c7ae3923ee1140596",
+    "evaluation/answer/results/multihop-2026-10-11/adjudicated-v1/decisions.json": "748903dbfb6b24a0d3154d813b6497e415069624d7e9978dabadcbd0e6b61a4a",
+    "evaluation/answer/results/multihop-2026-10-11/adjudicated-v1/pending-review.json": "9f9683ebfb0fd4a5a3e080cfa7cb74e0839658b06ee2223cd8fde09da446c60e",
+    "evaluation/answer/results/multihop-2026-10-11/adjudicated-v1/report.html": "93f177013bd3791d4a3df09cab569b044b2b90f24158394d2ea32dc55ac16f32",
+    "target/multihop-answer/adjudicated-v1-review.html": "52414f3e65890f8a112cc268105eaf2d7a8bee1173aefc48f745632768a14714"
+  }
+}
