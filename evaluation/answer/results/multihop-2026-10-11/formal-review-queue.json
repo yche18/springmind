@@ -1,0 +1,1560 @@
+[
+  {
+    "id": "m2258",
+    "arm": "VECTOR",
+    "split": "CALIBRATION",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2258",
+    "arm": "RRF",
+    "split": "CALIBRATION",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2258",
+    "arm": "VECTOR_QWEN",
+    "split": "CALIBRATION",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2258",
+    "arm": "RRF_QWEN",
+    "split": "CALIBRATION",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0331",
+    "arm": "RRF",
+    "split": "CALIBRATION",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0331",
+    "arm": "VECTOR_QWEN",
+    "split": "CALIBRATION",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0331",
+    "arm": "RRF_QWEN",
+    "split": "CALIBRATION",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0331",
+    "arm": "VECTOR",
+    "split": "CALIBRATION",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0487",
+    "arm": "VECTOR_QWEN",
+    "split": "CALIBRATION",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0487",
+    "arm": "RRF_QWEN",
+    "split": "CALIBRATION",
+    "flags": [
+      "INVALID_CITATION",
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0487",
+    "arm": "VECTOR",
+    "split": "CALIBRATION",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0487",
+    "arm": "RRF",
+    "split": "CALIBRATION",
+    "flags": [
+      "INVALID_CITATION",
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0939",
+    "arm": "RRF_QWEN",
+    "split": "CALIBRATION",
+    "flags": [
+      "NONEXACT_ANSWER",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0939",
+    "arm": "VECTOR",
+    "split": "CALIBRATION",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0939",
+    "arm": "RRF",
+    "split": "CALIBRATION",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0939",
+    "arm": "VECTOR_QWEN",
+    "split": "CALIBRATION",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0343",
+    "arm": "VECTOR",
+    "split": "CALIBRATION",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0343",
+    "arm": "RRF",
+    "split": "CALIBRATION",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0343",
+    "arm": "VECTOR_QWEN",
+    "split": "CALIBRATION",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0343",
+    "arm": "RRF_QWEN",
+    "split": "CALIBRATION",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2521",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING",
+      "ANSWER_ENTITY_IN_QUESTION"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2521",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "INVALID_CITATION",
+      "EXACT_BUT_SUPPORT_PENDING",
+      "ANSWER_ENTITY_IN_QUESTION"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2521",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING",
+      "ANSWER_ENTITY_IN_QUESTION"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2521",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING",
+      "ANSWER_ENTITY_IN_QUESTION"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2314",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2314",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2314",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2314",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0252",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0252",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0252",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0252",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0097",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0097",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0097",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0097",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1594",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1594",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1594",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1594",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "NONEXACT_ANSWER",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2302",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2302",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2302",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2302",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0335",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0335",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0335",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "INVALID_CITATION",
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0335",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "INVALID_CITATION",
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0077",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "INVALID_CITATION",
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0077",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "INVALID_CITATION",
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0077",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "INVALID_CITATION",
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0077",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "INVALID_CITATION",
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1682",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "INVALID_CITATION",
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1682",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1682",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "INVALID_CITATION",
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1682",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1823",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1823",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1823",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1823",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "INVALID_CITATION",
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1350",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1350",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1350",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1350",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0594",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0594",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0594",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0594",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2449",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2449",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2449",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2449",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0310",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0310",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0310",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0310",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1228",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1228",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1228",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1228",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0735",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "NONEXACT_ANSWER",
+      "INVALID_CITATION"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0735",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "NONEXACT_ANSWER",
+      "INVALID_CITATION"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0735",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "NONEXACT_ANSWER",
+      "INVALID_CITATION"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0735",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "NONEXACT_ANSWER",
+      "INVALID_CITATION"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0201",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "INVALID_CITATION",
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0201",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0201",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "INVALID_CITATION",
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0201",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0599",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "INVALID_CITATION",
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0599",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0599",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "INVALID_CITATION",
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0599",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "INVALID_CITATION",
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2503",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2503",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2503",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2503",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1711",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1711",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1711",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1711",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2488",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2488",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2488",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "INVALID_CITATION",
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2488",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0196",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0196",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0196",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0196",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0640",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0640",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0640",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0640",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1727",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "NONEXACT_ANSWER"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1727",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "NONEXACT_ANSWER"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1727",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "NONEXACT_ANSWER"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1727",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "NONEXACT_ANSWER"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2398",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "NONEXACT_ANSWER",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2398",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "NONEXACT_ANSWER",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2398",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2398",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "NONEXACT_ANSWER",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1273",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1273",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1273",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1273",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1987",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "INVALID_CITATION",
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1987",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1987",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1987",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1748",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "NONEXACT_ANSWER",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1748",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1748",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "NONEXACT_ANSWER",
+      "INVALID_CITATION",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m1748",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "NONEXACT_ANSWER",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0179",
+    "arm": "RRF_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0179",
+    "arm": "VECTOR",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0179",
+    "arm": "RRF",
+    "split": "FORMAL",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0179",
+    "arm": "VECTOR_QWEN",
+    "split": "FORMAL",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  }
+]
