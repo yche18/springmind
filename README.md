@@ -171,6 +171,8 @@ mvn -Dtest=FlywayMigrationTest test
 
 See the [Harness documentation](harness/README.md) for the detailed quality-gate rules.
 
+For benchmark conclusions, metric definitions, experiment history, and report links, see the [Evaluation overview (Chinese)](evaluation/README.md).
+
 ## Design Principles
 
 SpringMind treats the knowledge group as both the data-isolation and authorization boundary, and uses team documents as the sole basis for generated answers. The Q&A pipeline handles only retrievable, verifiable knowledge requests. When evidence is insufficient, it returns an explicit reason for declining to answer, and every citation is produced from actual retrieved content. New capabilities must preserve four engineering constraints: permission isolation, measurable quality, observable cost, and recoverable failures.
