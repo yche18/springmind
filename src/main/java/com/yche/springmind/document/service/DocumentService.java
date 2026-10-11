@@ -71,7 +71,7 @@ public class DocumentService {
     }
 
     /**
-     * Store a small upload and publish ingestion only after its metadata is durable.
+     * Store a small upload and persist ingestion work in the metadata transaction.
      * Compensate the object and external indexes if finalization fails.
      */
     @Transactional
@@ -180,7 +180,7 @@ public class DocumentService {
         elasticsearchChunkIndexService.deleteDocumentChunks(documentId);
     }
 
-    /** Move a failed document back to processing and publish a fresh ingestion request. */
+    /** Move a failed document back to processing and persist a fresh ingestion request. */
     @Transactional
     public void retryFailedDocumentIngestion(HttpServletRequest request, Long groupId, Long documentId) {
         Long requiredGroupId = requireGroupId(groupId);
@@ -188,7 +188,7 @@ public class DocumentService {
         if (documentId == null || documentId <= 0) {
             throw new BusinessException("文档ID非法");
         }
-        DocumentEntity document = documentMapper.selectByIdAndGroupId(documentId, requiredGroupId);
+        DocumentEntity document = documentMapper.selectForUpdate(documentId, requiredGroupId);
         if (document == null) {
             throw new BusinessException("文档不存在或已删除");
         }

@@ -10,6 +10,9 @@ import java.util.Map;
 @Mapper
 public interface DocumentChunkMapper {
 
+    List<DocumentChunkEntity> selectEvidenceWindow(@Param("groupId") Long groupId,
+            @Param("documentId") Long documentId, @Param("start") int start, @Param("end") int end);
+
     int deleteByDocumentId(@Param("documentId") Long documentId);
 
     int insert(DocumentChunkEntity chunk);

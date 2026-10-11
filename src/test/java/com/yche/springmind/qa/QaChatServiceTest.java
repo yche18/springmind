@@ -43,6 +43,10 @@ class QaChatServiceTest {
 
         assertThat(response.answered()).isFalse();
         assertThat(response.reasonCode()).isEqualTo("INSUFFICIENT_EVIDENCE");
+        assertThat(response.trace().traceId()).isNotBlank();
+        assertThat(response.trace().evidence()).isEmpty();
+        assertThat(response.trace().generationMs()).isZero();
+        assertThat(org.slf4j.MDC.get("qaTraceId")).isNull();
         verifyNoInteractions(provider);
     }
 
@@ -62,6 +66,10 @@ class QaChatServiceTest {
         assertThat(answer.answered()).isTrue();
         assertThat(answer.answer()).isEqualTo("产品团队每两周发布一次。");
         assertThat(answer.citations()).hasSize(1);
+        assertThat(answer.trace().evidence()).hasSize(1);
+        assertThat(answer.trace().evidence().getFirst().excerpt()).isEqualTo("产品团队每两周发布一次。");
+        assertThat(answer.trace().evidence().getFirst().documentId()).isEqualTo(1001L);
+        assertThat(answer.trace().totalMs()).isGreaterThanOrEqualTo(answer.trace().retrievalMs());
         verify(provider).getChatModel();
         verify(chatModel).call(any(Prompt.class));
     }

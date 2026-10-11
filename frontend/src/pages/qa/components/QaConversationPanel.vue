@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import type { AskQuestionResponse } from '../../../api/qa'
 import CitationList from '../../../components/CitationList.vue'
+import QaTracePanel from './QaTracePanel.vue'
 import MarkdownContent from '../../../components/MarkdownContent.vue'
 import { humanizeQaRefusalMessage } from '../../../utils/model-error-message'
 
@@ -89,6 +90,8 @@ const refusalTitle = computed(() => {
         :title="$t('qa.evidence')"
         :empty-text="result.answered ? $t('qa.noAnswerEvidence') : $t('qa.noRefusalEvidence')"
       />
+      <QaTracePanel v-if="result.trace && currentGroupId !== null" :key="result.trace.traceId"
+        :trace="result.trace" :group-id="currentGroupId" />
     </template>
   </article>
 </template>

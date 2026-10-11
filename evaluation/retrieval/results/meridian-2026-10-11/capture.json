@@ -1,0 +1,18 @@
+{
+  "completedAt" : "2026-10-10T21:46:13.934409Z",
+  "freezeSha256" : "2b5a7348820ad27ca584b017647336e89f10eb4b2aa1c24fc50db7a972e277f1",
+  "index" : "springmind_eval_meridian_20261011",
+  "ollamaVersion" : "0.33.1",
+  "elasticVersion" : "8.15.3",
+  "artifactHashes" : {
+    "current-vectors.json" : "c8156cd7d08056720bd5777644162f90567692ba7e03855361bc90764d508884",
+    "bge_m3-vectors.json" : "f66fbffd6458d07dbb7a16d92abf53bd5911f212a867dfc915feb54ee5a6a19e",
+    "keyword.json" : "7d401005f6d1eda4983938276ad85af118ce4ad74648df57820dee43b1459e55",
+    "index-snapshot.json" : "bb738311c3b3332cc5edeb227e40018342b3261d180a8a652ee03ff01e565898",
+    "index-metadata.json" : "9b5bfaa68d73fe696be967b0b841e18555c10e2948830abcd07bf034833b3968",
+    "run.json" : "fae39a9a8479e959e5550159cac65c5a6d4c82efeb2e4ca912049dea502c79cd"
+  },
+  "localEmbeddingRequests" : 282,
+  "keywordRequests" : 72,
+  "cloudRequests" : 0
+}

@@ -86,6 +86,7 @@ class DocumentControllerTest {
         registry.add("spring.flyway.password", () -> DATABASE_PASSWORD);
         registry.add("springmind.auth.jwt-secret", () -> TEST_JWT_SECRET);
         registry.add("springmind.dev-admin.enabled", () -> "false");
+        registry.add("document.ingestion.worker-enabled", () -> "false");
     }
 
     @BeforeEach
@@ -112,13 +113,16 @@ class DocumentControllerTest {
                 .andExpect(jsonPath("$[0].fileName").value("需求说明.md"))
                 .andExpect(jsonPath("$[0].status").value("PROCESSING"));
 
-        assertThat(queryJobCount(documentIdFromLatestDocument())).isZero();
+        long documentId = documentIdFromLatestDocument();
+        assertThat(queryJobCount(documentId)).isEqualTo(1);
+        assertPendingJob(documentId);
     }
 
     @Test
     void shouldRetryFailedDocumentIngestionForGroupOwner() throws Exception {
         long documentId = uploadDocument("u1001", 2001L, "重试解析文档.txt");
         updateDocumentStatusAndFailure(documentId, "FAILED", "向量写入失败");
+        jdbcTemplate.update("update ingestion_jobs set status = 'FAILED' where document_id = ?", documentId);
 
         mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post(
                         "/api/documents/{documentId}/retry-ingestion", documentId)
@@ -133,12 +137,11 @@ class DocumentControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(1))
                 .andExpect(jsonPath("$[0].documentId").value(documentId))
-                .andExpect(jsonPath("$[0].status").value(org.hamcrest.Matchers.anyOf(
-                        org.hamcrest.Matchers.is("PROCESSING"),
-                        org.hamcrest.Matchers.is("READY")
-                )));
+                .andExpect(jsonPath("$[0].status").value("PROCESSING"));
 
         assertThat(queryFailureReason(documentId)).isNull();
+        assertThat(queryJobCount(documentId)).isEqualTo(2);
+        assertPendingJob(documentId);
     }
 
     @Test
@@ -310,6 +313,13 @@ class DocumentControllerTest {
                 documentId
         );
         return count == null ? 0 : count;
+    }
+
+    private void assertPendingJob(long documentId) {
+        assertThat(jdbcTemplate.queryForObject(
+                "select count(*) from ingestion_jobs where document_id = ? and group_id = 2001 "
+                        + "and job_type = 'INGEST_DOCUMENT' and status = 'PENDING' and retry_count = 0",
+                Integer.class, documentId)).isEqualTo(1);
     }
 
     private String queryFailureReason(long documentId) {

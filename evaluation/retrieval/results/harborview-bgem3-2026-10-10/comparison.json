@@ -1,0 +1,2503 @@
+{
+  "annotationStatus" : "HUMAN_REVIEWED",
+  "captureSha256" : "80738762128e53da1c02a3c9e9b3d489b6d4e8f7e0d0507c5dd7128c34d6c98a",
+  "cloudRequests" : 0,
+  "localEmbeddingRequests" : 258,
+  "historicalVectorOrderMatches" : 24,
+  "historicalVectorTop50Overlap" : 1.0,
+  "groups" : {
+    "ALL" : {
+      "CURRENT_VECTOR" : {
+        "cases" : 24,
+        "answerable" : 20,
+        "metrics" : {
+          "hit" : 0.8,
+          "recall" : 0.775,
+          "mrr" : 0.75,
+          "ndcg" : 0.739736374452828
+        },
+        "recall30" : 0.85,
+        "recall50" : 0.875,
+        "factCoverage5" : 0.775,
+        "complementaryCases" : 6,
+        "completeComplementaryCases" : 3
+      },
+      "BGE_M3_VECTOR" : {
+        "cases" : 24,
+        "answerable" : 20,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.96,
+          "ndcg" : 0.9613147192765459
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 6,
+        "completeComplementaryCases" : 6
+      },
+      "CURRENT_HYBRID" : {
+        "cases" : 24,
+        "answerable" : 20,
+        "metrics" : {
+          "hit" : 0.85,
+          "recall" : 0.85,
+          "mrr" : 0.7766666666666666,
+          "ndcg" : 0.7863147192765458
+        },
+        "recall30" : 0.975,
+        "recall50" : null,
+        "factCoverage5" : 0.85,
+        "complementaryCases" : 6,
+        "completeComplementaryCases" : 4
+      },
+      "BGE_M3_HYBRID" : {
+        "cases" : 24,
+        "answerable" : 20,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 0.975,
+          "mrr" : 0.9166666666666666,
+          "ndcg" : 0.9254072534454754
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 0.975,
+        "complementaryCases" : 6,
+        "completeComplementaryCases" : 5
+      },
+      "KEYWORD_REFERENCE" : {
+        "cases" : 24,
+        "answerable" : 20,
+        "metrics" : {
+          "hit" : 0.9,
+          "recall" : 0.9,
+          "mrr" : 0.8166666666666667,
+          "ndcg" : 0.840281540814747
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 0.9,
+        "complementaryCases" : 6,
+        "completeComplementaryCases" : 5
+      }
+    },
+    "zh" : {
+      "CURRENT_VECTOR" : {
+        "cases" : 12,
+        "answerable" : 10,
+        "metrics" : {
+          "hit" : 0.8,
+          "recall" : 0.8,
+          "mrr" : 0.8,
+          "ndcg" : 0.7919720789148188
+        },
+        "recall30" : 0.9,
+        "recall50" : 0.95,
+        "factCoverage5" : 0.8,
+        "complementaryCases" : 3,
+        "completeComplementaryCases" : 2
+      },
+      "BGE_M3_VECTOR" : {
+        "cases" : 12,
+        "answerable" : 10,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 0.9919720789148186
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 3,
+        "completeComplementaryCases" : 3
+      },
+      "CURRENT_HYBRID" : {
+        "cases" : 12,
+        "answerable" : 10,
+        "metrics" : {
+          "hit" : 0.9,
+          "recall" : 0.9,
+          "mrr" : 0.82,
+          "ndcg" : 0.830657359638273
+        },
+        "recall30" : 0.95,
+        "recall50" : null,
+        "factCoverage5" : 0.9,
+        "complementaryCases" : 3,
+        "completeComplementaryCases" : 2
+      },
+      "BGE_M3_HYBRID" : {
+        "cases" : 12,
+        "answerable" : 10,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 0.95,
+          "mrr" : 0.9333333333333333,
+          "ndcg" : 0.9226294385530917
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 0.95,
+        "complementaryCases" : 3,
+        "completeComplementaryCases" : 2
+      },
+      "KEYWORD_REFERENCE" : {
+        "cases" : 12,
+        "answerable" : 10,
+        "metrics" : {
+          "hit" : 0.9,
+          "recall" : 0.9,
+          "mrr" : 0.85,
+          "ndcg" : 0.8630929753571458
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 0.9,
+        "complementaryCases" : 3,
+        "completeComplementaryCases" : 2
+      }
+    },
+    "en" : {
+      "CURRENT_VECTOR" : {
+        "cases" : 12,
+        "answerable" : 10,
+        "metrics" : {
+          "hit" : 0.8,
+          "recall" : 0.75,
+          "mrr" : 0.7,
+          "ndcg" : 0.6875006699908373
+        },
+        "recall30" : 0.8,
+        "recall50" : 0.8,
+        "factCoverage5" : 0.75,
+        "complementaryCases" : 3,
+        "completeComplementaryCases" : 1
+      },
+      "BGE_M3_VECTOR" : {
+        "cases" : 12,
+        "answerable" : 10,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.9199999999999999,
+          "ndcg" : 0.930657359638273
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 3,
+        "completeComplementaryCases" : 3
+      },
+      "CURRENT_HYBRID" : {
+        "cases" : 12,
+        "answerable" : 10,
+        "metrics" : {
+          "hit" : 0.8,
+          "recall" : 0.8,
+          "mrr" : 0.7333333333333333,
+          "ndcg" : 0.7419720789148188
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 0.8,
+        "complementaryCases" : 3,
+        "completeComplementaryCases" : 2
+      },
+      "BGE_M3_HYBRID" : {
+        "cases" : 12,
+        "answerable" : 10,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.9,
+          "ndcg" : 0.928185068337859
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 3,
+        "completeComplementaryCases" : 3
+      },
+      "KEYWORD_REFERENCE" : {
+        "cases" : 12,
+        "answerable" : 10,
+        "metrics" : {
+          "hit" : 0.9,
+          "recall" : 0.9,
+          "mrr" : 0.7833333333333333,
+          "ndcg" : 0.8174701062723482
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 0.9,
+        "complementaryCases" : 3,
+        "completeComplementaryCases" : 3
+      }
+    },
+    "exact" : {
+      "CURRENT_VECTOR" : {
+        "cases" : 6,
+        "answerable" : 6,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 0,
+        "completeComplementaryCases" : 0
+      },
+      "BGE_M3_VECTOR" : {
+        "cases" : 6,
+        "answerable" : 6,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 0,
+        "completeComplementaryCases" : 0
+      },
+      "CURRENT_HYBRID" : {
+        "cases" : 6,
+        "answerable" : 6,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 0,
+        "completeComplementaryCases" : 0
+      },
+      "BGE_M3_HYBRID" : {
+        "cases" : 6,
+        "answerable" : 6,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 0,
+        "completeComplementaryCases" : 0
+      },
+      "KEYWORD_REFERENCE" : {
+        "cases" : 6,
+        "answerable" : 6,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 0,
+        "completeComplementaryCases" : 0
+      }
+    },
+    "semantic" : {
+      "CURRENT_VECTOR" : {
+        "cases" : 6,
+        "answerable" : 6,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.8333333333333334,
+          "ndcg" : 0.8769765845238191
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 0,
+        "completeComplementaryCases" : 0
+      },
+      "BGE_M3_VECTOR" : {
+        "cases" : 6,
+        "answerable" : 6,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.8666666666666667,
+          "ndcg" : 0.8978088012057569
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 0,
+        "completeComplementaryCases" : 0
+      },
+      "CURRENT_HYBRID" : {
+        "cases" : 6,
+        "answerable" : 6,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.8888888888888888,
+          "ndcg" : 0.9166666666666666
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 0,
+        "completeComplementaryCases" : 0
+      },
+      "BGE_M3_HYBRID" : {
+        "cases" : 6,
+        "answerable" : 6,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.9166666666666666,
+          "ndcg" : 0.9384882922619097
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 0,
+        "completeComplementaryCases" : 0
+      },
+      "KEYWORD_REFERENCE" : {
+        "cases" : 6,
+        "answerable" : 6,
+        "metrics" : {
+          "hit" : 0.8333333333333334,
+          "recall" : 0.8333333333333334,
+          "mrr" : 0.8333333333333334,
+          "ndcg" : 0.8333333333333334
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 0.8333333333333334,
+        "complementaryCases" : 0,
+        "completeComplementaryCases" : 0
+      }
+    },
+    "cross-language" : {
+      "CURRENT_VECTOR" : {
+        "cases" : 4,
+        "answerable" : 4,
+        "metrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "recall30" : 0.25,
+        "recall50" : 0.375,
+        "factCoverage5" : 0.0,
+        "complementaryCases" : 2,
+        "completeComplementaryCases" : 0
+      },
+      "BGE_M3_VECTOR" : {
+        "cases" : 4,
+        "answerable" : 4,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 0.9799301972870469
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 2,
+        "completeComplementaryCases" : 2
+      },
+      "CURRENT_HYBRID" : {
+        "cases" : 4,
+        "answerable" : 4,
+        "metrics" : {
+          "hit" : 0.25,
+          "recall" : 0.25,
+          "mrr" : 0.05,
+          "ndcg" : 0.09671320180863541
+        },
+        "recall30" : 0.875,
+        "recall50" : null,
+        "factCoverage5" : 0.25,
+        "complementaryCases" : 2,
+        "completeComplementaryCases" : 0
+      },
+      "BGE_M3_HYBRID" : {
+        "cases" : 4,
+        "answerable" : 4,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 0.875,
+          "mrr" : 0.7083333333333334,
+          "ndcg" : 0.7393736315474654
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 0.875,
+        "complementaryCases" : 2,
+        "completeComplementaryCases" : 1
+      },
+      "KEYWORD_REFERENCE" : {
+        "cases" : 4,
+        "answerable" : 4,
+        "metrics" : {
+          "hit" : 0.75,
+          "recall" : 0.75,
+          "mrr" : 0.3333333333333333,
+          "ndcg" : 0.4514077040737351
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 0.75,
+        "complementaryCases" : 2,
+        "completeComplementaryCases" : 1
+      }
+    },
+    "multi-evidence" : {
+      "CURRENT_VECTOR" : {
+        "cases" : 2,
+        "answerable" : 2,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 2,
+        "completeComplementaryCases" : 2
+      },
+      "BGE_M3_VECTOR" : {
+        "cases" : 2,
+        "answerable" : 2,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 2,
+        "completeComplementaryCases" : 2
+      },
+      "CURRENT_HYBRID" : {
+        "cases" : 2,
+        "answerable" : 2,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 2,
+        "completeComplementaryCases" : 2
+      },
+      "BGE_M3_HYBRID" : {
+        "cases" : 2,
+        "answerable" : 2,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 2,
+        "completeComplementaryCases" : 2
+      },
+      "KEYWORD_REFERENCE" : {
+        "cases" : 2,
+        "answerable" : 2,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 2,
+        "completeComplementaryCases" : 2
+      }
+    },
+    "long-document" : {
+      "CURRENT_VECTOR" : {
+        "cases" : 2,
+        "answerable" : 2,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 0.75,
+          "mrr" : 1.0,
+          "ndcg" : 0.766433990956823
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 0.75,
+        "complementaryCases" : 2,
+        "completeComplementaryCases" : 1
+      },
+      "BGE_M3_VECTOR" : {
+        "cases" : 2,
+        "answerable" : 2,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 0.9598603945740938
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 2,
+        "completeComplementaryCases" : 2
+      },
+      "CURRENT_HYBRID" : {
+        "cases" : 2,
+        "answerable" : 2,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 0.9197207891481876
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 2,
+        "completeComplementaryCases" : 2
+      },
+      "BGE_M3_HYBRID" : {
+        "cases" : 2,
+        "answerable" : 2,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 0.9598603945740938
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 2,
+        "completeComplementaryCases" : 2
+      },
+      "KEYWORD_REFERENCE" : {
+        "cases" : 2,
+        "answerable" : 2,
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "complementaryCases" : 2,
+        "completeComplementaryCases" : 2
+      }
+    },
+    "unanswerable" : {
+      "CURRENT_VECTOR" : {
+        "cases" : 4,
+        "answerable" : 0,
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "complementaryCases" : 0,
+        "completeComplementaryCases" : 0
+      },
+      "BGE_M3_VECTOR" : {
+        "cases" : 4,
+        "answerable" : 0,
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "complementaryCases" : 0,
+        "completeComplementaryCases" : 0
+      },
+      "CURRENT_HYBRID" : {
+        "cases" : 4,
+        "answerable" : 0,
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "complementaryCases" : 0,
+        "completeComplementaryCases" : 0
+      },
+      "BGE_M3_HYBRID" : {
+        "cases" : 4,
+        "answerable" : 0,
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "complementaryCases" : 0,
+        "completeComplementaryCases" : 0
+      },
+      "KEYWORD_REFERENCE" : {
+        "cases" : 4,
+        "answerable" : 0,
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "complementaryCases" : 0,
+        "completeComplementaryCases" : 0
+      }
+    }
+  },
+  "rows" : [ {
+    "id" : "e01",
+    "category" : "exact",
+    "language" : "zh",
+    "scores" : {
+      "CURRENT_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "CURRENT_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "KEYWORD_REFERENCE" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "rankings" : {
+      "CURRENT_VECTOR" : [ "relay-v3-zh--c000", "relay-v2-zh--c000", "relay-agent-en--c000", "relay-gateway-en--c000", "restore-guide-en--c000", "backup-dublin-en--c000", "release-guide-zh--c004", "cert-agent-en--c001", "billing-v2-en--c000", "restore-guide-en--c010", "export-analyst-en--c000", "backup-seattle-en--c000", "cert-agent-en--c000", "incident-production-en--c001", "incident-degraded-en--c000", "notify-urgent-en--c000", "restore-guide-en--c006", "cert-gateway-en--c000", "purchase-hardware-en--c000", "audit-us-en--c000", "restore-guide-en--c003", "purchase-software-en--c000", "access-visitor-en--c001", "purchase-hardware-en--c001", "restore-guide-en--c012", "release-guide-zh--c003", "lost-laptop-en--c000", "incident-production-en--c000", "access-staff-en--c000", "restore-guide-en--c016", "export-admin-en--c000", "restore-guide-en--c005", "notify-routine-en--c000", "billing-v1-en--c000", "restore-guide-en--c002", "notify-urgent-en--c001", "restore-guide-en--c004", "restore-guide-en--c014", "purchase-software-en--c001", "export-member-zh--c000", "restore-guide-en--c007", "shipping-priority-en--c000", "audit-eu-en--c000", "expense-receipt-en--c000", "shipping-return-en--c000", "incident-production-zh--c000", "remote-exception-en--c000", "offboard-staff-en--c000", "restore-guide-en--c008", "offboard-partner-en--c000" ],
+      "CURRENT_HYBRID" : [ "relay-v3-zh--c000", "relay-v2-zh--c000", "relay-agent-en--c000", "relay-gateway-en--c000", "incident-production-zh--c000", "notify-urgent-zh--c000", "restore-guide-en--c000", "backup-dublin-en--c000", "cert-server-zh--c000", "incident-test-zh--c000", "release-guide-zh--c004", "cert-client-zh--c000", "cert-agent-en--c001", "billing-v2-en--c000", "offboard-staff-zh--c000", "export-admin-zh--c000", "restore-guide-en--c010", "backup-shanghai-zh--c000", "export-analyst-en--c000", "backup-seattle-en--c000", "notify-routine-zh--c000", "cert-agent-en--c000", "access-visitor-zh--c000", "api-production-zh--c000", "incident-production-en--c001", "travel-domestic-zh--c000", "incident-degraded-en--c000", "expense-receipt-zh--c000", "notify-urgent-en--c000", "restore-guide-en--c006" ],
+      "BGE_M3_VECTOR" : [ "relay-v3-zh--c000", "relay-v2-zh--c000", "relay-agent-en--c000", "relay-gateway-en--c000", "incident-production-zh--c000", "release-guide-zh--c003", "lost-token-en--c001", "shipping-priority-en--c001", "notify-urgent-en--c001", "incident-production-en--c000", "offboard-staff-zh--c000", "notify-routine-zh--c000", "cert-gateway-en--c000", "offboard-contractor-zh--c000", "restore-guide-en--c012", "billing-v1-en--c000", "lost-phone-zh--c000", "purchase-hardware-en--c001", "notify-urgent-en--c000", "notify-routine-en--c001", "billing-v2-en--c000", "notify-routine-en--c000", "restore-guide-en--c010", "incident-degraded-en--c000", "release-guide-zh--c002", "lost-laptop-zh--c000", "restore-guide-en--c014", "notify-urgent-zh--c000", "cert-client-zh--c000", "restore-guide-en--c013", "restore-guide-en--c005", "lost-laptop-en--c000", "incident-production-en--c001", "remote-exception-en--c000", "incident-test-zh--c000", "release-guide-zh--c001", "release-guide-zh--c004", "shipping-local-zh--c000", "shipping-return-en--c000", "purchase-software-en--c001", "release-guide-zh--c000", "export-member-zh--c000", "incident-degraded-en--c001", "shipping-priority-en--c000", "remote-exception-zh--c000", "access-staff-en--c001", "cert-agent-en--c001", "offboard-staff-en--c000", "restore-guide-en--c015", "restore-guide-en--c000" ],
+      "BGE_M3_HYBRID" : [ "relay-v3-zh--c000", "relay-v2-zh--c000", "relay-agent-en--c000", "relay-gateway-en--c000", "offboard-staff-zh--c000", "incident-production-zh--c000", "notify-routine-zh--c000", "notify-urgent-zh--c000", "cert-client-zh--c000", "incident-test-zh--c000", "release-guide-zh--c002", "cert-server-zh--c000", "release-guide-zh--c003", "lost-token-en--c001", "shipping-priority-en--c001", "notify-urgent-en--c001", "incident-production-en--c000", "export-admin-zh--c000", "backup-shanghai-zh--c000", "cert-gateway-en--c000", "access-visitor-zh--c000", "api-production-zh--c000", "offboard-contractor-zh--c000", "travel-domestic-zh--c000", "restore-guide-en--c012", "billing-v1-en--c000", "expense-receipt-zh--c000", "lost-phone-zh--c000", "purchase-hardware-en--c001", "notify-urgent-en--c000" ],
+      "KEYWORD_REFERENCE" : [ "relay-v3-zh--c000", "relay-v2-zh--c000", "relay-gateway-en--c000", "relay-agent-en--c000", "notify-urgent-zh--c000", "cert-server-zh--c000", "incident-test-zh--c000", "cert-client-zh--c000", "offboard-staff-zh--c000", "export-admin-zh--c000", "backup-shanghai-zh--c000", "notify-routine-zh--c000", "access-visitor-zh--c000", "api-production-zh--c000", "travel-domestic-zh--c000", "expense-receipt-zh--c000", "incident-production-zh--c000", "release-guide-zh--c002" ]
+    },
+    "historicalVectorOrderMatches" : true,
+    "historicalVectorTop50Overlap" : 1.0,
+    "historicalVectorMetrics" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "e02",
+    "category" : "exact",
+    "language" : "en",
+    "scores" : {
+      "CURRENT_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "CURRENT_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "KEYWORD_REFERENCE" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "rankings" : {
+      "CURRENT_VECTOR" : [ "billing-v2-en--c000", "billing-v1-en--c000", "export-admin-en--c001", "relay-gateway-en--c000", "restore-guide-en--c015", "expense-deadline-en--c000", "restore-guide-en--c004", "purchase-software-en--c000", "purchase-software-en--c001", "backup-dublin-en--c000", "export-analyst-en--c000", "restore-guide-en--c012", "restore-guide-en--c011", "restore-guide-en--c010", "restore-guide-en--c016", "audit-eu-en--c000", "restore-guide-en--c002", "cert-gateway-en--c000", "incident-production-en--c000", "cert-agent-en--c001", "restore-guide-en--c007", "backup-dublin-en--c001", "restore-guide-en--c003", "backup-seattle-en--c000", "audit-us-en--c000", "expense-receipt-en--c000", "notify-urgent-en--c001", "purchase-hardware-en--c001", "restore-guide-en--c008", "purchase-hardware-en--c000", "offboard-staff-en--c000", "offboard-staff-en--c001", "relay-agent-en--c000", "cert-agent-en--c000", "access-visitor-en--c001", "restore-guide-en--c009", "restore-guide-en--c005", "notify-urgent-en--c000", "access-staff-en--c000", "shipping-return-en--c000", "shipping-priority-en--c000", "incident-production-en--c001", "notify-routine-en--c000", "restore-guide-en--c000", "incident-degraded-en--c000", "access-staff-en--c001", "restore-guide-en--c017", "travel-sales-en--c000", "offboard-partner-en--c000", "remote-exception-en--c000" ],
+      "CURRENT_HYBRID" : [ "billing-v2-en--c000", "billing-v1-en--c000", "relay-gateway-en--c000", "export-admin-en--c001", "restore-guide-en--c015", "export-analyst-en--c000", "restore-guide-en--c016", "restore-guide-en--c002", "restore-guide-en--c007", "cert-gateway-en--c000", "relay-agent-en--c000", "restore-guide-en--c008", "incident-degraded-en--c000", "api-production-zh--c000", "api-sandbox-zh--c000", "expense-deadline-en--c000", "relay-v2-zh--c000", "restore-guide-en--c004", "purchase-software-en--c000", "purchase-software-en--c001", "backup-dublin-en--c000", "export-admin-en--c000", "restore-guide-en--c012", "restore-guide-en--c011", "restore-guide-en--c010", "audit-eu-en--c000", "export-member-zh--c000", "relay-v3-zh--c000", "incident-production-en--c000", "cert-agent-en--c001" ],
+      "BGE_M3_VECTOR" : [ "billing-v2-en--c000", "billing-v1-en--c000", "api-production-zh--c000", "api-sandbox-zh--c000", "export-admin-en--c001", "export-analyst-en--c000", "relay-v2-zh--c000", "access-contractor-zh--c000", "cert-client-zh--c000", "relay-gateway-en--c000", "export-member-zh--c000", "travel-domestic-zh--c000", "travel-engineering-en--c000", "travel-sales-en--c000", "travel-international-zh--c000", "release-guide-zh--c001", "offboard-staff-zh--c000", "purchase-software-en--c000", "release-guide-zh--c003", "offboard-contractor-zh--c000", "export-admin-en--c000", "purchase-large-zh--c000", "offboard-staff-en--c001", "offboard-partner-en--c000", "export-admin-zh--c000", "purchase-small-zh--c000", "purchase-hardware-en--c000", "relay-agent-en--c000", "travel-engineering-en--c001", "incident-degraded-en--c000", "release-guide-zh--c000", "release-guide-zh--c002", "expense-deadline-en--c000", "purchase-software-en--c001", "restore-guide-en--c014", "backup-dublin-en--c001", "restore-guide-en--c007", "relay-v3-zh--c000", "remote-exception-en--c000", "cert-server-zh--c000", "release-guide-zh--c004", "access-visitor-zh--c000", "remote-exception-zh--c000", "shipping-priority-en--c001", "remote-standard-zh--c000", "backup-hangzhou-zh--c000", "cert-agent-en--c000", "expense-deadline-zh--c000", "restore-guide-en--c010", "backup-shanghai-zh--c000" ],
+      "BGE_M3_HYBRID" : [ "billing-v2-en--c000", "billing-v1-en--c000", "api-production-zh--c000", "api-sandbox-zh--c000", "export-admin-en--c001", "relay-gateway-en--c000", "export-analyst-en--c000", "relay-v2-zh--c000", "export-member-zh--c000", "export-admin-en--c000", "relay-agent-en--c000", "restore-guide-en--c007", "incident-degraded-en--c000", "relay-v3-zh--c000", "access-contractor-zh--c000", "cert-client-zh--c000", "restore-guide-en--c015", "travel-domestic-zh--c000", "travel-engineering-en--c000", "restore-guide-en--c002", "travel-sales-en--c000", "restore-guide-en--c016", "cert-gateway-en--c000", "travel-international-zh--c000", "restore-guide-en--c008", "release-guide-zh--c001", "offboard-staff-zh--c000", "purchase-software-en--c000", "release-guide-zh--c003", "offboard-contractor-zh--c000" ],
+      "KEYWORD_REFERENCE" : [ "billing-v2-en--c000", "billing-v1-en--c000", "relay-gateway-en--c000", "api-production-zh--c000", "export-admin-en--c001", "api-sandbox-zh--c000", "relay-v2-zh--c000", "export-analyst-en--c000", "restore-guide-en--c015", "restore-guide-en--c007", "export-admin-en--c000", "relay-agent-en--c000", "restore-guide-en--c002", "restore-guide-en--c016", "cert-gateway-en--c000", "restore-guide-en--c008", "export-member-zh--c000", "incident-degraded-en--c000", "relay-v3-zh--c000" ]
+    },
+    "historicalVectorOrderMatches" : true,
+    "historicalVectorTop50Overlap" : 1.0,
+    "historicalVectorMetrics" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "e03",
+    "category" : "exact",
+    "language" : "zh",
+    "scores" : {
+      "CURRENT_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "CURRENT_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "KEYWORD_REFERENCE" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "rankings" : {
+      "CURRENT_VECTOR" : [ "cert-client-zh--c000", "cert-server-zh--c000", "shipping-overseas-zh--c000", "audit-test-zh--c000", "backup-shanghai-zh--c000", "shipping-local-zh--c000", "remote-standard-zh--c000", "access-contractor-zh--c000", "offboard-staff-zh--c000", "notify-routine-zh--c000", "audit-production-zh--c000", "backup-hangzhou-zh--c000", "api-production-zh--c000", "api-sandbox-zh--c000", "expense-deadline-zh--c000", "offboard-contractor-zh--c000", "release-guide-zh--c003", "access-visitor-zh--c000", "remote-exception-zh--c000", "release-guide-zh--c004", "relay-v2-zh--c000", "release-guide-zh--c002", "cert-agent-en--c000", "lost-laptop-zh--c000", "export-member-zh--c000", "release-guide-zh--c000", "incident-production-zh--c000", "export-admin-zh--c000", "lost-phone-zh--c000", "expense-receipt-zh--c000", "relay-v3-zh--c000", "release-guide-zh--c001", "billing-v2-en--c000", "offboard-staff-en--c000", "restore-guide-en--c016", "purchase-small-zh--c000", "backup-dublin-en--c000", "purchase-large-zh--c000", "notify-routine-en--c000", "restore-guide-en--c010", "cert-gateway-en--c000", "incident-degraded-en--c000", "restore-guide-en--c000", "shipping-return-en--c000", "cert-agent-en--c001", "audit-eu-en--c000", "remote-exception-en--c000", "export-analyst-en--c000", "travel-domestic-zh--c000", "incident-production-en--c000" ],
+      "CURRENT_HYBRID" : [ "cert-client-zh--c000", "cert-server-zh--c000", "shipping-overseas-zh--c000", "shipping-local-zh--c000", "audit-test-zh--c000", "backup-shanghai-zh--c000", "offboard-contractor-zh--c000", "remote-standard-zh--c000", "relay-v2-zh--c000", "backup-hangzhou-zh--c000", "lost-laptop-zh--c000", "relay-v3-zh--c000", "lost-phone-zh--c000", "release-guide-zh--c003", "export-admin-zh--c000", "purchase-small-zh--c000", "purchase-large-zh--c000", "travel-domestic-zh--c000", "access-contractor-zh--c000", "offboard-staff-zh--c000", "notify-routine-zh--c000", "audit-production-zh--c000", "api-production-zh--c000", "api-sandbox-zh--c000", "expense-deadline-zh--c000", "access-visitor-zh--c000", "remote-exception-zh--c000", "release-guide-zh--c004", "release-guide-zh--c002", "cert-agent-en--c000" ],
+      "BGE_M3_VECTOR" : [ "cert-client-zh--c000", "cert-server-zh--c000", "cert-agent-en--c000", "cert-gateway-en--c000", "cert-agent-en--c001", "access-contractor-zh--c000", "offboard-contractor-zh--c000", "shipping-local-zh--c000", "remote-exception-en--c000", "remote-exception-zh--c000", "offboard-staff-zh--c000", "relay-v2-zh--c000", "backup-shanghai-zh--c000", "offboard-partner-en--c000", "relay-v3-zh--c000", "shipping-overseas-zh--c000", "release-guide-zh--c003", "audit-test-zh--c000", "audit-production-zh--c000", "remote-standard-zh--c000", "api-sandbox-zh--c000", "backup-seattle-en--c000", "billing-v2-en--c000", "lost-phone-zh--c000", "backup-hangzhou-zh--c000", "release-guide-zh--c002", "billing-v1-en--c000", "expense-deadline-zh--c000", "restore-guide-en--c016", "release-guide-zh--c000", "shipping-priority-en--c001", "incident-production-zh--c000", "restore-guide-en--c010", "notify-routine-zh--c000", "restore-guide-en--c014", "backup-dublin-en--c000", "api-production-zh--c000", "access-visitor-zh--c000", "relay-gateway-en--c000", "release-guide-zh--c001", "audit-us-en--c000", "shipping-priority-en--c000", "export-member-zh--c000", "purchase-software-en--c000", "shipping-return-en--c001", "audit-eu-en--c000", "expense-receipt-zh--c000", "release-guide-zh--c004", "shipping-return-en--c000", "restore-guide-en--c017" ],
+      "BGE_M3_HYBRID" : [ "cert-client-zh--c000", "cert-server-zh--c000", "offboard-contractor-zh--c000", "shipping-local-zh--c000", "relay-v2-zh--c000", "relay-v3-zh--c000", "shipping-overseas-zh--c000", "backup-shanghai-zh--c000", "audit-test-zh--c000", "lost-phone-zh--c000", "remote-standard-zh--c000", "release-guide-zh--c003", "backup-hangzhou-zh--c000", "cert-agent-en--c000", "cert-gateway-en--c000", "cert-agent-en--c001", "access-contractor-zh--c000", "remote-exception-en--c000", "lost-laptop-zh--c000", "remote-exception-zh--c000", "offboard-staff-zh--c000", "travel-domestic-zh--c000", "offboard-partner-en--c000", "export-admin-zh--c000", "purchase-small-zh--c000", "purchase-large-zh--c000", "audit-production-zh--c000", "api-sandbox-zh--c000", "backup-seattle-en--c000", "billing-v2-en--c000" ],
+      "KEYWORD_REFERENCE" : [ "cert-client-zh--c000", "cert-server-zh--c000", "offboard-contractor-zh--c000", "relay-v2-zh--c000", "relay-v3-zh--c000", "shipping-local-zh--c000", "shipping-overseas-zh--c000", "lost-phone-zh--c000", "lost-laptop-zh--c000", "audit-test-zh--c000", "backup-shanghai-zh--c000", "backup-hangzhou-zh--c000", "remote-standard-zh--c000", "travel-domestic-zh--c000", "export-admin-zh--c000", "purchase-small-zh--c000", "purchase-large-zh--c000", "release-guide-zh--c003" ]
+    },
+    "historicalVectorOrderMatches" : true,
+    "historicalVectorTop50Overlap" : 1.0,
+    "historicalVectorMetrics" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "e04",
+    "category" : "exact",
+    "language" : "en",
+    "scores" : {
+      "CURRENT_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "CURRENT_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "KEYWORD_REFERENCE" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "rankings" : {
+      "CURRENT_VECTOR" : [ "incident-production-en--c000", "incident-degraded-en--c000", "restore-guide-en--c013", "notify-routine-en--c001", "restore-guide-en--c001", "notify-urgent-en--c000", "restore-guide-en--c005", "shipping-return-en--c001", "purchase-software-en--c001", "restore-guide-en--c015", "notify-urgent-en--c001", "access-staff-en--c001", "notify-routine-en--c000", "offboard-partner-en--c000", "offboard-staff-en--c001", "offboard-partner-en--c001", "expense-receipt-en--c000", "export-analyst-en--c000", "restore-guide-en--c011", "restore-guide-en--c003", "shipping-priority-en--c001", "lost-token-en--c000", "cert-gateway-en--c001", "export-admin-en--c001", "travel-engineering-en--c001", "purchase-software-en--c000", "access-visitor-en--c001", "restore-guide-en--c006", "restore-guide-en--c017", "restore-guide-en--c016", "offboard-staff-en--c000", "remote-standard-en--c000", "expense-deadline-en--c000", "shipping-priority-en--c000", "shipping-return-en--c000", "export-admin-en--c000", "restore-guide-en--c000", "restore-guide-en--c008", "purchase-hardware-en--c001", "restore-guide-en--c014", "restore-guide-en--c012", "restore-guide-en--c009", "billing-v1-en--c000", "lost-token-en--c001", "purchase-hardware-en--c000", "lost-laptop-en--c000", "access-staff-en--c000", "backup-dublin-en--c001", "audit-us-en--c000", "remote-exception-en--c000" ],
+      "CURRENT_HYBRID" : [ "incident-production-en--c000", "incident-degraded-en--c000", "notify-routine-en--c001", "restore-guide-en--c013", "notify-routine-en--c000", "restore-guide-en--c005", "notify-urgent-en--c000", "expense-receipt-en--c000", "shipping-priority-en--c001", "notify-urgent-en--c001", "shipping-priority-en--c000", "restore-guide-en--c015", "cert-gateway-en--c001", "export-analyst-en--c000", "offboard-partner-en--c000", "restore-guide-en--c012", "restore-guide-en--c006", "lost-token-en--c000", "purchase-software-en--c000", "offboard-staff-en--c000", "access-staff-en--c000", "shipping-return-en--c000", "expense-deadline-en--c000", "access-visitor-en--c001", "export-admin-en--c000", "remote-standard-en--c000", "lost-laptop-en--c000", "purchase-hardware-en--c000", "remote-exception-en--c000", "billing-v1-en--c000" ],
+      "BGE_M3_VECTOR" : [ "incident-production-en--c000", "incident-degraded-en--c000", "incident-production-zh--c000", "incident-test-zh--c000", "expense-deadline-en--c000", "shipping-priority-en--c000", "notify-routine-en--c000", "remote-exception-en--c000", "shipping-priority-en--c001", "notify-urgent-en--c000", "shipping-return-en--c000", "lost-token-en--c000", "purchase-hardware-en--c000", "expense-receipt-en--c000", "lost-laptop-en--c000", "remote-standard-en--c000", "incident-production-en--c001", "notify-routine-en--c001", "access-visitor-en--c000", "purchase-software-en--c000", "access-staff-en--c000", "export-analyst-en--c000", "release-guide-zh--c003", "restore-guide-en--c005", "restore-guide-en--c012", "restore-guide-en--c006", "restore-guide-en--c013", "offboard-staff-en--c000", "purchase-hardware-en--c001", "lost-token-en--c001", "release-guide-zh--c002", "audit-production-zh--c000", "export-admin-en--c000", "relay-v3-zh--c000", "purchase-software-en--c001", "notify-urgent-en--c001", "offboard-staff-zh--c000", "restore-guide-en--c002", "expense-deadline-zh--c000", "offboard-contractor-zh--c000", "relay-gateway-en--c000", "backup-dublin-en--c000", "audit-test-zh--c000", "relay-v2-zh--c000", "shipping-overseas-zh--c000", "restore-guide-en--c010", "release-guide-zh--c001", "access-visitor-en--c001", "restore-guide-en--c014", "restore-guide-en--c015" ],
+      "BGE_M3_HYBRID" : [ "incident-production-en--c000", "incident-degraded-en--c000", "incident-production-zh--c000", "incident-test-zh--c000", "shipping-priority-en--c000", "notify-routine-en--c000", "shipping-priority-en--c001", "incident-production-en--c001", "expense-receipt-en--c000", "access-visitor-en--c000", "notify-routine-en--c001", "expense-deadline-en--c000", "notify-urgent-en--c000", "shipping-return-en--c000", "access-staff-en--c000", "restore-guide-en--c012", "remote-exception-en--c000", "lost-token-en--c000", "restore-guide-en--c005", "lost-laptop-en--c000", "restore-guide-en--c013", "purchase-hardware-en--c000", "audit-production-zh--c000", "restore-guide-en--c006", "remote-standard-en--c000", "purchase-software-en--c000", "export-analyst-en--c000", "offboard-staff-en--c000", "notify-urgent-en--c001", "backup-dublin-en--c000" ],
+      "KEYWORD_REFERENCE" : [ "incident-production-en--c000", "incident-degraded-en--c000", "incident-production-zh--c000", "incident-test-zh--c000", "incident-production-en--c001", "relay-agent-en--c000", "shipping-priority-en--c000", "notify-routine-en--c000", "access-visitor-en--c000", "notify-routine-en--c001", "expense-receipt-en--c000", "shipping-priority-en--c001", "restore-guide-en--c012", "api-production-zh--c000", "audit-production-zh--c000", "access-staff-en--c000", "restore-guide-en--c013", "restore-guide-en--c005", "incident-degraded-en--c001", "backup-dublin-en--c000", "notify-urgent-en--c000", "restore-guide-en--c006", "notify-urgent-en--c001", "shipping-return-en--c000", "cert-gateway-en--c001", "offboard-staff-en--c000", "expense-deadline-en--c000", "lost-laptop-en--c000", "export-admin-en--c000", "purchase-software-en--c000", "lost-token-en--c000", "export-analyst-en--c000", "purchase-hardware-en--c000", "remote-exception-en--c000", "remote-standard-en--c000", "restore-guide-en--c015", "cert-gateway-en--c000", "access-visitor-en--c001", "offboard-partner-en--c000", "relay-gateway-en--c000", "audit-us-en--c000", "restore-guide-en--c004", "billing-v1-en--c000" ]
+    },
+    "historicalVectorOrderMatches" : true,
+    "historicalVectorTop50Overlap" : 1.0,
+    "historicalVectorMetrics" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "e05",
+    "category" : "exact",
+    "language" : "zh",
+    "scores" : {
+      "CURRENT_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "CURRENT_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "KEYWORD_REFERENCE" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "rankings" : {
+      "CURRENT_VECTOR" : [ "export-member-zh--c000", "export-admin-zh--c000", "offboard-staff-zh--c000", "expense-deadline-zh--c000", "api-production-zh--c000", "relay-v2-zh--c000", "remote-standard-zh--c000", "incident-production-zh--c000", "access-visitor-zh--c000", "release-guide-zh--c000", "access-contractor-zh--c000", "api-sandbox-zh--c000", "audit-production-zh--c000", "notify-urgent-zh--c000", "shipping-local-zh--c000", "cert-client-zh--c000", "remote-exception-zh--c000", "lost-laptop-zh--c000", "release-guide-zh--c003", "cert-server-zh--c000", "notify-routine-zh--c000", "travel-domestic-zh--c000", "relay-v3-zh--c000", "release-guide-zh--c002", "release-guide-zh--c004", "purchase-large-zh--c000", "purchase-small-zh--c000", "audit-test-zh--c000", "travel-international-zh--c000", "export-admin-en--c000", "export-analyst-en--c000", "backup-shanghai-zh--c000", "offboard-contractor-zh--c000", "shipping-overseas-zh--c000", "release-guide-zh--c001", "expense-receipt-zh--c000", "lost-phone-zh--c000", "incident-test-zh--c000", "restore-guide-en--c002", "purchase-hardware-en--c000", "restore-guide-en--c000", "backup-hangzhou-zh--c000", "restore-guide-en--c004", "incident-production-en--c000", "purchase-software-en--c000", "relay-agent-en--c000", "backup-seattle-en--c000", "offboard-staff-en--c000", "backup-dublin-en--c000", "audit-us-en--c000" ],
+      "CURRENT_HYBRID" : [ "export-member-zh--c000", "export-admin-zh--c000", "remote-standard-zh--c000", "offboard-staff-zh--c000", "incident-production-zh--c000", "api-production-zh--c000", "notify-urgent-zh--c000", "access-contractor-zh--c000", "remote-exception-zh--c000", "expense-deadline-zh--c000", "access-visitor-zh--c000", "shipping-local-zh--c000", "offboard-contractor-zh--c000", "release-guide-zh--c000", "notify-routine-zh--c000", "export-admin-en--c000", "export-analyst-en--c000", "travel-domestic-zh--c000", "lost-laptop-zh--c000", "travel-international-zh--c000", "purchase-small-zh--c000", "purchase-large-zh--c000", "lost-phone-zh--c000", "expense-receipt-zh--c000", "release-guide-zh--c001", "relay-v2-zh--c000", "api-sandbox-zh--c000", "audit-production-zh--c000", "cert-client-zh--c000", "release-guide-zh--c003" ],
+      "BGE_M3_VECTOR" : [ "export-member-zh--c000", "export-admin-zh--c000", "export-analyst-en--c000", "export-admin-en--c000", "purchase-small-zh--c000", "remote-standard-zh--c000", "purchase-large-zh--c000", "access-contractor-zh--c000", "backup-shanghai-zh--c000", "remote-exception-zh--c000", "api-production-zh--c000", "billing-v1-en--c000", "access-visitor-zh--c000", "restore-guide-en--c010", "api-sandbox-zh--c000", "restore-guide-en--c002", "notify-routine-zh--c000", "offboard-contractor-zh--c000", "release-guide-zh--c003", "release-guide-zh--c004", "travel-domestic-zh--c000", "notify-urgent-zh--c000", "billing-v2-en--c000", "offboard-staff-zh--c000", "lost-laptop-zh--c000", "release-guide-zh--c002", "incident-production-zh--c000", "expense-deadline-zh--c000", "release-guide-zh--c001", "restore-guide-en--c012", "relay-agent-en--c000", "backup-dublin-en--c001", "release-guide-zh--c000", "lost-phone-zh--c000", "relay-v2-zh--c000", "restore-guide-en--c003", "backup-hangzhou-zh--c000", "restore-guide-en--c007", "travel-international-zh--c000", "audit-production-zh--c000", "lost-token-en--c001", "restore-guide-en--c004", "cert-client-zh--c000", "access-staff-en--c001", "shipping-return-en--c001", "audit-test-zh--c000", "backup-seattle-en--c000", "shipping-local-zh--c000", "travel-engineering-en--c001", "cert-agent-en--c001" ],
+      "BGE_M3_HYBRID" : [ "export-member-zh--c000", "export-admin-zh--c000", "remote-standard-zh--c000", "export-analyst-en--c000", "export-admin-en--c000", "remote-exception-zh--c000", "access-contractor-zh--c000", "offboard-contractor-zh--c000", "api-production-zh--c000", "notify-urgent-zh--c000", "purchase-small-zh--c000", "purchase-large-zh--c000", "access-visitor-zh--c000", "notify-routine-zh--c000", "incident-production-zh--c000", "offboard-staff-zh--c000", "travel-domestic-zh--c000", "expense-deadline-zh--c000", "lost-laptop-zh--c000", "travel-international-zh--c000", "release-guide-zh--c001", "lost-phone-zh--c000", "shipping-local-zh--c000", "release-guide-zh--c000", "backup-shanghai-zh--c000", "billing-v1-en--c000", "restore-guide-en--c010", "api-sandbox-zh--c000", "restore-guide-en--c002", "release-guide-zh--c003" ],
+      "KEYWORD_REFERENCE" : [ "export-member-zh--c000", "export-admin-zh--c000", "notify-urgent-zh--c000", "remote-exception-zh--c000", "offboard-contractor-zh--c000", "remote-standard-zh--c000", "incident-production-zh--c000", "access-contractor-zh--c000", "export-admin-en--c000", "export-analyst-en--c000", "api-production-zh--c000", "offboard-staff-zh--c000", "notify-routine-zh--c000", "shipping-local-zh--c000", "access-visitor-zh--c000", "travel-international-zh--c000", "travel-domestic-zh--c000", "expense-deadline-zh--c000", "purchase-small-zh--c000", "purchase-large-zh--c000", "lost-phone-zh--c000", "lost-laptop-zh--c000", "expense-receipt-zh--c000", "release-guide-zh--c001", "release-guide-zh--c000" ]
+    },
+    "historicalVectorOrderMatches" : true,
+    "historicalVectorTop50Overlap" : 1.0,
+    "historicalVectorMetrics" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "e06",
+    "category" : "exact",
+    "language" : "en",
+    "scores" : {
+      "CURRENT_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "CURRENT_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "KEYWORD_REFERENCE" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "rankings" : {
+      "CURRENT_VECTOR" : [ "backup-dublin-en--c000", "backup-seattle-en--c000", "incident-degraded-en--c000", "cert-agent-en--c001", "access-visitor-en--c001", "restore-guide-en--c000", "notify-routine-en--c000", "restore-guide-en--c010", "restore-guide-en--c017", "incident-production-en--c001", "backup-dublin-en--c001", "incident-production-en--c000", "restore-guide-en--c016", "purchase-software-en--c001", "notify-urgent-en--c001", "billing-v2-en--c000", "restore-guide-en--c004", "relay-agent-en--c000", "restore-guide-en--c006", "purchase-hardware-en--c000", "remote-exception-en--c000", "restore-guide-en--c012", "audit-us-en--c000", "shipping-return-en--c000", "travel-sales-en--c000", "notify-urgent-en--c000", "restore-guide-en--c007", "billing-v1-en--c000", "restore-guide-en--c003", "cert-agent-en--c000", "audit-eu-en--c000", "restore-guide-en--c002", "expense-deadline-en--c000", "restore-guide-en--c005", "remote-standard-en--c000", "export-analyst-en--c000", "cert-gateway-en--c000", "purchase-hardware-en--c001", "restore-guide-en--c008", "travel-engineering-en--c000", "purchase-software-en--c000", "restore-guide-en--c011", "restore-guide-en--c013", "restore-guide-en--c015", "restore-guide-en--c014", "lost-laptop-en--c000", "lost-token-en--c001", "relay-gateway-en--c000", "shipping-priority-en--c000", "access-staff-en--c001" ],
+      "CURRENT_HYBRID" : [ "backup-dublin-en--c000", "backup-seattle-en--c000", "incident-degraded-en--c000", "restore-guide-en--c000", "incident-production-en--c000", "incident-production-en--c001", "backup-dublin-en--c001", "cert-agent-en--c001", "notify-routine-en--c000", "audit-us-en--c000", "restore-guide-en--c010", "restore-guide-en--c016", "restore-guide-en--c006", "travel-sales-en--c000", "restore-guide-en--c004", "audit-eu-en--c000", "restore-guide-en--c008", "access-visitor-en--c001", "restore-guide-en--c017", "api-production-zh--c000", "incident-production-zh--c000", "audit-production-zh--c000", "purchase-software-en--c001", "offboard-staff-en--c000", "notify-urgent-en--c001", "billing-v2-en--c000", "relay-agent-en--c000", "purchase-hardware-en--c000", "remote-exception-en--c000", "restore-guide-en--c012" ],
+      "BGE_M3_VECTOR" : [ "backup-dublin-en--c000", "backup-seattle-en--c000", "audit-us-en--c000", "audit-eu-en--c000", "backup-hangzhou-zh--c000", "backup-shanghai-zh--c000", "incident-degraded-en--c000", "restore-guide-en--c016", "incident-production-en--c000", "audit-production-zh--c000", "restore-guide-en--c006", "restore-guide-en--c017", "audit-test-zh--c000", "cert-server-zh--c000", "shipping-local-zh--c000", "incident-production-en--c001", "remote-exception-en--c000", "restore-guide-en--c010", "incident-production-zh--c000", "shipping-priority-en--c001", "offboard-partner-en--c000", "remote-exception-zh--c000", "cert-client-zh--c000", "release-guide-zh--c003", "offboard-staff-zh--c000", "shipping-priority-en--c000", "shipping-overseas-zh--c000", "notify-routine-zh--c000", "offboard-staff-en--c001", "notify-routine-en--c000", "restore-guide-en--c014", "restore-guide-en--c012", "purchase-software-en--c000", "lost-token-en--c000", "offboard-contractor-zh--c000", "offboard-staff-en--c000", "remote-standard-zh--c000", "restore-guide-en--c011", "incident-degraded-en--c001", "cert-agent-en--c001", "purchase-hardware-en--c001", "release-guide-zh--c004", "cert-gateway-en--c000", "export-admin-en--c000", "restore-guide-en--c003", "remote-standard-en--c000", "api-sandbox-zh--c000", "backup-dublin-en--c001", "restore-guide-en--c015", "lost-token-en--c001" ],
+      "BGE_M3_HYBRID" : [ "backup-dublin-en--c000", "backup-seattle-en--c000", "audit-us-en--c000", "incident-production-en--c000", "incident-degraded-en--c000", "audit-eu-en--c000", "incident-production-en--c001", "audit-production-zh--c000", "restore-guide-en--c016", "restore-guide-en--c006", "incident-production-zh--c000", "restore-guide-en--c010", "backup-dublin-en--c001", "notify-routine-en--c000", "offboard-staff-en--c000", "cert-agent-en--c001", "backup-hangzhou-zh--c000", "backup-shanghai-zh--c000", "restore-guide-en--c000", "travel-sales-en--c000", "api-production-zh--c000", "restore-guide-en--c017", "audit-test-zh--c000", "cert-server-zh--c000", "shipping-local-zh--c000", "remote-exception-en--c000", "restore-guide-en--c004", "shipping-priority-en--c001", "restore-guide-en--c008", "offboard-partner-en--c000" ],
+      "KEYWORD_REFERENCE" : [ "backup-dublin-en--c000", "backup-seattle-en--c000", "incident-production-en--c000", "audit-us-en--c000", "incident-production-en--c001", "incident-degraded-en--c000", "restore-guide-en--c000", "backup-dublin-en--c001", "travel-sales-en--c000", "api-production-zh--c000", "incident-production-zh--c000", "audit-production-zh--c000", "restore-guide-en--c006", "offboard-staff-en--c000", "audit-eu-en--c000", "restore-guide-en--c016", "cert-agent-en--c001", "notify-routine-en--c000", "restore-guide-en--c004", "restore-guide-en--c008", "restore-guide-en--c010" ]
+    },
+    "historicalVectorOrderMatches" : true,
+    "historicalVectorTop50Overlap" : 1.0,
+    "historicalVectorMetrics" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "e07",
+    "category" : "semantic",
+    "language" : "zh",
+    "scores" : {
+      "CURRENT_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "CURRENT_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "KEYWORD_REFERENCE" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "rankings" : {
+      "CURRENT_VECTOR" : [ "remote-standard-zh--c000", "remote-exception-zh--c000", "access-visitor-zh--c000", "access-contractor-zh--c000", "offboard-staff-zh--c000", "notify-routine-zh--c000", "expense-deadline-zh--c000", "notify-urgent-zh--c000", "purchase-large-zh--c000", "audit-production-zh--c000", "offboard-contractor-zh--c000", "audit-test-zh--c000", "shipping-local-zh--c000", "travel-domestic-zh--c000", "purchase-small-zh--c000", "backup-shanghai-zh--c000", "export-admin-zh--c000", "export-member-zh--c000", "cert-server-zh--c000", "backup-hangzhou-zh--c000", "lost-laptop-zh--c000", "shipping-overseas-zh--c000", "lost-phone-zh--c000", "remote-standard-en--c000", "api-sandbox-zh--c000", "release-guide-zh--c000", "travel-international-zh--c000", "expense-receipt-zh--c000", "cert-client-zh--c000", "api-production-zh--c000", "incident-production-zh--c000", "remote-exception-en--c000", "release-guide-zh--c003", "release-guide-zh--c001", "backup-dublin-en--c001", "backup-seattle-en--c000", "expense-deadline-en--c000", "release-guide-zh--c002", "offboard-staff-en--c000", "shipping-return-en--c001", "cert-gateway-en--c000", "backup-dublin-en--c000", "release-guide-zh--c004", "shipping-priority-en--c000", "incident-test-zh--c000", "travel-engineering-en--c000", "access-visitor-en--c000", "notify-routine-en--c000", "access-staff-en--c000", "relay-v3-zh--c000" ],
+      "CURRENT_HYBRID" : [ "remote-standard-zh--c000", "access-visitor-zh--c000", "remote-exception-zh--c000", "access-contractor-zh--c000", "offboard-staff-zh--c000", "purchase-large-zh--c000", "notify-routine-zh--c000", "expense-deadline-zh--c000", "purchase-small-zh--c000", "offboard-contractor-zh--c000", "notify-urgent-zh--c000", "shipping-local-zh--c000", "travel-domestic-zh--c000", "export-member-zh--c000", "lost-laptop-zh--c000", "lost-phone-zh--c000", "export-admin-zh--c000", "expense-receipt-zh--c000", "travel-international-zh--c000", "release-guide-zh--c000", "incident-production-zh--c000", "audit-production-zh--c000", "audit-test-zh--c000", "backup-shanghai-zh--c000", "cert-server-zh--c000", "backup-hangzhou-zh--c000", "shipping-overseas-zh--c000", "remote-standard-en--c000", "api-sandbox-zh--c000", "cert-client-zh--c000" ],
+      "BGE_M3_VECTOR" : [ "remote-standard-zh--c000", "remote-exception-zh--c000", "backup-dublin-en--c001", "remote-standard-en--c000", "access-contractor-zh--c000", "access-visitor-zh--c000", "remote-exception-en--c000", "notify-routine-zh--c000", "offboard-staff-zh--c000", "backup-shanghai-zh--c000", "travel-domestic-zh--c000", "purchase-small-zh--c000", "expense-deadline-zh--c000", "purchase-large-zh--c000", "offboard-contractor-zh--c000", "travel-international-zh--c000", "export-member-zh--c000", "lost-phone-zh--c000", "export-admin-zh--c000", "backup-hangzhou-zh--c000", "notify-urgent-zh--c000", "shipping-local-zh--c000", "access-staff-en--c001", "shipping-overseas-zh--c000", "lost-laptop-zh--c000", "audit-production-zh--c000", "backup-seattle-en--c000", "audit-test-zh--c000", "travel-engineering-en--c000", "incident-production-zh--c000", "shipping-priority-en--c001", "api-sandbox-zh--c000", "api-production-zh--c000", "notify-urgent-en--c001", "lost-token-en--c001", "backup-dublin-en--c000", "shipping-priority-en--c000", "access-staff-en--c000", "expense-receipt-zh--c000", "export-analyst-en--c000", "billing-v1-en--c000", "restore-guide-en--c011", "travel-sales-en--c000", "audit-us-en--c000", "cert-server-zh--c000", "billing-v2-en--c000", "audit-eu-en--c000", "release-guide-zh--c003", "offboard-staff-en--c001", "restore-guide-en--c002" ],
+      "BGE_M3_HYBRID" : [ "remote-standard-zh--c000", "access-visitor-zh--c000", "remote-exception-zh--c000", "access-contractor-zh--c000", "offboard-staff-zh--c000", "purchase-small-zh--c000", "notify-routine-zh--c000", "purchase-large-zh--c000", "expense-deadline-zh--c000", "offboard-contractor-zh--c000", "travel-domestic-zh--c000", "lost-phone-zh--c000", "export-member-zh--c000", "travel-international-zh--c000", "notify-urgent-zh--c000", "lost-laptop-zh--c000", "shipping-local-zh--c000", "export-admin-zh--c000", "expense-receipt-zh--c000", "incident-production-zh--c000", "backup-dublin-en--c001", "remote-standard-en--c000", "remote-exception-en--c000", "backup-shanghai-zh--c000", "backup-hangzhou-zh--c000", "release-guide-zh--c000", "access-staff-en--c001", "shipping-overseas-zh--c000", "audit-production-zh--c000", "backup-seattle-en--c000" ],
+      "KEYWORD_REFERENCE" : [ "remote-standard-zh--c000", "access-visitor-zh--c000", "purchase-small-zh--c000", "purchase-large-zh--c000", "offboard-staff-zh--c000", "access-contractor-zh--c000", "remote-exception-zh--c000", "notify-routine-zh--c000", "expense-deadline-zh--c000", "offboard-contractor-zh--c000", "lost-phone-zh--c000", "lost-laptop-zh--c000", "expense-receipt-zh--c000", "export-member-zh--c000", "notify-urgent-zh--c000", "shipping-local-zh--c000", "travel-international-zh--c000", "travel-domestic-zh--c000", "export-admin-zh--c000", "incident-production-zh--c000", "release-guide-zh--c000" ]
+    },
+    "historicalVectorOrderMatches" : true,
+    "historicalVectorTop50Overlap" : 1.0,
+    "historicalVectorMetrics" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "e08",
+    "category" : "semantic",
+    "language" : "en",
+    "scores" : {
+      "CURRENT_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.5,
+          "ndcg" : 0.6309297535714574
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "CURRENT_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.3333333333333333,
+          "ndcg" : 0.5
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "KEYWORD_REFERENCE" : {
+        "metrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 0.0,
+        "allFacts5" : null
+      }
+    },
+    "rankings" : {
+      "CURRENT_VECTOR" : [ "remote-standard-en--c000", "remote-exception-en--c000", "expense-deadline-en--c000", "incident-degraded-en--c000", "shipping-priority-en--c000", "notify-routine-en--c000", "access-staff-en--c001", "travel-engineering-en--c000", "shipping-return-en--c001", "access-visitor-en--c000", "expense-receipt-en--c000", "restore-guide-en--c013", "notify-urgent-en--c000", "restore-guide-en--c001", "access-staff-en--c000", "restore-guide-en--c011", "travel-sales-en--c000", "access-visitor-en--c001", "notify-urgent-en--c001", "restore-guide-en--c017", "offboard-staff-en--c000", "purchase-hardware-en--c000", "lost-laptop-en--c000", "lost-token-en--c000", "incident-production-en--c000", "cert-agent-en--c001", "export-admin-en--c000", "cert-gateway-en--c001", "cert-agent-en--c000", "shipping-priority-en--c001", "restore-guide-en--c009", "backup-seattle-en--c000", "restore-guide-en--c004", "purchase-software-en--c000", "export-analyst-en--c000", "cert-gateway-en--c000", "restore-guide-en--c007", "restore-guide-en--c005", "restore-guide-en--c015", "travel-engineering-en--c001", "restore-guide-en--c002", "offboard-staff-en--c001", "backup-dublin-en--c000", "notify-routine-en--c001", "audit-eu-en--c000", "purchase-software-en--c001", "backup-dublin-en--c001", "shipping-return-en--c000", "restore-guide-en--c008", "restore-guide-en--c016" ],
+      "CURRENT_HYBRID" : [ "notify-routine-en--c000", "remote-standard-en--c000", "remote-exception-en--c000", "travel-engineering-en--c000", "restore-guide-en--c011", "offboard-staff-en--c000", "expense-deadline-en--c000", "shipping-priority-en--c000", "lost-laptop-en--c000", "notify-urgent-en--c001", "purchase-hardware-en--c000", "access-visitor-en--c000", "restore-guide-en--c009", "notify-urgent-en--c000", "expense-receipt-en--c000", "incident-degraded-en--c000", "restore-guide-en--c002", "access-staff-en--c000", "restore-guide-en--c004", "restore-guide-en--c017", "export-admin-en--c000", "incident-production-en--c000", "lost-token-en--c000", "restore-guide-en--c015", "purchase-software-en--c000", "cert-agent-en--c001", "shipping-return-en--c000", "export-analyst-en--c000", "access-staff-en--c001", "relay-gateway-en--c000" ],
+      "BGE_M3_VECTOR" : [ "remote-exception-en--c000", "remote-standard-en--c000", "remote-exception-zh--c000", "access-visitor-en--c000", "backup-dublin-en--c001", "access-staff-en--c000", "shipping-return-en--c000", "expense-deadline-en--c000", "export-analyst-en--c000", "shipping-priority-en--c000", "export-admin-en--c000", "purchase-software-en--c000", "access-staff-en--c001", "purchase-hardware-en--c000", "access-visitor-zh--c000", "expense-receipt-en--c000", "offboard-staff-en--c000", "remote-standard-zh--c000", "access-contractor-zh--c000", "access-visitor-en--c001", "travel-engineering-en--c001", "restore-guide-en--c004", "purchase-software-en--c001", "notify-urgent-en--c000", "offboard-contractor-zh--c000", "incident-production-en--c001", "lost-laptop-en--c000", "notify-routine-en--c000", "lost-token-en--c000", "shipping-priority-en--c001", "restore-guide-en--c002", "offboard-staff-zh--c000", "restore-guide-en--c011", "notify-routine-en--c001", "restore-guide-en--c010", "incident-degraded-en--c000", "incident-production-en--c000", "billing-v1-en--c000", "purchase-hardware-en--c001", "lost-token-en--c001", "restore-guide-en--c003", "export-admin-zh--c000", "shipping-overseas-zh--c000", "shipping-local-zh--c000", "travel-engineering-en--c000", "release-guide-zh--c000", "travel-domestic-zh--c000", "restore-guide-en--c005", "release-guide-zh--c002", "export-member-zh--c000" ],
+      "BGE_M3_HYBRID" : [ "remote-exception-en--c000", "remote-standard-en--c000", "offboard-staff-en--c000", "purchase-hardware-en--c000", "access-visitor-en--c000", "notify-routine-en--c000", "shipping-return-en--c000", "lost-laptop-en--c000", "expense-deadline-en--c000", "shipping-priority-en--c000", "access-staff-en--c000", "restore-guide-en--c011", "export-admin-en--c000", "restore-guide-en--c002", "export-analyst-en--c000", "restore-guide-en--c004", "expense-receipt-en--c000", "purchase-software-en--c000", "notify-urgent-en--c000", "travel-engineering-en--c000", "lost-token-en--c000", "incident-production-en--c000", "restore-guide-en--c003", "incident-degraded-en--c000", "restore-guide-en--c009", "remote-exception-zh--c000", "backup-dublin-en--c001", "notify-urgent-en--c001", "relay-gateway-en--c000", "restore-guide-en--c006" ],
+      "KEYWORD_REFERENCE" : [ "notify-routine-en--c000", "restore-guide-en--c009", "offboard-staff-en--c000", "lost-laptop-en--c000", "restore-guide-en--c011", "purchase-hardware-en--c000", "restore-guide-en--c002", "notify-urgent-en--c001", "relay-gateway-en--c000", "travel-engineering-en--c000", "restore-guide-en--c006", "remote-standard-en--c000", "remote-exception-en--c000", "restore-guide-en--c004", "restore-guide-en--c012", "notify-urgent-en--c000", "access-visitor-en--c000", "shipping-return-en--c000", "restore-guide-en--c015", "expense-receipt-en--c000", "shipping-priority-en--c000", "audit-us-en--c000", "expense-deadline-en--c000", "export-admin-en--c000", "purchase-software-en--c000", "incident-production-en--c000", "restore-guide-en--c003", "lost-token-en--c000", "export-analyst-en--c000", "access-staff-en--c000", "restore-guide-en--c017", "incident-degraded-en--c000", "cert-agent-en--c001" ]
+    },
+    "historicalVectorOrderMatches" : true,
+    "historicalVectorTop50Overlap" : 1.0,
+    "historicalVectorMetrics" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 0.5,
+      "ndcg" : 0.6309297535714574
+    }
+  }, {
+    "id" : "e09",
+    "category" : "semantic",
+    "language" : "zh",
+    "scores" : {
+      "CURRENT_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "CURRENT_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "KEYWORD_REFERENCE" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "rankings" : {
+      "CURRENT_VECTOR" : [ "lost-laptop-zh--c000", "offboard-staff-zh--c000", "notify-routine-zh--c000", "lost-phone-zh--c000", "notify-urgent-zh--c000", "offboard-contractor-zh--c000", "access-visitor-zh--c000", "incident-production-zh--c000", "expense-receipt-zh--c000", "backup-shanghai-zh--c000", "remote-exception-zh--c000", "remote-standard-zh--c000", "shipping-local-zh--c000", "release-guide-zh--c003", "purchase-large-zh--c000", "export-admin-zh--c000", "expense-deadline-zh--c000", "release-guide-zh--c004", "audit-production-zh--c000", "backup-hangzhou-zh--c000", "audit-test-zh--c000", "cert-server-zh--c000", "release-guide-zh--c002", "purchase-small-zh--c000", "shipping-overseas-zh--c000", "export-member-zh--c000", "release-guide-zh--c000", "relay-v2-zh--c000", "incident-degraded-en--c000", "cert-agent-en--c001", "offboard-staff-en--c000", "relay-v3-zh--c000", "incident-test-zh--c000", "cert-client-zh--c000", "access-contractor-zh--c000", "backup-dublin-en--c001", "lost-laptop-en--c000", "cert-agent-en--c000", "access-visitor-en--c001", "restore-guide-en--c002", "backup-dublin-en--c000", "restore-guide-en--c000", "notify-routine-en--c000", "notify-urgent-en--c000", "release-guide-zh--c001", "incident-production-en--c001", "restore-guide-en--c003", "remote-standard-en--c000", "purchase-software-en--c000", "backup-seattle-en--c000" ],
+      "CURRENT_HYBRID" : [ "lost-laptop-zh--c000", "offboard-staff-zh--c000", "lost-phone-zh--c000", "offboard-contractor-zh--c000", "access-visitor-zh--c000", "notify-routine-zh--c000", "remote-standard-zh--c000", "remote-exception-zh--c000", "expense-receipt-zh--c000", "notify-urgent-zh--c000", "expense-deadline-zh--c000", "incident-production-zh--c000", "shipping-local-zh--c000", "export-admin-zh--c000", "release-guide-zh--c002", "cert-server-zh--c000", "purchase-large-zh--c000", "release-guide-zh--c003", "export-member-zh--c000", "purchase-small-zh--c000", "relay-v3-zh--c000", "release-guide-zh--c000", "access-contractor-zh--c000", "travel-international-zh--c000", "travel-domestic-zh--c000", "backup-shanghai-zh--c000", "release-guide-zh--c004", "audit-production-zh--c000", "backup-hangzhou-zh--c000", "audit-test-zh--c000" ],
+      "BGE_M3_VECTOR" : [ "lost-laptop-zh--c000", "lost-phone-zh--c000", "notify-routine-zh--c000", "remote-standard-zh--c000", "offboard-staff-zh--c000", "offboard-contractor-zh--c000", "access-visitor-zh--c000", "remote-exception-zh--c000", "shipping-local-zh--c000", "lost-laptop-en--c000", "backup-dublin-en--c001", "incident-production-zh--c000", "backup-shanghai-zh--c000", "expense-deadline-zh--c000", "notify-urgent-zh--c000", "purchase-large-zh--c000", "purchase-small-zh--c000", "lost-token-en--c000", "shipping-overseas-zh--c000", "lost-token-en--c001", "access-contractor-zh--c000", "backup-hangzhou-zh--c000", "notify-urgent-en--c001", "expense-receipt-zh--c000", "restore-guide-en--c002", "travel-domestic-zh--c000", "audit-production-zh--c000", "relay-v3-zh--c000", "export-admin-zh--c000", "notify-routine-en--c000", "restore-guide-en--c010", "export-member-zh--c000", "relay-agent-en--c000", "access-staff-en--c001", "access-visitor-en--c001", "release-guide-zh--c000", "remote-exception-en--c000", "travel-international-zh--c000", "incident-production-en--c000", "offboard-staff-en--c000", "cert-server-zh--c000", "release-guide-zh--c004", "relay-v2-zh--c000", "notify-routine-en--c001", "incident-production-en--c001", "restore-guide-en--c003", "backup-seattle-en--c000", "access-staff-en--c000", "audit-test-zh--c000", "restore-guide-en--c012" ],
+      "BGE_M3_HYBRID" : [ "lost-laptop-zh--c000", "lost-phone-zh--c000", "offboard-staff-zh--c000", "remote-standard-zh--c000", "offboard-contractor-zh--c000", "access-visitor-zh--c000", "notify-routine-zh--c000", "remote-exception-zh--c000", "expense-deadline-zh--c000", "shipping-local-zh--c000", "travel-domestic-zh--c000", "notify-urgent-zh--c000", "incident-production-zh--c000", "expense-receipt-zh--c000", "purchase-large-zh--c000", "purchase-small-zh--c000", "travel-international-zh--c000", "relay-v3-zh--c000", "access-contractor-zh--c000", "export-member-zh--c000", "export-admin-zh--c000", "cert-server-zh--c000", "release-guide-zh--c000", "lost-laptop-en--c000", "backup-dublin-en--c001", "backup-shanghai-zh--c000", "release-guide-zh--c002", "lost-token-en--c000", "shipping-overseas-zh--c000", "lost-token-en--c001" ],
+      "KEYWORD_REFERENCE" : [ "lost-laptop-zh--c000", "lost-phone-zh--c000", "offboard-staff-zh--c000", "offboard-contractor-zh--c000", "access-visitor-zh--c000", "remote-standard-zh--c000", "travel-international-zh--c000", "travel-domestic-zh--c000", "remote-exception-zh--c000", "notify-routine-zh--c000", "expense-deadline-zh--c000", "expense-receipt-zh--c000", "release-guide-zh--c002", "cert-server-zh--c000", "relay-v3-zh--c000", "export-member-zh--c000", "notify-urgent-zh--c000", "shipping-local-zh--c000", "export-admin-zh--c000", "purchase-small-zh--c000", "purchase-large-zh--c000", "access-contractor-zh--c000", "incident-production-zh--c000", "release-guide-zh--c003", "release-guide-zh--c000" ]
+    },
+    "historicalVectorOrderMatches" : true,
+    "historicalVectorTop50Overlap" : 1.0,
+    "historicalVectorMetrics" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "e10",
+    "category" : "semantic",
+    "language" : "en",
+    "scores" : {
+      "CURRENT_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.5,
+          "ndcg" : 0.6309297535714574
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "CURRENT_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "KEYWORD_REFERENCE" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "rankings" : {
+      "CURRENT_VECTOR" : [ "expense-deadline-en--c000", "expense-receipt-en--c000", "restore-guide-en--c015", "offboard-staff-en--c000", "notify-urgent-en--c001", "access-visitor-en--c001", "access-visitor-en--c000", "access-staff-en--c001", "notify-urgent-en--c000", "restore-guide-en--c017", "shipping-return-en--c000", "restore-guide-en--c013", "shipping-priority-en--c000", "offboard-partner-en--c000", "purchase-software-en--c000", "export-analyst-en--c000", "purchase-hardware-en--c000", "remote-standard-en--c000", "travel-sales-en--c000", "lost-laptop-en--c000", "lost-token-en--c000", "restore-guide-en--c009", "purchase-software-en--c001", "travel-engineering-en--c000", "restore-guide-en--c016", "audit-eu-en--c000", "cert-gateway-en--c001", "restore-guide-en--c004", "billing-v2-en--c000", "restore-guide-en--c008", "remote-exception-en--c000", "restore-guide-en--c000", "restore-guide-en--c005", "notify-routine-en--c001", "backup-seattle-en--c000", "incident-degraded-en--c000", "access-staff-en--c000", "incident-production-en--c000", "restore-guide-en--c002", "audit-us-en--c000", "export-admin-en--c000", "shipping-priority-en--c001", "restore-guide-en--c003", "lost-token-en--c001", "cert-agent-en--c001", "notify-routine-en--c000", "cert-gateway-en--c000", "billing-v1-en--c000", "shipping-return-en--c001", "offboard-partner-en--c001" ],
+      "CURRENT_HYBRID" : [ "expense-receipt-en--c000", "expense-deadline-en--c000", "shipping-return-en--c000", "offboard-staff-en--c000", "access-visitor-en--c000", "notify-urgent-en--c000", "export-analyst-en--c000", "shipping-priority-en--c000", "travel-engineering-en--c000", "purchase-software-en--c000", "remote-exception-en--c000", "lost-laptop-en--c000", "purchase-hardware-en--c000", "lost-token-en--c000", "remote-standard-en--c000", "travel-sales-en--c000", "shipping-return-en--c001", "notify-routine-en--c000", "export-admin-en--c000", "incident-production-en--c000", "access-staff-en--c000", "incident-degraded-en--c000", "restore-guide-en--c015", "notify-urgent-en--c001", "access-visitor-en--c001", "expense-receipt-zh--c000", "access-staff-en--c001", "expense-deadline-zh--c000", "restore-guide-en--c017", "restore-guide-en--c013" ],
+      "BGE_M3_VECTOR" : [ "expense-receipt-en--c000", "shipping-return-en--c000", "expense-deadline-en--c000", "access-visitor-en--c000", "purchase-hardware-en--c000", "access-staff-en--c000", "lost-token-en--c000", "shipping-return-en--c001", "export-analyst-en--c000", "purchase-software-en--c000", "shipping-priority-en--c000", "expense-receipt-zh--c000", "export-admin-en--c000", "restore-guide-en--c003", "notify-routine-en--c001", "remote-exception-en--c000", "offboard-staff-en--c000", "purchase-software-en--c001", "notify-urgent-en--c000", "restore-guide-en--c015", "incident-production-en--c001", "access-staff-en--c001", "notify-routine-en--c000", "lost-laptop-en--c000", "lost-token-en--c001", "remote-standard-en--c000", "travel-engineering-en--c000", "access-visitor-en--c001", "incident-production-en--c000", "backup-dublin-en--c001", "billing-v1-en--c000", "restore-guide-en--c005", "travel-international-zh--c000", "restore-guide-en--c017", "travel-sales-en--c000", "incident-degraded-en--c000", "restore-guide-en--c001", "restore-guide-en--c002", "cert-gateway-en--c001", "travel-domestic-zh--c000", "restore-guide-en--c007", "restore-guide-en--c008", "travel-engineering-en--c001", "release-guide-zh--c004", "restore-guide-en--c006", "restore-guide-en--c016", "purchase-hardware-en--c001", "restore-guide-en--c009", "api-production-zh--c000", "backup-dublin-en--c000" ],
+      "BGE_M3_HYBRID" : [ "expense-receipt-en--c000", "expense-deadline-en--c000", "shipping-return-en--c000", "export-analyst-en--c000", "access-visitor-en--c000", "shipping-return-en--c001", "expense-receipt-zh--c000", "remote-exception-en--c000", "shipping-priority-en--c000", "purchase-hardware-en--c000", "access-staff-en--c000", "lost-token-en--c000", "purchase-software-en--c000", "notify-urgent-en--c000", "travel-engineering-en--c000", "export-admin-en--c000", "offboard-staff-en--c000", "notify-routine-en--c000", "lost-laptop-en--c000", "incident-production-en--c000", "remote-standard-en--c000", "incident-degraded-en--c000", "travel-sales-en--c000", "expense-deadline-zh--c000", "restore-guide-en--c003", "notify-routine-en--c001", "purchase-software-en--c001", "restore-guide-en--c015", "incident-production-en--c001", "access-staff-en--c001" ],
+      "KEYWORD_REFERENCE" : [ "expense-receipt-en--c000", "expense-deadline-en--c000", "shipping-return-en--c000", "export-analyst-en--c000", "travel-engineering-en--c000", "remote-exception-en--c000", "expense-receipt-zh--c000", "expense-deadline-zh--c000", "notify-urgent-en--c000", "shipping-return-en--c001", "access-visitor-en--c000", "shipping-priority-en--c000", "notify-routine-en--c000", "offboard-staff-en--c000", "lost-laptop-en--c000", "export-admin-en--c000", "purchase-software-en--c000", "incident-production-en--c000", "lost-token-en--c000", "access-staff-en--c000", "purchase-hardware-en--c000", "incident-degraded-en--c000", "remote-standard-en--c000", "travel-sales-en--c000", "restore-guide-en--c010" ]
+    },
+    "historicalVectorOrderMatches" : true,
+    "historicalVectorTop50Overlap" : 1.0,
+    "historicalVectorMetrics" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 0.5,
+      "ndcg" : 0.6309297535714574
+    }
+  }, {
+    "id" : "e11",
+    "category" : "semantic",
+    "language" : "zh",
+    "scores" : {
+      "CURRENT_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "CURRENT_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "KEYWORD_REFERENCE" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "rankings" : {
+      "CURRENT_VECTOR" : [ "access-visitor-zh--c000", "access-contractor-zh--c000", "remote-exception-zh--c000", "remote-standard-zh--c000", "offboard-contractor-zh--c000", "offboard-staff-zh--c000", "travel-domestic-zh--c000", "notify-routine-zh--c000", "lost-phone-zh--c000", "expense-deadline-zh--c000", "shipping-local-zh--c000", "notify-urgent-zh--c000", "lost-laptop-zh--c000", "cert-server-zh--c000", "expense-receipt-zh--c000", "purchase-large-zh--c000", "travel-international-zh--c000", "cert-client-zh--c000", "shipping-overseas-zh--c000", "backup-shanghai-zh--c000", "export-admin-zh--c000", "purchase-small-zh--c000", "release-guide-zh--c000", "release-guide-zh--c003", "backup-hangzhou-zh--c000", "export-member-zh--c000", "api-sandbox-zh--c000", "release-guide-zh--c004", "backup-dublin-en--c001", "release-guide-zh--c001", "remote-standard-en--c000", "audit-production-zh--c000", "incident-production-zh--c000", "access-visitor-en--c000", "backup-seattle-en--c000", "offboard-staff-en--c000", "api-production-zh--c000", "release-guide-zh--c002", "audit-test-zh--c000", "expense-deadline-en--c000", "remote-exception-en--c000", "notify-urgent-en--c001", "relay-v3-zh--c000", "backup-dublin-en--c000", "restore-guide-en--c015", "travel-sales-en--c000", "travel-engineering-en--c000", "shipping-priority-en--c000", "access-staff-en--c000", "audit-eu-en--c000" ],
+      "CURRENT_HYBRID" : [ "access-visitor-zh--c000", "access-contractor-zh--c000", "remote-standard-zh--c000", "offboard-contractor-zh--c000", "remote-exception-zh--c000", "purchase-large-zh--c000", "lost-phone-zh--c000", "shipping-local-zh--c000", "purchase-small-zh--c000", "expense-deadline-zh--c000", "cert-client-zh--c000", "offboard-staff-zh--c000", "backup-shanghai-zh--c000", "notify-urgent-zh--c000", "release-guide-zh--c003", "notify-routine-zh--c000", "travel-domestic-zh--c000", "release-guide-zh--c001", "release-guide-zh--c000", "export-member-zh--c000", "lost-laptop-zh--c000", "travel-international-zh--c000", "api-sandbox-zh--c000", "expense-receipt-zh--c000", "backup-hangzhou-zh--c000", "release-guide-zh--c004", "incident-production-zh--c000", "export-admin-zh--c000", "audit-production-zh--c000", "release-guide-zh--c002" ],
+      "BGE_M3_VECTOR" : [ "access-visitor-zh--c000", "access-contractor-zh--c000", "remote-standard-zh--c000", "remote-exception-zh--c000", "backup-dublin-en--c001", "access-visitor-en--c000", "access-staff-en--c000", "export-member-zh--c000", "export-admin-zh--c000", "purchase-small-zh--c000", "offboard-staff-zh--c000", "travel-domestic-zh--c000", "purchase-large-zh--c000", "travel-international-zh--c000", "access-staff-en--c001", "shipping-local-zh--c000", "access-visitor-en--c001", "offboard-contractor-zh--c000", "notify-urgent-zh--c000", "lost-phone-zh--c000", "travel-engineering-en--c001", "lost-token-en--c001", "notify-routine-zh--c000", "backup-shanghai-zh--c000", "lost-laptop-zh--c000", "restore-guide-en--c002", "remote-standard-en--c000", "shipping-overseas-zh--c000", "remote-exception-en--c000", "purchase-hardware-en--c001", "cert-client-zh--c000", "billing-v1-en--c000", "incident-production-zh--c000", "api-sandbox-zh--c000", "expense-deadline-zh--c000", "restore-guide-en--c011", "restore-guide-en--c004", "travel-engineering-en--c000", "release-guide-zh--c001", "offboard-partner-en--c000", "notify-routine-en--c001", "api-production-zh--c000", "cert-agent-en--c001", "travel-sales-en--c000", "release-guide-zh--c000", "backup-hangzhou-zh--c000", "notify-urgent-en--c001", "restore-guide-en--c010", "billing-v2-en--c000", "incident-production-en--c001" ],
+      "BGE_M3_HYBRID" : [ "access-visitor-zh--c000", "access-contractor-zh--c000", "remote-standard-zh--c000", "purchase-small-zh--c000", "remote-exception-zh--c000", "purchase-large-zh--c000", "offboard-contractor-zh--c000", "export-member-zh--c000", "shipping-local-zh--c000", "backup-shanghai-zh--c000", "lost-phone-zh--c000", "offboard-staff-zh--c000", "notify-urgent-zh--c000", "export-admin-zh--c000", "cert-client-zh--c000", "travel-domestic-zh--c000", "travel-international-zh--c000", "release-guide-zh--c001", "expense-deadline-zh--c000", "incident-production-zh--c000", "notify-routine-zh--c000", "api-sandbox-zh--c000", "release-guide-zh--c000", "lost-laptop-zh--c000", "backup-hangzhou-zh--c000", "api-production-zh--c000", "backup-dublin-en--c001", "access-visitor-en--c000", "access-staff-en--c000", "release-guide-zh--c003" ],
+      "KEYWORD_REFERENCE" : [ "access-visitor-zh--c000", "access-contractor-zh--c000", "purchase-small-zh--c000", "purchase-large-zh--c000", "remote-standard-zh--c000", "offboard-contractor-zh--c000", "release-guide-zh--c003", "release-guide-zh--c001", "backup-shanghai-zh--c000", "cert-client-zh--c000", "shipping-local-zh--c000", "remote-exception-zh--c000", "lost-phone-zh--c000", "expense-deadline-zh--c000", "release-guide-zh--c000", "export-member-zh--c000", "notify-urgent-zh--c000", "incident-production-zh--c000", "api-sandbox-zh--c000", "incident-test-zh--c000", "release-guide-zh--c004", "release-guide-zh--c002", "backup-hangzhou-zh--c000", "offboard-staff-zh--c000", "audit-test-zh--c000", "audit-production-zh--c000", "notify-routine-zh--c000", "travel-international-zh--c000", "travel-domestic-zh--c000", "api-production-zh--c000", "export-admin-zh--c000", "lost-laptop-zh--c000", "expense-receipt-zh--c000" ]
+    },
+    "historicalVectorOrderMatches" : true,
+    "historicalVectorTop50Overlap" : 1.0,
+    "historicalVectorMetrics" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "e12",
+    "category" : "semantic",
+    "language" : "en",
+    "scores" : {
+      "CURRENT_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.2,
+          "ndcg" : 0.38685280723454163
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "CURRENT_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.5,
+          "ndcg" : 0.6309297535714574
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "KEYWORD_REFERENCE" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "rankings" : {
+      "CURRENT_VECTOR" : [ "notify-urgent-en--c001", "notify-routine-en--c000", "incident-degraded-en--c000", "restore-guide-en--c004", "offboard-staff-en--c000", "notify-urgent-en--c000", "access-visitor-en--c000", "cert-agent-en--c001", "remote-standard-en--c000", "restore-guide-en--c002", "lost-laptop-en--c000", "restore-guide-en--c017", "access-staff-en--c000", "backup-seattle-en--c000", "restore-guide-en--c003", "incident-production-en--c001", "restore-guide-en--c013", "remote-exception-en--c000", "access-visitor-en--c001", "restore-guide-en--c000", "incident-production-en--c000", "restore-guide-en--c010", "restore-guide-en--c016", "lost-token-en--c000", "shipping-priority-en--c000", "expense-deadline-en--c000", "backup-dublin-en--c001", "restore-guide-en--c011", "cert-gateway-en--c000", "backup-dublin-en--c000", "restore-guide-en--c015", "cert-agent-en--c000", "offboard-partner-en--c000", "restore-guide-en--c008", "purchase-hardware-en--c000", "travel-engineering-en--c000", "expense-receipt-en--c000", "export-analyst-en--c000", "restore-guide-en--c014", "shipping-return-en--c001", "travel-sales-en--c000", "purchase-software-en--c000", "audit-us-en--c000", "audit-eu-en--c000", "access-staff-en--c001", "restore-guide-en--c012", "restore-guide-en--c005", "relay-agent-en--c000", "restore-guide-en--c006", "restore-guide-en--c007" ],
+      "CURRENT_HYBRID" : [ "notify-urgent-en--c001", "notify-routine-en--c000", "incident-degraded-en--c000", "access-staff-en--c000", "lost-laptop-en--c000", "restore-guide-en--c004", "remote-standard-en--c000", "remote-exception-en--c000", "offboard-staff-en--c000", "restore-guide-en--c013", "notify-urgent-en--c000", "backup-seattle-en--c000", "incident-production-en--c000", "access-visitor-en--c000", "restore-guide-en--c017", "restore-guide-en--c000", "access-visitor-en--c001", "cert-agent-en--c001", "export-analyst-en--c000", "incident-production-en--c001", "lost-token-en--c000", "restore-guide-en--c010", "backup-dublin-en--c000", "cert-gateway-en--c000", "shipping-priority-en--c000", "purchase-hardware-en--c000", "restore-guide-en--c014", "expense-deadline-en--c000", "expense-receipt-en--c000", "cert-agent-en--c000" ],
+      "BGE_M3_VECTOR" : [ "notify-urgent-en--c000", "notify-routine-en--c000", "remote-standard-en--c000", "shipping-priority-en--c000", "notify-urgent-en--c001", "access-staff-en--c000", "lost-token-en--c001", "remote-exception-en--c000", "incident-degraded-en--c000", "notify-routine-zh--c000", "lost-laptop-en--c000", "expense-deadline-en--c000", "notify-urgent-zh--c000", "access-visitor-en--c000", "offboard-staff-en--c000", "lost-token-en--c000", "incident-production-en--c000", "backup-dublin-en--c001", "shipping-return-en--c000", "offboard-staff-zh--c000", "access-visitor-zh--c000", "lost-phone-zh--c000", "remote-standard-zh--c000", "shipping-priority-en--c001", "purchase-hardware-en--c000", "backup-dublin-en--c000", "expense-receipt-en--c000", "relay-v3-zh--c000", "incident-production-en--c001", "access-contractor-zh--c000", "incident-production-zh--c000", "purchase-software-en--c000", "billing-v2-en--c000", "relay-v2-zh--c000", "export-analyst-en--c000", "offboard-contractor-zh--c000", "restore-guide-en--c005", "remote-exception-zh--c000", "export-admin-en--c000", "access-staff-en--c001", "shipping-overseas-zh--c000", "billing-v1-en--c000", "shipping-local-zh--c000", "restore-guide-en--c011", "relay-agent-en--c000", "lost-laptop-zh--c000", "restore-guide-en--c014", "restore-guide-en--c010", "incident-degraded-en--c001", "purchase-software-en--c001" ],
+      "BGE_M3_HYBRID" : [ "notify-routine-en--c000", "notify-urgent-en--c001", "access-staff-en--c000", "remote-standard-en--c000", "remote-exception-en--c000", "lost-laptop-en--c000", "incident-degraded-en--c000", "notify-urgent-en--c000", "shipping-return-en--c000", "incident-production-en--c000", "shipping-priority-en--c000", "offboard-staff-en--c000", "lost-token-en--c000", "export-analyst-en--c000", "billing-v2-en--c000", "access-visitor-en--c000", "expense-deadline-en--c000", "backup-dublin-en--c000", "purchase-hardware-en--c000", "export-admin-en--c000", "billing-v1-en--c000", "expense-receipt-en--c000", "incident-production-en--c001", "restore-guide-en--c014", "purchase-software-en--c000", "restore-guide-en--c010", "relay-agent-en--c000", "lost-token-en--c001", "restore-guide-en--c013", "notify-routine-zh--c000" ],
+      "KEYWORD_REFERENCE" : [ "notify-urgent-en--c001", "access-staff-en--c000", "notify-routine-en--c000", "lost-laptop-en--c000", "remote-exception-en--c000", "shipping-return-en--c000", "restore-guide-en--c013", "export-analyst-en--c000", "remote-standard-en--c000", "incident-degraded-en--c000", "restore-guide-en--c004", "billing-v2-en--c000", "incident-production-en--c000", "billing-v1-en--c000", "export-admin-en--c000", "restore-guide-en--c000", "backup-seattle-en--c000", "backup-dublin-en--c000", "offboard-staff-en--c000", "access-visitor-en--c001", "restore-guide-en--c014", "lost-token-en--c000", "purchase-hardware-en--c000", "restore-guide-en--c017", "restore-guide-en--c010", "notify-urgent-en--c000", "cert-gateway-en--c000", "restore-guide-en--c006", "incident-production-en--c001", "access-visitor-en--c000", "expense-receipt-en--c000", "shipping-priority-en--c000", "export-admin-en--c001", "expense-deadline-en--c000", "purchase-software-en--c000", "cert-agent-en--c001", "audit-us-en--c000", "restore-guide-en--c008", "restore-guide-en--c007", "cert-agent-en--c000", "offboard-partner-en--c000", "relay-gateway-en--c000", "travel-engineering-en--c000", "travel-sales-en--c000", "relay-agent-en--c000" ]
+    },
+    "historicalVectorOrderMatches" : true,
+    "historicalVectorTop50Overlap" : 1.0,
+    "historicalVectorMetrics" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "e13",
+    "category" : "cross-language",
+    "language" : "zh",
+    "scores" : {
+      "CURRENT_VECTOR" : {
+        "metrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 0.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "CURRENT_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.2,
+          "ndcg" : 0.38685280723454163
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "KEYWORD_REFERENCE" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.5,
+          "ndcg" : 0.6309297535714574
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "rankings" : {
+      "CURRENT_VECTOR" : [ "audit-test-zh--c000", "backup-shanghai-zh--c000", "shipping-overseas-zh--c000", "audit-production-zh--c000", "cert-server-zh--c000", "cert-client-zh--c000", "offboard-staff-zh--c000", "backup-hangzhou-zh--c000", "shipping-local-zh--c000", "backup-seattle-en--c000", "api-sandbox-zh--c000", "api-production-zh--c000", "release-guide-zh--c004", "notify-routine-zh--c000", "expense-deadline-zh--c000", "backup-dublin-en--c000", "export-member-zh--c000", "lost-laptop-zh--c000", "export-admin-zh--c000", "lost-phone-zh--c000", "remote-standard-zh--c000", "backup-dublin-en--c001", "offboard-contractor-zh--c000", "release-guide-zh--c003", "access-visitor-zh--c000", "release-guide-zh--c002", "release-guide-zh--c001", "access-contractor-zh--c000", "incident-production-zh--c000", "restore-guide-en--c016", "restore-guide-en--c010", "audit-eu-en--c000", "remote-exception-zh--c000", "cert-gateway-en--c000", "restore-guide-en--c000", "restore-guide-en--c002", "release-guide-zh--c000", "incident-production-en--c001", "cert-agent-en--c001", "relay-v2-zh--c000", "cert-agent-en--c000", "relay-v3-zh--c000", "audit-us-en--c000", "relay-agent-en--c000", "lost-laptop-en--c000", "notify-urgent-zh--c000", "billing-v2-en--c000", "expense-receipt-zh--c000", "offboard-staff-en--c000", "restore-guide-en--c004" ],
+      "CURRENT_HYBRID" : [ "audit-test-zh--c000", "backup-shanghai-zh--c000", "cert-client-zh--c000", "cert-server-zh--c000", "backup-seattle-en--c000", "backup-hangzhou-zh--c000", "audit-production-zh--c000", "release-guide-zh--c004", "shipping-local-zh--c000", "api-sandbox-zh--c000", "backup-dublin-en--c001", "backup-dublin-en--c000", "remote-standard-zh--c000", "export-admin-zh--c000", "notify-routine-zh--c000", "api-production-zh--c000", "release-guide-zh--c003", "incident-production-zh--c000", "export-member-zh--c000", "release-guide-zh--c000", "lost-phone-zh--c000", "release-guide-zh--c001", "release-guide-zh--c002", "offboard-contractor-zh--c000", "access-visitor-zh--c000", "notify-urgent-zh--c000", "access-contractor-zh--c000", "relay-v3-zh--c000", "shipping-overseas-zh--c000", "offboard-staff-zh--c000" ],
+      "BGE_M3_VECTOR" : [ "backup-seattle-en--c000", "backup-shanghai-zh--c000", "backup-dublin-en--c000", "audit-test-zh--c000", "audit-production-zh--c000", "backup-hangzhou-zh--c000", "cert-server-zh--c000", "backup-dublin-en--c001", "restore-guide-en--c016", "shipping-local-zh--c000", "shipping-overseas-zh--c000", "cert-client-zh--c000", "offboard-staff-zh--c000", "notify-routine-zh--c000", "api-sandbox-zh--c000", "audit-us-en--c000", "restore-guide-en--c017", "incident-production-zh--c000", "cert-agent-en--c001", "restore-guide-en--c010", "remote-exception-en--c000", "audit-eu-en--c000", "shipping-priority-en--c001", "offboard-contractor-zh--c000", "cert-gateway-en--c000", "remote-standard-zh--c000", "remote-exception-zh--c000", "incident-production-en--c001", "release-guide-zh--c003", "offboard-partner-en--c000", "restore-guide-en--c003", "notify-urgent-zh--c000", "export-member-zh--c000", "lost-phone-zh--c000", "access-contractor-zh--c000", "incident-degraded-en--c000", "lost-laptop-zh--c000", "restore-guide-en--c011", "release-guide-zh--c004", "restore-guide-en--c014", "billing-v1-en--c000", "billing-v2-en--c000", "api-production-zh--c000", "cert-agent-en--c000", "restore-guide-en--c008", "export-admin-zh--c000", "relay-v3-zh--c000", "relay-v2-zh--c000", "shipping-priority-en--c000", "restore-guide-en--c015" ],
+      "BGE_M3_HYBRID" : [ "backup-seattle-en--c000", "audit-test-zh--c000", "backup-shanghai-zh--c000", "cert-server-zh--c000", "backup-hangzhou-zh--c000", "cert-client-zh--c000", "audit-production-zh--c000", "backup-dublin-en--c001", "backup-dublin-en--c000", "shipping-local-zh--c000", "incident-production-zh--c000", "api-sandbox-zh--c000", "release-guide-zh--c004", "remote-standard-zh--c000", "notify-routine-zh--c000", "notify-urgent-zh--c000", "release-guide-zh--c003", "offboard-contractor-zh--c000", "lost-phone-zh--c000", "export-admin-zh--c000", "export-member-zh--c000", "access-contractor-zh--c000", "relay-v3-zh--c000", "api-production-zh--c000", "incident-test-zh--c000", "restore-guide-en--c016", "release-guide-zh--c000", "shipping-overseas-zh--c000", "offboard-staff-zh--c000", "audit-us-en--c000" ],
+      "KEYWORD_REFERENCE" : [ "audit-test-zh--c000", "backup-seattle-en--c000", "cert-client-zh--c000", "release-guide-zh--c004", "cert-server-zh--c000", "backup-hangzhou-zh--c000", "backup-shanghai-zh--c000", "backup-dublin-en--c001", "incident-test-zh--c000", "release-guide-zh--c000", "audit-production-zh--c000", "remote-standard-zh--c000", "notify-urgent-zh--c000", "incident-production-zh--c000", "backup-dublin-en--c000", "release-guide-zh--c003", "export-admin-zh--c000", "api-sandbox-zh--c000", "release-guide-zh--c001", "shipping-local-zh--c000", "purchase-small-zh--c000", "release-guide-zh--c002", "lost-phone-zh--c000", "notify-routine-zh--c000", "relay-v3-zh--c000", "export-member-zh--c000", "access-visitor-zh--c000", "api-production-zh--c000", "offboard-contractor-zh--c000", "purchase-large-zh--c000", "access-contractor-zh--c000" ]
+    },
+    "historicalVectorOrderMatches" : true,
+    "historicalVectorTop50Overlap" : 1.0,
+    "historicalVectorMetrics" : {
+      "hit" : 0.0,
+      "recall" : 0.0,
+      "mrr" : 0.0,
+      "ndcg" : 0.0
+    }
+  }, {
+    "id" : "e14",
+    "category" : "cross-language",
+    "language" : "en",
+    "scores" : {
+      "CURRENT_VECTOR" : {
+        "metrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "recall30" : 0.0,
+        "recall50" : 0.0,
+        "factCoverage5" : 0.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "CURRENT_HYBRID" : {
+        "metrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 0.0,
+        "allFacts5" : null
+      },
+      "BGE_M3_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      },
+      "KEYWORD_REFERENCE" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.5,
+          "ndcg" : 0.6309297535714574
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : null
+      }
+    },
+    "rankings" : {
+      "CURRENT_VECTOR" : [ "backup-seattle-en--c000", "backup-dublin-en--c000", "backup-dublin-en--c001", "restore-guide-en--c017", "restore-guide-en--c011", "notify-urgent-en--c001", "expense-deadline-en--c000", "restore-guide-en--c000", "restore-guide-en--c004", "restore-guide-en--c002", "notify-urgent-en--c000", "restore-guide-en--c008", "restore-guide-en--c012", "purchase-hardware-en--c000", "restore-guide-en--c010", "offboard-staff-en--c000", "notify-routine-en--c000", "lost-laptop-en--c000", "cert-agent-en--c001", "restore-guide-en--c007", "lost-token-en--c000", "purchase-software-en--c000", "relay-agent-en--c000", "remote-exception-en--c000", "shipping-priority-en--c000", "incident-degraded-en--c001", "access-staff-en--c000", "audit-eu-en--c000", "audit-us-en--c000", "export-analyst-en--c000", "access-visitor-en--c001", "expense-receipt-en--c000", "access-visitor-en--c000", "restore-guide-en--c013", "shipping-return-en--c000", "purchase-hardware-en--c001", "offboard-partner-en--c000", "remote-standard-en--c000", "restore-guide-en--c016", "incident-degraded-en--c000", "restore-guide-en--c015", "cert-gateway-en--c001", "lost-token-en--c001", "restore-guide-en--c003", "restore-guide-en--c005", "shipping-return-en--c001", "travel-engineering-en--c000", "travel-engineering-en--c001", "incident-production-en--c000", "export-admin-en--c000" ],
+      "CURRENT_HYBRID" : [ "backup-seattle-en--c000", "backup-dublin-en--c000", "restore-guide-en--c000", "lost-laptop-en--c000", "audit-us-en--c000", "access-staff-en--c000", "access-visitor-en--c000", "backup-shanghai-zh--c000", "backup-dublin-en--c001", "travel-sales-en--c000", "restore-guide-en--c017", "restore-guide-en--c011", "notify-urgent-en--c001", "expense-deadline-en--c000", "restore-guide-en--c004", "restore-guide-en--c002", "notify-urgent-en--c000", "restore-guide-en--c008", "restore-guide-en--c012", "purchase-hardware-en--c000", "restore-guide-en--c010", "offboard-staff-en--c000", "notify-routine-en--c000", "cert-agent-en--c001", "restore-guide-en--c007", "lost-token-en--c000", "purchase-software-en--c000", "relay-agent-en--c000", "remote-exception-en--c000", "shipping-priority-en--c000" ],
+      "BGE_M3_VECTOR" : [ "backup-shanghai-zh--c000", "backup-seattle-en--c000", "backup-hangzhou-zh--c000", "backup-dublin-en--c000", "audit-production-zh--c000", "audit-test-zh--c000", "cert-server-zh--c000", "shipping-local-zh--c000", "restore-guide-en--c016", "audit-us-en--c000", "cert-client-zh--c000", "shipping-overseas-zh--c000", "notify-routine-zh--c000", "restore-guide-en--c017", "lost-phone-zh--c000", "audit-eu-en--c000", "remote-exception-zh--c000", "access-contractor-zh--c000", "incident-production-zh--c000", "offboard-staff-zh--c000", "remote-standard-zh--c000", "remote-exception-en--c000", "lost-laptop-zh--c000", "backup-dublin-en--c001", "restore-guide-en--c010", "offboard-contractor-zh--c000", "release-guide-zh--c003", "restore-guide-en--c006", "cert-agent-en--c001", "api-sandbox-zh--c000", "offboard-partner-en--c000", "restore-guide-en--c003", "restore-guide-en--c011", "access-visitor-zh--c000", "incident-production-en--c001", "restore-guide-en--c012", "cert-gateway-en--c000", "notify-urgent-zh--c000", "incident-degraded-en--c000", "shipping-priority-en--c001", "restore-guide-en--c000", "release-guide-zh--c004", "purchase-hardware-en--c001", "restore-guide-en--c002", "purchase-large-zh--c000", "expense-deadline-zh--c000", "incident-production-en--c000", "purchase-small-zh--c000", "cert-agent-en--c000", "relay-v2-zh--c000" ],
+      "BGE_M3_HYBRID" : [ "backup-shanghai-zh--c000", "backup-seattle-en--c000", "backup-dublin-en--c000", "audit-us-en--c000", "restore-guide-en--c000", "backup-hangzhou-zh--c000", "travel-sales-en--c000", "audit-production-zh--c000", "audit-test-zh--c000", "cert-server-zh--c000", "access-visitor-en--c000", "lost-laptop-en--c000", "shipping-local-zh--c000", "access-staff-en--c000", "restore-guide-en--c016", "cert-client-zh--c000", "shipping-overseas-zh--c000", "notify-routine-zh--c000", "restore-guide-en--c017", "lost-phone-zh--c000", "audit-eu-en--c000", "remote-exception-zh--c000", "access-contractor-zh--c000", "incident-production-zh--c000", "offboard-staff-zh--c000", "remote-standard-zh--c000", "remote-exception-en--c000", "lost-laptop-zh--c000", "backup-dublin-en--c001", "restore-guide-en--c010" ],
+      "KEYWORD_REFERENCE" : [ "restore-guide-en--c000", "backup-shanghai-zh--c000", "travel-sales-en--c000", "backup-seattle-en--c000", "backup-dublin-en--c000", "audit-us-en--c000", "access-visitor-en--c000", "lost-laptop-en--c000", "access-staff-en--c000" ]
+    },
+    "historicalVectorOrderMatches" : true,
+    "historicalVectorTop50Overlap" : 1.0,
+    "historicalVectorMetrics" : {
+      "hit" : 0.0,
+      "recall" : 0.0,
+      "mrr" : 0.0,
+      "ndcg" : 0.0
+    }
+  }, {
+    "id" : "e15",
+    "category" : "cross-language",
+    "language" : "en",
+    "scores" : {
+      "CURRENT_VECTOR" : {
+        "metrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "recall30" : 0.0,
+        "recall50" : 0.0,
+        "factCoverage5" : 0.0,
+        "allFacts5" : false
+      },
+      "BGE_M3_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 0.9197207891481876
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      },
+      "CURRENT_HYBRID" : {
+        "metrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 0.0,
+        "allFacts5" : false
+      },
+      "BGE_M3_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.5,
+          "ndcg" : 0.6509209298071325
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      },
+      "KEYWORD_REFERENCE" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 0.3333333333333333,
+          "ndcg" : 0.5437713091520254
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      }
+    },
+    "rankings" : {
+      "CURRENT_VECTOR" : [ "remote-standard-en--c000", "remote-exception-en--c000", "cert-gateway-en--c001", "restore-guide-en--c005", "shipping-priority-en--c000", "restore-guide-en--c001", "access-visitor-en--c001", "notify-routine-en--c000", "shipping-return-en--c001", "restore-guide-en--c017", "backup-seattle-en--c000", "purchase-software-en--c001", "expense-deadline-en--c000", "notify-urgent-en--c001", "restore-guide-en--c013", "restore-guide-en--c012", "access-staff-en--c001", "restore-guide-en--c015", "incident-degraded-en--c000", "access-visitor-en--c000", "shipping-priority-en--c001", "travel-engineering-en--c000", "backup-dublin-en--c000", "incident-production-en--c000", "restore-guide-en--c016", "shipping-return-en--c000", "expense-receipt-en--c000", "restore-guide-en--c009", "travel-sales-en--c000", "cert-gateway-en--c000", "restore-guide-en--c003", "offboard-partner-en--c000", "restore-guide-en--c011", "restore-guide-en--c004", "audit-eu-en--c000", "notify-urgent-en--c000", "lost-token-en--c000", "audit-us-en--c000", "offboard-staff-en--c001", "notify-routine-en--c001", "restore-guide-en--c008", "backup-dublin-en--c001", "restore-guide-en--c007", "offboard-staff-en--c000", "travel-engineering-en--c001", "restore-guide-en--c010", "export-analyst-en--c000", "restore-guide-en--c006", "lost-token-en--c001", "restore-guide-en--c000" ],
+      "CURRENT_HYBRID" : [ "remote-standard-en--c000", "remote-exception-en--c000", "shipping-priority-en--c000", "backup-seattle-en--c000", "notify-routine-en--c000", "notify-urgent-en--c001", "travel-engineering-en--c000", "restore-guide-en--c017", "backup-dublin-en--c000", "restore-guide-en--c015", "expense-deadline-en--c000", "restore-guide-en--c011", "restore-guide-en--c009", "shipping-return-en--c000", "restore-guide-en--c003", "restore-guide-en--c016", "offboard-staff-en--c000", "cert-gateway-en--c000", "travel-sales-en--c000", "audit-eu-en--c000", "restore-guide-en--c006", "audit-us-en--c000", "cert-gateway-en--c001", "remote-exception-zh--c000", "lost-laptop-en--c000", "restore-guide-en--c005", "remote-standard-zh--c000", "restore-guide-en--c001", "access-visitor-en--c001", "shipping-return-en--c001" ],
+      "BGE_M3_VECTOR" : [ "remote-exception-zh--c000", "remote-exception-en--c000", "remote-standard-zh--c000", "remote-standard-en--c000", "notify-routine-en--c001", "offboard-staff-zh--c000", "offboard-contractor-zh--c000", "notify-routine-zh--c000", "incident-production-zh--c000", "backup-dublin-en--c001", "shipping-overseas-zh--c000", "access-contractor-zh--c000", "notify-urgent-zh--c000", "audit-test-zh--c000", "shipping-priority-en--c001", "backup-seattle-en--c000", "audit-production-zh--c000", "travel-engineering-en--c001", "shipping-priority-en--c000", "shipping-local-zh--c000", "cert-client-zh--c000", "export-member-zh--c000", "lost-phone-zh--c000", "access-visitor-zh--c000", "backup-dublin-en--c000", "api-sandbox-zh--c000", "expense-deadline-zh--c000", "backup-hangzhou-zh--c000", "backup-shanghai-zh--c000", "api-production-zh--c000", "incident-production-en--c000", "travel-international-zh--c000", "purchase-hardware-en--c001", "audit-us-en--c000", "travel-engineering-en--c000", "incident-production-en--c001", "notify-routine-en--c000", "notify-urgent-en--c001", "cert-server-zh--c000", "lost-laptop-zh--c000", "travel-domestic-zh--c000", "relay-v3-zh--c000", "shipping-return-en--c001", "offboard-partner-en--c001", "release-guide-zh--c003", "cert-gateway-en--c000", "offboard-staff-en--c000", "offboard-partner-en--c000", "cert-agent-en--c001", "lost-token-en--c001" ],
+      "BGE_M3_HYBRID" : [ "remote-exception-en--c000", "remote-exception-zh--c000", "remote-standard-en--c000", "remote-standard-zh--c000", "backup-seattle-en--c000", "shipping-priority-en--c000", "backup-dublin-en--c000", "travel-engineering-en--c000", "notify-urgent-en--c001", "notify-routine-en--c000", "offboard-staff-en--c000", "audit-us-en--c000", "cert-agent-en--c001", "cert-gateway-en--c000", "lost-laptop-en--c000", "notify-routine-en--c001", "offboard-staff-zh--c000", "offboard-contractor-zh--c000", "notify-routine-zh--c000", "incident-production-zh--c000", "backup-dublin-en--c001", "restore-guide-en--c011", "shipping-overseas-zh--c000", "access-contractor-zh--c000", "notify-urgent-zh--c000", "relay-gateway-en--c000", "audit-test-zh--c000", "shipping-priority-en--c001", "restore-guide-en--c015", "restore-guide-en--c006" ],
+      "KEYWORD_REFERENCE" : [ "remote-exception-en--c000", "remote-standard-en--c000", "remote-exception-zh--c000", "lost-laptop-en--c000", "remote-standard-zh--c000", "travel-engineering-en--c000", "shipping-priority-en--c000", "backup-seattle-en--c000", "backup-dublin-en--c000", "restore-guide-en--c011", "notify-urgent-en--c001", "notify-routine-en--c000", "offboard-staff-en--c000", "relay-gateway-en--c000", "restore-guide-en--c015", "restore-guide-en--c006", "restore-guide-en--c009", "cert-agent-en--c000", "restore-guide-en--c003", "restore-guide-en--c017", "cert-agent-en--c001", "shipping-return-en--c000", "expense-deadline-en--c000", "audit-eu-en--c000", "restore-guide-en--c016", "cert-gateway-en--c000", "audit-us-en--c000", "restore-guide-en--c002", "travel-sales-en--c000" ]
+    },
+    "historicalVectorOrderMatches" : true,
+    "historicalVectorTop50Overlap" : 1.0,
+    "historicalVectorMetrics" : {
+      "hit" : 0.0,
+      "recall" : 0.0,
+      "mrr" : 0.0,
+      "ndcg" : 0.0
+    }
+  }, {
+    "id" : "e16",
+    "category" : "cross-language",
+    "language" : "zh",
+    "scores" : {
+      "CURRENT_VECTOR" : {
+        "metrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "recall30" : 0.0,
+        "recall50" : 0.5,
+        "factCoverage5" : 0.0,
+        "allFacts5" : false
+      },
+      "BGE_M3_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      },
+      "CURRENT_HYBRID" : {
+        "metrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "recall30" : 0.5,
+        "recall50" : null,
+        "factCoverage5" : 0.0,
+        "allFacts5" : false
+      },
+      "BGE_M3_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 0.5,
+          "mrr" : 0.3333333333333333,
+          "ndcg" : 0.3065735963827292
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 0.5,
+        "allFacts5" : false
+      },
+      "KEYWORD_REFERENCE" : {
+        "metrics" : {
+          "hit" : 0.0,
+          "recall" : 0.0,
+          "mrr" : 0.0,
+          "ndcg" : 0.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 0.0,
+        "allFacts5" : false
+      }
+    },
+    "rankings" : {
+      "CURRENT_VECTOR" : [ "expense-deadline-zh--c000", "expense-receipt-zh--c000", "cert-server-zh--c000", "cert-client-zh--c000", "release-guide-zh--c003", "release-guide-zh--c001", "shipping-overseas-zh--c000", "offboard-staff-zh--c000", "shipping-local-zh--c000", "travel-domestic-zh--c000", "notify-routine-zh--c000", "release-guide-zh--c002", "access-visitor-zh--c000", "remote-exception-zh--c000", "backup-shanghai-zh--c000", "offboard-contractor-zh--c000", "audit-test-zh--c000", "release-guide-zh--c004", "export-admin-zh--c000", "lost-laptop-zh--c000", "remote-standard-zh--c000", "incident-production-zh--c000", "release-guide-zh--c000", "access-contractor-zh--c000", "audit-production-zh--c000", "notify-urgent-zh--c000", "restore-guide-en--c016", "offboard-staff-en--c000", "relay-v2-zh--c000", "export-member-zh--c000", "backup-hangzhou-zh--c000", "purchase-large-zh--c000", "incident-degraded-en--c000", "api-sandbox-zh--c000", "purchase-small-zh--c000", "travel-international-zh--c000", "audit-eu-en--c000", "cert-agent-en--c000", "remote-standard-en--c000", "api-production-zh--c000", "audit-us-en--c000", "shipping-return-en--c000", "lost-phone-zh--c000", "notify-routine-en--c000", "cert-agent-en--c001", "travel-sales-en--c000", "access-visitor-en--c000", "purchase-software-en--c000", "expense-deadline-en--c000", "incident-production-en--c000" ],
+      "CURRENT_HYBRID" : [ "expense-deadline-zh--c000", "expense-receipt-zh--c000", "release-guide-zh--c003", "travel-domestic-zh--c000", "release-guide-zh--c001", "cert-client-zh--c000", "access-visitor-zh--c000", "offboard-staff-zh--c000", "lost-laptop-zh--c000", "shipping-overseas-zh--c000", "offboard-contractor-zh--c000", "backup-shanghai-zh--c000", "cert-server-zh--c000", "release-guide-zh--c000", "export-admin-zh--c000", "travel-international-zh--c000", "shipping-local-zh--c000", "api-sandbox-zh--c000", "audit-production-zh--c000", "release-guide-zh--c002", "offboard-staff-en--c000", "access-visitor-en--c000", "release-guide-zh--c004", "shipping-return-en--c000", "notify-routine-en--c000", "incident-degraded-en--c000", "expense-deadline-en--c000", "purchase-small-zh--c000", "purchase-software-en--c000", "incident-production-en--c000" ],
+      "BGE_M3_VECTOR" : [ "expense-deadline-en--c000", "expense-receipt-en--c000", "expense-receipt-zh--c000", "expense-deadline-zh--c000", "shipping-return-en--c000", "purchase-hardware-en--c000", "remote-exception-en--c000", "shipping-priority-en--c000", "access-visitor-en--c000", "access-staff-en--c000", "remote-standard-en--c000", "lost-token-en--c000", "purchase-software-en--c001", "purchase-software-en--c000", "lost-laptop-en--c000", "offboard-staff-en--c000", "incident-production-en--c000", "notify-urgent-en--c000", "access-staff-en--c001", "shipping-return-en--c001", "incident-degraded-en--c000", "shipping-priority-en--c001", "notify-routine-en--c000", "export-analyst-en--c000", "remote-exception-zh--c000", "export-admin-en--c000", "cert-client-zh--c000", "purchase-small-zh--c000", "relay-v2-zh--c000", "access-contractor-zh--c000", "offboard-staff-zh--c000", "offboard-contractor-zh--c000", "offboard-partner-en--c000", "cert-server-zh--c000", "purchase-large-zh--c000", "billing-v1-en--c000", "shipping-overseas-zh--c000", "audit-production-zh--c000", "shipping-local-zh--c000", "relay-v3-zh--c000", "incident-production-en--c001", "travel-domestic-zh--c000", "cert-agent-en--c000", "audit-test-zh--c000", "restore-guide-en--c002", "cert-gateway-en--c000", "restore-guide-en--c016", "backup-dublin-en--c000", "travel-sales-en--c000", "remote-standard-zh--c000" ],
+      "BGE_M3_HYBRID" : [ "expense-deadline-zh--c000", "expense-receipt-zh--c000", "expense-receipt-en--c000", "shipping-return-en--c000", "access-visitor-en--c000", "expense-deadline-en--c000", "notify-urgent-en--c000", "shipping-priority-en--c000", "purchase-hardware-en--c000", "travel-domestic-zh--c000", "remote-exception-en--c000", "offboard-staff-en--c000", "access-staff-en--c000", "cert-client-zh--c000", "lost-laptop-en--c000", "lost-token-en--c000", "offboard-staff-zh--c000", "purchase-software-en--c000", "notify-routine-en--c000", "incident-production-en--c000", "offboard-contractor-zh--c000", "remote-standard-en--c000", "export-admin-en--c000", "export-analyst-en--c000", "incident-degraded-en--c000", "shipping-overseas-zh--c000", "audit-production-zh--c000", "purchase-small-zh--c000", "shipping-local-zh--c000", "cert-server-zh--c000" ],
+      "KEYWORD_REFERENCE" : [ "expense-deadline-zh--c000", "expense-receipt-zh--c000", "travel-domestic-zh--c000", "lost-laptop-zh--c000", "travel-international-zh--c000", "release-guide-zh--c003", "access-visitor-zh--c000", "release-guide-zh--c001", "notify-urgent-en--c000", "api-sandbox-zh--c000", "release-guide-zh--c000", "offboard-staff-zh--c000", "access-visitor-en--c000", "cert-client-zh--c000", "offboard-contractor-zh--c000", "export-admin-zh--c000", "backup-shanghai-zh--c000", "shipping-return-en--c000", "expense-receipt-en--c000", "shipping-priority-en--c000", "notify-routine-en--c000", "shipping-overseas-zh--c000", "audit-production-zh--c000", "offboard-staff-en--c000", "expense-deadline-en--c000", "lost-laptop-en--c000", "export-admin-en--c000", "purchase-software-en--c000", "incident-production-en--c000", "shipping-local-zh--c000", "lost-token-en--c000", "export-analyst-en--c000", "access-staff-en--c000", "purchase-hardware-en--c000", "remote-exception-en--c000", "incident-degraded-en--c000", "cert-server-zh--c000", "purchase-small-zh--c000", "remote-standard-en--c000", "relay-v3-zh--c000", "release-guide-zh--c004", "release-guide-zh--c002" ]
+    },
+    "historicalVectorOrderMatches" : true,
+    "historicalVectorTop50Overlap" : 1.0,
+    "historicalVectorMetrics" : {
+      "hit" : 0.0,
+      "recall" : 0.0,
+      "mrr" : 0.0,
+      "ndcg" : 0.0
+    }
+  }, {
+    "id" : "e17",
+    "category" : "multi-evidence",
+    "language" : "zh",
+    "scores" : {
+      "CURRENT_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      },
+      "BGE_M3_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      },
+      "CURRENT_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      },
+      "BGE_M3_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      },
+      "KEYWORD_REFERENCE" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      }
+    },
+    "rankings" : {
+      "CURRENT_VECTOR" : [ "expense-deadline-zh--c000", "expense-receipt-zh--c000", "travel-domestic-zh--c000", "offboard-staff-zh--c000", "cert-server-zh--c000", "notify-routine-zh--c000", "shipping-local-zh--c000", "export-admin-zh--c000", "access-visitor-zh--c000", "remote-exception-zh--c000", "purchase-small-zh--c000", "purchase-large-zh--c000", "offboard-contractor-zh--c000", "cert-client-zh--c000", "release-guide-zh--c000", "shipping-overseas-zh--c000", "travel-international-zh--c000", "release-guide-zh--c001", "access-contractor-zh--c000", "backup-shanghai-zh--c000", "release-guide-zh--c003", "export-member-zh--c000", "release-guide-zh--c004", "notify-urgent-zh--c000", "remote-standard-zh--c000", "audit-test-zh--c000", "lost-laptop-zh--c000", "incident-production-zh--c000", "release-guide-zh--c002", "audit-production-zh--c000", "api-sandbox-zh--c000", "backup-hangzhou-zh--c000", "api-production-zh--c000", "lost-phone-zh--c000", "relay-v2-zh--c000", "incident-production-en--c001", "travel-sales-en--c000", "backup-seattle-en--c000", "restore-guide-en--c016", "backup-dublin-en--c000", "incident-test-zh--c000", "cert-agent-en--c001", "shipping-return-en--c001", "expense-deadline-en--c000", "restore-guide-en--c015", "backup-dublin-en--c001", "audit-us-en--c000", "shipping-priority-en--c000", "restore-guide-en--c008", "notify-urgent-en--c001" ],
+      "CURRENT_HYBRID" : [ "expense-deadline-zh--c000", "expense-receipt-zh--c000", "travel-domestic-zh--c000", "offboard-staff-zh--c000", "remote-exception-zh--c000", "notify-routine-zh--c000", "export-admin-zh--c000", "offboard-contractor-zh--c000", "purchase-small-zh--c000", "access-visitor-zh--c000", "travel-international-zh--c000", "remote-standard-zh--c000", "shipping-local-zh--c000", "release-guide-zh--c000", "lost-laptop-zh--c000", "cert-client-zh--c000", "shipping-overseas-zh--c000", "release-guide-zh--c001", "purchase-large-zh--c000", "release-guide-zh--c003", "export-member-zh--c000", "access-contractor-zh--c000", "lost-phone-zh--c000", "api-sandbox-zh--c000", "notify-urgent-zh--c000", "audit-production-zh--c000", "backup-hangzhou-zh--c000", "incident-production-zh--c000", "release-guide-zh--c002", "cert-server-zh--c000" ],
+      "BGE_M3_VECTOR" : [ "expense-deadline-zh--c000", "expense-receipt-zh--c000", "travel-domestic-zh--c000", "offboard-contractor-zh--c000", "remote-exception-zh--c000", "travel-international-zh--c000", "offboard-staff-zh--c000", "expense-deadline-en--c000", "purchase-small-zh--c000", "purchase-large-zh--c000", "remote-standard-zh--c000", "notify-routine-zh--c000", "access-visitor-zh--c000", "cert-client-zh--c000", "access-contractor-zh--c000", "offboard-partner-en--c000", "shipping-overseas-zh--c000", "shipping-local-zh--c000", "lost-phone-zh--c000", "expense-receipt-en--c000", "backup-shanghai-zh--c000", "lost-laptop-zh--c000", "shipping-priority-en--c001", "purchase-software-en--c001", "incident-production-zh--c000", "shipping-return-en--c001", "release-guide-zh--c003", "cert-server-zh--c000", "travel-sales-en--c000", "release-guide-zh--c000", "export-member-zh--c000", "incident-production-en--c001", "export-admin-zh--c000", "access-staff-en--c001", "audit-production-zh--c000", "audit-test-zh--c000", "travel-engineering-en--c001", "restore-guide-en--c015", "travel-engineering-en--c000", "billing-v1-en--c000", "shipping-return-en--c000", "remote-exception-en--c000", "release-guide-zh--c004", "api-sandbox-zh--c000", "api-production-zh--c000", "restore-guide-en--c016", "release-guide-zh--c001", "restore-guide-en--c002", "backup-seattle-en--c000", "audit-us-en--c000" ],
+      "BGE_M3_HYBRID" : [ "expense-deadline-zh--c000", "expense-receipt-zh--c000", "travel-domestic-zh--c000", "remote-exception-zh--c000", "offboard-contractor-zh--c000", "travel-international-zh--c000", "remote-standard-zh--c000", "offboard-staff-zh--c000", "purchase-small-zh--c000", "notify-routine-zh--c000", "access-visitor-zh--c000", "lost-laptop-zh--c000", "cert-client-zh--c000", "lost-phone-zh--c000", "purchase-large-zh--c000", "shipping-overseas-zh--c000", "export-admin-zh--c000", "access-contractor-zh--c000", "shipping-local-zh--c000", "release-guide-zh--c000", "release-guide-zh--c003", "incident-production-zh--c000", "export-member-zh--c000", "audit-production-zh--c000", "api-sandbox-zh--c000", "release-guide-zh--c001", "expense-deadline-en--c000", "offboard-partner-en--c000", "expense-receipt-en--c000", "backup-shanghai-zh--c000" ],
+      "KEYWORD_REFERENCE" : [ "expense-deadline-zh--c000", "expense-receipt-zh--c000", "travel-domestic-zh--c000", "remote-standard-zh--c000", "remote-exception-zh--c000", "lost-laptop-zh--c000", "offboard-contractor-zh--c000", "travel-international-zh--c000", "purchase-small-zh--c000", "offboard-staff-zh--c000", "export-admin-zh--c000", "notify-routine-zh--c000", "access-visitor-zh--c000", "lost-phone-zh--c000", "release-guide-zh--c000", "api-sandbox-zh--c000", "cert-client-zh--c000", "release-guide-zh--c001", "shipping-overseas-zh--c000", "audit-production-zh--c000", "release-guide-zh--c003", "backup-hangzhou-zh--c000", "export-member-zh--c000", "notify-urgent-zh--c000", "shipping-local-zh--c000", "purchase-large-zh--c000", "access-contractor-zh--c000", "incident-production-zh--c000", "release-guide-zh--c002" ]
+    },
+    "historicalVectorOrderMatches" : true,
+    "historicalVectorTop50Overlap" : 1.0,
+    "historicalVectorMetrics" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "e18",
+    "category" : "multi-evidence",
+    "language" : "en",
+    "scores" : {
+      "CURRENT_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      },
+      "BGE_M3_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      },
+      "CURRENT_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      },
+      "BGE_M3_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      },
+      "KEYWORD_REFERENCE" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      }
+    },
+    "rankings" : {
+      "CURRENT_VECTOR" : [ "remote-exception-en--c000", "remote-standard-en--c000", "restore-guide-en--c001", "shipping-priority-en--c000", "notify-routine-en--c000", "restore-guide-en--c017", "expense-deadline-en--c000", "shipping-return-en--c001", "access-visitor-en--c001", "restore-guide-en--c013", "restore-guide-en--c004", "expense-receipt-en--c000", "offboard-staff-en--c000", "incident-degraded-en--c000", "notify-urgent-en--c000", "restore-guide-en--c016", "restore-guide-en--c011", "access-visitor-en--c000", "lost-token-en--c000", "restore-guide-en--c009", "access-staff-en--c000", "offboard-partner-en--c000", "shipping-return-en--c000", "lost-laptop-en--c000", "purchase-hardware-en--c000", "restore-guide-en--c012", "access-staff-en--c001", "purchase-software-en--c001", "restore-guide-en--c008", "notify-urgent-en--c001", "restore-guide-en--c007", "restore-guide-en--c003", "incident-production-en--c000", "restore-guide-en--c006", "restore-guide-en--c002", "cert-gateway-en--c001", "restore-guide-en--c014", "cert-agent-en--c001", "offboard-staff-en--c001", "restore-guide-en--c005", "purchase-software-en--c000", "restore-guide-en--c010", "export-admin-en--c000", "restore-guide-en--c015", "export-analyst-en--c000", "cert-gateway-en--c000", "backup-seattle-en--c000", "audit-eu-en--c000", "notify-routine-en--c001", "audit-us-en--c000" ],
+      "CURRENT_HYBRID" : [ "remote-exception-en--c000", "remote-standard-en--c000", "expense-deadline-en--c000", "restore-guide-en--c001", "shipping-return-en--c001", "shipping-priority-en--c000", "lost-laptop-en--c000", "notify-routine-en--c000", "restore-guide-en--c009", "purchase-hardware-en--c000", "notify-urgent-en--c000", "restore-guide-en--c017", "lost-token-en--c000", "expense-receipt-en--c000", "access-staff-en--c000", "access-visitor-en--c000", "offboard-staff-en--c000", "restore-guide-en--c013", "restore-guide-en--c004", "purchase-software-en--c000", "incident-degraded-en--c000", "incident-production-en--c000", "shipping-return-en--c000", "export-admin-en--c000", "cert-agent-en--c001", "restore-guide-en--c016", "restore-guide-en--c003", "restore-guide-en--c015", "restore-guide-en--c012", "export-analyst-en--c000" ],
+      "BGE_M3_VECTOR" : [ "remote-exception-en--c000", "remote-standard-en--c000", "remote-exception-zh--c000", "remote-standard-zh--c000", "shipping-priority-en--c000", "export-admin-en--c000", "expense-deadline-en--c000", "export-analyst-en--c000", "incident-production-en--c000", "notify-routine-en--c000", "offboard-staff-en--c000", "incident-degraded-en--c000", "access-staff-en--c000", "notify-urgent-en--c000", "backup-dublin-en--c001", "purchase-software-en--c000", "access-visitor-en--c000", "expense-receipt-en--c000", "access-contractor-zh--c000", "purchase-hardware-en--c000", "shipping-return-en--c000", "lost-token-en--c000", "lost-laptop-en--c000", "backup-dublin-en--c000", "shipping-priority-en--c001", "restore-guide-en--c010", "offboard-contractor-zh--c000", "travel-engineering-en--c001", "purchase-hardware-en--c001", "offboard-staff-zh--c000", "incident-production-zh--c000", "travel-engineering-en--c000", "access-visitor-zh--c000", "api-production-zh--c000", "notify-routine-en--c001", "audit-production-zh--c000", "billing-v1-en--c000", "shipping-overseas-zh--c000", "audit-test-zh--c000", "backup-shanghai-zh--c000", "backup-hangzhou-zh--c000", "release-guide-zh--c003", "backup-seattle-en--c000", "restore-guide-en--c004", "shipping-return-en--c001", "cert-client-zh--c000", "release-guide-zh--c001", "billing-v2-en--c000", "restore-guide-en--c002", "relay-v3-zh--c000" ],
+      "BGE_M3_HYBRID" : [ "remote-exception-en--c000", "remote-standard-en--c000", "remote-exception-zh--c000", "remote-standard-zh--c000", "export-admin-en--c000", "expense-deadline-en--c000", "incident-production-en--c000", "purchase-software-en--c000", "lost-laptop-en--c000", "shipping-priority-en--c000", "purchase-hardware-en--c000", "access-staff-en--c000", "notify-urgent-en--c000", "notify-routine-en--c000", "export-analyst-en--c000", "lost-token-en--c000", "offboard-staff-en--c000", "access-visitor-en--c000", "incident-degraded-en--c000", "expense-receipt-en--c000", "shipping-return-en--c000", "shipping-return-en--c001", "restore-guide-en--c010", "restore-guide-en--c004", "billing-v1-en--c000", "backup-seattle-en--c000", "billing-v2-en--c000", "restore-guide-en--c002", "restore-guide-en--c009", "cert-agent-en--c001" ],
+      "KEYWORD_REFERENCE" : [ "remote-exception-en--c000", "remote-standard-en--c000", "remote-exception-zh--c000", "lost-laptop-en--c000", "remote-standard-zh--c000", "purchase-software-en--c000", "purchase-hardware-en--c000", "expense-deadline-en--c000", "export-admin-en--c000", "restore-guide-en--c009", "incident-production-en--c000", "lost-token-en--c000", "access-staff-en--c000", "cert-agent-en--c001", "notify-urgent-en--c000", "shipping-return-en--c001", "access-visitor-en--c000", "restore-guide-en--c001", "shipping-return-en--c000", "restore-guide-en--c015", "expense-receipt-en--c000", "shipping-priority-en--c000", "notify-routine-en--c000", "offboard-staff-en--c000", "restore-guide-en--c003", "export-analyst-en--c000", "restore-guide-en--c017", "incident-degraded-en--c000", "restore-guide-en--c013", "restore-guide-en--c004", "restore-guide-en--c000", "backup-seattle-en--c000", "audit-eu-en--c000", "relay-agent-en--c000", "billing-v2-en--c000", "billing-v1-en--c000", "restore-guide-en--c002", "restore-guide-en--c016", "travel-sales-en--c000", "restore-guide-en--c010", "restore-guide-en--c012" ]
+    },
+    "historicalVectorOrderMatches" : true,
+    "historicalVectorTop50Overlap" : 1.0,
+    "historicalVectorMetrics" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 1.0
+    }
+  }, {
+    "id" : "e19",
+    "category" : "long-document",
+    "language" : "en",
+    "scores" : {
+      "CURRENT_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 0.5,
+          "mrr" : 1.0,
+          "ndcg" : 0.6131471927654584
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 0.5,
+        "allFacts5" : false
+      },
+      "BGE_M3_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      },
+      "CURRENT_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 0.9197207891481876
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      },
+      "BGE_M3_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      },
+      "KEYWORD_REFERENCE" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      }
+    },
+    "rankings" : {
+      "CURRENT_VECTOR" : [ "restore-guide-en--c016", "restore-guide-en--c008", "restore-guide-en--c015", "restore-guide-en--c003", "restore-guide-en--c005", "restore-guide-en--c017", "restore-guide-en--c004", "restore-guide-en--c000", "restore-guide-en--c002", "restore-guide-en--c014", "cert-gateway-en--c001", "notify-routine-en--c001", "restore-guide-en--c001", "restore-guide-en--c013", "restore-guide-en--c010", "access-visitor-en--c001", "purchase-software-en--c001", "restore-guide-en--c012", "lost-laptop-en--c000", "audit-us-en--c000", "incident-production-en--c001", "audit-eu-en--c000", "lost-token-en--c000", "shipping-return-en--c000", "access-visitor-en--c000", "cert-agent-en--c001", "backup-seattle-en--c000", "restore-guide-en--c009", "notify-urgent-en--c001", "restore-guide-en--c007", "purchase-hardware-en--c001", "shipping-priority-en--c000", "expense-receipt-en--c000", "restore-guide-en--c006", "purchase-hardware-en--c000", "restore-guide-en--c011", "notify-urgent-en--c000", "incident-production-en--c000", "remote-exception-en--c000", "backup-dublin-en--c000", "notify-routine-en--c000", "relay-agent-en--c000", "purchase-software-en--c000", "expense-deadline-en--c000", "access-staff-en--c001", "shipping-return-en--c001", "offboard-partner-en--c000", "export-admin-en--c001", "offboard-staff-en--c000", "remote-standard-en--c000" ],
+      "CURRENT_HYBRID" : [ "restore-guide-en--c016", "restore-guide-en--c015", "restore-guide-en--c004", "restore-guide-en--c008", "restore-guide-en--c000", "restore-guide-en--c005", "restore-guide-en--c010", "restore-guide-en--c012", "restore-guide-en--c003", "restore-guide-en--c014", "audit-us-en--c000", "restore-guide-en--c001", "restore-guide-en--c002", "restore-guide-en--c009", "restore-guide-en--c017", "cert-gateway-en--c001", "restore-guide-en--c013", "restore-guide-en--c006", "access-visitor-en--c000", "access-visitor-en--c001", "restore-guide-en--c007", "lost-laptop-en--c000", "audit-eu-en--c000", "expense-receipt-en--c000", "restore-guide-en--c011", "cert-agent-en--c001", "offboard-partner-en--c000", "purchase-hardware-en--c000", "backup-dublin-en--c000", "incident-production-en--c000" ],
+      "BGE_M3_VECTOR" : [ "restore-guide-en--c016", "restore-guide-en--c004", "restore-guide-en--c000", "restore-guide-en--c015", "restore-guide-en--c014", "restore-guide-en--c010", "audit-production-zh--c000", "restore-guide-en--c001", "audit-us-en--c000", "restore-guide-en--c012", "audit-eu-en--c000", "restore-guide-en--c017", "offboard-staff-zh--c000", "restore-guide-en--c009", "audit-test-zh--c000", "backup-shanghai-zh--c000", "restore-guide-en--c002", "backup-seattle-en--c000", "restore-guide-en--c008", "restore-guide-en--c005", "incident-production-en--c001", "shipping-return-en--c000", "cert-agent-en--c000", "cert-client-zh--c000", "offboard-partner-en--c000", "export-admin-en--c000", "release-guide-zh--c004", "restore-guide-en--c011", "cert-gateway-en--c000", "backup-hangzhou-zh--c000", "release-guide-zh--c003", "cert-agent-en--c001", "offboard-contractor-zh--c000", "purchase-software-en--c000", "restore-guide-en--c007", "restore-guide-en--c003", "export-analyst-en--c000", "remote-exception-en--c000", "access-contractor-zh--c000", "purchase-hardware-en--c001", "purchase-software-en--c001", "relay-v2-zh--c000", "offboard-staff-en--c001", "access-visitor-en--c000", "purchase-hardware-en--c000", "offboard-partner-en--c001", "access-visitor-zh--c000", "incident-production-zh--c000", "shipping-priority-en--c001", "restore-guide-en--c006" ],
+      "BGE_M3_HYBRID" : [ "restore-guide-en--c004", "restore-guide-en--c016", "restore-guide-en--c015", "restore-guide-en--c010", "restore-guide-en--c012", "restore-guide-en--c000", "restore-guide-en--c014", "audit-us-en--c000", "restore-guide-en--c009", "restore-guide-en--c001", "restore-guide-en--c008", "restore-guide-en--c005", "audit-eu-en--c000", "restore-guide-en--c002", "restore-guide-en--c017", "cert-gateway-en--c000", "restore-guide-en--c007", "restore-guide-en--c006", "restore-guide-en--c003", "offboard-partner-en--c000", "access-visitor-en--c000", "restore-guide-en--c011", "export-admin-en--c000", "purchase-software-en--c000", "cert-agent-en--c001", "remote-exception-en--c000", "purchase-hardware-en--c000", "audit-production-zh--c000", "offboard-staff-zh--c000", "audit-test-zh--c000" ],
+      "KEYWORD_REFERENCE" : [ "restore-guide-en--c004", "restore-guide-en--c016", "restore-guide-en--c012", "restore-guide-en--c015", "restore-guide-en--c010", "restore-guide-en--c009", "restore-guide-en--c006", "restore-guide-en--c008", "audit-us-en--c000", "restore-guide-en--c014", "restore-guide-en--c000", "restore-guide-en--c007", "cert-gateway-en--c000", "access-visitor-en--c000", "restore-guide-en--c005", "restore-guide-en--c001", "restore-guide-en--c003", "travel-sales-en--c000", "billing-v1-en--c000", "access-staff-en--c000", "restore-guide-en--c013", "restore-guide-en--c002", "cert-gateway-en--c001", "access-visitor-en--c001", "expense-receipt-en--c000", "offboard-partner-en--c000", "relay-gateway-en--c000", "audit-eu-en--c000", "restore-guide-en--c011", "restore-guide-en--c017", "lost-laptop-en--c000", "backup-dublin-en--c000", "purchase-software-en--c000", "offboard-staff-en--c000", "incident-production-en--c000", "purchase-hardware-en--c000", "remote-exception-en--c000", "billing-v2-en--c000", "relay-agent-en--c000", "cert-agent-en--c001", "expense-deadline-en--c000", "export-admin-en--c000", "remote-standard-en--c000" ]
+    },
+    "historicalVectorOrderMatches" : true,
+    "historicalVectorTop50Overlap" : 1.0,
+    "historicalVectorMetrics" : {
+      "hit" : 1.0,
+      "recall" : 0.5,
+      "mrr" : 1.0,
+      "ndcg" : 0.6131471927654584
+    }
+  }, {
+    "id" : "e20",
+    "category" : "long-document",
+    "language" : "zh",
+    "scores" : {
+      "CURRENT_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 0.9197207891481876
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      },
+      "BGE_M3_VECTOR" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 0.9197207891481876
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      },
+      "CURRENT_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 0.9197207891481876
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      },
+      "BGE_M3_HYBRID" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 0.9197207891481876
+        },
+        "recall30" : 1.0,
+        "recall50" : null,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      },
+      "KEYWORD_REFERENCE" : {
+        "metrics" : {
+          "hit" : 1.0,
+          "recall" : 1.0,
+          "mrr" : 1.0,
+          "ndcg" : 1.0
+        },
+        "recall30" : 1.0,
+        "recall50" : 1.0,
+        "factCoverage5" : 1.0,
+        "allFacts5" : true
+      }
+    },
+    "rankings" : {
+      "CURRENT_VECTOR" : [ "release-guide-zh--c001", "release-guide-zh--c000", "release-guide-zh--c003", "offboard-contractor-zh--c000", "incident-production-zh--c000", "release-guide-zh--c002", "release-guide-zh--c004", "backup-shanghai-zh--c000", "notify-routine-zh--c000", "shipping-local-zh--c000", "offboard-staff-zh--c000", "cert-server-zh--c000", "backup-hangzhou-zh--c000", "expense-deadline-zh--c000", "shipping-overseas-zh--c000", "cert-client-zh--c000", "lost-laptop-zh--c000", "audit-production-zh--c000", "access-contractor-zh--c000", "api-production-zh--c000", "audit-test-zh--c000", "incident-test-zh--c000", "access-visitor-zh--c000", "api-sandbox-zh--c000", "notify-urgent-zh--c000", "remote-exception-zh--c000", "relay-v2-zh--c000", "expense-receipt-zh--c000", "remote-standard-zh--c000", "purchase-small-zh--c000", "export-admin-zh--c000", "purchase-large-zh--c000", "travel-domestic-zh--c000", "lost-phone-zh--c000", "backup-dublin-en--c000", "relay-v3-zh--c000", "export-member-zh--c000", "incident-degraded-en--c000", "restore-guide-en--c016", "restore-guide-en--c000", "incident-production-en--c000", "billing-v1-en--c000", "restore-guide-en--c017", "travel-international-zh--c000", "incident-production-en--c001", "restore-guide-en--c002", "restore-guide-en--c015", "purchase-hardware-en--c001", "notify-routine-en--c000", "billing-v2-en--c000" ],
+      "CURRENT_HYBRID" : [ "release-guide-zh--c001", "release-guide-zh--c000", "release-guide-zh--c003", "incident-production-zh--c000", "release-guide-zh--c004", "release-guide-zh--c002", "cert-server-zh--c000", "offboard-contractor-zh--c000", "shipping-local-zh--c000", "expense-deadline-zh--c000", "offboard-staff-zh--c000", "incident-test-zh--c000", "notify-routine-zh--c000", "backup-hangzhou-zh--c000", "cert-client-zh--c000", "purchase-small-zh--c000", "shipping-overseas-zh--c000", "audit-production-zh--c000", "export-admin-zh--c000", "relay-v2-zh--c000", "lost-laptop-zh--c000", "api-sandbox-zh--c000", "purchase-large-zh--c000", "notify-urgent-zh--c000", "relay-v3-zh--c000", "access-contractor-zh--c000", "remote-exception-zh--c000", "expense-receipt-zh--c000", "remote-standard-zh--c000", "travel-domestic-zh--c000" ],
+      "BGE_M3_VECTOR" : [ "release-guide-zh--c001", "release-guide-zh--c000", "release-guide-zh--c003", "shipping-overseas-zh--c000", "incident-production-zh--c000", "release-guide-zh--c002", "offboard-staff-zh--c000", "shipping-local-zh--c000", "offboard-contractor-zh--c000", "release-guide-zh--c004", "expense-deadline-zh--c000", "backup-shanghai-zh--c000", "access-contractor-zh--c000", "cert-client-zh--c000", "relay-v2-zh--c000", "cert-server-zh--c000", "relay-v3-zh--c000", "notify-routine-zh--c000", "backup-hangzhou-zh--c000", "incident-production-en--c000", "backup-dublin-en--c000", "remote-exception-zh--c000", "incident-production-en--c001", "offboard-partner-en--c000", "restore-guide-en--c012", "remote-exception-en--c000", "incident-degraded-en--c000", "purchase-hardware-en--c001", "remote-standard-zh--c000", "access-visitor-zh--c000", "offboard-staff-en--c001", "audit-production-zh--c000", "lost-phone-zh--c000", "cert-gateway-en--c000", "backup-seattle-en--c000", "restore-guide-en--c010", "shipping-priority-en--c001", "audit-test-zh--c000", "expense-deadline-en--c000", "shipping-priority-en--c000", "restore-guide-en--c013", "purchase-small-zh--c000", "export-member-zh--c000", "lost-token-en--c001", "billing-v2-en--c000", "restore-guide-en--c009", "api-production-zh--c000", "restore-guide-en--c014", "incident-degraded-en--c001", "purchase-large-zh--c000" ],
+      "BGE_M3_HYBRID" : [ "release-guide-zh--c001", "release-guide-zh--c000", "release-guide-zh--c003", "incident-production-zh--c000", "release-guide-zh--c002", "release-guide-zh--c004", "shipping-local-zh--c000", "cert-server-zh--c000", "offboard-contractor-zh--c000", "expense-deadline-zh--c000", "shipping-overseas-zh--c000", "offboard-staff-zh--c000", "cert-client-zh--c000", "relay-v3-zh--c000", "relay-v2-zh--c000", "backup-hangzhou-zh--c000", "notify-routine-zh--c000", "access-contractor-zh--c000", "purchase-small-zh--c000", "remote-exception-zh--c000", "audit-production-zh--c000", "purchase-large-zh--c000", "remote-standard-zh--c000", "incident-test-zh--c000", "backup-shanghai-zh--c000", "export-admin-zh--c000", "api-sandbox-zh--c000", "incident-production-en--c000", "backup-dublin-en--c000", "notify-urgent-zh--c000" ],
+      "KEYWORD_REFERENCE" : [ "release-guide-zh--c001", "release-guide-zh--c003", "release-guide-zh--c000", "cert-server-zh--c000", "release-guide-zh--c004", "incident-production-zh--c000", "release-guide-zh--c002", "purchase-small-zh--c000", "incident-test-zh--c000", "shipping-local-zh--c000", "expense-deadline-zh--c000", "offboard-contractor-zh--c000", "export-admin-zh--c000", "purchase-large-zh--c000", "relay-v3-zh--c000", "cert-client-zh--c000", "relay-v2-zh--c000", "backup-hangzhou-zh--c000", "offboard-staff-zh--c000", "api-sandbox-zh--c000", "notify-urgent-zh--c000", "notify-routine-zh--c000", "shipping-overseas-zh--c000", "audit-production-zh--c000", "expense-receipt-zh--c000", "remote-exception-zh--c000", "lost-laptop-zh--c000", "travel-international-zh--c000", "travel-domestic-zh--c000", "remote-standard-zh--c000", "access-contractor-zh--c000" ]
+    },
+    "historicalVectorOrderMatches" : true,
+    "historicalVectorTop50Overlap" : 1.0,
+    "historicalVectorMetrics" : {
+      "hit" : 1.0,
+      "recall" : 1.0,
+      "mrr" : 1.0,
+      "ndcg" : 0.9197207891481876
+    }
+  }, {
+    "id" : "e21",
+    "category" : "unanswerable",
+    "language" : "zh",
+    "scores" : {
+      "CURRENT_VECTOR" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      },
+      "BGE_M3_VECTOR" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      },
+      "CURRENT_HYBRID" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      },
+      "BGE_M3_HYBRID" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      },
+      "KEYWORD_REFERENCE" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      }
+    },
+    "rankings" : {
+      "CURRENT_VECTOR" : [ "remote-standard-zh--c000", "remote-exception-zh--c000", "expense-deadline-zh--c000", "offboard-staff-zh--c000", "travel-international-zh--c000", "access-visitor-zh--c000", "export-member-zh--c000", "travel-domestic-zh--c000", "offboard-contractor-zh--c000", "api-production-zh--c000", "access-contractor-zh--c000", "api-sandbox-zh--c000", "audit-test-zh--c000", "export-admin-zh--c000", "notify-routine-zh--c000", "audit-production-zh--c000", "shipping-local-zh--c000", "cert-server-zh--c000", "expense-receipt-zh--c000", "remote-standard-en--c000", "purchase-small-zh--c000", "purchase-large-zh--c000", "backup-shanghai-zh--c000", "shipping-overseas-zh--c000", "incident-production-zh--c000", "notify-urgent-zh--c000", "travel-sales-en--c000", "travel-engineering-en--c000", "backup-hangzhou-zh--c000", "cert-client-zh--c000", "lost-laptop-zh--c000", "lost-phone-zh--c000", "release-guide-zh--c000", "release-guide-zh--c003", "shipping-return-en--c001", "expense-deadline-en--c000", "backup-dublin-en--c001", "remote-exception-en--c000", "release-guide-zh--c001", "backup-seattle-en--c000", "shipping-priority-en--c000", "release-guide-zh--c002", "restore-guide-en--c017", "restore-guide-en--c002", "backup-dublin-en--c000", "release-guide-zh--c004", "audit-us-en--c000", "access-staff-en--c001", "audit-eu-en--c000", "incident-test-zh--c000" ],
+      "CURRENT_HYBRID" : [ "remote-standard-zh--c000", "remote-exception-zh--c000", "offboard-staff-zh--c000", "expense-deadline-zh--c000", "offboard-contractor-zh--c000", "notify-routine-zh--c000", "export-member-zh--c000", "travel-international-zh--c000", "access-visitor-zh--c000", "incident-production-zh--c000", "audit-test-zh--c000", "travel-domestic-zh--c000", "expense-receipt-zh--c000", "cert-server-zh--c000", "access-contractor-zh--c000", "shipping-local-zh--c000", "export-admin-zh--c000", "lost-phone-zh--c000", "lost-laptop-zh--c000", "backup-hangzhou-zh--c000", "cert-client-zh--c000", "notify-urgent-zh--c000", "purchase-small-zh--c000", "purchase-large-zh--c000", "release-guide-zh--c000", "api-production-zh--c000", "api-sandbox-zh--c000", "audit-production-zh--c000", "remote-standard-en--c000", "backup-shanghai-zh--c000" ],
+      "BGE_M3_VECTOR" : [ "remote-exception-zh--c000", "remote-standard-zh--c000", "expense-deadline-zh--c000", "travel-domestic-zh--c000", "travel-international-zh--c000", "offboard-staff-zh--c000", "offboard-contractor-zh--c000", "notify-routine-zh--c000", "access-visitor-zh--c000", "export-member-zh--c000", "travel-sales-en--c000", "backup-dublin-en--c001", "remote-exception-en--c000", "backup-shanghai-zh--c000", "access-contractor-zh--c000", "travel-engineering-en--c000", "incident-production-zh--c000", "remote-standard-en--c000", "expense-receipt-zh--c000", "shipping-local-zh--c000", "lost-phone-zh--c000", "purchase-large-zh--c000", "export-admin-zh--c000", "shipping-priority-en--c001", "purchase-small-zh--c000", "backup-seattle-en--c000", "shipping-overseas-zh--c000", "backup-hangzhou-zh--c000", "lost-laptop-zh--c000", "notify-urgent-zh--c000", "incident-degraded-en--c001", "access-staff-en--c001", "audit-test-zh--c000", "audit-production-zh--c000", "travel-engineering-en--c001", "shipping-return-en--c001", "backup-dublin-en--c000", "cert-client-zh--c000", "offboard-staff-en--c001", "audit-us-en--c000", "incident-production-en--c001", "export-analyst-en--c000", "billing-v1-en--c000", "cert-server-zh--c000", "api-sandbox-zh--c000", "audit-eu-en--c000", "release-guide-zh--c003", "api-production-zh--c000", "purchase-hardware-en--c001", "incident-production-en--c000" ],
+      "BGE_M3_HYBRID" : [ "remote-standard-zh--c000", "remote-exception-zh--c000", "expense-deadline-zh--c000", "offboard-staff-zh--c000", "notify-routine-zh--c000", "offboard-contractor-zh--c000", "incident-production-zh--c000", "travel-domestic-zh--c000", "travel-international-zh--c000", "export-member-zh--c000", "access-visitor-zh--c000", "lost-phone-zh--c000", "expense-receipt-zh--c000", "lost-laptop-zh--c000", "shipping-local-zh--c000", "backup-hangzhou-zh--c000", "access-contractor-zh--c000", "audit-test-zh--c000", "export-admin-zh--c000", "notify-urgent-zh--c000", "purchase-large-zh--c000", "purchase-small-zh--c000", "cert-client-zh--c000", "cert-server-zh--c000", "travel-sales-en--c000", "backup-dublin-en--c001", "remote-exception-en--c000", "backup-shanghai-zh--c000", "travel-engineering-en--c000", "remote-standard-en--c000" ],
+      "KEYWORD_REFERENCE" : [ "remote-standard-zh--c000", "incident-production-zh--c000", "offboard-staff-zh--c000", "remote-exception-zh--c000", "notify-routine-zh--c000", "expense-deadline-zh--c000", "offboard-contractor-zh--c000", "lost-phone-zh--c000", "lost-laptop-zh--c000", "expense-receipt-zh--c000", "audit-test-zh--c000", "backup-hangzhou-zh--c000", "cert-client-zh--c000", "cert-server-zh--c000", "export-member-zh--c000", "notify-urgent-zh--c000", "shipping-local-zh--c000", "access-visitor-zh--c000", "travel-international-zh--c000", "travel-domestic-zh--c000", "export-admin-zh--c000", "purchase-small-zh--c000", "purchase-large-zh--c000", "access-contractor-zh--c000", "release-guide-zh--c000" ]
+    },
+    "historicalVectorOrderMatches" : true,
+    "historicalVectorTop50Overlap" : 1.0,
+    "historicalVectorMetrics" : null
+  }, {
+    "id" : "e22",
+    "category" : "unanswerable",
+    "language" : "en",
+    "scores" : {
+      "CURRENT_VECTOR" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      },
+      "BGE_M3_VECTOR" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      },
+      "CURRENT_HYBRID" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      },
+      "BGE_M3_HYBRID" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      },
+      "KEYWORD_REFERENCE" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      }
+    },
+    "rankings" : {
+      "CURRENT_VECTOR" : [ "access-staff-en--c001", "offboard-staff-en--c000", "backup-dublin-en--c001", "travel-engineering-en--c001", "remote-standard-en--c000", "lost-token-en--c001", "offboard-partner-en--c001", "expense-deadline-en--c000", "notify-routine-en--c001", "incident-production-en--c000", "shipping-priority-en--c001", "access-staff-en--c000", "offboard-partner-en--c000", "notify-routine-en--c000", "access-visitor-en--c000", "incident-degraded-en--c000", "restore-guide-en--c015", "restore-guide-en--c005", "notify-urgent-en--c000", "purchase-software-en--c001", "restore-guide-en--c013", "shipping-return-en--c001", "lost-laptop-en--c000", "restore-guide-en--c003", "purchase-hardware-en--c001", "cert-agent-en--c000", "lost-token-en--c000", "remote-exception-en--c000", "purchase-hardware-en--c000", "restore-guide-en--c000", "shipping-priority-en--c000", "purchase-software-en--c000", "travel-engineering-en--c000", "expense-receipt-en--c000", "restore-guide-en--c001", "backup-seattle-en--c000", "travel-sales-en--c000", "cert-gateway-en--c001", "audit-us-en--c000", "restore-guide-en--c009", "backup-dublin-en--c000", "incident-degraded-en--c001", "billing-v1-en--c000", "access-visitor-en--c001", "offboard-staff-en--c001", "restore-guide-en--c002", "billing-v2-en--c000", "restore-guide-en--c011", "audit-eu-en--c000", "restore-guide-en--c017" ],
+      "CURRENT_HYBRID" : [ "remote-standard-en--c000", "access-staff-en--c000", "offboard-staff-en--c000", "expense-deadline-en--c000", "notify-urgent-en--c000", "access-visitor-en--c000", "notify-routine-en--c000", "incident-production-en--c000", "restore-guide-en--c000", "lost-laptop-en--c000", "travel-sales-en--c000", "incident-degraded-en--c000", "shipping-priority-en--c000", "expense-receipt-en--c000", "lost-token-en--c000", "purchase-software-en--c000", "purchase-hardware-en--c000", "remote-exception-en--c000", "access-staff-en--c001", "backup-dublin-en--c001", "travel-engineering-en--c001", "lost-token-en--c001", "offboard-partner-en--c001", "shipping-return-en--c000", "notify-routine-en--c001", "shipping-priority-en--c001", "offboard-partner-en--c000", "export-admin-en--c000", "restore-guide-en--c015", "export-analyst-en--c000" ],
+      "BGE_M3_VECTOR" : [ "access-staff-en--c000", "shipping-priority-en--c000", "notify-urgent-en--c000", "remote-standard-en--c000", "access-visitor-en--c000", "purchase-software-en--c000", "purchase-hardware-en--c000", "expense-deadline-en--c000", "offboard-staff-en--c000", "lost-token-en--c000", "remote-exception-en--c000", "backup-dublin-en--c001", "lost-laptop-en--c000", "access-staff-en--c001", "notify-routine-en--c000", "shipping-return-en--c000", "expense-receipt-en--c000", "shipping-return-en--c001", "shipping-priority-en--c001", "incident-degraded-en--c000", "export-analyst-en--c000", "incident-production-en--c000", "export-admin-en--c000", "offboard-staff-en--c001", "lost-token-en--c001", "purchase-software-en--c001", "offboard-staff-zh--c000", "offboard-partner-en--c000", "travel-sales-en--c000", "incident-production-en--c001", "relay-v2-zh--c000", "backup-dublin-en--c000", "relay-gateway-en--c000", "travel-engineering-en--c001", "backup-seattle-en--c000", "offboard-contractor-zh--c000", "lost-phone-zh--c000", "travel-engineering-en--c000", "purchase-hardware-en--c001", "remote-exception-zh--c000", "cert-server-zh--c000", "relay-agent-en--c000", "relay-v3-zh--c000", "api-sandbox-zh--c000", "billing-v1-en--c000", "cert-client-zh--c000", "access-visitor-zh--c000", "restore-guide-en--c014", "restore-guide-en--c000", "access-visitor-en--c001" ],
+      "BGE_M3_HYBRID" : [ "access-staff-en--c000", "remote-standard-en--c000", "notify-urgent-en--c000", "shipping-priority-en--c000", "access-visitor-en--c000", "expense-deadline-en--c000", "offboard-staff-en--c000", "purchase-software-en--c000", "shipping-return-en--c000", "expense-receipt-en--c000", "notify-routine-en--c000", "purchase-hardware-en--c000", "lost-laptop-en--c000", "lost-token-en--c000", "travel-sales-en--c000", "remote-exception-en--c000", "export-admin-en--c000", "incident-production-en--c000", "export-analyst-en--c000", "incident-degraded-en--c000", "restore-guide-en--c000", "backup-dublin-en--c001", "access-staff-en--c001", "shipping-return-en--c001", "shipping-priority-en--c001", "offboard-staff-en--c001", "lost-token-en--c001", "purchase-software-en--c001", "offboard-staff-zh--c000", "offboard-partner-en--c000" ],
+      "KEYWORD_REFERENCE" : [ "access-staff-en--c000", "remote-standard-en--c000", "notify-urgent-en--c000", "restore-guide-en--c000", "travel-sales-en--c000", "access-visitor-en--c000", "shipping-return-en--c000", "expense-receipt-en--c000", "shipping-priority-en--c000", "notify-routine-en--c000", "offboard-staff-en--c000", "expense-deadline-en--c000", "lost-laptop-en--c000", "export-admin-en--c000", "purchase-software-en--c000", "incident-production-en--c000", "lost-token-en--c000", "export-analyst-en--c000", "purchase-hardware-en--c000", "remote-exception-en--c000", "incident-degraded-en--c000" ]
+    },
+    "historicalVectorOrderMatches" : true,
+    "historicalVectorTop50Overlap" : 1.0,
+    "historicalVectorMetrics" : null
+  }, {
+    "id" : "e23",
+    "category" : "unanswerable",
+    "language" : "zh",
+    "scores" : {
+      "CURRENT_VECTOR" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      },
+      "BGE_M3_VECTOR" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      },
+      "CURRENT_HYBRID" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      },
+      "BGE_M3_HYBRID" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      },
+      "KEYWORD_REFERENCE" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      }
+    },
+    "rankings" : {
+      "CURRENT_VECTOR" : [ "relay-v3-zh--c000", "relay-v2-zh--c000", "relay-gateway-en--c000", "relay-agent-en--c000", "incident-production-en--c001", "cert-agent-en--c001", "restore-guide-en--c000", "billing-v2-en--c000", "restore-guide-en--c006", "incident-production-zh--c000", "release-guide-zh--c003", "incident-degraded-en--c000", "notify-urgent-en--c000", "restore-guide-en--c012", "purchase-software-en--c000", "access-staff-en--c000", "release-guide-zh--c004", "restore-guide-en--c010", "purchase-hardware-en--c000", "release-guide-zh--c002", "backup-dublin-en--c000", "incident-production-en--c000", "billing-v1-en--c000", "restore-guide-en--c011", "lost-laptop-en--c000", "cert-gateway-en--c000", "lost-token-en--c000", "expense-receipt-en--c000", "backup-seattle-en--c000", "export-analyst-en--c000", "restore-guide-en--c003", "access-visitor-en--c001", "restore-guide-en--c004", "notify-urgent-en--c001", "restore-guide-en--c014", "notify-routine-en--c000", "shipping-return-en--c000", "export-admin-en--c000", "restore-guide-en--c016", "restore-guide-en--c008", "restore-guide-en--c005", "audit-us-en--c000", "offboard-partner-en--c000", "purchase-hardware-en--c001", "incident-test-zh--c000", "cert-server-zh--c000", "purchase-software-en--c001", "restore-guide-en--c009", "notify-routine-zh--c000", "restore-guide-en--c002" ],
+      "CURRENT_HYBRID" : [ "relay-v3-zh--c000", "relay-v2-zh--c000", "relay-gateway-en--c000", "relay-agent-en--c000", "release-guide-zh--c003", "release-guide-zh--c002", "release-guide-zh--c004", "incident-production-zh--c000", "cert-server-zh--c000", "incident-test-zh--c000", "cert-client-zh--c000", "incident-production-en--c001", "cert-agent-en--c001", "restore-guide-en--c000", "api-sandbox-zh--c000", "billing-v2-en--c000", "restore-guide-en--c006", "release-guide-zh--c001", "shipping-local-zh--c000", "incident-degraded-en--c000", "purchase-small-zh--c000", "notify-urgent-en--c000", "restore-guide-en--c012", "purchase-software-en--c000", "lost-phone-zh--c000", "access-staff-en--c000", "export-member-zh--c000", "audit-test-zh--c000", "notify-urgent-zh--c000", "restore-guide-en--c010" ],
+      "BGE_M3_VECTOR" : [ "relay-v3-zh--c000", "relay-v2-zh--c000", "relay-gateway-en--c000", "relay-agent-en--c000", "release-guide-zh--c003", "incident-production-zh--c000", "lost-token-en--c001", "restore-guide-en--c012", "offboard-contractor-zh--c000", "offboard-staff-zh--c000", "billing-v1-en--c000", "billing-v2-en--c000", "notify-urgent-zh--c000", "cert-client-zh--c000", "incident-production-en--c001", "release-guide-zh--c000", "purchase-hardware-en--c001", "incident-degraded-en--c001", "lost-phone-zh--c000", "notify-routine-zh--c000", "purchase-software-en--c001", "shipping-priority-en--c001", "notify-urgent-en--c000", "incident-production-en--c000", "release-guide-zh--c001", "incident-degraded-en--c000", "shipping-local-zh--c000", "restore-guide-en--c007", "lost-laptop-zh--c000", "restore-guide-en--c010", "restore-guide-en--c014", "release-guide-zh--c004", "release-guide-zh--c002", "notify-routine-en--c000", "notify-urgent-en--c001", "restore-guide-en--c000", "notify-routine-en--c001", "cert-server-zh--c000", "export-member-zh--c000", "restore-guide-en--c003", "restore-guide-en--c015", "api-production-zh--c000", "restore-guide-en--c004", "access-staff-en--c001", "remote-exception-zh--c000", "lost-token-en--c000", "cert-agent-en--c001", "cert-gateway-en--c000", "access-visitor-en--c001", "remote-exception-en--c000" ],
+      "BGE_M3_HYBRID" : [ "relay-v3-zh--c000", "relay-v2-zh--c000", "relay-gateway-en--c000", "relay-agent-en--c000", "release-guide-zh--c003", "cert-client-zh--c000", "incident-production-zh--c000", "offboard-contractor-zh--c000", "notify-urgent-zh--c000", "release-guide-zh--c001", "lost-phone-zh--c000", "release-guide-zh--c002", "shipping-local-zh--c000", "release-guide-zh--c000", "cert-server-zh--c000", "release-guide-zh--c004", "export-member-zh--c000", "api-production-zh--c000", "lost-token-en--c001", "api-sandbox-zh--c000", "restore-guide-en--c012", "offboard-staff-zh--c000", "billing-v1-en--c000", "billing-v2-en--c000", "incident-test-zh--c000", "purchase-small-zh--c000", "incident-production-en--c001", "purchase-hardware-en--c001", "audit-test-zh--c000", "incident-degraded-en--c001" ],
+      "KEYWORD_REFERENCE" : [ "relay-v3-zh--c000", "relay-v2-zh--c000", "relay-gateway-en--c000", "relay-agent-en--c000", "cert-client-zh--c000", "release-guide-zh--c003", "release-guide-zh--c002", "api-sandbox-zh--c000", "release-guide-zh--c001", "cert-server-zh--c000", "shipping-local-zh--c000", "incident-test-zh--c000", "purchase-small-zh--c000", "release-guide-zh--c004", "lost-phone-zh--c000", "export-member-zh--c000", "audit-test-zh--c000", "notify-urgent-zh--c000", "audit-production-zh--c000", "access-visitor-zh--c000", "api-production-zh--c000", "remote-standard-zh--c000", "offboard-contractor-zh--c000", "backup-shanghai-zh--c000", "purchase-large-zh--c000", "access-contractor-zh--c000", "incident-production-zh--c000", "release-guide-zh--c000" ]
+    },
+    "historicalVectorOrderMatches" : true,
+    "historicalVectorTop50Overlap" : 1.0,
+    "historicalVectorMetrics" : null
+  }, {
+    "id" : "e24",
+    "category" : "unanswerable",
+    "language" : "en",
+    "scores" : {
+      "CURRENT_VECTOR" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      },
+      "BGE_M3_VECTOR" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      },
+      "CURRENT_HYBRID" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      },
+      "BGE_M3_HYBRID" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      },
+      "KEYWORD_REFERENCE" : {
+        "metrics" : null,
+        "recall30" : null,
+        "recall50" : null,
+        "factCoverage5" : null,
+        "allFacts5" : null
+      }
+    },
+    "rankings" : {
+      "CURRENT_VECTOR" : [ "remote-exception-en--c000", "remote-standard-en--c000", "expense-deadline-en--c000", "purchase-software-en--c000", "cert-gateway-en--c000", "purchase-hardware-en--c000", "cert-agent-en--c000", "offboard-staff-en--c000", "backup-seattle-en--c000", "export-analyst-en--c000", "offboard-partner-en--c000", "shipping-return-en--c000", "shipping-return-en--c001", "backup-dublin-en--c000", "incident-production-en--c000", "audit-eu-en--c000", "incident-degraded-en--c000", "audit-us-en--c000", "restore-guide-en--c016", "notify-urgent-en--c000", "access-visitor-en--c001", "lost-laptop-en--c000", "access-visitor-en--c000", "expense-receipt-en--c000", "billing-v2-en--c000", "restore-guide-en--c000", "notify-routine-en--c000", "restore-guide-en--c011", "relay-agent-en--c000", "travel-engineering-en--c000", "access-staff-en--c000", "shipping-priority-en--c000", "restore-guide-en--c013", "restore-guide-en--c017", "travel-sales-en--c000", "lost-token-en--c000", "restore-guide-en--c002", "relay-gateway-en--c000", "billing-v1-en--c000", "restore-guide-en--c010", "restore-guide-en--c003", "restore-guide-en--c012", "export-admin-en--c000", "restore-guide-en--c005", "restore-guide-en--c004", "access-staff-en--c001", "notify-urgent-en--c001", "cert-agent-en--c001", "restore-guide-en--c015", "restore-guide-en--c007" ],
+      "CURRENT_HYBRID" : [ "purchase-software-en--c000", "remote-standard-en--c000", "purchase-hardware-en--c000", "expense-deadline-en--c000", "shipping-return-en--c001", "backup-seattle-en--c000", "cert-agent-en--c000", "backup-dublin-en--c000", "remote-exception-en--c000", "cert-gateway-en--c000", "audit-eu-en--c000", "billing-v2-en--c000", "access-staff-en--c000", "incident-production-en--c000", "restore-guide-en--c016", "access-visitor-en--c000", "lost-laptop-en--c000", "offboard-staff-en--c000", "shipping-return-en--c000", "audit-us-en--c000", "offboard-partner-en--c000", "restore-guide-en--c000", "export-analyst-en--c000", "notify-urgent-en--c000", "shipping-priority-en--c000", "relay-agent-en--c000", "incident-degraded-en--c000", "lost-token-en--c000", "expense-receipt-en--c000", "export-admin-en--c000" ],
+      "BGE_M3_VECTOR" : [ "backup-seattle-en--c000", "backup-dublin-en--c000", "cert-agent-en--c000", "cert-gateway-en--c000", "audit-eu-en--c000", "offboard-partner-en--c000", "audit-us-en--c000", "remote-exception-en--c000", "travel-sales-en--c000", "purchase-software-en--c000", "lost-token-en--c000", "billing-v1-en--c000", "travel-engineering-en--c000", "expense-deadline-en--c000", "remote-standard-en--c000", "backup-shanghai-zh--c000", "restore-guide-en--c000", "billing-v2-en--c000", "offboard-staff-en--c000", "notify-routine-en--c000", "incident-production-en--c000", "expense-deadline-zh--c000", "shipping-return-en--c000", "offboard-staff-zh--c000", "purchase-hardware-en--c000", "relay-gateway-en--c000", "cert-client-zh--c000", "incident-degraded-en--c000", "shipping-priority-en--c000", "shipping-return-en--c001", "lost-laptop-en--c000", "audit-production-zh--c000", "relay-agent-en--c000", "export-admin-en--c000", "notify-urgent-en--c000", "shipping-overseas-zh--c000", "relay-v3-zh--c000", "expense-receipt-zh--c000", "access-visitor-en--c000", "offboard-contractor-zh--c000", "backup-hangzhou-zh--c000", "shipping-local-zh--c000", "restore-guide-en--c016", "remote-exception-zh--c000", "cert-server-zh--c000", "notify-routine-zh--c000", "access-staff-en--c000", "release-guide-zh--c003", "export-analyst-en--c000", "audit-test-zh--c000" ],
+      "BGE_M3_HYBRID" : [ "backup-seattle-en--c000", "backup-dublin-en--c000", "purchase-software-en--c000", "cert-agent-en--c000", "audit-eu-en--c000", "remote-standard-en--c000", "expense-deadline-en--c000", "cert-gateway-en--c000", "billing-v2-en--c000", "purchase-hardware-en--c000", "shipping-return-en--c001", "audit-us-en--c000", "lost-token-en--c000", "remote-exception-en--c000", "restore-guide-en--c000", "offboard-partner-en--c000", "billing-v1-en--c000", "incident-production-en--c000", "access-staff-en--c000", "travel-sales-en--c000", "lost-laptop-en--c000", "shipping-priority-en--c000", "travel-engineering-en--c000", "access-visitor-en--c000", "export-admin-en--c000", "notify-routine-en--c000", "offboard-staff-en--c000", "shipping-return-en--c000", "relay-agent-en--c000", "restore-guide-en--c016" ],
+      "KEYWORD_REFERENCE" : [ "purchase-software-en--c000", "shipping-return-en--c001", "remote-standard-en--c000", "purchase-hardware-en--c000", "access-staff-en--c000", "backup-dublin-en--c000", "backup-seattle-en--c000", "billing-v2-en--c000", "expense-deadline-en--c000", "audit-eu-en--c000", "cert-agent-en--c000", "access-visitor-en--c000", "purchase-software-en--c001", "lost-laptop-en--c000", "restore-guide-en--c016", "restore-guide-en--c000", "shipping-priority-en--c000", "export-admin-en--c000", "incident-production-en--c000", "lost-token-en--c000", "relay-agent-en--c000", "cert-gateway-en--c000", "audit-us-en--c000", "billing-v1-en--c000", "remote-exception-en--c000", "restore-guide-en--c001", "notify-urgent-en--c000", "restore-guide-en--c010", "restore-guide-en--c012", "shipping-return-en--c000", "expense-receipt-en--c000", "notify-routine-en--c000", "offboard-partner-en--c000", "offboard-staff-en--c000", "relay-gateway-en--c000", "travel-engineering-en--c000", "export-analyst-en--c000", "travel-sales-en--c000", "incident-degraded-en--c000" ]
+    },
+    "historicalVectorOrderMatches" : true,
+    "historicalVectorTop50Overlap" : 1.0,
+    "historicalVectorMetrics" : null
+  } ]
+}

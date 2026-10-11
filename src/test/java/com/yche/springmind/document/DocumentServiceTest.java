@@ -215,7 +215,7 @@ class DocumentServiceTest {
                 .willReturn(currentUser);
         given(groupMembershipService.requireGroupOwner(any(HttpServletRequest.class), eq(2001L)))
                 .willReturn(currentUser);
-        given(documentMapper.selectByIdAndGroupId(3001L, 2001L)).willReturn(document);
+        given(documentMapper.selectForUpdate(3001L, 2001L)).willReturn(document);
         given(documentMapper.updateStatus(eq(3001L), eq(2001L), eq("PROCESSING"), eq(null), eq(null)))
                 .willReturn(1);
 

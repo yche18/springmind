@@ -4,6 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yche.springmind.ingestion.mapper.DocumentChunkMapper">
 
+    <select id="selectEvidenceWindow" resultType="com.yche.springmind.ingestion.model.entity.DocumentChunkEntity">
+        select c.id, c.chunk_index as chunkIndex, c.chunk_text as chunkText
+        from document_chunks c join documents d on d.id = c.document_id and d.group_id = c.group_id
+        where c.group_id = #{groupId} and c.document_id = #{documentId}
+          and c.chunk_index between #{start} and #{end}
+          and d.status = 'READY' and d.deleted = false
+        order by c.chunk_index limit 64
+    </select>
+
     <delete id="deleteByDocumentId">
         delete from document_chunks
         where document_id = #{documentId}

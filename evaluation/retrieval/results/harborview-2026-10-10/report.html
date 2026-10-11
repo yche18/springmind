@@ -1,0 +1,935 @@
+<!doctype html><html lang='zh'><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Harborview 扩展集：三组对照（标注已复核）</title><style>body{font:16px/1.65 system-ui,sans-serif;background:#f1f5f9;color:#203044;margin:0}main{max-width:1180px;margin:auto;padding:28px}section{background:#fff;padding:24px;border:1px solid #dde4eb;border-radius:12px;margin:22px 0;overflow:auto}h1,h2{line-height:1.35}table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}th,td{text-align:left;padding:9px;border-bottom:1px solid #dde4eb}th{background:#eaf1f7}a{color:#145ca6}details{border:1px solid #dce4ed;padding:10px;margin:9px 0;border-radius:6px}summary{cursor:pointer}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;background:#f7fafc;padding:12px}code{overflow-wrap:anywhere}.muted{color:#52657a}.notice{border-left:4px solid #c28314;padding:12px;background:#fff8e8}blockquote{border-left:3px solid #87abb9;padding-left:14px}nav a{display:inline-block;padding:5px}li{margin:6px 0}</style><main><h1>Harborview 扩展集：三组对照（标注已复核）</h1><p class='notice'><strong>标注人工复核已通过，分级与指标不变。</strong>查看 <a href='review.html'>复核页面</a>及 <a href='review-approval.json'>确认记录</a>。仍为诊断性合成数据，不代表生产效果。三组均使用原始真实检索命中；未重新调用模型。</p><p>主要排名指标按<strong>聚类与窗口扩展前的切片</strong>计算：每路最多 50 个，候选池最多 30 个，评估前 5 名。语料和标签在查询前冻结。窗口事实覆盖单列，不与切片排名混算。</p><p>20 道有答案题参与排序均值，4 道无答案题不算正确拒答。事实覆盖按不同答案要点去重；重叠切片不会增加事实数量。跨语言题中有 2 道、多证据题 2 道、长文题 2 道需要多个事实，共 6 道。</p><section><h2>总体</h2><table><tr><th>方案</th><th>有答案/全部</th><th>Hit@5</th><th>Recall@5</th><th>MRR@5</th><th>nDCG@5</th><th>候选切片召回</th><th>多事实齐全@5</th></tr><tr><td>仅关键词</td><td>20 / 24</td><td>0.9000</td><td>0.9000</td><td>0.8167</td><td>0.8403</td><td>1.0000</td><td>5 / 6</td></tr><tr><td>仅向量</td><td>20 / 24</td><td>0.8000</td><td>0.7750</td><td>0.7500</td><td>0.7397</td><td>0.8500</td><td>3 / 6</td></tr><tr><td>双路 RRF</td><td>20 / 24</td><td>0.8500</td><td>0.8500</td><td>0.7767</td><td>0.7863</td><td>0.9750</td><td>4 / 6</td></tr></table><h3>不同阶段的独立事实覆盖</h3><table><tr><th>方案</th><th>原始命中（每路≤50）</th><th>候选切片≤30</th><th>切片前5</th><th>精排入口窗口前5</th><th>最终选中窗口</th></tr><tr><td>仅关键词</td><td>1.0000</td><td>1.0000</td><td>0.9000</td><td>0.9000</td><td>0.9000</td></tr><tr><td>仅向量</td><td>0.8750</td><td>0.8500</td><td>0.7750</td><td>0.8000</td><td>0.8000</td></tr><tr><td>双路 RRF</td><td>1.0000</td><td>0.9750</td><td>0.8500</td><td>0.8500</td><td>0.8500</td></tr></table></section><section><h2>中文问题</h2><table><tr><th>方案</th><th>有答案/全部</th><th>Hit@5</th><th>Recall@5</th><th>MRR@5</th><th>nDCG@5</th><th>候选切片召回</th><th>多事实齐全@5</th></tr><tr><td>仅关键词</td><td>10 / 12</td><td>0.9000</td><td>0.9000</td><td>0.8500</td><td>0.8631</td><td>1.0000</td><td>2 / 3</td></tr><tr><td>仅向量</td><td>10 / 12</td><td>0.8000</td><td>0.8000</td><td>0.8000</td><td>0.7920</td><td>0.9000</td><td>2 / 3</td></tr><tr><td>双路 RRF</td><td>10 / 12</td><td>0.9000</td><td>0.9000</td><td>0.8200</td><td>0.8307</td><td>0.9500</td><td>2 / 3</td></tr></table><h3>不同阶段的独立事实覆盖</h3><table><tr><th>方案</th><th>原始命中（每路≤50）</th><th>候选切片≤30</th><th>切片前5</th><th>精排入口窗口前5</th><th>最终选中窗口</th></tr><tr><td>仅关键词</td><td>1.0000</td><td>1.0000</td><td>0.9000</td><td>0.9000</td><td>0.9000</td></tr><tr><td>仅向量</td><td>0.9500</td><td>0.9000</td><td>0.8000</td><td>0.8000</td><td>0.8000</td></tr><tr><td>双路 RRF</td><td>1.0000</td><td>0.9500</td><td>0.9000</td><td>0.9000</td><td>0.9000</td></tr></table></section><section><h2>英文问题</h2><table><tr><th>方案</th><th>有答案/全部</th><th>Hit@5</th><th>Recall@5</th><th>MRR@5</th><th>nDCG@5</th><th>候选切片召回</th><th>多事实齐全@5</th></tr><tr><td>仅关键词</td><td>10 / 12</td><td>0.9000</td><td>0.9000</td><td>0.7833</td><td>0.8175</td><td>1.0000</td><td>3 / 3</td></tr><tr><td>仅向量</td><td>10 / 12</td><td>0.8000</td><td>0.7500</td><td>0.7000</td><td>0.6875</td><td>0.8000</td><td>1 / 3</td></tr><tr><td>双路 RRF</td><td>10 / 12</td><td>0.8000</td><td>0.8000</td><td>0.7333</td><td>0.7420</td><td>1.0000</td><td>2 / 3</td></tr></table><h3>不同阶段的独立事实覆盖</h3><table><tr><th>方案</th><th>原始命中（每路≤50）</th><th>候选切片≤30</th><th>切片前5</th><th>精排入口窗口前5</th><th>最终选中窗口</th></tr><tr><td>仅关键词</td><td>1.0000</td><td>1.0000</td><td>0.9000</td><td>0.9000</td><td>0.9000</td></tr><tr><td>仅向量</td><td>0.8000</td><td>0.8000</td><td>0.7500</td><td>0.8000</td><td>0.8000</td></tr><tr><td>双路 RRF</td><td>1.0000</td><td>1.0000</td><td>0.8000</td><td>0.8000</td><td>0.8000</td></tr></table></section><section><h2>精确匹配</h2><table><tr><th>方案</th><th>有答案/全部</th><th>Hit@5</th><th>Recall@5</th><th>MRR@5</th><th>nDCG@5</th><th>候选切片召回</th><th>多事实齐全@5</th></tr><tr><td>仅关键词</td><td>6 / 6</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>—</td></tr><tr><td>仅向量</td><td>6 / 6</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>—</td></tr><tr><td>双路 RRF</td><td>6 / 6</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>—</td></tr></table><h3>不同阶段的独立事实覆盖</h3><table><tr><th>方案</th><th>原始命中（每路≤50）</th><th>候选切片≤30</th><th>切片前5</th><th>精排入口窗口前5</th><th>最终选中窗口</th></tr><tr><td>仅关键词</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td></tr><tr><td>仅向量</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td></tr><tr><td>双路 RRF</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td></tr></table></section><section><h2>同义表达</h2><table><tr><th>方案</th><th>有答案/全部</th><th>Hit@5</th><th>Recall@5</th><th>MRR@5</th><th>nDCG@5</th><th>候选切片召回</th><th>多事实齐全@5</th></tr><tr><td>仅关键词</td><td>6 / 6</td><td>0.8333</td><td>0.8333</td><td>0.8333</td><td>0.8333</td><td>1.0000</td><td>—</td></tr><tr><td>仅向量</td><td>6 / 6</td><td>1.0000</td><td>1.0000</td><td>0.8333</td><td>0.8770</td><td>1.0000</td><td>—</td></tr><tr><td>双路 RRF</td><td>6 / 6</td><td>1.0000</td><td>1.0000</td><td>0.8889</td><td>0.9167</td><td>1.0000</td><td>—</td></tr></table><h3>不同阶段的独立事实覆盖</h3><table><tr><th>方案</th><th>原始命中（每路≤50）</th><th>候选切片≤30</th><th>切片前5</th><th>精排入口窗口前5</th><th>最终选中窗口</th></tr><tr><td>仅关键词</td><td>1.0000</td><td>1.0000</td><td>0.8333</td><td>0.8333</td><td>0.8333</td></tr><tr><td>仅向量</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td></tr><tr><td>双路 RRF</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td></tr></table></section><section><h2>跨语言</h2><table><tr><th>方案</th><th>有答案/全部</th><th>Hit@5</th><th>Recall@5</th><th>MRR@5</th><th>nDCG@5</th><th>候选切片召回</th><th>多事实齐全@5</th></tr><tr><td>仅关键词</td><td>4 / 4</td><td>0.7500</td><td>0.7500</td><td>0.3333</td><td>0.4514</td><td>1.0000</td><td>1 / 2</td></tr><tr><td>仅向量</td><td>4 / 4</td><td>0.0000</td><td>0.0000</td><td>0.0000</td><td>0.0000</td><td>0.2500</td><td>0 / 2</td></tr><tr><td>双路 RRF</td><td>4 / 4</td><td>0.2500</td><td>0.2500</td><td>0.0500</td><td>0.0967</td><td>0.8750</td><td>0 / 2</td></tr></table><h3>不同阶段的独立事实覆盖</h3><table><tr><th>方案</th><th>原始命中（每路≤50）</th><th>候选切片≤30</th><th>切片前5</th><th>精排入口窗口前5</th><th>最终选中窗口</th></tr><tr><td>仅关键词</td><td>1.0000</td><td>1.0000</td><td>0.7500</td><td>0.7500</td><td>0.7500</td></tr><tr><td>仅向量</td><td>0.3750</td><td>0.2500</td><td>0.0000</td><td>0.0000</td><td>0.0000</td></tr><tr><td>双路 RRF</td><td>1.0000</td><td>0.8750</td><td>0.2500</td><td>0.2500</td><td>0.2500</td></tr></table></section><section><h2>多证据</h2><table><tr><th>方案</th><th>有答案/全部</th><th>Hit@5</th><th>Recall@5</th><th>MRR@5</th><th>nDCG@5</th><th>候选切片召回</th><th>多事实齐全@5</th></tr><tr><td>仅关键词</td><td>2 / 2</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>2 / 2</td></tr><tr><td>仅向量</td><td>2 / 2</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>2 / 2</td></tr><tr><td>双路 RRF</td><td>2 / 2</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>2 / 2</td></tr></table><h3>不同阶段的独立事实覆盖</h3><table><tr><th>方案</th><th>原始命中（每路≤50）</th><th>候选切片≤30</th><th>切片前5</th><th>精排入口窗口前5</th><th>最终选中窗口</th></tr><tr><td>仅关键词</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td></tr><tr><td>仅向量</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td></tr><tr><td>双路 RRF</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td></tr></table></section><section><h2>长文分块</h2><table><tr><th>方案</th><th>有答案/全部</th><th>Hit@5</th><th>Recall@5</th><th>MRR@5</th><th>nDCG@5</th><th>候选切片召回</th><th>多事实齐全@5</th></tr><tr><td>仅关键词</td><td>2 / 2</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>2 / 2</td></tr><tr><td>仅向量</td><td>2 / 2</td><td>1.0000</td><td>0.7500</td><td>1.0000</td><td>0.7664</td><td>1.0000</td><td>1 / 2</td></tr><tr><td>双路 RRF</td><td>2 / 2</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>0.9197</td><td>1.0000</td><td>2 / 2</td></tr></table><h3>不同阶段的独立事实覆盖</h3><table><tr><th>方案</th><th>原始命中（每路≤50）</th><th>候选切片≤30</th><th>切片前5</th><th>精排入口窗口前5</th><th>最终选中窗口</th></tr><tr><td>仅关键词</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td></tr><tr><td>仅向量</td><td>1.0000</td><td>1.0000</td><td>0.7500</td><td>1.0000</td><td>1.0000</td></tr><tr><td>双路 RRF</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>1.0000</td></tr></table></section><section><h2>无答案</h2><table><tr><th>方案</th><th>有答案/全部</th><th>Hit@5</th><th>Recall@5</th><th>MRR@5</th><th>nDCG@5</th><th>候选切片召回</th><th>多事实齐全@5</th></tr><tr><td>仅关键词</td><td>0 / 4</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>仅向量</td><td>0 / 4</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>双路 RRF</td><td>0 / 4</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr></table><h3>不同阶段的独立事实覆盖</h3><table><tr><th>方案</th><th>原始命中（每路≤50）</th><th>候选切片≤30</th><th>切片前5</th><th>精排入口窗口前5</th><th>最终选中窗口</th></tr><tr><td>仅关键词</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>仅向量</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><td>双路 RRF</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr></table></section><section><h2>全部题目的变化（双路相对向量，nDCG@5）</h2><ul><li><a href='#e01'>e01</a> · 不变</li><li><a href='#e02'>e02</a> · 不变</li><li><a href='#e03'>e03</a> · 不变</li><li><a href='#e04'>e04</a> · 不变</li><li><a href='#e05'>e05</a> · 不变</li><li><a href='#e06'>e06</a> · 不变</li><li><a href='#e07'>e07</a> · 不变</li><li><a href='#e08'>e08</a> · 退化</li><li><a href='#e09'>e09</a> · 不变</li><li><a href='#e10'>e10</a> · 改善</li><li><a href='#e11'>e11</a> · 不变</li><li><a href='#e12'>e12</a> · 不变</li><li><a href='#e13'>e13</a> · 改善</li><li><a href='#e14'>e14</a> · 不变</li><li><a href='#e15'>e15</a> · 不变</li><li><a href='#e16'>e16</a> · 不变</li><li><a href='#e17'>e17</a> · 不变</li><li><a href='#e18'>e18</a> · 不变</li><li><a href='#e19'>e19</a> · 改善</li><li><a href='#e20'>e20</a> · 不变</li><li><a href='#e21'>e21</a> · 无答案，不评分</li><li><a href='#e22'>e22</a> · 无答案，不评分</li><li><a href='#e23'>e23</a> · 无答案，不评分</li><li><a href='#e24'>e24</a> · 无答案，不评分</li></ul></section><section id='e01'><h2>e01 · Relay 客户端 v3 报 HBR-417 时应该怎么处理？</h2><p><a href='review.html#e01'>查看应答要点与全部标注</a>；向量命中 50，关键词命中 18。</p><h3>仅关键词</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>relay-v3-zh--c000</code></li><li><code>relay-v2-zh--c000</code></li><li><code>relay-gateway-en--c000</code></li><li><code>relay-agent-en--c000</code></li><li><code>notify-urgent-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>relay-v3-zh</h4><pre>Evidence ID: E1
+文件名：relay-v3-zh.txt
+海湾实验室 Relay 客户端 v3 运维说明。错误 HBR-417 表示设备时钟与认证服务器不同步。先同步设备时间，再刷新登录令牌；不要重置用户密码。本说明只适用于 v3 桌面客户端，不适用于 v2 或支付网关。故障处理后应把客户端版本和发生时间记入支持工单。</pre><h4>relay-v2-zh</h4><pre>Evidence ID: E2
+文件名：relay-v2-zh.txt
+海湾实验室 Relay 客户端 v2 历史支持说明。错误 HBR-417 表示代理证书不受信任。应安装企业根证书，然后重新启动客户端。v2 已进入维护阶段，此含义不能用于 v3 排障。工单应保留代理配置和版本信息，但不要上传私钥。</pre><h4>relay-gateway-en</h4><pre>Evidence ID: E3
+文件名：relay-gateway-en.txt
+Harborview Relay gateway 2.1 support note. Error HBR-471 indicates that a tenant route is not registered. The gateway administrator must register the route before traffic is retried. Do not install a client certificate as a workaround. Include the tenant route name and gateway version in the support ticket.</pre><h4>relay-agent-en</h4><pre>Evidence ID: E4
+文件名：relay-agent-en.txt
+Harborview Relay agent 3.2 operations note. Error HBR-418 means the local disk queue is full. Pause incoming jobs, archive acknowledged records, then resume the agent. This code does not indicate clock drift or a password failure. Record the queue size and agent version in the incident ticket before cleanup.</pre><h4>notify-urgent-zh</h4><pre>Evidence ID: E5
+文件名：notify-urgent-zh.txt
+海湾实验室大陆值班紧急通知。影响正式服务的紧急事件同时发送短信并拨打值班电话。仅发送邮件不能代替呼叫；无人接听时按值班表升级。普通维护提醒使用每日摘要，不能占用紧急通道。处理人应在事件工单中记录接收时间。</pre></details><h3>仅向量</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>relay-v3-zh--c000</code></li><li><code>relay-v2-zh--c000</code></li><li><code>relay-agent-en--c000</code></li><li><code>relay-gateway-en--c000</code></li><li><code>restore-guide-en--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>relay-v3-zh</h4><pre>Evidence ID: E1
+文件名：relay-v3-zh.txt
+海湾实验室 Relay 客户端 v3 运维说明。错误 HBR-417 表示设备时钟与认证服务器不同步。先同步设备时间，再刷新登录令牌；不要重置用户密码。本说明只适用于 v3 桌面客户端，不适用于 v2 或支付网关。故障处理后应把客户端版本和发生时间记入支持工单。</pre><h4>relay-v2-zh</h4><pre>Evidence ID: E2
+文件名：relay-v2-zh.txt
+海湾实验室 Relay 客户端 v2 历史支持说明。错误 HBR-417 表示代理证书不受信任。应安装企业根证书，然后重新启动客户端。v2 已进入维护阶段，此含义不能用于 v3 排障。工单应保留代理配置和版本信息，但不要上传私钥。</pre><h4>relay-agent-en</h4><pre>Evidence ID: E3
+文件名：relay-agent-en.txt
+Harborview Relay agent 3.2 operations note. Error HBR-418 means the local disk queue is full. Pause incoming jobs, archive acknowledged records, then resume the agent. This code does not indicate clock drift or a password failure. Record the queue size and agent version in the incident ticket before cleanup.</pre><h4>relay-gateway-en</h4><pre>Evidence ID: E4
+文件名：relay-gateway-en.txt
+Harborview Relay gateway 2.1 support note. Error HBR-471 indicates that a tenant route is not registered. The gateway administrator must register the route before traffic is retried. Do not install a client certificate as a workaround. Include the tenant route name and gateway version in the support ticket.</pre><h4>restore-guide-en</h4><pre>Evidence ID: E5
+文件名：restore-guide-en.txt
+Harborview Atlas restoration handbook. This guide covers restoration of the Atlas reporting service, not general office backups. It is organized for operators, service owners and audit reviewers. Read the requested recovery scope before choosing a snapshot. A successful file download alone does not demonstrate that a restoration is correct. Every restoration has a case identifier carried through preparation, validation and closure.</pre></details><h3>双路 RRF</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>relay-v3-zh--c000</code></li><li><code>relay-v2-zh--c000</code></li><li><code>relay-agent-en--c000</code></li><li><code>relay-gateway-en--c000</code></li><li><code>incident-production-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>relay-v3-zh</h4><pre>Evidence ID: E1
+文件名：relay-v3-zh.txt
+海湾实验室 Relay 客户端 v3 运维说明。错误 HBR-417 表示设备时钟与认证服务器不同步。先同步设备时间，再刷新登录令牌；不要重置用户密码。本说明只适用于 v3 桌面客户端，不适用于 v2 或支付网关。故障处理后应把客户端版本和发生时间记入支持工单。</pre><h4>relay-v2-zh</h4><pre>Evidence ID: E2
+文件名：relay-v2-zh.txt
+海湾实验室 Relay 客户端 v2 历史支持说明。错误 HBR-417 表示代理证书不受信任。应安装企业根证书，然后重新启动客户端。v2 已进入维护阶段，此含义不能用于 v3 排障。工单应保留代理配置和版本信息，但不要上传私钥。</pre><h4>relay-agent-en</h4><pre>Evidence ID: E3
+文件名：relay-agent-en.txt
+Harborview Relay agent 3.2 operations note. Error HBR-418 means the local disk queue is full. Pause incoming jobs, archive acknowledged records, then resume the agent. This code does not indicate clock drift or a password failure. Record the queue size and agent version in the incident ticket before cleanup.</pre><h4>relay-gateway-en</h4><pre>Evidence ID: E4
+文件名：relay-gateway-en.txt
+Harborview Relay gateway 2.1 support note. Error HBR-471 indicates that a tenant route is not registered. The gateway administrator must register the route before traffic is retried. Do not install a client certificate as a workaround. Include the tenant route name and gateway version in the support ticket.</pre><h4>incident-production-zh</h4><pre>Evidence ID: E5
+文件名：incident-production-zh.txt
+海湾实验室大陆正式环境 S1 事故。值班工程师须在八分钟内确认，之后每二十分钟发布一次状态更新。生产负责人协调回滚与沟通，恢复后补交事件记录。没有用户影响的测试环境告警不按 S1 正式事故处理。确认告警不等于已恢复服务。</pre></details></section><section id='e02'><h2>e02 · What is the tenant request limit for billing API version 2?</h2><p><a href='review.html#e02'>查看应答要点与全部标注</a>；向量命中 50，关键词命中 19。</p><h3>仅关键词</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>billing-v2-en--c000</code></li><li><code>billing-v1-en--c000</code></li><li><code>relay-gateway-en--c000</code></li><li><code>api-production-zh--c000</code></li><li><code>export-admin-en--c001</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>billing-v2-en</h4><pre>Evidence ID: E1
+文件名：billing-v2-en.txt
+Harborview billing API version 2 quota. A tenant may send 120 requests per minute. On a rate-limit response, wait for Retry-After before retrying. Multiple tokens share the tenant quota. The version 2 limit is independent of the order API and does not apply to the retired version 1 endpoint.</pre><h4>billing-v1-en</h4><pre>Evidence ID: E2
+文件名：billing-v1-en.txt
+Harborview billing API version 1 migration notice. The legacy endpoint permits 80 requests per minute per tenant. New integrations should use version 2 and must consult its separate quota. Rotating tokens does not increase the allowance. Existing tenants may request migration assistance through the integration desk.</pre><h4>relay-gateway-en</h4><pre>Evidence ID: E3
+文件名：relay-gateway-en.txt
+Harborview Relay gateway 2.1 support note. Error HBR-471 indicates that a tenant route is not registered. The gateway administrator must register the route before traffic is retried. Do not install a client certificate as a workaround. Include the tenant route name and gateway version in the support ticket.</pre><h4>api-production-zh</h4><pre>Evidence ID: E4
+文件名：api-production-zh.txt
+海湾实验室订单 API 的正式环境配额。每个租户每分钟最多发送二百四十个请求；超过限额时等待下一分钟，不要不断立即重试。配额按租户统计，而不是按令牌统计。批量导出有独立限制，此处也不适用于账单 API。</pre><h4>export-admin-en</h4><pre>Evidence ID: E5
+文件名：export-admin-en.txt
+Harborview Bristol administrator export policy. Approved administrative CSV downloads may contain up to 100,000 rows. Data-owner approval and existing access restrictions still apply. Administrator status does not authorize exporting unrelated projects. Analysts use a lower limit; API rate limits are governed by their own endpoint policies.</pre></details><h3>仅向量</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>billing-v2-en--c000</code></li><li><code>billing-v1-en--c000</code></li><li><code>export-admin-en--c001</code></li><li><code>relay-gateway-en--c000</code></li><li><code>restore-guide-en--c015</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>billing-v2-en</h4><pre>Evidence ID: E1
+文件名：billing-v2-en.txt
+Harborview billing API version 2 quota. A tenant may send 120 requests per minute. On a rate-limit response, wait for Retry-After before retrying. Multiple tokens share the tenant quota. The version 2 limit is independent of the order API and does not apply to the retired version 1 endpoint.</pre><h4>billing-v1-en</h4><pre>Evidence ID: E2
+文件名：billing-v1-en.txt
+Harborview billing API version 1 migration notice. The legacy endpoint permits 80 requests per minute per tenant. New integrations should use version 2 and must consult its separate quota. Rotating tokens does not increase the allowance. Existing tenants may request migration assistance through the integration desk.</pre><h4>export-admin-en</h4><pre>Evidence ID: E3
+文件名：export-admin-en.txt
+Harborview Bristol administrator export policy. Approved administrative CSV downloads may contain up to 100,000 rows. Data-owner approval and existing access restrictions still apply. Administrator status does not authorize exporting unrelated projects. Analysts use a lower limit; API rate limits are governed by their own endpoint policies.</pre><h4>relay-gateway-en</h4><pre>Evidence ID: E4
+文件名：relay-gateway-en.txt
+Harborview Relay gateway 2.1 support note. Error HBR-471 indicates that a tenant route is not registered. The gateway administrator must register the route before traffic is retried. Do not install a client certificate as a workaround. Include the tenant route name and gateway version in the support ticket.</pre><h4>restore-guide-en</h4><pre>Evidence ID: E5
+文件名：restore-guide-en.txt
+lure affects active customers.
+
+Section seven: closure. Confirm that scheduled refreshes and notification settings match the recorded pre-change configuration. Revoke the temporary restore credential and destroy the isolated staging database once no further checks are required. The case remains open until the owner accepts the outcome. Closure records must distinguish a successful restoration from a canceled request or a rollback.
+
+Section eight: evidence retention. Atlas restoration approval records are retained for ninety days after closure. The audit custodian stores the approvals and verification checklist with the case identifier. A legal hold pauses disposal of the affected records. This retention period is not the backup snapshot lifetime. Reviewers should be able to trace the requester, approvers, chosen timestamp and final disposition without recovering credentials from the evidence.</pre></details><h3>双路 RRF</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>billing-v2-en--c000</code></li><li><code>billing-v1-en--c000</code></li><li><code>relay-gateway-en--c000</code></li><li><code>export-admin-en--c001</code></li><li><code>restore-guide-en--c015</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>billing-v2-en</h4><pre>Evidence ID: E1
+文件名：billing-v2-en.txt
+Harborview billing API version 2 quota. A tenant may send 120 requests per minute. On a rate-limit response, wait for Retry-After before retrying. Multiple tokens share the tenant quota. The version 2 limit is independent of the order API and does not apply to the retired version 1 endpoint.</pre><h4>billing-v1-en</h4><pre>Evidence ID: E2
+文件名：billing-v1-en.txt
+Harborview billing API version 1 migration notice. The legacy endpoint permits 80 requests per minute per tenant. New integrations should use version 2 and must consult its separate quota. Rotating tokens does not increase the allowance. Existing tenants may request migration assistance through the integration desk.</pre><h4>relay-gateway-en</h4><pre>Evidence ID: E3
+文件名：relay-gateway-en.txt
+Harborview Relay gateway 2.1 support note. Error HBR-471 indicates that a tenant route is not registered. The gateway administrator must register the route before traffic is retried. Do not install a client certificate as a workaround. Include the tenant route name and gateway version in the support ticket.</pre><h4>export-admin-en</h4><pre>Evidence ID: E4
+文件名：export-admin-en.txt
+Harborview Bristol administrator export policy. Approved administrative CSV downloads may contain up to 100,000 rows. Data-owner approval and existing access restrictions still apply. Administrator status does not authorize exporting unrelated projects. Analysts use a lower limit; API rate limits are governed by their own endpoint policies.</pre><h4>restore-guide-en</h4><pre>Evidence ID: E5
+文件名：restore-guide-en.txt
+lure affects active customers.
+
+Section seven: closure. Confirm that scheduled refreshes and notification settings match the recorded pre-change configuration. Revoke the temporary restore credential and destroy the isolated staging database once no further checks are required. The case remains open until the owner accepts the outcome. Closure records must distinguish a successful restoration from a canceled request or a rollback.
+
+Section eight: evidence retention. Atlas restoration approval records are retained for ninety days after closure. The audit custodian stores the approvals and verification checklist with the case identifier. A legal hold pauses disposal of the affected records. This retention period is not the backup snapshot lifetime. Reviewers should be able to trace the requester, approvers, chosen timestamp and final disposition without recovering credentials from the evidence.</pre></details></section><section id='e03'><h2>e03 · 设备客户端证书到期前多少天能续期？</h2><p><a href='review.html#e03'>查看应答要点与全部标注</a>；向量命中 50，关键词命中 18。</p><h3>仅关键词</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>cert-client-zh--c000</code></li><li><code>cert-server-zh--c000</code></li><li><code>offboard-contractor-zh--c000</code></li><li><code>relay-v2-zh--c000</code></li><li><code>relay-v3-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>cert-client-zh</h4><pre>Evidence ID: E1
+文件名：cert-client-zh.txt
+海湾实验室设备客户端证书规则。客户端证书在到期前十四天进入续期窗口。设备管理员在管理台提交续期申请，用户无须重新注册设备。私钥不得附在支持邮件中。本规则不涵盖服务器证书，服务器有独立的变更审批流程。</pre><h4>cert-server-zh</h4><pre>Evidence ID: E2
+文件名：cert-server-zh.txt
+海湾实验室服务器证书维护规则。服务器证书到期前三十天创建变更单，取得服务负责人批准后再部署。替换证书时应保留回滚版本并验证健康检查。设备客户端续期不走这一流程。任何工单都不得包含证书私钥。</pre><h4>offboard-contractor-zh</h4><pre>Evidence ID: E3
+文件名：offboard-contractor-zh.txt
+海湾实验室大陆团队承包商离场。合同结束当天十八点前关闭项目账号，项目负责人确认交接资料和设备归还。延长访问必须在合同到期前重新批准。项目组成员不得私下共享自己的账号。正式员工离职使用另一份人力资源交接流程。</pre><h4>relay-v2-zh</h4><pre>Evidence ID: E4
+文件名：relay-v2-zh.txt
+海湾实验室 Relay 客户端 v2 历史支持说明。错误 HBR-417 表示代理证书不受信任。应安装企业根证书，然后重新启动客户端。v2 已进入维护阶段，此含义不能用于 v3 排障。工单应保留代理配置和版本信息，但不要上传私钥。</pre><h4>relay-v3-zh</h4><pre>Evidence ID: E5
+文件名：relay-v3-zh.txt
+海湾实验室 Relay 客户端 v3 运维说明。错误 HBR-417 表示设备时钟与认证服务器不同步。先同步设备时间，再刷新登录令牌；不要重置用户密码。本说明只适用于 v3 桌面客户端，不适用于 v2 或支付网关。故障处理后应把客户端版本和发生时间记入支持工单。</pre></details><h3>仅向量</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>cert-client-zh--c000</code></li><li><code>cert-server-zh--c000</code></li><li><code>shipping-overseas-zh--c000</code></li><li><code>audit-test-zh--c000</code></li><li><code>backup-shanghai-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>cert-client-zh</h4><pre>Evidence ID: E1
+文件名：cert-client-zh.txt
+海湾实验室设备客户端证书规则。客户端证书在到期前十四天进入续期窗口。设备管理员在管理台提交续期申请，用户无须重新注册设备。私钥不得附在支持邮件中。本规则不涵盖服务器证书，服务器有独立的变更审批流程。</pre><h4>cert-server-zh</h4><pre>Evidence ID: E2
+文件名：cert-server-zh.txt
+海湾实验室服务器证书维护规则。服务器证书到期前三十天创建变更单，取得服务负责人批准后再部署。替换证书时应保留回滚版本并验证健康检查。设备客户端续期不走这一流程。任何工单都不得包含证书私钥。</pre><h4>shipping-overseas-zh</h4><pre>Evidence ID: E3
+文件名：shipping-overseas-zh.txt
+海湾实验室跨境设备寄送。申请获批后预留十个工作日准备报关材料和出口审查。实际到达时间取决于承运商与海关，不作固定保证。设备内容必须通过数据清理检查。国内本地备用机寄送使用另一份操作规则。</pre><h4>audit-test-zh</h4><pre>Evidence ID: E4
+文件名：audit-test-zh.txt
+海湾实验室测试环境审计日志。常规保留三十天，只供工程排障和自动化验证。测试数据不得包含真实客户密钥。若收到法律保留通知，按法务要求保存指定记录。正式环境日志和备份快照有不同的保留政策。</pre><h4>backup-shanghai-zh</h4><pre>Evidence ID: E5
+文件名：backup-shanghai-zh.txt
+海湾实验室上海办公系统备份规则。备份保留四十五天，恢复申请由上海平台组处理。申请人需要给出系统名称、恢复日期和工单编号。此规则只涵盖办公系统，不包括杭州研发环境和海外区域。备份到期不等于用户文档的回收站期限。</pre></details><h3>双路 RRF</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>cert-client-zh--c000</code></li><li><code>cert-server-zh--c000</code></li><li><code>shipping-overseas-zh--c000</code></li><li><code>shipping-local-zh--c000</code></li><li><code>audit-test-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>cert-client-zh</h4><pre>Evidence ID: E1
+文件名：cert-client-zh.txt
+海湾实验室设备客户端证书规则。客户端证书在到期前十四天进入续期窗口。设备管理员在管理台提交续期申请，用户无须重新注册设备。私钥不得附在支持邮件中。本规则不涵盖服务器证书，服务器有独立的变更审批流程。</pre><h4>cert-server-zh</h4><pre>Evidence ID: E2
+文件名：cert-server-zh.txt
+海湾实验室服务器证书维护规则。服务器证书到期前三十天创建变更单，取得服务负责人批准后再部署。替换证书时应保留回滚版本并验证健康检查。设备客户端续期不走这一流程。任何工单都不得包含证书私钥。</pre><h4>shipping-overseas-zh</h4><pre>Evidence ID: E3
+文件名：shipping-overseas-zh.txt
+海湾实验室跨境设备寄送。申请获批后预留十个工作日准备报关材料和出口审查。实际到达时间取决于承运商与海关，不作固定保证。设备内容必须通过数据清理检查。国内本地备用机寄送使用另一份操作规则。</pre><h4>shipping-local-zh</h4><pre>Evidence ID: E4
+文件名：shipping-local-zh.txt
+海湾实验室大陆设备寄送。已批准的本地备用设备通常在两个工作日内交给承运商，物流时间另计。收件人核对设备编号后签收，并由资产管理员更新保管人。此时间不是国际运输承诺，也不是丢失设备的安全报告时限。</pre><h4>audit-test-zh</h4><pre>Evidence ID: E5
+文件名：audit-test-zh.txt
+海湾实验室测试环境审计日志。常规保留三十天，只供工程排障和自动化验证。测试数据不得包含真实客户密钥。若收到法律保留通知，按法务要求保存指定记录。正式环境日志和备份快照有不同的保留政策。</pre></details></section><section id='e04'><h2>e04 · How soon must a Bristol production S1 incident be acknowledged?</h2><p><a href='review.html#e04'>查看应答要点与全部标注</a>；向量命中 50，关键词命中 43。</p><h3>仅关键词</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>incident-production-en--c000</code></li><li><code>incident-degraded-en--c000</code></li><li><code>incident-production-zh--c000</code></li><li><code>incident-test-zh--c000</code></li><li><code>incident-production-en--c001</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>incident-production-en</h4><pre>Evidence ID: E1
+文件名：incident-production-en.txt
+Harborview Bristol production S1 incident procedure. Acknowledge within twelve minutes and publish an update every twenty-five minutes. The incident lead coordinates mitigation and records decisions. This is the production procedure, not a staging alert rule. Acknowledgment does not mean the service has recovered or that a root cause is confirmed.</pre><h4>incident-degraded-en</h4><pre>Evidence ID: E2
+文件名：incident-degraded-en.txt
+Harborview Bristol production S2 degraded-service procedure. Acknowledge within one hour when a workaround remains available and there is no complete outage. The service owner decides the next update time. Escalate to S1 if the impact becomes a production outage. Staging alerts are handled through the engineering backlog.</pre><h4>incident-production-zh</h4><pre>Evidence ID: E3
+文件名：incident-production-zh.txt
+海湾实验室大陆正式环境 S1 事故。值班工程师须在八分钟内确认，之后每二十分钟发布一次状态更新。生产负责人协调回滚与沟通，恢复后补交事件记录。没有用户影响的测试环境告警不按 S1 正式事故处理。确认告警不等于已恢复服务。</pre><h4>incident-test-zh</h4><pre>Evidence ID: E4
+文件名：incident-test-zh.txt
+海湾实验室测试环境 S1 标记说明。测试集群中的 S1 标签只是压测分级，不代表正式环境事故。无用户影响时由项目组在下个工作日处理并记录原因。若影响正式服务，转交生产事故流程。测试告警不能替代正式环境的状态通报。</pre><h4>relay-agent-en</h4><pre>Evidence ID: E5
+文件名：relay-agent-en.txt
+Harborview Relay agent 3.2 operations note. Error HBR-418 means the local disk queue is full. Pause incoming jobs, archive acknowledged records, then resume the agent. This code does not indicate clock drift or a password failure. Record the queue size and agent version in the incident ticket before cleanup.</pre></details><h3>仅向量</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>incident-production-en--c000</code></li><li><code>incident-degraded-en--c000</code></li><li><code>restore-guide-en--c013</code></li><li><code>notify-routine-en--c001</code></li><li><code>restore-guide-en--c001</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>incident-production-en</h4><pre>Evidence ID: E1
+文件名：incident-production-en.txt
+Harborview Bristol production S1 incident procedure. Acknowledge within twelve minutes and publish an update every twenty-five minutes. The incident lead coordinates mitigation and records decisions. This is the production procedure, not a staging alert rule. Acknowledgment does not mean the service has recovered or that a root cause is confirmed.</pre><h4>incident-degraded-en</h4><pre>Evidence ID: E2
+文件名：incident-degraded-en.txt
+Harborview Bristol production S2 degraded-service procedure. Acknowledge within one hour when a workaround remains available and there is no complete outage. The service owner decides the next update time. Escalate to S1 if the impact becomes a production outage. Staging alerts are handled through the engineering backlog.</pre><h4>restore-guide-en</h4><pre>Evidence ID: E3
+文件名：restore-guide-en.txt
+o access unrelated workspaces.
+
+Section six: rollback. If validation fails after release, return the connection to the saved state and reopen the case. Explain the failed check in the timeline. The operator must not silently choose another snapshot or expand the recovery scope. Any different target timestamp needs a new approval. The incident lead coordinates communication when the failure affects active customers.
+
+Section seven: closure. Confirm that scheduled refreshes and notification settings match the recorded pre-change configuration. Revoke the temporary restore credential and destroy the isolated staging database once no further checks are required. The case remains open until the owner accepts the outcome. Closure record</pre><h4>notify-routine-en</h4><pre>Evidence ID: E4
+文件名：notify-routine-en.txt
+Harborview Bristol routine notification procedure. Planned maintenance notices appear in the service portal and a weekday email digest. Do not page the on-call engineer for a notice with no active impact. If an outage occurs during maintenance, switch to the urgent notification procedure and record the incident separately.</pre><h4>restore-guide-en</h4><pre>Evidence ID: E5
+文件名：restore-guide-en.txt
+Harborview Atlas restoration handbook. This guide covers restoration of the Atlas reporting service, not general office backups. It is organized for operators, service owners and audit reviewers. Read the requested recovery scope before choosing a snapshot. A successful file download alone does not demonstrate that a restoration is correct. Every restoration has a case identifier carried through preparation, validation and closure.
+
+Section one: intake. The requester records the affected reporting workspace, the desired timestamp and the reason for recovery. Intake staff check that the requester owns the workspace. If ownership is unclear, pause the request and contact the workspace administrator. Never infer permission from possession of a screen</pre></details><h3>双路 RRF</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>incident-production-en--c000</code></li><li><code>incident-degraded-en--c000</code></li><li><code>notify-routine-en--c001</code></li><li><code>restore-guide-en--c013</code></li><li><code>notify-routine-en--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>incident-production-en</h4><pre>Evidence ID: E1
+文件名：incident-production-en.txt
+Harborview Bristol production S1 incident procedure. Acknowledge within twelve minutes and publish an update every twenty-five minutes. The incident lead coordinates mitigation and records decisions. This is the production procedure, not a staging alert rule. Acknowledgment does not mean the service has recovered or that a root cause is confirmed.</pre><h4>incident-degraded-en</h4><pre>Evidence ID: E2
+文件名：incident-degraded-en.txt
+Harborview Bristol production S2 degraded-service procedure. Acknowledge within one hour when a workaround remains available and there is no complete outage. The service owner decides the next update time. Escalate to S1 if the impact becomes a production outage. Staging alerts are handled through the engineering backlog.</pre><h4>notify-routine-en</h4><pre>Evidence ID: E3
+文件名：notify-routine-en.txt
+Harborview Bristol routine notification procedure. Planned maintenance notices appear in the service portal and a weekday email digest. Do not page the on-call engineer for a notice with no active impact. If an outage occurs during maintenance, switch to the urgent notification procedure and record the incident separately.</pre><h4>restore-guide-en</h4><pre>Evidence ID: E4
+文件名：restore-guide-en.txt
+. Keep the old state available until closure is complete. Do not treat the replacement window as authorization to access unrelated workspaces.
+
+Section six: rollback. If validation fails after release, return the connection to the saved state and reopen the case. Explain the failed check in the timeline. The operator must not silently choose another snapshot or expand the recovery scope. Any different target timestamp needs a new approval. The incident lead coordinates communication when the failure affects active customers.
+
+Section seven: closure. Confirm that scheduled refreshes and notification settings match the recorded pre-change configuration. Revoke the temporary restore credential and destroy the isolated staging database once no further checks are required. The case remains open until the owner accepts the outcome. Closure record</pre><h4>restore-guide-en</h4><pre>Evidence ID: E5
+文件名：restore-guide-en.txt
+an opening duplicate requests.
+
+Section two: approval. Both the service owner and the security officer must approve an Atlas restore. The operator checks that the two decisions refer to the same timestamp and workspace. Approval for one workspace cannot be reused for another. Emergency handling uses the same named approvers, although they may respond on the incident bridge. Keep their decisions attached to the case for subsequent review.
+
+Section three: staging. Create an isolated staging database before restoring data. Disable outbound notifications and background exports in that database. Use a temporary credential scoped to the case, and do not copy a production administrator password into a script. Check the restore size against the available disk allocation. If staging capacity is insufficient, request additional capacity before starting the restore operation.</pre></details></section><section id='e05'><h2>e05 · 大陆工作台普通成员一次 CSV 下载最多多少行？</h2><p><a href='review.html#e05'>查看应答要点与全部标注</a>；向量命中 50，关键词命中 25。</p><h3>仅关键词</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>export-member-zh--c000</code></li><li><code>export-admin-zh--c000</code></li><li><code>notify-urgent-zh--c000</code></li><li><code>remote-exception-zh--c000</code></li><li><code>offboard-contractor-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>export-member-zh</h4><pre>Evidence ID: E1
+文件名：export-member-zh.txt
+海湾实验室大陆工作台成员 CSV 导出。普通成员每次最多导出五万行，且只能导出已有访问权限的数据。更多数据应按日期分批，不得借用管理员账号。限制针对 CSV 下载，不是 API 请求速率。导出行为会写入审计记录。</pre><h4>export-admin-zh</h4><pre>Evidence ID: E2
+文件名：export-admin-zh.txt
+海湾实验室大陆工作台管理员 CSV 导出。经数据负责人批准，每次最多导出二十万行。管理员身份不能绕过项目权限和个人信息处理要求。导出前确认用途及保存位置。普通成员不能使用本限额，也不能共享管理员凭证。</pre><h4>notify-urgent-zh</h4><pre>Evidence ID: E3
+文件名：notify-urgent-zh.txt
+海湾实验室大陆值班紧急通知。影响正式服务的紧急事件同时发送短信并拨打值班电话。仅发送邮件不能代替呼叫；无人接听时按值班表升级。普通维护提醒使用每日摘要，不能占用紧急通道。处理人应在事件工单中记录接收时间。</pre><h4>remote-exception-zh</h4><pre>Evidence ID: E4
+文件名：remote-exception-zh.txt
+海湾实验室大陆团队远程例外。连续异地办公最多三周，必须同时取得人力资源和直属经理批准。申请需说明地点、工作时间和交接安排。例外不改变休假余额，也不能自动延长。常规每周远程安排适用另一份规则。</pre><h4>offboard-contractor-zh</h4><pre>Evidence ID: E5
+文件名：offboard-contractor-zh.txt
+海湾实验室大陆团队承包商离场。合同结束当天十八点前关闭项目账号，项目负责人确认交接资料和设备归还。延长访问必须在合同到期前重新批准。项目组成员不得私下共享自己的账号。正式员工离职使用另一份人力资源交接流程。</pre></details><h3>仅向量</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>export-member-zh--c000</code></li><li><code>export-admin-zh--c000</code></li><li><code>offboard-staff-zh--c000</code></li><li><code>expense-deadline-zh--c000</code></li><li><code>api-production-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>export-member-zh</h4><pre>Evidence ID: E1
+文件名：export-member-zh.txt
+海湾实验室大陆工作台成员 CSV 导出。普通成员每次最多导出五万行，且只能导出已有访问权限的数据。更多数据应按日期分批，不得借用管理员账号。限制针对 CSV 下载，不是 API 请求速率。导出行为会写入审计记录。</pre><h4>export-admin-zh</h4><pre>Evidence ID: E2
+文件名：export-admin-zh.txt
+海湾实验室大陆工作台管理员 CSV 导出。经数据负责人批准，每次最多导出二十万行。管理员身份不能绕过项目权限和个人信息处理要求。导出前确认用途及保存位置。普通成员不能使用本限额，也不能共享管理员凭证。</pre><h4>offboard-staff-zh</h4><pre>Evidence ID: E3
+文件名：offboard-staff-zh.txt
+海湾实验室大陆团队员工离职。最后工作日十七点停用日常业务账号，由人力资源确认时间，IT 执行。经理负责资料归档和工作交接。法律保留要求不意味着保留本人登录权限。承包商账号按合同结束流程处理。</pre><h4>expense-deadline-zh</h4><pre>Evidence ID: E4
+文件名：expense-deadline-zh.txt
+海湾实验室大陆团队费用提交时限。费用发生后十五个自然日内提交报销申请。直属经理审核用途，财务核对凭证和费用中心。超过期限须附延迟说明并取得财务批准。提交及时并不免除正式凭证要求，出差和办公采购也要遵循各自审批规则。</pre><h4>api-production-zh</h4><pre>Evidence ID: E5
+文件名：api-production-zh.txt
+海湾实验室订单 API 的正式环境配额。每个租户每分钟最多发送二百四十个请求；超过限额时等待下一分钟，不要不断立即重试。配额按租户统计，而不是按令牌统计。批量导出有独立限制，此处也不适用于账单 API。</pre></details><h3>双路 RRF</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>export-member-zh--c000</code></li><li><code>export-admin-zh--c000</code></li><li><code>remote-standard-zh--c000</code></li><li><code>offboard-staff-zh--c000</code></li><li><code>incident-production-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>export-member-zh</h4><pre>Evidence ID: E1
+文件名：export-member-zh.txt
+海湾实验室大陆工作台成员 CSV 导出。普通成员每次最多导出五万行，且只能导出已有访问权限的数据。更多数据应按日期分批，不得借用管理员账号。限制针对 CSV 下载，不是 API 请求速率。导出行为会写入审计记录。</pre><h4>export-admin-zh</h4><pre>Evidence ID: E2
+文件名：export-admin-zh.txt
+海湾实验室大陆工作台管理员 CSV 导出。经数据负责人批准，每次最多导出二十万行。管理员身份不能绕过项目权限和个人信息处理要求。导出前确认用途及保存位置。普通成员不能使用本限额，也不能共享管理员凭证。</pre><h4>remote-standard-zh</h4><pre>Evidence ID: E3
+文件名：remote-standard-zh.txt
+海湾实验室大陆团队常规远程办公。经直属经理批准，可在周二和周三远程办公，每周最多两天。团队会议和客户现场安排优先。未使用的天数不能累计到下周。连续数周异地办公必须申请例外，不得把常规远程天数拼接成长假。</pre><h4>offboard-staff-zh</h4><pre>Evidence ID: E4
+文件名：offboard-staff-zh.txt
+海湾实验室大陆团队员工离职。最后工作日十七点停用日常业务账号，由人力资源确认时间，IT 执行。经理负责资料归档和工作交接。法律保留要求不意味着保留本人登录权限。承包商账号按合同结束流程处理。</pre><h4>incident-production-zh</h4><pre>Evidence ID: E5
+文件名：incident-production-zh.txt
+海湾实验室大陆正式环境 S1 事故。值班工程师须在八分钟内确认，之后每二十分钟发布一次状态更新。生产负责人协调回滚与沟通，恢复后补交事件记录。没有用户影响的测试环境告警不按 S1 正式事故处理。确认告警不等于已恢复服务。</pre></details></section><section id='e06'><h2>e06 · How long are Dublin production service backups retained?</h2><p><a href='review.html#e06'>查看应答要点与全部标注</a>；向量命中 50，关键词命中 21。</p><h3>仅关键词</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>backup-dublin-en--c000</code></li><li><code>backup-seattle-en--c000</code></li><li><code>incident-production-en--c000</code></li><li><code>audit-us-en--c000</code></li><li><code>incident-production-en--c001</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>backup-dublin-en</h4><pre>Evidence ID: E1
+文件名：backup-dublin-en.txt
+Harborview Dublin service backup policy. Backups are retained for twenty-one days. The Dublin platform team handles restoration requests after the service owner approves the target timestamp. Restores are staged in an isolated database before release. This policy applies to Dublin production services, not Seattle or employee laptops.</pre><h4>backup-seattle-en</h4><pre>Evidence ID: E2
+文件名：backup-seattle-en.txt
+Harborview Seattle service backup policy. Backups are retained for fourteen days. The Seattle platform team restores an approved snapshot into a temporary database. A service owner validates the result before replacement. This retention period does not govern Dublin services, audit logs, or document trash.</pre><h4>incident-production-en</h4><pre>Evidence ID: E3
+文件名：incident-production-en.txt
+Harborview Bristol production S1 incident procedure. Acknowledge within twelve minutes and publish an update every twenty-five minutes. The incident lead coordinates mitigation and records decisions. This is the production procedure, not a staging alert rule. Acknowledgment does not mean the service has recovered or that a root cause is confirmed.</pre><h4>audit-us-en</h4><pre>Evidence ID: E4
+文件名：audit-us-en.txt
+Harborview US audit logging policy. Standard audit records are retained for 365 days. Records under legal hold must not be deleted until the hold is released. Investigators need approved access and a case identifier. EU audit data, service backups and temporary diagnostic logs follow separate policies.</pre><h4>incident-degraded-en</h4><pre>Evidence ID: E5
+文件名：incident-degraded-en.txt
+Harborview Bristol production S2 degraded-service procedure. Acknowledge within one hour when a workaround remains available and there is no complete outage. The service owner decides the next update time. Escalate to S1 if the impact becomes a production outage. Staging alerts are handled through the engineering backlog.</pre></details><h3>仅向量</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>backup-dublin-en--c000</code></li><li><code>backup-seattle-en--c000</code></li><li><code>incident-degraded-en--c000</code></li><li><code>cert-agent-en--c001</code></li><li><code>access-visitor-en--c001</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>backup-dublin-en</h4><pre>Evidence ID: E1
+文件名：backup-dublin-en.txt
+Harborview Dublin service backup policy. Backups are retained for twenty-one days. The Dublin platform team handles restoration requests after the service owner approves the target timestamp. Restores are staged in an isolated database before release. This policy applies to Dublin production services, not Seattle or employee laptops.</pre><h4>backup-seattle-en</h4><pre>Evidence ID: E2
+文件名：backup-seattle-en.txt
+Harborview Seattle service backup policy. Backups are retained for fourteen days. The Seattle platform team restores an approved snapshot into a temporary database. A service owner validates the result before replacement. This retention period does not govern Dublin services, audit logs, or document trash.</pre><h4>incident-degraded-en</h4><pre>Evidence ID: E3
+文件名：incident-degraded-en.txt
+Harborview Bristol production S2 degraded-service procedure. Acknowledge within one hour when a workaround remains available and there is no complete outage. The service owner decides the next update time. Escalate to S1 if the impact becomes a production outage. Staging alerts are handled through the engineering backlog.</pre><h4>cert-agent-en</h4><pre>Evidence ID: E4
+文件名：cert-agent-en.txt
+Harborview monitoring agent certificate procedure. Renewal opens ten days before expiry. The device administrator requests renewal in the agent console; no service outage approval is required. Keep private keys on the device. This procedure is separate from gateway server certificate replacement and user account recovery.</pre><h4>access-visitor-en</h4><pre>Evidence ID: E5
+文件名：access-visitor-en.txt
+Harborview Bristol office visitor rules. A registered host must escort visitors throughout the office. Reception issues a temporary badge after checking the booking and photo identification. Return the badge at departure; it cannot be shared. Contractors working repeatedly on site must follow the separate contractor access process.</pre></details><h3>双路 RRF</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>backup-dublin-en--c000</code></li><li><code>backup-seattle-en--c000</code></li><li><code>incident-degraded-en--c000</code></li><li><code>restore-guide-en--c000</code></li><li><code>incident-production-en--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>backup-dublin-en</h4><pre>Evidence ID: E1
+文件名：backup-dublin-en.txt
+Harborview Dublin service backup policy. Backups are retained for twenty-one days. The Dublin platform team handles restoration requests after the service owner approves the target timestamp. Restores are staged in an isolated database before release. This policy applies to Dublin production services, not Seattle or employee laptops.</pre><h4>backup-seattle-en</h4><pre>Evidence ID: E2
+文件名：backup-seattle-en.txt
+Harborview Seattle service backup policy. Backups are retained for fourteen days. The Seattle platform team restores an approved snapshot into a temporary database. A service owner validates the result before replacement. This retention period does not govern Dublin services, audit logs, or document trash.</pre><h4>incident-degraded-en</h4><pre>Evidence ID: E3
+文件名：incident-degraded-en.txt
+Harborview Bristol production S2 degraded-service procedure. Acknowledge within one hour when a workaround remains available and there is no complete outage. The service owner decides the next update time. Escalate to S1 if the impact becomes a production outage. Staging alerts are handled through the engineering backlog.</pre><h4>restore-guide-en</h4><pre>Evidence ID: E4
+文件名：restore-guide-en.txt
+Harborview Atlas restoration handbook. This guide covers restoration of the Atlas reporting service, not general office backups. It is organized for operators, service owners and audit reviewers. Read the requested recovery scope before choosing a snapshot. A successful file download alone does not demonstrate that a restoration is correct. Every restoration has a case identifier carried through preparation, validation and closure.</pre><h4>incident-production-en</h4><pre>Evidence ID: E5
+文件名：incident-production-en.txt
+Harborview Bristol production S1 incident procedure. Acknowledge within twelve minutes and publish an update every twenty-five minutes. The incident lead coordinates mitigation and records decisions. This is the production procedure, not a staging alert rule. Acknowledgment does not mean the service has recovered or that a root cause is confirmed.</pre></details></section><section id='e07'><h2>e07 · 大陆团队不想每天通勤，平时一周哪两天可以不去办公室？</h2><p><a href='review.html#e07'>查看应答要点与全部标注</a>；向量命中 50，关键词命中 21。</p><h3>仅关键词</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>remote-standard-zh--c000</code></li><li><code>access-visitor-zh--c000</code></li><li><code>purchase-small-zh--c000</code></li><li><code>purchase-large-zh--c000</code></li><li><code>offboard-staff-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>remote-standard-zh</h4><pre>Evidence ID: E1
+文件名：remote-standard-zh.txt
+海湾实验室大陆团队常规远程办公。经直属经理批准，可在周二和周三远程办公，每周最多两天。团队会议和客户现场安排优先。未使用的天数不能累计到下周。连续数周异地办公必须申请例外，不得把常规远程天数拼接成长假。</pre><h4>access-visitor-zh</h4><pre>Evidence ID: E2
+文件名：access-visitor-zh.txt
+海湾实验室大陆办公室访客管理。访客必须由接待员工全程陪同，不可独自在办公区活动。前台核对预约和身份证明，发放当天有效的临时卡。临时卡在离开时归还，不能借给其他访客。承包商长期门禁与员工门禁另有审批规则。</pre><h4>purchase-small-zh</h4><pre>Evidence ID: E3
+文件名：purchase-small-zh.txt
+海湾实验室大陆办公室小额采购。单笔两千元及以下的办公用品采购由直属经理批准。采购前要确认现有库存，收货后登记费用中心。软件订阅和固定资产不适用本流程。不得把同一需求拆成多笔以绕过较高金额的财务审批。</pre><h4>purchase-large-zh</h4><pre>Evidence ID: E4
+文件名：purchase-large-zh.txt
+海湾实验室大陆办公室大额采购。单笔超过两千元的办公用品需求须由经理和财务共同批准，再由采购专员下单。申请应附预算说明及供应商报价。紧急采购也不能省略审批。软件和设备资产有独立流程，不以办公用品金额阈值判断。</pre><h4>offboard-staff-zh</h4><pre>Evidence ID: E5
+文件名：offboard-staff-zh.txt
+海湾实验室大陆团队员工离职。最后工作日十七点停用日常业务账号，由人力资源确认时间，IT 执行。经理负责资料归档和工作交接。法律保留要求不意味着保留本人登录权限。承包商账号按合同结束流程处理。</pre></details><h3>仅向量</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>remote-standard-zh--c000</code></li><li><code>remote-exception-zh--c000</code></li><li><code>access-visitor-zh--c000</code></li><li><code>access-contractor-zh--c000</code></li><li><code>offboard-staff-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>remote-standard-zh</h4><pre>Evidence ID: E1
+文件名：remote-standard-zh.txt
+海湾实验室大陆团队常规远程办公。经直属经理批准，可在周二和周三远程办公，每周最多两天。团队会议和客户现场安排优先。未使用的天数不能累计到下周。连续数周异地办公必须申请例外，不得把常规远程天数拼接成长假。</pre><h4>remote-exception-zh</h4><pre>Evidence ID: E2
+文件名：remote-exception-zh.txt
+海湾实验室大陆团队远程例外。连续异地办公最多三周，必须同时取得人力资源和直属经理批准。申请需说明地点、工作时间和交接安排。例外不改变休假余额，也不能自动延长。常规每周远程安排适用另一份规则。</pre><h4>access-visitor-zh</h4><pre>Evidence ID: E3
+文件名：access-visitor-zh.txt
+海湾实验室大陆办公室访客管理。访客必须由接待员工全程陪同，不可独自在办公区活动。前台核对预约和身份证明，发放当天有效的临时卡。临时卡在离开时归还，不能借给其他访客。承包商长期门禁与员工门禁另有审批规则。</pre><h4>access-contractor-zh</h4><pre>Evidence ID: E4
+文件名：access-contractor-zh.txt
+海湾实验室大陆办公室承包商门禁。连续驻场超过五个工作日的承包商可申请项目期门禁，由项目负责人和行政共同批准。门禁有效期不能超过合同期限。此卡只允许进入指定楼层，不授予机房权限；普通访客仍使用当日临时卡。</pre><h4>offboard-staff-zh</h4><pre>Evidence ID: E5
+文件名：offboard-staff-zh.txt
+海湾实验室大陆团队员工离职。最后工作日十七点停用日常业务账号，由人力资源确认时间，IT 执行。经理负责资料归档和工作交接。法律保留要求不意味着保留本人登录权限。承包商账号按合同结束流程处理。</pre></details><h3>双路 RRF</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>remote-standard-zh--c000</code></li><li><code>access-visitor-zh--c000</code></li><li><code>remote-exception-zh--c000</code></li><li><code>access-contractor-zh--c000</code></li><li><code>offboard-staff-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>remote-standard-zh</h4><pre>Evidence ID: E1
+文件名：remote-standard-zh.txt
+海湾实验室大陆团队常规远程办公。经直属经理批准，可在周二和周三远程办公，每周最多两天。团队会议和客户现场安排优先。未使用的天数不能累计到下周。连续数周异地办公必须申请例外，不得把常规远程天数拼接成长假。</pre><h4>access-visitor-zh</h4><pre>Evidence ID: E2
+文件名：access-visitor-zh.txt
+海湾实验室大陆办公室访客管理。访客必须由接待员工全程陪同，不可独自在办公区活动。前台核对预约和身份证明，发放当天有效的临时卡。临时卡在离开时归还，不能借给其他访客。承包商长期门禁与员工门禁另有审批规则。</pre><h4>remote-exception-zh</h4><pre>Evidence ID: E3
+文件名：remote-exception-zh.txt
+海湾实验室大陆团队远程例外。连续异地办公最多三周，必须同时取得人力资源和直属经理批准。申请需说明地点、工作时间和交接安排。例外不改变休假余额，也不能自动延长。常规每周远程安排适用另一份规则。</pre><h4>access-contractor-zh</h4><pre>Evidence ID: E4
+文件名：access-contractor-zh.txt
+海湾实验室大陆办公室承包商门禁。连续驻场超过五个工作日的承包商可申请项目期门禁，由项目负责人和行政共同批准。门禁有效期不能超过合同期限。此卡只允许进入指定楼层，不授予机房权限；普通访客仍使用当日临时卡。</pre><h4>offboard-staff-zh</h4><pre>Evidence ID: E5
+文件名：offboard-staff-zh.txt
+海湾实验室大陆团队员工离职。最后工作日十七点停用日常业务账号，由人力资源确认时间，IT 执行。经理负责资料归档和工作交接。法律保留要求不意味着保留本人登录权限。承包商账号按合同结束流程处理。</pre></details></section><section id='e08'><h2>e08 · I work in Bristol and want to do my job from another city for a whole month. Whose permission do I need?</h2><p><a href='review.html#e08'>查看应答要点与全部标注</a>；向量命中 50，关键词命中 33。</p><h3>仅关键词</h3><p>切片 Recall@5：0.0000；nDCG@5：0.0000；切片事实覆盖：0.0000；最终窗口事实覆盖：0.0000。</p><ol><li><code>notify-routine-en--c000</code></li><li><code>restore-guide-en--c009</code></li><li><code>offboard-staff-en--c000</code></li><li><code>lost-laptop-en--c000</code></li><li><code>restore-guide-en--c011</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>notify-routine-en</h4><pre>Evidence ID: E1
+文件名：notify-routine-en.txt
+Harborview Bristol routine notification procedure. Planned maintenance notices appear in the service portal and a weekday email digest. Do not page the on-call engineer for a notice with no active impact. If an outage occurs during maintenance, switch to the urgent notification procedure and record the incident separately.</pre><h4>restore-guide-en</h4><pre>Evidence ID: E2
+文件名：restore-guide-en.txt
+tarting the restore operation.
+
+Section four: verification. Compare record counts, a sample of reporting totals and the snapshot timestamp against the request. The service owner signs off on these checks. A lower record count may be expected for an older snapshot, so explain differences rather than deleting records to make counts match. Restore verification is distinct from the permission checks performed during intake and approval.
+
+Section five: release. Announce the replacement window to the affected workspace users and stop scheduled report refreshes. Save the current database state before switching the connection to the approved restore. Resume refreshes only after the service owner confirms the reporting checks. Keep the old state available u</pre><h4>offboard-staff-en</h4><pre>Evidence ID: E3
+文件名：offboard-staff-en.txt
+Harborview Bristol employee offboarding. HR supplies the confirmed departure time and IT disables interactive access at that time. The manager transfers ownership of shared documents before departure. Retained audit records do not justify keeping the user&#39;s login active. External partner integrations follow the contract closure policy.</pre><h4>lost-laptop-en</h4><pre>Evidence ID: E4
+文件名：lost-laptop-en.txt
+Harborview Bristol lost-laptop procedure. Call the security hotline immediately after discovering the loss, even outside office hours. Do not wait to search for the device before reporting. Security suspends access credentials and initiates a remote lock. Provide the asset identifier and the last known location.</pre><h4>restore-guide-en</h4><pre>Evidence ID: E5
+文件名：restore-guide-en.txt
+. Keep the old state available until closure is complete. Do not treat the replacement window as authorization to access unrelated workspaces.
+
+Section six: rollback. If validation fails after release, return the connection to the saved state and reopen the case. Explain the failed check in the timeline. The operator must not silently choose another snapshot or expand the recovery scope. Any different target timestamp needs a new approval. The incident lead coordinates communication when the failure affects active customers.</pre></details><h3>仅向量</h3><p>切片 Recall@5：1.0000；nDCG@5：0.6309；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>remote-standard-en--c000</code></li><li><code>remote-exception-en--c000</code></li><li><code>expense-deadline-en--c000</code></li><li><code>incident-degraded-en--c000</code></li><li><code>shipping-priority-en--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>remote-standard-en</h4><pre>Evidence ID: E1
+文件名：remote-standard-en.txt
+Harborview Bristol ordinary remote-work policy. With manager approval, employees may work remotely on Monday and Friday, up to two days per week. Customer visits and mandatory on-site work take priority. Unused days cannot be carried over. A continuous period away requires the separate remote exception process.</pre><h4>remote-exception-en</h4><pre>Evidence ID: E2
+文件名：remote-exception-en.txt
+Harborview Bristol extended remote-work policy. A continuous remote exception can last up to six weeks and needs both HR and manager approval. Provide the location, working hours and handover plan before departure. An extension requires a new approval. Weekly remote days cannot be accumulated to bypass this process.</pre><h4>expense-deadline-en</h4><pre>Evidence ID: E3
+文件名：expense-deadline-en.txt
+Harborview Bristol expense filing policy. Submit an expense claim within twelve calendar days of the purchase. The manager verifies the business purpose and finance checks the cost center. Late claims require finance approval with an explanation. Timely submission does not waive the separate receipt requirements.</pre><h4>incident-degraded-en</h4><pre>Evidence ID: E4
+文件名：incident-degraded-en.txt
+Harborview Bristol production S2 degraded-service procedure. Acknowledge within one hour when a workaround remains available and there is no complete outage. The service owner decides the next update time. Escalate to S1 if the impact becomes a production outage. Staging alerts are handled through the engineering backlog.</pre><h4>shipping-priority-en</h4><pre>Evidence ID: E5
+文件名：shipping-priority-en.txt
+Harborview Bristol priority equipment dispatch. Approved replacement equipment is handed to the courier within two working days. Transit time is not included. The recipient checks the asset identifier and confirms receipt to the asset team. This dispatch target is not an international delivery guarantee or an incident response deadline.</pre></details><h3>双路 RRF</h3><p>切片 Recall@5：1.0000；nDCG@5：0.5000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>notify-routine-en--c000</code></li><li><code>remote-standard-en--c000</code></li><li><code>remote-exception-en--c000</code></li><li><code>travel-engineering-en--c000</code></li><li><code>restore-guide-en--c011</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>notify-routine-en</h4><pre>Evidence ID: E1
+文件名：notify-routine-en.txt
+Harborview Bristol routine notification procedure. Planned maintenance notices appear in the service portal and a weekday email digest. Do not page the on-call engineer for a notice with no active impact. If an outage occurs during maintenance, switch to the urgent notification procedure and record the incident separately.</pre><h4>remote-standard-en</h4><pre>Evidence ID: E2
+文件名：remote-standard-en.txt
+Harborview Bristol ordinary remote-work policy. With manager approval, employees may work remotely on Monday and Friday, up to two days per week. Customer visits and mandatory on-site work take priority. Unused days cannot be carried over. A continuous period away requires the separate remote exception process.</pre><h4>remote-exception-en</h4><pre>Evidence ID: E3
+文件名：remote-exception-en.txt
+Harborview Bristol extended remote-work policy. A continuous remote exception can last up to six weeks and needs both HR and manager approval. Provide the location, working hours and handover plan before departure. An extension requires a new approval. Weekly remote days cannot be accumulated to bypass this process.</pre><h4>travel-engineering-en</h4><pre>Evidence ID: E4
+文件名：travel-engineering-en.txt
+Harborview engineering travel policy. Domestic hotel reimbursement is capped at USD 140 per night. The engineering manager approves exceptions before booking. Keep the itinerary and hotel invoice together. Sales-team allowances do not transfer to engineering travelers, and temporary relocation is handled through a separate agreement.</pre><h4>restore-guide-en</h4><pre>Evidence ID: E5
+文件名：restore-guide-en.txt
+ed during intake and approval.
+
+Section five: release. Announce the replacement window to the affected workspace users and stop scheduled report refreshes. Save the current database state before switching the connection to the approved restore. Resume refreshes only after the service owner confirms the reporting checks. Keep the old state available until closure is complete. Do not treat the replacement window as authorization to access unrelated workspaces.
+
+Section six: rollback. If validation fails after release, return the connection to the saved state and reopen the case. Explain the failed check in the timeline. The operator must not silently choose another snapshot or expand the recovery scope. Any different target timestamp needs a new approval. The incident lead co</pre></details></section><section id='e09'><h2>e09 · 我是大陆团队员工，刚发现公司电脑找不到了，能不能明天上班后再告诉公司？</h2><p><a href='review.html#e09'>查看应答要点与全部标注</a>；向量命中 50，关键词命中 25。</p><h3>仅关键词</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>lost-laptop-zh--c000</code></li><li><code>lost-phone-zh--c000</code></li><li><code>offboard-staff-zh--c000</code></li><li><code>offboard-contractor-zh--c000</code></li><li><code>access-visitor-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>lost-laptop-zh</h4><pre>Evidence ID: E1
+文件名：lost-laptop-zh.txt
+海湾实验室大陆团队笔记本丢失处置。发现笔记本丢失后二十分钟内致电安全值班组。先报告，不要等到下个工作日，也不要先自行找回设备再决定是否上报。安全组负责暂停访问凭证和远程锁定。员工应提供设备编号和最后使用地点。</pre><h4>lost-phone-zh</h4><pre>Evidence ID: E2
+文件名：lost-phone-zh.txt
+海湾实验室大陆团队工作手机丢失处置。三十分钟内联系设备管理员申请远程锁定，并向安全值班组登记。不要自行停用企业设备管理软件。该流程针对公司管理的手机；笔记本丢失的报告时限和联系人按笔记本专用流程执行。</pre><h4>offboard-staff-zh</h4><pre>Evidence ID: E3
+文件名：offboard-staff-zh.txt
+海湾实验室大陆团队员工离职。最后工作日十七点停用日常业务账号，由人力资源确认时间，IT 执行。经理负责资料归档和工作交接。法律保留要求不意味着保留本人登录权限。承包商账号按合同结束流程处理。</pre><h4>offboard-contractor-zh</h4><pre>Evidence ID: E4
+文件名：offboard-contractor-zh.txt
+海湾实验室大陆团队承包商离场。合同结束当天十八点前关闭项目账号，项目负责人确认交接资料和设备归还。延长访问必须在合同到期前重新批准。项目组成员不得私下共享自己的账号。正式员工离职使用另一份人力资源交接流程。</pre><h4>access-visitor-zh</h4><pre>Evidence ID: E5
+文件名：access-visitor-zh.txt
+海湾实验室大陆办公室访客管理。访客必须由接待员工全程陪同，不可独自在办公区活动。前台核对预约和身份证明，发放当天有效的临时卡。临时卡在离开时归还，不能借给其他访客。承包商长期门禁与员工门禁另有审批规则。</pre></details><h3>仅向量</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>lost-laptop-zh--c000</code></li><li><code>offboard-staff-zh--c000</code></li><li><code>notify-routine-zh--c000</code></li><li><code>lost-phone-zh--c000</code></li><li><code>notify-urgent-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>lost-laptop-zh</h4><pre>Evidence ID: E1
+文件名：lost-laptop-zh.txt
+海湾实验室大陆团队笔记本丢失处置。发现笔记本丢失后二十分钟内致电安全值班组。先报告，不要等到下个工作日，也不要先自行找回设备再决定是否上报。安全组负责暂停访问凭证和远程锁定。员工应提供设备编号和最后使用地点。</pre><h4>offboard-staff-zh</h4><pre>Evidence ID: E2
+文件名：offboard-staff-zh.txt
+海湾实验室大陆团队员工离职。最后工作日十七点停用日常业务账号，由人力资源确认时间，IT 执行。经理负责资料归档和工作交接。法律保留要求不意味着保留本人登录权限。承包商账号按合同结束流程处理。</pre><h4>notify-routine-zh</h4><pre>Evidence ID: E3
+文件名：notify-routine-zh.txt
+海湾实验室大陆团队常规通知。计划内维护和无影响变更汇总到工作日邮件摘要，收件人可在门户查看详情。没有事故时不拨打值班电话。若维护期间出现正式服务中断，应转为紧急通知流程，而不是等待下一封摘要。</pre><h4>lost-phone-zh</h4><pre>Evidence ID: E4
+文件名：lost-phone-zh.txt
+海湾实验室大陆团队工作手机丢失处置。三十分钟内联系设备管理员申请远程锁定，并向安全值班组登记。不要自行停用企业设备管理软件。该流程针对公司管理的手机；笔记本丢失的报告时限和联系人按笔记本专用流程执行。</pre><h4>notify-urgent-zh</h4><pre>Evidence ID: E5
+文件名：notify-urgent-zh.txt
+海湾实验室大陆值班紧急通知。影响正式服务的紧急事件同时发送短信并拨打值班电话。仅发送邮件不能代替呼叫；无人接听时按值班表升级。普通维护提醒使用每日摘要，不能占用紧急通道。处理人应在事件工单中记录接收时间。</pre></details><h3>双路 RRF</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>lost-laptop-zh--c000</code></li><li><code>offboard-staff-zh--c000</code></li><li><code>lost-phone-zh--c000</code></li><li><code>offboard-contractor-zh--c000</code></li><li><code>access-visitor-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>lost-laptop-zh</h4><pre>Evidence ID: E1
+文件名：lost-laptop-zh.txt
+海湾实验室大陆团队笔记本丢失处置。发现笔记本丢失后二十分钟内致电安全值班组。先报告，不要等到下个工作日，也不要先自行找回设备再决定是否上报。安全组负责暂停访问凭证和远程锁定。员工应提供设备编号和最后使用地点。</pre><h4>offboard-staff-zh</h4><pre>Evidence ID: E2
+文件名：offboard-staff-zh.txt
+海湾实验室大陆团队员工离职。最后工作日十七点停用日常业务账号，由人力资源确认时间，IT 执行。经理负责资料归档和工作交接。法律保留要求不意味着保留本人登录权限。承包商账号按合同结束流程处理。</pre><h4>lost-phone-zh</h4><pre>Evidence ID: E3
+文件名：lost-phone-zh.txt
+海湾实验室大陆团队工作手机丢失处置。三十分钟内联系设备管理员申请远程锁定，并向安全值班组登记。不要自行停用企业设备管理软件。该流程针对公司管理的手机；笔记本丢失的报告时限和联系人按笔记本专用流程执行。</pre><h4>offboard-contractor-zh</h4><pre>Evidence ID: E4
+文件名：offboard-contractor-zh.txt
+海湾实验室大陆团队承包商离场。合同结束当天十八点前关闭项目账号，项目负责人确认交接资料和设备归还。延长访问必须在合同到期前重新批准。项目组成员不得私下共享自己的账号。正式员工离职使用另一份人力资源交接流程。</pre><h4>access-visitor-zh</h4><pre>Evidence ID: E5
+文件名：access-visitor-zh.txt
+海湾实验室大陆办公室访客管理。访客必须由接待员工全程陪同，不可独自在办公区活动。前台核对预约和身份证明，发放当天有效的临时卡。临时卡在离开时归还，不能借给其他访客。承包商长期门禁与员工门禁另有审批规则。</pre></details></section><section id='e10'><h2>e10 · For a Bristol expense, can I get my money back using only a picture showing the bank transfer?</h2><p><a href='review.html#e10'>查看应答要点与全部标注</a>；向量命中 50，关键词命中 25。</p><h3>仅关键词</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>expense-receipt-en--c000</code></li><li><code>expense-deadline-en--c000</code></li><li><code>shipping-return-en--c000</code></li><li><code>export-analyst-en--c000</code></li><li><code>travel-engineering-en--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>expense-receipt-en</h4><pre>Evidence ID: E1
+文件名：expense-receipt-en.txt
+Harborview Bristol expense evidence policy. An itemized receipt is required; a banking screenshot alone is not sufficient. The receipt must identify the supplier and purchased items. Ask the supplier for a replacement if the original is lost. This policy defines evidence, not the separate expense filing deadline.</pre><h4>expense-deadline-en</h4><pre>Evidence ID: E2
+文件名：expense-deadline-en.txt
+Harborview Bristol expense filing policy. Submit an expense claim within twelve calendar days of the purchase. The manager verifies the business purpose and finance checks the cost center. Late claims require finance approval with an explanation. Timely submission does not waive the separate receipt requirements.</pre><h4>shipping-return-en</h4><pre>Evidence ID: E3
+文件名：shipping-return-en.txt
+Harborview Bristol equipment returns. Obtain an asset-team return authorization before shipping a device back. Use the supplied tracking label and keep the collection receipt until the asset team confirms arrival. This process concerns physical equipment only; it does not describe subscription cancellation, refunds or employee benefit claims.</pre><h4>export-analyst-en</h4><pre>Evidence ID: E4
+文件名：export-analyst-en.txt
+Harborview Bristol analyst export policy. An analyst may export at most 10,000 rows per CSV download, limited to data they can already access. Split larger authorized requests by date. This is a download limit, not an API quota. Export events are audited and cannot be delegated by sharing credentials.</pre><h4>travel-engineering-en</h4><pre>Evidence ID: E5
+文件名：travel-engineering-en.txt
+Harborview engineering travel policy. Domestic hotel reimbursement is capped at USD 140 per night. The engineering manager approves exceptions before booking. Keep the itinerary and hotel invoice together. Sales-team allowances do not transfer to engineering travelers, and temporary relocation is handled through a separate agreement.</pre></details><h3>仅向量</h3><p>切片 Recall@5：1.0000；nDCG@5：0.6309；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>expense-deadline-en--c000</code></li><li><code>expense-receipt-en--c000</code></li><li><code>restore-guide-en--c015</code></li><li><code>offboard-staff-en--c000</code></li><li><code>notify-urgent-en--c001</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>expense-deadline-en</h4><pre>Evidence ID: E1
+文件名：expense-deadline-en.txt
+Harborview Bristol expense filing policy. Submit an expense claim within twelve calendar days of the purchase. The manager verifies the business purpose and finance checks the cost center. Late claims require finance approval with an explanation. Timely submission does not waive the separate receipt requirements.</pre><h4>expense-receipt-en</h4><pre>Evidence ID: E2
+文件名：expense-receipt-en.txt
+Harborview Bristol expense evidence policy. An itemized receipt is required; a banking screenshot alone is not sufficient. The receipt must identify the supplier and purchased items. Ask the supplier for a replacement if the original is lost. This policy defines evidence, not the separate expense filing deadline.</pre><h4>restore-guide-en</h4><pre>Evidence ID: E3
+文件名：restore-guide-en.txt
+lure affects active customers.
+
+Section seven: closure. Confirm that scheduled refreshes and notification settings match the recorded pre-change configuration. Revoke the temporary restore credential and destroy the isolated staging database once no further checks are required. The case remains open until the owner accepts the outcome. Closure records must distinguish a successful restoration from a canceled request or a rollback.
+
+Section eight: evidence retention. Atlas restoration approval records are retained for ninety days after closure. The audit custodian stores the approvals and verification checklist with the case identifier. A legal hold pauses disposal of the affected records. This retention period is not the backup snapshot lifetime. Reviewers should be able to trace the requester, approvers, chosen timestamp and final disposition without recovering credentials from the evidence.</pre><h4>offboard-staff-en</h4><pre>Evidence ID: E4
+文件名：offboard-staff-en.txt
+Harborview Bristol employee offboarding. HR supplies the confirmed departure time and IT disables interactive access at that time. The manager transfers ownership of shared documents before departure. Retained audit records do not justify keeping the user&#39;s login active. External partner integrations follow the contract closure policy.</pre><h4>notify-urgent-en</h4><pre>Evidence ID: E5
+文件名：notify-urgent-en.txt
+Harborview Bristol urgent notification procedure. Page the on-call engineer for an active customer-facing outage; do not wait for the email digest. Escalate through the duty roster if nobody acknowledges. Routine maintenance announcements use the portal instead. Record the page time and acknowledgment in the incident ticket.</pre></details><h3>双路 RRF</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>expense-receipt-en--c000</code></li><li><code>expense-deadline-en--c000</code></li><li><code>shipping-return-en--c000</code></li><li><code>offboard-staff-en--c000</code></li><li><code>access-visitor-en--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>expense-receipt-en</h4><pre>Evidence ID: E1
+文件名：expense-receipt-en.txt
+Harborview Bristol expense evidence policy. An itemized receipt is required; a banking screenshot alone is not sufficient. The receipt must identify the supplier and purchased items. Ask the supplier for a replacement if the original is lost. This policy defines evidence, not the separate expense filing deadline.</pre><h4>expense-deadline-en</h4><pre>Evidence ID: E2
+文件名：expense-deadline-en.txt
+Harborview Bristol expense filing policy. Submit an expense claim within twelve calendar days of the purchase. The manager verifies the business purpose and finance checks the cost center. Late claims require finance approval with an explanation. Timely submission does not waive the separate receipt requirements.</pre><h4>shipping-return-en</h4><pre>Evidence ID: E3
+文件名：shipping-return-en.txt
+Harborview Bristol equipment returns. Obtain an asset-team return authorization before shipping a device back. Use the supplied tracking label and keep the collection receipt until the asset team confirms arrival. This process concerns physical equipment only; it does not describe subscription cancellation, refunds or employee benefit claims.</pre><h4>offboard-staff-en</h4><pre>Evidence ID: E4
+文件名：offboard-staff-en.txt
+Harborview Bristol employee offboarding. HR supplies the confirmed departure time and IT disables interactive access at that time. The manager transfers ownership of shared documents before departure. Retained audit records do not justify keeping the user&#39;s login active. External partner integrations follow the contract closure policy.</pre><h4>access-visitor-en</h4><pre>Evidence ID: E5
+文件名：access-visitor-en.txt
+Harborview Bristol office visitor rules. A registered host must escort visitors throughout the office. Reception issues a temporary badge after checking the booking and photo identification. Return the badge at departure; it cannot be shared. Contractors working repeatedly on site must follow the separate contractor access process.</pre></details></section><section id='e11'><h2>e11 · 大陆办公室的外来客人拿到临时卡以后，可以自己在办公区走动吗？</h2><p><a href='review.html#e11'>查看应答要点与全部标注</a>；向量命中 50，关键词命中 33。</p><h3>仅关键词</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>access-visitor-zh--c000</code></li><li><code>access-contractor-zh--c000</code></li><li><code>purchase-small-zh--c000</code></li><li><code>purchase-large-zh--c000</code></li><li><code>remote-standard-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>access-visitor-zh</h4><pre>Evidence ID: E1
+文件名：access-visitor-zh.txt
+海湾实验室大陆办公室访客管理。访客必须由接待员工全程陪同，不可独自在办公区活动。前台核对预约和身份证明，发放当天有效的临时卡。临时卡在离开时归还，不能借给其他访客。承包商长期门禁与员工门禁另有审批规则。</pre><h4>access-contractor-zh</h4><pre>Evidence ID: E2
+文件名：access-contractor-zh.txt
+海湾实验室大陆办公室承包商门禁。连续驻场超过五个工作日的承包商可申请项目期门禁，由项目负责人和行政共同批准。门禁有效期不能超过合同期限。此卡只允许进入指定楼层，不授予机房权限；普通访客仍使用当日临时卡。</pre><h4>purchase-small-zh</h4><pre>Evidence ID: E3
+文件名：purchase-small-zh.txt
+海湾实验室大陆办公室小额采购。单笔两千元及以下的办公用品采购由直属经理批准。采购前要确认现有库存，收货后登记费用中心。软件订阅和固定资产不适用本流程。不得把同一需求拆成多笔以绕过较高金额的财务审批。</pre><h4>purchase-large-zh</h4><pre>Evidence ID: E4
+文件名：purchase-large-zh.txt
+海湾实验室大陆办公室大额采购。单笔超过两千元的办公用品需求须由经理和财务共同批准，再由采购专员下单。申请应附预算说明及供应商报价。紧急采购也不能省略审批。软件和设备资产有独立流程，不以办公用品金额阈值判断。</pre><h4>remote-standard-zh</h4><pre>Evidence ID: E5
+文件名：remote-standard-zh.txt
+海湾实验室大陆团队常规远程办公。经直属经理批准，可在周二和周三远程办公，每周最多两天。团队会议和客户现场安排优先。未使用的天数不能累计到下周。连续数周异地办公必须申请例外，不得把常规远程天数拼接成长假。</pre></details><h3>仅向量</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>access-visitor-zh--c000</code></li><li><code>access-contractor-zh--c000</code></li><li><code>remote-exception-zh--c000</code></li><li><code>remote-standard-zh--c000</code></li><li><code>offboard-contractor-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>access-visitor-zh</h4><pre>Evidence ID: E1
+文件名：access-visitor-zh.txt
+海湾实验室大陆办公室访客管理。访客必须由接待员工全程陪同，不可独自在办公区活动。前台核对预约和身份证明，发放当天有效的临时卡。临时卡在离开时归还，不能借给其他访客。承包商长期门禁与员工门禁另有审批规则。</pre><h4>access-contractor-zh</h4><pre>Evidence ID: E2
+文件名：access-contractor-zh.txt
+海湾实验室大陆办公室承包商门禁。连续驻场超过五个工作日的承包商可申请项目期门禁，由项目负责人和行政共同批准。门禁有效期不能超过合同期限。此卡只允许进入指定楼层，不授予机房权限；普通访客仍使用当日临时卡。</pre><h4>remote-exception-zh</h4><pre>Evidence ID: E3
+文件名：remote-exception-zh.txt
+海湾实验室大陆团队远程例外。连续异地办公最多三周，必须同时取得人力资源和直属经理批准。申请需说明地点、工作时间和交接安排。例外不改变休假余额，也不能自动延长。常规每周远程安排适用另一份规则。</pre><h4>remote-standard-zh</h4><pre>Evidence ID: E4
+文件名：remote-standard-zh.txt
+海湾实验室大陆团队常规远程办公。经直属经理批准，可在周二和周三远程办公，每周最多两天。团队会议和客户现场安排优先。未使用的天数不能累计到下周。连续数周异地办公必须申请例外，不得把常规远程天数拼接成长假。</pre><h4>offboard-contractor-zh</h4><pre>Evidence ID: E5
+文件名：offboard-contractor-zh.txt
+海湾实验室大陆团队承包商离场。合同结束当天十八点前关闭项目账号，项目负责人确认交接资料和设备归还。延长访问必须在合同到期前重新批准。项目组成员不得私下共享自己的账号。正式员工离职使用另一份人力资源交接流程。</pre></details><h3>双路 RRF</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>access-visitor-zh--c000</code></li><li><code>access-contractor-zh--c000</code></li><li><code>remote-standard-zh--c000</code></li><li><code>offboard-contractor-zh--c000</code></li><li><code>remote-exception-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>access-visitor-zh</h4><pre>Evidence ID: E1
+文件名：access-visitor-zh.txt
+海湾实验室大陆办公室访客管理。访客必须由接待员工全程陪同，不可独自在办公区活动。前台核对预约和身份证明，发放当天有效的临时卡。临时卡在离开时归还，不能借给其他访客。承包商长期门禁与员工门禁另有审批规则。</pre><h4>access-contractor-zh</h4><pre>Evidence ID: E2
+文件名：access-contractor-zh.txt
+海湾实验室大陆办公室承包商门禁。连续驻场超过五个工作日的承包商可申请项目期门禁，由项目负责人和行政共同批准。门禁有效期不能超过合同期限。此卡只允许进入指定楼层，不授予机房权限；普通访客仍使用当日临时卡。</pre><h4>remote-standard-zh</h4><pre>Evidence ID: E3
+文件名：remote-standard-zh.txt
+海湾实验室大陆团队常规远程办公。经直属经理批准，可在周二和周三远程办公，每周最多两天。团队会议和客户现场安排优先。未使用的天数不能累计到下周。连续数周异地办公必须申请例外，不得把常规远程天数拼接成长假。</pre><h4>offboard-contractor-zh</h4><pre>Evidence ID: E4
+文件名：offboard-contractor-zh.txt
+海湾实验室大陆团队承包商离场。合同结束当天十八点前关闭项目账号，项目负责人确认交接资料和设备归还。延长访问必须在合同到期前重新批准。项目组成员不得私下共享自己的账号。正式员工离职使用另一份人力资源交接流程。</pre><h4>remote-exception-zh</h4><pre>Evidence ID: E5
+文件名：remote-exception-zh.txt
+海湾实验室大陆团队远程例外。连续异地办公最多三周，必须同时取得人力资源和直属经理批准。申请需说明地点、工作时间和交接安排。例外不改变休假余额，也不能自动延长。常规每周远程安排适用另一份规则。</pre></details></section><section id='e12'><h2>e12 · Bristol customers cannot use the service right now. Should we wait for the daily email before contacting someone?</h2><p><a href='review.html#e12'>查看应答要点与全部标注</a>；向量命中 50，关键词命中 45。</p><h3>仅关键词</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>notify-urgent-en--c001</code></li><li><code>access-staff-en--c000</code></li><li><code>notify-routine-en--c000</code></li><li><code>lost-laptop-en--c000</code></li><li><code>remote-exception-en--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>notify-urgent-en</h4><pre>Evidence ID: E1
+文件名：notify-urgent-en.txt
+Harborview Bristol urgent notification procedure. Page the on-call engineer for an active customer-facing outage; do not wait for the email digest. Escalate through the duty roster if nobody acknowledges. Routine maintenance announcements use the portal instead. Record the page time and acknowledgment in the incident ticket.</pre><h4>access-staff-en</h4><pre>Evidence ID: E2
+文件名：access-staff-en.txt
+Harborview Bristol office staff access rules. Active employees receive a named building badge after identity verification. A lost badge must be disabled before a replacement is issued. Standard building access does not authorize entry to the server room. Visitors and contractors cannot use an employee&#39;s badge as a substitute for registration.</pre><h4>notify-routine-en</h4><pre>Evidence ID: E3
+文件名：notify-routine-en.txt
+Harborview Bristol routine notification procedure. Planned maintenance notices appear in the service portal and a weekday email digest. Do not page the on-call engineer for a notice with no active impact. If an outage occurs during maintenance, switch to the urgent notification procedure and record the incident separately.</pre><h4>lost-laptop-en</h4><pre>Evidence ID: E4
+文件名：lost-laptop-en.txt
+Harborview Bristol lost-laptop procedure. Call the security hotline immediately after discovering the loss, even outside office hours. Do not wait to search for the device before reporting. Security suspends access credentials and initiates a remote lock. Provide the asset identifier and the last known location.</pre><h4>remote-exception-en</h4><pre>Evidence ID: E5
+文件名：remote-exception-en.txt
+Harborview Bristol extended remote-work policy. A continuous remote exception can last up to six weeks and needs both HR and manager approval. Provide the location, working hours and handover plan before departure. An extension requires a new approval. Weekly remote days cannot be accumulated to bypass this process.</pre></details><h3>仅向量</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>notify-urgent-en--c001</code></li><li><code>notify-routine-en--c000</code></li><li><code>incident-degraded-en--c000</code></li><li><code>restore-guide-en--c004</code></li><li><code>offboard-staff-en--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>notify-urgent-en</h4><pre>Evidence ID: E1
+文件名：notify-urgent-en.txt
+Harborview Bristol urgent notification procedure. Page the on-call engineer for an active customer-facing outage; do not wait for the email digest. Escalate through the duty roster if nobody acknowledges. Routine maintenance announcements use the portal instead. Record the page time and acknowledgment in the incident ticket.</pre><h4>notify-routine-en</h4><pre>Evidence ID: E2
+文件名：notify-routine-en.txt
+Harborview Bristol routine notification procedure. Planned maintenance notices appear in the service portal and a weekday email digest. Do not page the on-call engineer for a notice with no active impact. If an outage occurs during maintenance, switch to the urgent notification procedure and record the incident separately.</pre><h4>incident-degraded-en</h4><pre>Evidence ID: E3
+文件名：incident-degraded-en.txt
+Harborview Bristol production S2 degraded-service procedure. Acknowledge within one hour when a workaround remains available and there is no complete outage. The service owner decides the next update time. Escalate to S1 if the impact becomes a production outage. Staging alerts are handled through the engineering backlog.</pre><h4>restore-guide-en</h4><pre>Evidence ID: E4
+文件名：restore-guide-en.txt
+ne does not demonstrate that a restoration is correct. Every restoration has a case identifier carried through preparation, validation and closure.
+
+Section one: intake. The requester records the affected reporting workspace, the desired timestamp and the reason for recovery. Intake staff check that the requester owns the workspace. If ownership is unclear, pause the request and contact the workspace administrator. Never infer permission from possession of a screenshot or a previously shared report. Record any clarification on the same case rather than opening duplicate requests.
+
+Section two: approval. Both the service owner and the security officer must approve an Atlas restore. The operator checks that the two decisions refer to the same timestamp and workspace. Approval for one workspace cannot be reused for another. Emergency handling uses the same named approvers, although they may respond on the incident bridge. Keep their decisions attached to the case for subsequent review.</pre><h4>offboard-staff-en</h4><pre>Evidence ID: E5
+文件名：offboard-staff-en.txt
+Harborview Bristol employee offboarding. HR supplies the confirmed departure time and IT disables interactive access at that time. The manager transfers ownership of shared documents before departure. Retained audit records do not justify keeping the user&#39;s login active. External partner integrations follow the contract closure policy.</pre></details><h3>双路 RRF</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>notify-urgent-en--c001</code></li><li><code>notify-routine-en--c000</code></li><li><code>incident-degraded-en--c000</code></li><li><code>access-staff-en--c000</code></li><li><code>lost-laptop-en--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>notify-urgent-en</h4><pre>Evidence ID: E1
+文件名：notify-urgent-en.txt
+Harborview Bristol urgent notification procedure. Page the on-call engineer for an active customer-facing outage; do not wait for the email digest. Escalate through the duty roster if nobody acknowledges. Routine maintenance announcements use the portal instead. Record the page time and acknowledgment in the incident ticket.</pre><h4>notify-routine-en</h4><pre>Evidence ID: E2
+文件名：notify-routine-en.txt
+Harborview Bristol routine notification procedure. Planned maintenance notices appear in the service portal and a weekday email digest. Do not page the on-call engineer for a notice with no active impact. If an outage occurs during maintenance, switch to the urgent notification procedure and record the incident separately.</pre><h4>incident-degraded-en</h4><pre>Evidence ID: E3
+文件名：incident-degraded-en.txt
+Harborview Bristol production S2 degraded-service procedure. Acknowledge within one hour when a workaround remains available and there is no complete outage. The service owner decides the next update time. Escalate to S1 if the impact becomes a production outage. Staging alerts are handled through the engineering backlog.</pre><h4>access-staff-en</h4><pre>Evidence ID: E4
+文件名：access-staff-en.txt
+Harborview Bristol office staff access rules. Active employees receive a named building badge after identity verification. A lost badge must be disabled before a replacement is issued. Standard building access does not authorize entry to the server room. Visitors and contractors cannot use an employee&#39;s badge as a substitute for registration.</pre><h4>lost-laptop-en</h4><pre>Evidence ID: E5
+文件名：lost-laptop-en.txt
+Harborview Bristol lost-laptop procedure. Call the security hotline immediately after discovering the loss, even outside office hours. Do not wait to search for the device before reporting. Security suspends access credentials and initiates a remote lock. Provide the asset identifier and the last known location.</pre></details></section><section id='e13'><h2>e13 · Seattle 服务的备份会保存多少天？</h2><p><a href='review.html#e13'>查看应答要点与全部标注</a>；向量命中 50，关键词命中 31。</p><h3>仅关键词</h3><p>切片 Recall@5：1.0000；nDCG@5：0.6309；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>audit-test-zh--c000</code></li><li><code>backup-seattle-en--c000</code></li><li><code>cert-client-zh--c000</code></li><li><code>release-guide-zh--c004</code></li><li><code>cert-server-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>audit-test-zh</h4><pre>Evidence ID: E1
+文件名：audit-test-zh.txt
+海湾实验室测试环境审计日志。常规保留三十天，只供工程排障和自动化验证。测试数据不得包含真实客户密钥。若收到法律保留通知，按法务要求保存指定记录。正式环境日志和备份快照有不同的保留政策。</pre><h4>backup-seattle-en</h4><pre>Evidence ID: E2
+文件名：backup-seattle-en.txt
+Harborview Seattle service backup policy. Backups are retained for fourteen days. The Seattle platform team restores an approved snapshot into a temporary database. A service owner validates the result before replacement. This retention period does not govern Dublin services, audit logs, or document trash.</pre><h4>cert-client-zh</h4><pre>Evidence ID: E3
+文件名：cert-client-zh.txt
+海湾实验室设备客户端证书规则。客户端证书在到期前十四天进入续期窗口。设备管理员在管理台提交续期申请，用户无须重新注册设备。私钥不得附在支持邮件中。本规则不涵盖服务器证书，服务器有独立的变更审批流程。</pre><h4>release-guide-zh</h4><pre>Evidence ID: E4
+文件名：release-guide-zh.txt
+海湾实验室澄海服务发布手册。本手册面向大陆生产环境的发布操作员、值班负责人和业务验收人。测试环境练习不能替代正式发布审批。手册依次说明需求登记、上线审批、预演、流量切换、业务检查、回滚、交接和归档。发布单贯穿全部阶段，任何临时变更都必须留在同一条记录中。不要把某个阶段完成误认为整个发布已经成功。
+
+第一节，需求登记。申请人说明版本号、目标服务、变更范围和用户影响，附上可执行的检查清单。服务所有者核对本次发布是否涉及数据库结构或对外接口。若依赖服务尚未就绪，应调整窗口而不是强行继续。登记时还应列出需要参与的人员及联系渠道。重复提交同一需求不会自动提高优先级，协调结论仍需记录在发布单里。
+
+第二节，上线审批。澄海正式上线必须由发布负责人和业务验收人共同批准。两个批准都要对应本次版本号，不能沿用历史版本的审批截图。批准后若增加变更范围，应重新确认。审批人需要看到预期影响、回滚方案和验收条件，而不仅是程序包名称。紧急窗口允许在值班会议中完成确认，但操作员仍须补齐相应记录。
+
+第三节，预演。操作员在隔离环境按照发布清单执行一次预演，记录实际执行顺序、关键命令的结果和遇到的问题。不得复制生产密码到预演脚本。预演使用的测试数据应经过脱敏。若预演暴露了未登记的依赖或额外变更，应回到登记阶段修订方案。预演成功只是进入下一阶段的条件，不代表已经取得生产访问授权。
+
+第四节，流量切换。先确认上一版本可用，再逐步切换少量流量并观察错误率。观察期间暂停与本次发布无关的批量任务，避免干扰判断。值班人员记录切换时间和监控截图。若指标偏离验收条件，不应通过修改告警阈值来隐藏问题。流量增加必须按预先批准的步骤推进，不能因为暂时没有投诉就跳过检查。
+
+第五节，业务检查。业务验收人执行登录、查询和关键业务操作的检查，比较新旧版本的返回结果。检查失败时要说明具体步骤及影响，不能仅写系统异常。操作员核对业务报告与监控时间是否一致。验收人缺席时应暂停后续切换，而不是让操作员代签。完成业务检查仍需要保持回滚资源直到观察阶段结束。
+
+第六节，失败回滚。确认发布失败后十分钟内完成回滚。值班负责人协调切回上一版本，业务验收人再次检查关键流程。回滚期间保留失败版本的必要诊断信息，但不得保留明文用户凭证。若预计不能在规定时间完成，应立即通知事故负责人。不要反复重试同一发布来拖延回滚，新的发布尝试必须有明确的修复与验证依据。
+
+第七节，交接。观察阶段结束后，把版本号、尚未关闭的问题和下一班需要关注的指标交接给值班人员。临时增加的权限在交接前撤销。操作员检查定时任务和通知设置是否恢复。交接清单不能只写正常两个字，应能让未参加发布的人理解当前状态。若仍有未解决的用户影响，发布单不得直接转为完成。
+
+第八节，归档。将审批、预演、切换、业务检查和回滚记录归入同一发布单。归档应区分成功、取消和回滚三种结果。后续复盘只能引用实际发生的操作，不得把原计划当作已经执行。管理员核对相关附件的访问范围，避免把内部环境信息分享给无关人员。发布记录保存策略与数据库备份策略不同，需要分别查询对应制度。</pre><h4>cert-server-zh</h4><pre>Evidence ID: E5
+文件名：cert-server-zh.txt
+海湾实验室服务器证书维护规则。服务器证书到期前三十天创建变更单，取得服务负责人批准后再部署。替换证书时应保留回滚版本并验证健康检查。设备客户端续期不走这一流程。任何工单都不得包含证书私钥。</pre></details><h3>仅向量</h3><p>切片 Recall@5：0.0000；nDCG@5：0.0000；切片事实覆盖：0.0000；最终窗口事实覆盖：0.0000。</p><ol><li><code>audit-test-zh--c000</code></li><li><code>backup-shanghai-zh--c000</code></li><li><code>shipping-overseas-zh--c000</code></li><li><code>audit-production-zh--c000</code></li><li><code>cert-server-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>audit-test-zh</h4><pre>Evidence ID: E1
+文件名：audit-test-zh.txt
+海湾实验室测试环境审计日志。常规保留三十天，只供工程排障和自动化验证。测试数据不得包含真实客户密钥。若收到法律保留通知，按法务要求保存指定记录。正式环境日志和备份快照有不同的保留政策。</pre><h4>backup-shanghai-zh</h4><pre>Evidence ID: E2
+文件名：backup-shanghai-zh.txt
+海湾实验室上海办公系统备份规则。备份保留四十五天，恢复申请由上海平台组处理。申请人需要给出系统名称、恢复日期和工单编号。此规则只涵盖办公系统，不包括杭州研发环境和海外区域。备份到期不等于用户文档的回收站期限。</pre><h4>shipping-overseas-zh</h4><pre>Evidence ID: E3
+文件名：shipping-overseas-zh.txt
+海湾实验室跨境设备寄送。申请获批后预留十个工作日准备报关材料和出口审查。实际到达时间取决于承运商与海关，不作固定保证。设备内容必须通过数据清理检查。国内本地备用机寄送使用另一份操作规则。</pre><h4>audit-production-zh</h4><pre>Evidence ID: E4
+文件名：audit-production-zh.txt
+海湾实验室正式环境审计日志。常规保留一百八十天；收到法律保留通知后，暂停删除相关记录直到法务解除。日志不得作为共享密码的渠道。此规则不适用于测试环境日志或备份快照。访问审计记录必须有授权和查询工单。</pre><h4>cert-server-zh</h4><pre>Evidence ID: E5
+文件名：cert-server-zh.txt
+海湾实验室服务器证书维护规则。服务器证书到期前三十天创建变更单，取得服务负责人批准后再部署。替换证书时应保留回滚版本并验证健康检查。设备客户端续期不走这一流程。任何工单都不得包含证书私钥。</pre></details><h3>双路 RRF</h3><p>切片 Recall@5：1.0000；nDCG@5：0.3869；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>audit-test-zh--c000</code></li><li><code>backup-shanghai-zh--c000</code></li><li><code>cert-client-zh--c000</code></li><li><code>cert-server-zh--c000</code></li><li><code>backup-seattle-en--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>audit-test-zh</h4><pre>Evidence ID: E1
+文件名：audit-test-zh.txt
+海湾实验室测试环境审计日志。常规保留三十天，只供工程排障和自动化验证。测试数据不得包含真实客户密钥。若收到法律保留通知，按法务要求保存指定记录。正式环境日志和备份快照有不同的保留政策。</pre><h4>backup-shanghai-zh</h4><pre>Evidence ID: E2
+文件名：backup-shanghai-zh.txt
+海湾实验室上海办公系统备份规则。备份保留四十五天，恢复申请由上海平台组处理。申请人需要给出系统名称、恢复日期和工单编号。此规则只涵盖办公系统，不包括杭州研发环境和海外区域。备份到期不等于用户文档的回收站期限。</pre><h4>cert-client-zh</h4><pre>Evidence ID: E3
+文件名：cert-client-zh.txt
+海湾实验室设备客户端证书规则。客户端证书在到期前十四天进入续期窗口。设备管理员在管理台提交续期申请，用户无须重新注册设备。私钥不得附在支持邮件中。本规则不涵盖服务器证书，服务器有独立的变更审批流程。</pre><h4>cert-server-zh</h4><pre>Evidence ID: E4
+文件名：cert-server-zh.txt
+海湾实验室服务器证书维护规则。服务器证书到期前三十天创建变更单，取得服务负责人批准后再部署。替换证书时应保留回滚版本并验证健康检查。设备客户端续期不走这一流程。任何工单都不得包含证书私钥。</pre><h4>backup-seattle-en</h4><pre>Evidence ID: E5
+文件名：backup-seattle-en.txt
+Harborview Seattle service backup policy. Backups are retained for fourteen days. The Seattle platform team restores an approved snapshot into a temporary database. A service owner validates the result before replacement. This retention period does not govern Dublin services, audit logs, or document trash.</pre></details></section><section id='e14'><h2>e14 · How long are backups kept for the Shanghai office systems?</h2><p><a href='review.html#e14'>查看应答要点与全部标注</a>；向量命中 50，关键词命中 9。</p><h3>仅关键词</h3><p>切片 Recall@5：1.0000；nDCG@5：0.6309；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>restore-guide-en--c000</code></li><li><code>backup-shanghai-zh--c000</code></li><li><code>travel-sales-en--c000</code></li><li><code>backup-seattle-en--c000</code></li><li><code>backup-dublin-en--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>restore-guide-en</h4><pre>Evidence ID: E1
+文件名：restore-guide-en.txt
+Harborview Atlas restoration handbook. This guide covers restoration of the Atlas reporting service, not general office backups. It is organized for operators, service owners and audit reviewers. Read the requested recovery scope before choosing a snapshot. A successful file download alone does not demonstrate that a restoration is correct. Every restoration has a case identifier carried through preparation, validation and closure.</pre><h4>backup-shanghai-zh</h4><pre>Evidence ID: E2
+文件名：backup-shanghai-zh.txt
+海湾实验室上海办公系统备份规则。备份保留四十五天，恢复申请由上海平台组处理。申请人需要给出系统名称、恢复日期和工单编号。此规则只涵盖办公系统，不包括杭州研发环境和海外区域。备份到期不等于用户文档的回收站期限。</pre><h4>travel-sales-en</h4><pre>Evidence ID: E3
+文件名：travel-sales-en.txt
+Harborview sales travel policy. Domestic hotel reimbursement is capped at USD 160 per night. Obtain sales director approval before booking above the cap and attach the approved itinerary to the claim. This policy covers the sales team only. Engineering travel and long-term assignments have separate allowances.</pre><h4>backup-seattle-en</h4><pre>Evidence ID: E4
+文件名：backup-seattle-en.txt
+Harborview Seattle service backup policy. Backups are retained for fourteen days. The Seattle platform team restores an approved snapshot into a temporary database. A service owner validates the result before replacement. This retention period does not govern Dublin services, audit logs, or document trash.</pre><h4>backup-dublin-en</h4><pre>Evidence ID: E5
+文件名：backup-dublin-en.txt
+Harborview Dublin service backup policy. Backups are retained for twenty-one days. The Dublin platform team handles restoration requests after the service owner approves the target timestamp. Restores are staged in an isolated database before release. This policy applies to Dublin production services, not Seattle or employee laptops.</pre></details><h3>仅向量</h3><p>切片 Recall@5：0.0000；nDCG@5：0.0000；切片事实覆盖：0.0000；最终窗口事实覆盖：0.0000。</p><ol><li><code>backup-seattle-en--c000</code></li><li><code>backup-dublin-en--c000</code></li><li><code>backup-dublin-en--c001</code></li><li><code>restore-guide-en--c017</code></li><li><code>restore-guide-en--c011</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>backup-seattle-en</h4><pre>Evidence ID: E1
+文件名：backup-seattle-en.txt
+Harborview Seattle service backup policy. Backups are retained for fourteen days. The Seattle platform team restores an approved snapshot into a temporary database. A service owner validates the result before replacement. This retention period does not govern Dublin services, audit logs, or document trash.</pre><h4>backup-dublin-en</h4><pre>Evidence ID: E2
+文件名：backup-dublin-en.txt
+Harborview Dublin service backup policy. Backups are retained for twenty-one days. The Dublin platform team handles restoration requests after the service owner approves the target timestamp. Restores are staged in an isolated database before release. This policy applies to Dublin production services, not Seattle or employee laptops.</pre><h4>restore-guide-en</h4><pre>Evidence ID: E3
+文件名：restore-guide-en.txt
+anceled request or a rollback.
+
+Section eight: evidence retention. Atlas restoration approval records are retained for ninety days after closure. The audit custodian stores the approvals and verification checklist with the case identifier. A legal hold pauses disposal of the affected records. This retention period is not the backup snapshot lifetime. Reviewers should be able to trace the requester, approvers, chosen timestamp and final disposition without recovering credentials from the evidence.</pre><h4>restore-guide-en</h4><pre>Evidence ID: E4
+文件名：restore-guide-en.txt
+make counts match. Restore verification is distinct from the permission checks performed during intake and approval.
+
+Section five: release. Announce the replacement window to the affected workspace users and stop scheduled report refreshes. Save the current database state before switching the connection to the approved restore. Resume refreshes only after the service owner confirms the reporting checks. Keep the old state available until closure is complete. Do not treat the replacement window as authorization to access unrelated workspaces.
+
+Section six: rollback. If validation fails after release, return the connection to the saved state and reopen the case. Explain the failed check in the timeline. The operator must not silently choose another snapshot or expand the recovery scope. Any different target timestamp needs a new approval. The incident lead coordinates communication when the failure affects active customers.</pre><h4>notify-urgent-en</h4><pre>Evidence ID: E5
+文件名：notify-urgent-en.txt
+Harborview Bristol urgent notification procedure. Page the on-call engineer for an active customer-facing outage; do not wait for the email digest. Escalate through the duty roster if nobody acknowledges. Routine maintenance announcements use the portal instead. Record the page time and acknowledgment in the incident ticket.</pre></details><h3>双路 RRF</h3><p>切片 Recall@5：0.0000；nDCG@5：0.0000；切片事实覆盖：0.0000；最终窗口事实覆盖：0.0000。</p><ol><li><code>backup-seattle-en--c000</code></li><li><code>backup-dublin-en--c000</code></li><li><code>restore-guide-en--c000</code></li><li><code>lost-laptop-en--c000</code></li><li><code>audit-us-en--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>backup-seattle-en</h4><pre>Evidence ID: E1
+文件名：backup-seattle-en.txt
+Harborview Seattle service backup policy. Backups are retained for fourteen days. The Seattle platform team restores an approved snapshot into a temporary database. A service owner validates the result before replacement. This retention period does not govern Dublin services, audit logs, or document trash.</pre><h4>backup-dublin-en</h4><pre>Evidence ID: E2
+文件名：backup-dublin-en.txt
+Harborview Dublin service backup policy. Backups are retained for twenty-one days. The Dublin platform team handles restoration requests after the service owner approves the target timestamp. Restores are staged in an isolated database before release. This policy applies to Dublin production services, not Seattle or employee laptops.</pre><h4>restore-guide-en</h4><pre>Evidence ID: E3
+文件名：restore-guide-en.txt
+Harborview Atlas restoration handbook. This guide covers restoration of the Atlas reporting service, not general office backups. It is organized for operators, service owners and audit reviewers. Read the requested recovery scope before choosing a snapshot. A successful file download alone does not demonstrate that a restoration is correct. Every restoration has a case identifier carried through preparation, validation and closure.</pre><h4>lost-laptop-en</h4><pre>Evidence ID: E4
+文件名：lost-laptop-en.txt
+Harborview Bristol lost-laptop procedure. Call the security hotline immediately after discovering the loss, even outside office hours. Do not wait to search for the device before reporting. Security suspends access credentials and initiates a remote lock. Provide the asset identifier and the last known location.</pre><h4>audit-us-en</h4><pre>Evidence ID: E5
+文件名：audit-us-en.txt
+Harborview US audit logging policy. Standard audit records are retained for 365 days. Records under legal hold must not be deleted until the hold is released. Investigators need approved access and a case identifier. EU audit data, service backups and temporary diagnostic logs follow separate policies.</pre></details></section><section id='e15'><h2>e15 · For the mainland team, how do ordinary weekly remote days differ from a continuous remote exception?</h2><p><a href='review.html#e15'>查看应答要点与全部标注</a>；向量命中 50，关键词命中 29。</p><h3>仅关键词</h3><p>切片 Recall@5：1.0000；nDCG@5：0.5438；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>remote-exception-en--c000</code></li><li><code>remote-standard-en--c000</code></li><li><code>remote-exception-zh--c000</code></li><li><code>lost-laptop-en--c000</code></li><li><code>remote-standard-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>remote-exception-en</h4><pre>Evidence ID: E1
+文件名：remote-exception-en.txt
+Harborview Bristol extended remote-work policy. A continuous remote exception can last up to six weeks and needs both HR and manager approval. Provide the location, working hours and handover plan before departure. An extension requires a new approval. Weekly remote days cannot be accumulated to bypass this process.</pre><h4>remote-standard-en</h4><pre>Evidence ID: E2
+文件名：remote-standard-en.txt
+Harborview Bristol ordinary remote-work policy. With manager approval, employees may work remotely on Monday and Friday, up to two days per week. Customer visits and mandatory on-site work take priority. Unused days cannot be carried over. A continuous period away requires the separate remote exception process.</pre><h4>remote-exception-zh</h4><pre>Evidence ID: E3
+文件名：remote-exception-zh.txt
+海湾实验室大陆团队远程例外。连续异地办公最多三周，必须同时取得人力资源和直属经理批准。申请需说明地点、工作时间和交接安排。例外不改变休假余额，也不能自动延长。常规每周远程安排适用另一份规则。</pre><h4>lost-laptop-en</h4><pre>Evidence ID: E4
+文件名：lost-laptop-en.txt
+Harborview Bristol lost-laptop procedure. Call the security hotline immediately after discovering the loss, even outside office hours. Do not wait to search for the device before reporting. Security suspends access credentials and initiates a remote lock. Provide the asset identifier and the last known location.</pre><h4>remote-standard-zh</h4><pre>Evidence ID: E5
+文件名：remote-standard-zh.txt
+海湾实验室大陆团队常规远程办公。经直属经理批准，可在周二和周三远程办公，每周最多两天。团队会议和客户现场安排优先。未使用的天数不能累计到下周。连续数周异地办公必须申请例外，不得把常规远程天数拼接成长假。</pre></details><h3>仅向量</h3><p>切片 Recall@5：0.0000；nDCG@5：0.0000；切片事实覆盖：0.0000；最终窗口事实覆盖：0.0000。</p><ol><li><code>remote-standard-en--c000</code></li><li><code>remote-exception-en--c000</code></li><li><code>cert-gateway-en--c001</code></li><li><code>restore-guide-en--c005</code></li><li><code>shipping-priority-en--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>remote-standard-en</h4><pre>Evidence ID: E1
+文件名：remote-standard-en.txt
+Harborview Bristol ordinary remote-work policy. With manager approval, employees may work remotely on Monday and Friday, up to two days per week. Customer visits and mandatory on-site work take priority. Unused days cannot be carried over. A continuous period away requires the separate remote exception process.</pre><h4>remote-exception-en</h4><pre>Evidence ID: E2
+文件名：remote-exception-en.txt
+Harborview Bristol extended remote-work policy. A continuous remote exception can last up to six weeks and needs both HR and manager approval. Provide the location, working hours and handover plan before departure. An extension requires a new approval. Weekly remote days cannot be accumulated to bypass this process.</pre><h4>cert-gateway-en</h4><pre>Evidence ID: E3
+文件名：cert-gateway-en.txt
+Harborview gateway server certificate procedure. Create a change request twenty-one days before expiry. The network owner approves deployment and a rollback certificate must remain available. Run the gateway health checks afterward. Monitoring agent certificates use a separate renewal window and must not be replaced through this procedure.</pre><h4>restore-guide-en</h4><pre>Evidence ID: E4
+文件名：restore-guide-en.txt
+an opening duplicate requests.
+
+Section two: approval. Both the service owner and the security officer must approve an Atlas restore. The operator checks that the two decisions refer to the same timestamp and workspace. Approval for one workspace cannot be reused for another. Emergency handling uses the same named approvers, although they may respond on the incident bridge. Keep their decisions attached to the case for subsequent review.
+
+Section three: staging. Create an isolated staging database before restoring data. Disable outbound notifications and background exports in that database. Use a temporary credential scoped to the case, and do not copy a production administrator password into a script. Check the restore size against the available disk a</pre><h4>shipping-priority-en</h4><pre>Evidence ID: E5
+文件名：shipping-priority-en.txt
+Harborview Bristol priority equipment dispatch. Approved replacement equipment is handed to the courier within two working days. Transit time is not included. The recipient checks the asset identifier and confirms receipt to the asset team. This dispatch target is not an international delivery guarantee or an incident response deadline.</pre></details><h3>双路 RRF</h3><p>切片 Recall@5：0.0000；nDCG@5：0.0000；切片事实覆盖：0.0000；最终窗口事实覆盖：0.0000。</p><ol><li><code>remote-standard-en--c000</code></li><li><code>remote-exception-en--c000</code></li><li><code>shipping-priority-en--c000</code></li><li><code>backup-seattle-en--c000</code></li><li><code>notify-routine-en--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>remote-standard-en</h4><pre>Evidence ID: E1
+文件名：remote-standard-en.txt
+Harborview Bristol ordinary remote-work policy. With manager approval, employees may work remotely on Monday and Friday, up to two days per week. Customer visits and mandatory on-site work take priority. Unused days cannot be carried over. A continuous period away requires the separate remote exception process.</pre><h4>remote-exception-en</h4><pre>Evidence ID: E2
+文件名：remote-exception-en.txt
+Harborview Bristol extended remote-work policy. A continuous remote exception can last up to six weeks and needs both HR and manager approval. Provide the location, working hours and handover plan before departure. An extension requires a new approval. Weekly remote days cannot be accumulated to bypass this process.</pre><h4>shipping-priority-en</h4><pre>Evidence ID: E3
+文件名：shipping-priority-en.txt
+Harborview Bristol priority equipment dispatch. Approved replacement equipment is handed to the courier within two working days. Transit time is not included. The recipient checks the asset identifier and confirms receipt to the asset team. This dispatch target is not an international delivery guarantee or an incident response deadline.</pre><h4>backup-seattle-en</h4><pre>Evidence ID: E4
+文件名：backup-seattle-en.txt
+Harborview Seattle service backup policy. Backups are retained for fourteen days. The Seattle platform team restores an approved snapshot into a temporary database. A service owner validates the result before replacement. This retention period does not govern Dublin services, audit logs, or document trash.</pre><h4>notify-routine-en</h4><pre>Evidence ID: E5
+文件名：notify-routine-en.txt
+Harborview Bristol routine notification procedure. Planned maintenance notices appear in the service portal and a weekday email digest. Do not page the on-call engineer for a notice with no active impact. If an outage occurs during maintenance, switch to the urgent notification procedure and record the incident separately.</pre></details></section><section id='e16'><h2>e16 · Bristol 员工报销需要什么凭证，购买后最迟多久提交？</h2><p><a href='review.html#e16'>查看应答要点与全部标注</a>；向量命中 50，关键词命中 42。</p><h3>仅关键词</h3><p>切片 Recall@5：0.0000；nDCG@5：0.0000；切片事实覆盖：0.0000；最终窗口事实覆盖：0.0000。</p><ol><li><code>expense-deadline-zh--c000</code></li><li><code>expense-receipt-zh--c000</code></li><li><code>travel-domestic-zh--c000</code></li><li><code>lost-laptop-zh--c000</code></li><li><code>travel-international-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>expense-deadline-zh</h4><pre>Evidence ID: E1
+文件名：expense-deadline-zh.txt
+海湾实验室大陆团队费用提交时限。费用发生后十五个自然日内提交报销申请。直属经理审核用途，财务核对凭证和费用中心。超过期限须附延迟说明并取得财务批准。提交及时并不免除正式凭证要求，出差和办公采购也要遵循各自审批规则。</pre><h4>expense-receipt-zh</h4><pre>Evidence ID: E2
+文件名：expense-receipt-zh.txt
+海湾实验室大陆团队费用凭证。报销必须提供正式发票，只有银行付款截图不能作为报销凭证。发票应列出供应商和费用项目，并与实际用途一致。丢失发票时应先联系供应商补开，不能用手写说明代替。本条只规定凭证，提交期限见费用时限规则。</pre><h4>travel-domestic-zh</h4><pre>Evidence ID: E3
+文件名：travel-domestic-zh.txt
+海湾实验室大陆员工国内出差住宿规则。酒店每晚报销上限为六百五十元，超出部分须在预订前取得直属经理批准。提交发票时附上出差行程。此上限不适用于国际出差或长期派驻，也不包含交通和餐饮费用。不得拆分发票规避审批。</pre><h4>lost-laptop-zh</h4><pre>Evidence ID: E4
+文件名：lost-laptop-zh.txt
+海湾实验室大陆团队笔记本丢失处置。发现笔记本丢失后二十分钟内致电安全值班组。先报告，不要等到下个工作日，也不要先自行找回设备再决定是否上报。安全组负责暂停访问凭证和远程锁定。员工应提供设备编号和最后使用地点。</pre><h4>travel-international-zh</h4><pre>Evidence ID: E5
+文件名：travel-international-zh.txt
+海湾实验室大陆员工国际出差住宿规则。酒店每晚报销上限为一百八十美元等值金额；超限须在订房前由部门负责人批准。汇率按财务月度表换算。国内差旅使用人民币单独限额。长期派驻住宿按派驻协议执行，不按此规则计算。</pre></details><h3>仅向量</h3><p>切片 Recall@5：0.0000；nDCG@5：0.0000；切片事实覆盖：0.0000；最终窗口事实覆盖：0.0000。</p><ol><li><code>expense-deadline-zh--c000</code></li><li><code>expense-receipt-zh--c000</code></li><li><code>cert-server-zh--c000</code></li><li><code>cert-client-zh--c000</code></li><li><code>release-guide-zh--c003</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>expense-deadline-zh</h4><pre>Evidence ID: E1
+文件名：expense-deadline-zh.txt
+海湾实验室大陆团队费用提交时限。费用发生后十五个自然日内提交报销申请。直属经理审核用途，财务核对凭证和费用中心。超过期限须附延迟说明并取得财务批准。提交及时并不免除正式凭证要求，出差和办公采购也要遵循各自审批规则。</pre><h4>expense-receipt-zh</h4><pre>Evidence ID: E2
+文件名：expense-receipt-zh.txt
+海湾实验室大陆团队费用凭证。报销必须提供正式发票，只有银行付款截图不能作为报销凭证。发票应列出供应商和费用项目，并与实际用途一致。丢失发票时应先联系供应商补开，不能用手写说明代替。本条只规定凭证，提交期限见费用时限规则。</pre><h4>cert-server-zh</h4><pre>Evidence ID: E3
+文件名：cert-server-zh.txt
+海湾实验室服务器证书维护规则。服务器证书到期前三十天创建变更单，取得服务负责人批准后再部署。替换证书时应保留回滚版本并验证健康检查。设备客户端续期不走这一流程。任何工单都不得包含证书私钥。</pre><h4>cert-client-zh</h4><pre>Evidence ID: E4
+文件名：cert-client-zh.txt
+海湾实验室设备客户端证书规则。客户端证书在到期前十四天进入续期窗口。设备管理员在管理台提交续期申请，用户无须重新注册设备。私钥不得附在支持邮件中。本规则不涵盖服务器证书，服务器有独立的变更审批流程。</pre><h4>release-guide-zh</h4><pre>Evidence ID: E5
+文件名：release-guide-zh.txt
+海湾实验室澄海服务发布手册。本手册面向大陆生产环境的发布操作员、值班负责人和业务验收人。测试环境练习不能替代正式发布审批。手册依次说明需求登记、上线审批、预演、流量切换、业务检查、回滚、交接和归档。发布单贯穿全部阶段，任何临时变更都必须留在同一条记录中。不要把某个阶段完成误认为整个发布已经成功。
+
+第一节，需求登记。申请人说明版本号、目标服务、变更范围和用户影响，附上可执行的检查清单。服务所有者核对本次发布是否涉及数据库结构或对外接口。若依赖服务尚未就绪，应调整窗口而不是强行继续。登记时还应列出需要参与的人员及联系渠道。重复提交同一需求不会自动提高优先级，协调结论仍需记录在发布单里。
+
+第二节，上线审批。澄海正式上线必须由发布负责人和业务验收人共同批准。两个批准都要对应本次版本号，不能沿用历史版本的审批截图。批准后若增加变更范围，应重新确认。审批人需要看到预期影响、回滚方案和验收条件，而不仅是程序包名称。紧急窗口允许在值班会议中完成确认，但操作员仍须补齐相应记录。
+
+第三节，预演。操作员在隔离环境按照发布清单执行一次预演，记录实际执行顺序、关键命令的结果和遇到的问题。不得复制生产密码到预演脚本。预演使用的测试数据应经过脱敏。若预演暴露了未登记的依赖或额外变更，应回到登记阶段修订方案。预演成功只是进入下一阶段的条件，不代表已经取得生产访问授权。
+
+第四节，流量切换。先确认上一版本可用，再逐步切换少量流量并观察错误率。观察期间暂停与本次发布无关的批量任务，避免干扰判断。值班人员记录切换时间和监控截图。若指标偏离验收条件，不应通过修改告警阈值来隐藏问题。流量增加必须按预先批准的步骤推进，不能因为暂时没有投诉就跳过检查。
+
+第五节，业务检查。业务验收人执行登录、查询和关键业务操作的检查，比较新旧版本的返回结果。检查失败时要说明具体步骤及影响，不能仅写系统异常。操作员核对业务报告与监控时间是否一致。验收人缺席时应暂停后续切换，而不是让操作员代签。完成业务检查仍需要保持回滚资源直到观察阶段结束。
+
+第六节，失败回滚。确认发布失败后十分钟内完成回滚。值班负责人协调切回上一版本，业务验收人再次检查关键流程。回滚期间保留失败版本的必要诊断信息，但不得保留明文用户凭证。若预计不能在规定时间完成，应立即通知事故负责人。不要反复重试同一发布来拖延回滚，新的发布尝试必须有明确的修复与验证依据。
+
+第七节，交接。观察阶段结束后，把版本号、尚未关闭的问题和下一班需要关注的指标交接给值班人员。临时增加的权限在交接前撤销。操作员检查定时任务和通知设置是否恢复。交接清单不能只写正常两个字，应能让未参加发布的人理解当前状态。若仍有未解决的用户影响，发布单不得直接转为完成。
+
+第八节，归档。将审批、预演、切换、业务检查和回滚记录归入同一发布单。归档应区分成功、取消和回滚三种结果。后续复盘只能引用实际发生的操作，不得把原计划当作已经执行。管理员核对相关附件的访问范围，避免把内部环境信息分享给无关人员。发布记录保存策略与数据库备份策略不同，需要分别查询对应制度。</pre></details><h3>双路 RRF</h3><p>切片 Recall@5：0.0000；nDCG@5：0.0000；切片事实覆盖：0.0000；最终窗口事实覆盖：0.0000。</p><ol><li><code>expense-deadline-zh--c000</code></li><li><code>expense-receipt-zh--c000</code></li><li><code>release-guide-zh--c003</code></li><li><code>travel-domestic-zh--c000</code></li><li><code>release-guide-zh--c001</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>expense-deadline-zh</h4><pre>Evidence ID: E1
+文件名：expense-deadline-zh.txt
+海湾实验室大陆团队费用提交时限。费用发生后十五个自然日内提交报销申请。直属经理审核用途，财务核对凭证和费用中心。超过期限须附延迟说明并取得财务批准。提交及时并不免除正式凭证要求，出差和办公采购也要遵循各自审批规则。</pre><h4>expense-receipt-zh</h4><pre>Evidence ID: E2
+文件名：expense-receipt-zh.txt
+海湾实验室大陆团队费用凭证。报销必须提供正式发票，只有银行付款截图不能作为报销凭证。发票应列出供应商和费用项目，并与实际用途一致。丢失发票时应先联系供应商补开，不能用手写说明代替。本条只规定凭证，提交期限见费用时限规则。</pre><h4>release-guide-zh</h4><pre>Evidence ID: E3
+文件名：release-guide-zh.txt
+海湾实验室澄海服务发布手册。本手册面向大陆生产环境的发布操作员、值班负责人和业务验收人。测试环境练习不能替代正式发布审批。手册依次说明需求登记、上线审批、预演、流量切换、业务检查、回滚、交接和归档。发布单贯穿全部阶段，任何临时变更都必须留在同一条记录中。不要把某个阶段完成误认为整个发布已经成功。
+
+第一节，需求登记。申请人说明版本号、目标服务、变更范围和用户影响，附上可执行的检查清单。服务所有者核对本次发布是否涉及数据库结构或对外接口。若依赖服务尚未就绪，应调整窗口而不是强行继续。登记时还应列出需要参与的人员及联系渠道。重复提交同一需求不会自动提高优先级，协调结论仍需记录在发布单里。
+
+第二节，上线审批。澄海正式上线必须由发布负责人和业务验收人共同批准。两个批准都要对应本次版本号，不能沿用历史版本的审批截图。批准后若增加变更范围，应重新确认。审批人需要看到预期影响、回滚方案和验收条件，而不仅是程序包名称。紧急窗口允许在值班会议中完成确认，但操作员仍须补齐相应记录。
+
+第三节，预演。操作员在隔离环境按照发布清单执行一次预演，记录实际执行顺序、关键命令的结果和遇到的问题。不得复制生产密码到预演脚本。预演使用的测试数据应经过脱敏。若预演暴露了未登记的依赖或额外变更，应回到登记阶段修订方案。预演成功只是进入下一阶段的条件，不代表已经取得生产访问授权。
+
+第四节，流量切换。先确认上一版本可用，再逐步切换少量流量并观察错误率。观察期间暂停与本次发布无关的批量任务，避免干扰判断。值班人员记录切换时间和监控截图。若指标偏离验收条件，不应通过修改告警阈值来隐藏问题。流量增加必须按预先批准的步骤推进，不能因为暂时没有投诉就跳过检查。
+
+第五节，业务检查。业务验收人执行登录、查询和关键业务操作的检查，比较新旧版本的返回结果。检查失败时要说明具体步骤及影响，不能仅写系统异常。操作员核对业务报告与监控时间是否一致。验收人缺席时应暂停后续切换，而不是让操作员代签。完成业务检查仍需要保持回滚资源直到观察阶段结束。
+
+第六节，失败回滚。确认发布失败后十分钟内完成回滚。值班负责人协调切回上一版本，业务验收人再次检查关键流程。回滚期间保留失败版本的必要诊断信息，但不得保留明文用户凭证。若预计不能在规定时间完成，应立即通知事故负责人。不要反复重试同一发布来拖延回滚，新的发布尝试必须有明确的修复与验证依据。
+
+第七节，交接。观察阶段结束后，把版本号、尚未关闭的问题和下一班需要关注的指标交接给值班人员。临时增加的权限在交接前撤销。操作员检查定时任务和通知设置是否恢复。交接清单不能只写正常两个字，应能让未参加发布的人理解当前状态。若仍有未解决的用户影响，发布单不得直接转为完成。
+
+第八节，归档。将审批、预演、切换、业务检查和回滚记录归入同一发布单。归档应区分成功、取消和回滚三种结果。后续复盘只能引用实际发生的操作，不得把原计划当作已经执行。管理员核对相关附件的访问范围，避免把内部环境信息分享给无关人员。发布记录保存策略与数据库备份策略不同，需要分别查询对应制度。</pre><h4>travel-domestic-zh</h4><pre>Evidence ID: E4
+文件名：travel-domestic-zh.txt
+海湾实验室大陆员工国内出差住宿规则。酒店每晚报销上限为六百五十元，超出部分须在预订前取得直属经理批准。提交发票时附上出差行程。此上限不适用于国际出差或长期派驻，也不包含交通和餐饮费用。不得拆分发票规避审批。</pre><h4>cert-client-zh</h4><pre>Evidence ID: E5
+文件名：cert-client-zh.txt
+海湾实验室设备客户端证书规则。客户端证书在到期前十四天进入续期窗口。设备管理员在管理台提交续期申请，用户无须重新注册设备。私钥不得附在支持邮件中。本规则不涵盖服务器证书，服务器有独立的变更审批流程。</pre></details></section><section id='e17'><h2>e17 · 大陆团队报销必须交什么凭证，费用发生后多久提交？</h2><p><a href='review.html#e17'>查看应答要点与全部标注</a>；向量命中 50，关键词命中 29。</p><h3>仅关键词</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>expense-deadline-zh--c000</code></li><li><code>expense-receipt-zh--c000</code></li><li><code>travel-domestic-zh--c000</code></li><li><code>remote-standard-zh--c000</code></li><li><code>remote-exception-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>expense-deadline-zh</h4><pre>Evidence ID: E1
+文件名：expense-deadline-zh.txt
+海湾实验室大陆团队费用提交时限。费用发生后十五个自然日内提交报销申请。直属经理审核用途，财务核对凭证和费用中心。超过期限须附延迟说明并取得财务批准。提交及时并不免除正式凭证要求，出差和办公采购也要遵循各自审批规则。</pre><h4>expense-receipt-zh</h4><pre>Evidence ID: E2
+文件名：expense-receipt-zh.txt
+海湾实验室大陆团队费用凭证。报销必须提供正式发票，只有银行付款截图不能作为报销凭证。发票应列出供应商和费用项目，并与实际用途一致。丢失发票时应先联系供应商补开，不能用手写说明代替。本条只规定凭证，提交期限见费用时限规则。</pre><h4>travel-domestic-zh</h4><pre>Evidence ID: E3
+文件名：travel-domestic-zh.txt
+海湾实验室大陆员工国内出差住宿规则。酒店每晚报销上限为六百五十元，超出部分须在预订前取得直属经理批准。提交发票时附上出差行程。此上限不适用于国际出差或长期派驻，也不包含交通和餐饮费用。不得拆分发票规避审批。</pre><h4>remote-standard-zh</h4><pre>Evidence ID: E4
+文件名：remote-standard-zh.txt
+海湾实验室大陆团队常规远程办公。经直属经理批准，可在周二和周三远程办公，每周最多两天。团队会议和客户现场安排优先。未使用的天数不能累计到下周。连续数周异地办公必须申请例外，不得把常规远程天数拼接成长假。</pre><h4>remote-exception-zh</h4><pre>Evidence ID: E5
+文件名：remote-exception-zh.txt
+海湾实验室大陆团队远程例外。连续异地办公最多三周，必须同时取得人力资源和直属经理批准。申请需说明地点、工作时间和交接安排。例外不改变休假余额，也不能自动延长。常规每周远程安排适用另一份规则。</pre></details><h3>仅向量</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>expense-deadline-zh--c000</code></li><li><code>expense-receipt-zh--c000</code></li><li><code>travel-domestic-zh--c000</code></li><li><code>offboard-staff-zh--c000</code></li><li><code>cert-server-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>expense-deadline-zh</h4><pre>Evidence ID: E1
+文件名：expense-deadline-zh.txt
+海湾实验室大陆团队费用提交时限。费用发生后十五个自然日内提交报销申请。直属经理审核用途，财务核对凭证和费用中心。超过期限须附延迟说明并取得财务批准。提交及时并不免除正式凭证要求，出差和办公采购也要遵循各自审批规则。</pre><h4>expense-receipt-zh</h4><pre>Evidence ID: E2
+文件名：expense-receipt-zh.txt
+海湾实验室大陆团队费用凭证。报销必须提供正式发票，只有银行付款截图不能作为报销凭证。发票应列出供应商和费用项目，并与实际用途一致。丢失发票时应先联系供应商补开，不能用手写说明代替。本条只规定凭证，提交期限见费用时限规则。</pre><h4>travel-domestic-zh</h4><pre>Evidence ID: E3
+文件名：travel-domestic-zh.txt
+海湾实验室大陆员工国内出差住宿规则。酒店每晚报销上限为六百五十元，超出部分须在预订前取得直属经理批准。提交发票时附上出差行程。此上限不适用于国际出差或长期派驻，也不包含交通和餐饮费用。不得拆分发票规避审批。</pre><h4>offboard-staff-zh</h4><pre>Evidence ID: E4
+文件名：offboard-staff-zh.txt
+海湾实验室大陆团队员工离职。最后工作日十七点停用日常业务账号，由人力资源确认时间，IT 执行。经理负责资料归档和工作交接。法律保留要求不意味着保留本人登录权限。承包商账号按合同结束流程处理。</pre><h4>cert-server-zh</h4><pre>Evidence ID: E5
+文件名：cert-server-zh.txt
+海湾实验室服务器证书维护规则。服务器证书到期前三十天创建变更单，取得服务负责人批准后再部署。替换证书时应保留回滚版本并验证健康检查。设备客户端续期不走这一流程。任何工单都不得包含证书私钥。</pre></details><h3>双路 RRF</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>expense-deadline-zh--c000</code></li><li><code>expense-receipt-zh--c000</code></li><li><code>travel-domestic-zh--c000</code></li><li><code>offboard-staff-zh--c000</code></li><li><code>remote-exception-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>expense-deadline-zh</h4><pre>Evidence ID: E1
+文件名：expense-deadline-zh.txt
+海湾实验室大陆团队费用提交时限。费用发生后十五个自然日内提交报销申请。直属经理审核用途，财务核对凭证和费用中心。超过期限须附延迟说明并取得财务批准。提交及时并不免除正式凭证要求，出差和办公采购也要遵循各自审批规则。</pre><h4>expense-receipt-zh</h4><pre>Evidence ID: E2
+文件名：expense-receipt-zh.txt
+海湾实验室大陆团队费用凭证。报销必须提供正式发票，只有银行付款截图不能作为报销凭证。发票应列出供应商和费用项目，并与实际用途一致。丢失发票时应先联系供应商补开，不能用手写说明代替。本条只规定凭证，提交期限见费用时限规则。</pre><h4>travel-domestic-zh</h4><pre>Evidence ID: E3
+文件名：travel-domestic-zh.txt
+海湾实验室大陆员工国内出差住宿规则。酒店每晚报销上限为六百五十元，超出部分须在预订前取得直属经理批准。提交发票时附上出差行程。此上限不适用于国际出差或长期派驻，也不包含交通和餐饮费用。不得拆分发票规避审批。</pre><h4>offboard-staff-zh</h4><pre>Evidence ID: E4
+文件名：offboard-staff-zh.txt
+海湾实验室大陆团队员工离职。最后工作日十七点停用日常业务账号，由人力资源确认时间，IT 执行。经理负责资料归档和工作交接。法律保留要求不意味着保留本人登录权限。承包商账号按合同结束流程处理。</pre><h4>remote-exception-zh</h4><pre>Evidence ID: E5
+文件名：remote-exception-zh.txt
+海湾实验室大陆团队远程例外。连续异地办公最多三周，必须同时取得人力资源和直属经理批准。申请需说明地点、工作时间和交接安排。例外不改变休假余额，也不能自动延长。常规每周远程安排适用另一份规则。</pre></details></section><section id='e18'><h2>e18 · In Bristol, how does weekly remote work differ from an extended remote exception in duration and approval?</h2><p><a href='review.html#e18'>查看应答要点与全部标注</a>；向量命中 50，关键词命中 41。</p><h3>仅关键词</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>remote-exception-en--c000</code></li><li><code>remote-standard-en--c000</code></li><li><code>remote-exception-zh--c000</code></li><li><code>lost-laptop-en--c000</code></li><li><code>remote-standard-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>remote-exception-en</h4><pre>Evidence ID: E1
+文件名：remote-exception-en.txt
+Harborview Bristol extended remote-work policy. A continuous remote exception can last up to six weeks and needs both HR and manager approval. Provide the location, working hours and handover plan before departure. An extension requires a new approval. Weekly remote days cannot be accumulated to bypass this process.</pre><h4>remote-standard-en</h4><pre>Evidence ID: E2
+文件名：remote-standard-en.txt
+Harborview Bristol ordinary remote-work policy. With manager approval, employees may work remotely on Monday and Friday, up to two days per week. Customer visits and mandatory on-site work take priority. Unused days cannot be carried over. A continuous period away requires the separate remote exception process.</pre><h4>remote-exception-zh</h4><pre>Evidence ID: E3
+文件名：remote-exception-zh.txt
+海湾实验室大陆团队远程例外。连续异地办公最多三周，必须同时取得人力资源和直属经理批准。申请需说明地点、工作时间和交接安排。例外不改变休假余额，也不能自动延长。常规每周远程安排适用另一份规则。</pre><h4>lost-laptop-en</h4><pre>Evidence ID: E4
+文件名：lost-laptop-en.txt
+Harborview Bristol lost-laptop procedure. Call the security hotline immediately after discovering the loss, even outside office hours. Do not wait to search for the device before reporting. Security suspends access credentials and initiates a remote lock. Provide the asset identifier and the last known location.</pre><h4>remote-standard-zh</h4><pre>Evidence ID: E5
+文件名：remote-standard-zh.txt
+海湾实验室大陆团队常规远程办公。经直属经理批准，可在周二和周三远程办公，每周最多两天。团队会议和客户现场安排优先。未使用的天数不能累计到下周。连续数周异地办公必须申请例外，不得把常规远程天数拼接成长假。</pre></details><h3>仅向量</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>remote-exception-en--c000</code></li><li><code>remote-standard-en--c000</code></li><li><code>restore-guide-en--c001</code></li><li><code>shipping-priority-en--c000</code></li><li><code>notify-routine-en--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>remote-exception-en</h4><pre>Evidence ID: E1
+文件名：remote-exception-en.txt
+Harborview Bristol extended remote-work policy. A continuous remote exception can last up to six weeks and needs both HR and manager approval. Provide the location, working hours and handover plan before departure. An extension requires a new approval. Weekly remote days cannot be accumulated to bypass this process.</pre><h4>remote-standard-en</h4><pre>Evidence ID: E2
+文件名：remote-standard-en.txt
+Harborview Bristol ordinary remote-work policy. With manager approval, employees may work remotely on Monday and Friday, up to two days per week. Customer visits and mandatory on-site work take priority. Unused days cannot be carried over. A continuous period away requires the separate remote exception process.</pre><h4>restore-guide-en</h4><pre>Evidence ID: E3
+文件名：restore-guide-en.txt
+Harborview Atlas restoration handbook. This guide covers restoration of the Atlas reporting service, not general office backups. It is organized for operators, service owners and audit reviewers. Read the requested recovery scope before choosing a snapshot. A successful file download alone does not demonstrate that a restoration is correct. Every restoration has a case identifier carried through preparation, validation and closure.
+
+Section one: intake. The requester records the affected reporting workspace, the desired timestamp and the reason for recovery. Intake staff check that the requester owns the workspace. If ownership is unclear, pause the request and contact the workspace administrator. Never infer permission from possession of a screen</pre><h4>shipping-priority-en</h4><pre>Evidence ID: E4
+文件名：shipping-priority-en.txt
+Harborview Bristol priority equipment dispatch. Approved replacement equipment is handed to the courier within two working days. Transit time is not included. The recipient checks the asset identifier and confirms receipt to the asset team. This dispatch target is not an international delivery guarantee or an incident response deadline.</pre><h4>notify-routine-en</h4><pre>Evidence ID: E5
+文件名：notify-routine-en.txt
+Harborview Bristol routine notification procedure. Planned maintenance notices appear in the service portal and a weekday email digest. Do not page the on-call engineer for a notice with no active impact. If an outage occurs during maintenance, switch to the urgent notification procedure and record the incident separately.</pre></details><h3>双路 RRF</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>remote-exception-en--c000</code></li><li><code>remote-standard-en--c000</code></li><li><code>expense-deadline-en--c000</code></li><li><code>restore-guide-en--c001</code></li><li><code>shipping-return-en--c001</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>remote-exception-en</h4><pre>Evidence ID: E1
+文件名：remote-exception-en.txt
+Harborview Bristol extended remote-work policy. A continuous remote exception can last up to six weeks and needs both HR and manager approval. Provide the location, working hours and handover plan before departure. An extension requires a new approval. Weekly remote days cannot be accumulated to bypass this process.</pre><h4>remote-standard-en</h4><pre>Evidence ID: E2
+文件名：remote-standard-en.txt
+Harborview Bristol ordinary remote-work policy. With manager approval, employees may work remotely on Monday and Friday, up to two days per week. Customer visits and mandatory on-site work take priority. Unused days cannot be carried over. A continuous period away requires the separate remote exception process.</pre><h4>expense-deadline-en</h4><pre>Evidence ID: E3
+文件名：expense-deadline-en.txt
+Harborview Bristol expense filing policy. Submit an expense claim within twelve calendar days of the purchase. The manager verifies the business purpose and finance checks the cost center. Late claims require finance approval with an explanation. Timely submission does not waive the separate receipt requirements.</pre><h4>restore-guide-en</h4><pre>Evidence ID: E4
+文件名：restore-guide-en.txt
+Harborview Atlas restoration handbook. This guide covers restoration of the Atlas reporting service, not general office backups. It is organized for operators, service owners and audit reviewers. Read the requested recovery scope before choosing a snapshot. A successful file download alone does not demonstrate that a restoration is correct. Every restoration has a case identifier carried through preparation, validation and closure.
+
+Section one: intake. The requester records the affected reporting workspace, the desired timestamp and the reason for recovery. Intake staff check that the requester owns the workspace. If ownership is unclear, pause the request and contact the workspace administrator. Never infer permission from possession of a screen</pre><h4>shipping-return-en</h4><pre>Evidence ID: E5
+文件名：shipping-return-en.txt
+Harborview Bristol equipment returns. Obtain an asset-team return authorization before shipping a device back. Use the supplied tracking label and keep the collection receipt until the asset team confirms arrival. This process concerns physical equipment only; it does not describe subscription cancellation, refunds or employee benefit claims.</pre></details></section><section id='e19'><h2>e19 · Who must approve an Atlas restore, and how long must its approval records remain after the case is closed?</h2><p><a href='review.html#e19'>查看应答要点与全部标注</a>；向量命中 50，关键词命中 43。</p><h3>仅关键词</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>restore-guide-en--c004</code></li><li><code>restore-guide-en--c016</code></li><li><code>restore-guide-en--c012</code></li><li><code>restore-guide-en--c015</code></li><li><code>restore-guide-en--c010</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>restore-guide-en</h4><pre>Evidence ID: E1
+文件名：restore-guide-en.txt
+Harborview Atlas restoration handbook. This guide covers restoration of the Atlas reporting service, not general office backups. It is organized for operators, service owners and audit reviewers. Read the requested recovery scope before choosing a snapshot. A successful file download alone does not demonstrate that a restoration is correct. Every restoration has a case identifier carried through preparation, validation and closure.
+
+Section one: intake. The requester records the affected reporting workspace, the desired timestamp and the reason for recovery. Intake staff check that the requester owns the workspace. If ownership is unclear, pause the request and contact the workspace administrator. Never infer permission from possession of a screenshot or a previously shared report. Record any clarification on the same case rather than opening duplicate requests.
+
+Section two: approval. Both the service owner and the security officer must approve an Atlas restore. The operator checks that the two decisions refer to the same timestamp and workspace. Approval for one workspace cannot be reused for another. Emergency handling uses the same named approvers, although they may respond on the incident bridge. Keep their decisions attached to the case for subsequent review.
+
+Section three: staging. Create an isolated staging database before restoring data. Disable outbound notifications and background exports in that database. Use a temporary credential scoped to the case, and do not copy a production administrator password into a script. Check the restore size against the available disk allocation. If staging capacity is insufficient, request additional capacity before starting the restore operation.
+
+Section four: verification. Compare record counts, a sample of reporting totals and the snapshot timestamp against the request. The service owner signs off on these checks. A lower record count may be expected for an older snapshot, so explain differences rather than deleting records to make counts match. Restore verification is distinct from the permission checks performed during intake and approval.
+
+Section five: release. Announce the replacement window to the affected workspace users and stop scheduled report refreshes. Save the current database state before switching the connection to the approved restore. Resume refreshes only after the service owner confirms the reporting checks. Keep the old state available until closure is complete. Do not treat the replacement window as authorization to access unrelated workspaces.
+
+Section six: rollback. If validation fails after release, return the connection to the saved state and reopen the case. Explain the failed check in the timeline. The operator must not silently choose another snapshot or expand the recovery scope. Any different target timestamp needs a new approval. The incident lead coordinates communication when the failure affects active customers.
+
+Section seven: closure. Confirm that scheduled refreshes and notification settings match the recorded pre-change configuration. Revoke the temporary restore credential and destroy the isolated staging database once no further checks are required. The case remains open until the owner accepts the outcome. Closure records must distinguish a successful restoration from a canceled request or a rollback.
+
+Section eight: evidence retention. Atlas restoration approval records are retained for ninety days after closure. The audit custodian stores the approvals and verification checklist with the case identifier. A legal hold pauses disposal of the affected records. This retention period is not the backup snapshot lifetime. Reviewers should be able to trace the requester, approvers, chosen timestamp and final disposition without recovering credentials from the evidence.</pre><h4>audit-us-en</h4><pre>Evidence ID: E2
+文件名：audit-us-en.txt
+Harborview US audit logging policy. Standard audit records are retained for 365 days. Records under legal hold must not be deleted until the hold is released. Investigators need approved access and a case identifier. EU audit data, service backups and temporary diagnostic logs follow separate policies.</pre><h4>cert-gateway-en</h4><pre>Evidence ID: E3
+文件名：cert-gateway-en.txt
+Harborview gateway server certificate procedure. Create a change request twenty-one days before expiry. The network owner approves deployment and a rollback certificate must remain available. Run the gateway health checks afterward. Monitoring agent certificates use a separate renewal window and must not be replaced through this procedure.</pre><h4>access-visitor-en</h4><pre>Evidence ID: E4
+文件名：access-visitor-en.txt
+Harborview Bristol office visitor rules. A registered host must escort visitors throughout the office. Reception issues a temporary badge after checking the booking and photo identification. Return the badge at departure; it cannot be shared. Contractors working repeatedly on site must follow the separate contractor access process.</pre><h4>travel-sales-en</h4><pre>Evidence ID: E5
+文件名：travel-sales-en.txt
+Harborview sales travel policy. Domestic hotel reimbursement is capped at USD 160 per night. Obtain sales director approval before booking above the cap and attach the approved itinerary to the claim. This policy covers the sales team only. Engineering travel and long-term assignments have separate allowances.</pre></details><h3>仅向量</h3><p>切片 Recall@5：0.5000；nDCG@5：0.6131；切片事实覆盖：0.5000；最终窗口事实覆盖：1.0000。</p><ol><li><code>restore-guide-en--c016</code></li><li><code>restore-guide-en--c008</code></li><li><code>restore-guide-en--c015</code></li><li><code>restore-guide-en--c003</code></li><li><code>restore-guide-en--c005</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>restore-guide-en</h4><pre>Evidence ID: E1
+文件名：restore-guide-en.txt
+. Keep the old state available until closure is complete. Do not treat the replacement window as authorization to access unrelated workspaces.
+
+Section six: rollback. If validation fails after release, return the connection to the saved state and reopen the case. Explain the failed check in the timeline. The operator must not silently choose another snapshot or expand the recovery scope. Any different target timestamp needs a new approval. The incident lead coordinates communication when the failure affects active customers.
+
+Section seven: closure. Confirm that scheduled refreshes and notification settings match the recorded pre-change configuration. Revoke the temporary restore credential and destroy the isolated staging database once no further checks are required. The case remains open until the owner accepts the outcome. Closure records must distinguish a successful restoration from a canceled request or a rollback.
+
+Section eight: evidence retention. Atlas restoration approval records are retained for ninety days after closure. The audit custodian stores the approvals and verification checklist with the case identifier. A legal hold pauses disposal of the affected records. This retention period is not the backup snapshot lifetime. Reviewers should be able to trace the requester, approvers, chosen timestamp and final disposition without recovering credentials from the evidence.</pre><h4>restore-guide-en</h4><pre>Evidence ID: E2
+文件名：restore-guide-en.txt
+he case for subsequent review.
+
+Section three: staging. Create an isolated staging database before restoring data. Disable outbound notifications and background exports in that database. Use a temporary credential scoped to the case, and do not copy a production administrator password into a script. Check the restore size against the available disk allocation. If staging capacity is insufficient, request additional capacity before starting the restore operation.
+
+Section four: verification. Compare record counts, a sample of reporting totals and the snapshot timestamp against the request. The service owner signs off on these checks. A lower record count may be expected for an older snapshot, so explain differences rather than deleting records to make counts match. Restore verification is distinct from the permission checks performed during intake and approval.
+
+Section five: release. Announce the replacement window to the affected workspace users and stop scheduled report refreshes. Save the current database state before switching the connection to the approved restore. Resume refreshes only after the service owner confirms the reporting checks. Keep the old state available u</pre><h4>restore-guide-en</h4><pre>Evidence ID: E3
+文件名：restore-guide-en.txt
+Harborview Atlas restoration handbook. This guide covers restoration of the Atlas reporting service, not general office backups. It is organized for operators, service owners and audit reviewers. Read the requested recovery scope before choosing a snapshot. A successful file download alone does not demonstrate that a restoration is correct. Every restoration has a case identifier carried through preparation, validation and closure.
+
+Section one: intake. The requester records the affected reporting workspace, the desired timestamp and the reason for recovery. Intake staff check that the requester owns the workspace. If ownership is unclear, pause the request and contact the workspace administrator. Never infer permission from possession of a screenshot or a previously shared report. Record any clarification on the same case rather than opening duplicate requests.
+
+Section two: approval. Both the service owner and the security officer must approve an Atlas restore. The operator checks that the two decisions refer to the same timestamp and workspace. Approval for one workspace cannot be reused for another. Emergency handling uses the same named approvers, although they may respond on the incident bridge. Keep their decisions attached to the case for subsequent review.</pre><h4>cert-gateway-en</h4><pre>Evidence ID: E4
+文件名：cert-gateway-en.txt
+Harborview gateway server certificate procedure. Create a change request twenty-one days before expiry. The network owner approves deployment and a rollback certificate must remain available. Run the gateway health checks afterward. Monitoring agent certificates use a separate renewal window and must not be replaced through this procedure.</pre><h4>notify-routine-en</h4><pre>Evidence ID: E5
+文件名：notify-routine-en.txt
+Harborview Bristol routine notification procedure. Planned maintenance notices appear in the service portal and a weekday email digest. Do not page the on-call engineer for a notice with no active impact. If an outage occurs during maintenance, switch to the urgent notification procedure and record the incident separately.</pre></details><h3>双路 RRF</h3><p>切片 Recall@5：1.0000；nDCG@5：0.9197；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>restore-guide-en--c016</code></li><li><code>restore-guide-en--c015</code></li><li><code>restore-guide-en--c004</code></li><li><code>restore-guide-en--c008</code></li><li><code>restore-guide-en--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>restore-guide-en</h4><pre>Evidence ID: E1
+文件名：restore-guide-en.txt
+Harborview Atlas restoration handbook. This guide covers restoration of the Atlas reporting service, not general office backups. It is organized for operators, service owners and audit reviewers. Read the requested recovery scope before choosing a snapshot. A successful file download alone does not demonstrate that a restoration is correct. Every restoration has a case identifier carried through preparation, validation and closure.
+
+Section one: intake. The requester records the affected reporting workspace, the desired timestamp and the reason for recovery. Intake staff check that the requester owns the workspace. If ownership is unclear, pause the request and contact the workspace administrator. Never infer permission from possession of a screenshot or a previously shared report. Record any clarification on the same case rather than opening duplicate requests.
+
+Section two: approval. Both the service owner and the security officer must approve an Atlas restore. The operator checks that the two decisions refer to the same timestamp and workspace. Approval for one workspace cannot be reused for another. Emergency handling uses the same named approvers, although they may respond on the incident bridge. Keep their decisions attached to the case for subsequent review.
+
+Section three: staging. Create an isolated staging database before restoring data. Disable outbound notifications and background exports in that database. Use a temporary credential scoped to the case, and do not copy a production administrator password into a script. Check the restore size against the available disk allocation. If staging capacity is insufficient, request additional capacity before starting the restore operation.
+
+Section four: verification. Compare record counts, a sample of reporting totals and the snapshot timestamp against the request. The service owner signs off on these checks. A lower record count may be expected for an older snapshot, so explain differences rather than deleting records to make counts match. Restore verification is distinct from the permission checks performed during intake and approval.
+
+Section five: release. Announce the replacement window to the affected workspace users and stop scheduled report refreshes. Save the current database state before switching the connection to the approved restore. Resume refreshes only after the service owner confirms the reporting checks. Keep the old state available until closure is complete. Do not treat the replacement window as authorization to access unrelated workspaces.
+
+Section six: rollback. If validation fails after release, return the connection to the saved state and reopen the case. Explain the failed check in the timeline. The operator must not silently choose another snapshot or expand the recovery scope. Any different target timestamp needs a new approval. The incident lead coordinates communication when the failure affects active customers.
+
+Section seven: closure. Confirm that scheduled refreshes and notification settings match the recorded pre-change configuration. Revoke the temporary restore credential and destroy the isolated staging database once no further checks are required. The case remains open until the owner accepts the outcome. Closure records must distinguish a successful restoration from a canceled request or a rollback.
+
+Section eight: evidence retention. Atlas restoration approval records are retained for ninety days after closure. The audit custodian stores the approvals and verification checklist with the case identifier. A legal hold pauses disposal of the affected records. This retention period is not the backup snapshot lifetime. Reviewers should be able to trace the requester, approvers, chosen timestamp and final disposition without recovering credentials from the evidence.</pre><h4>audit-us-en</h4><pre>Evidence ID: E2
+文件名：audit-us-en.txt
+Harborview US audit logging policy. Standard audit records are retained for 365 days. Records under legal hold must not be deleted until the hold is released. Investigators need approved access and a case identifier. EU audit data, service backups and temporary diagnostic logs follow separate policies.</pre><h4>cert-gateway-en</h4><pre>Evidence ID: E3
+文件名：cert-gateway-en.txt
+Harborview gateway server certificate procedure. Create a change request twenty-one days before expiry. The network owner approves deployment and a rollback certificate must remain available. Run the gateway health checks afterward. Monitoring agent certificates use a separate renewal window and must not be replaced through this procedure.</pre><h4>access-visitor-en</h4><pre>Evidence ID: E4
+文件名：access-visitor-en.txt
+Harborview Bristol office visitor rules. A registered host must escort visitors throughout the office. Reception issues a temporary badge after checking the booking and photo identification. Return the badge at departure; it cannot be shared. Contractors working repeatedly on site must follow the separate contractor access process.</pre><h4>lost-laptop-en</h4><pre>Evidence ID: E5
+文件名：lost-laptop-en.txt
+Harborview Bristol lost-laptop procedure. Call the security hotline immediately after discovering the loss, even outside office hours. Do not wait to search for the device before reporting. Security suspends access credentials and initiates a remote lock. Provide the asset identifier and the last known location.</pre></details></section><section id='e20'><h2>e20 · 澄海生产服务上线要谁批准，确认发布失败后多久应完成回滚？</h2><p><a href='review.html#e20'>查看应答要点与全部标注</a>；向量命中 50，关键词命中 31。</p><h3>仅关键词</h3><p>切片 Recall@5：1.0000；nDCG@5：1.0000；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>release-guide-zh--c001</code></li><li><code>release-guide-zh--c003</code></li><li><code>release-guide-zh--c000</code></li><li><code>cert-server-zh--c000</code></li><li><code>release-guide-zh--c004</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>release-guide-zh</h4><pre>Evidence ID: E1
+文件名：release-guide-zh.txt
+海湾实验室澄海服务发布手册。本手册面向大陆生产环境的发布操作员、值班负责人和业务验收人。测试环境练习不能替代正式发布审批。手册依次说明需求登记、上线审批、预演、流量切换、业务检查、回滚、交接和归档。发布单贯穿全部阶段，任何临时变更都必须留在同一条记录中。不要把某个阶段完成误认为整个发布已经成功。
+
+第一节，需求登记。申请人说明版本号、目标服务、变更范围和用户影响，附上可执行的检查清单。服务所有者核对本次发布是否涉及数据库结构或对外接口。若依赖服务尚未就绪，应调整窗口而不是强行继续。登记时还应列出需要参与的人员及联系渠道。重复提交同一需求不会自动提高优先级，协调结论仍需记录在发布单里。
+
+第二节，上线审批。澄海正式上线必须由发布负责人和业务验收人共同批准。两个批准都要对应本次版本号，不能沿用历史版本的审批截图。批准后若增加变更范围，应重新确认。审批人需要看到预期影响、回滚方案和验收条件，而不仅是程序包名称。紧急窗口允许在值班会议中完成确认，但操作员仍须补齐相应记录。
+
+第三节，预演。操作员在隔离环境按照发布清单执行一次预演，记录实际执行顺序、关键命令的结果和遇到的问题。不得复制生产密码到预演脚本。预演使用的测试数据应经过脱敏。若预演暴露了未登记的依赖或额外变更，应回到登记阶段修订方案。预演成功只是进入下一阶段的条件，不代表已经取得生产访问授权。
+
+第四节，流量切换。先确认上一版本可用，再逐步切换少量流量并观察错误率。观察期间暂停与本次发布无关的批量任务，避免干扰判断。值班人员记录切换时间和监控截图。若指标偏离验收条件，不应通过修改告警阈值来隐藏问题。流量增加必须按预先批准的步骤推进，不能因为暂时没有投诉就跳过检查。
+
+第五节，业务检查。业务验收人执行登录、查询和关键业务操作的检查，比较新旧版本的返回结果。检查失败时要说明具体步骤及影响，不能仅写系统异常。操作员核对业务报告与监控时间是否一致。验收人缺席时应暂停后续切换，而不是让操作员代签。完成业务检查仍需要保持回滚资源直到观察阶段结束。
+
+第六节，失败回滚。确认发布失败后十分钟内完成回滚。值班负责人协调切回上一版本，业务验收人再次检查关键流程。回滚期间保留失败版本的必要诊断信息，但不得保留明文用户凭证。若预计不能在规定时间完成，应立即通知事故负责人。不要反复重试同一发布来拖延回滚，新的发布尝试必须有明确的修复与验证依据。
+
+第七节，交接。观察阶段结束后，把版本号、尚未关闭的问题和下一班需要关注的指标交接给值班人员。临时增加的权限在交接前撤销。操作员检查定时任务和通知设置是否恢复。交接清单不能只写正常两个字，应能让未参加发布的人理解当前状态。若仍有未解决的用户影响，发布单不得直接转为完成。
+
+第八节，归档。将审批、预演、切换、业务检查和回滚记录归入同一发布单。归档应区分成功、取消和回滚三种结果。后续复盘只能引用实际发生的操作，不得把原计划当作已经执行。管理员核对相关附件的访问范围，避免把内部环境信息分享给无关人员。发布记录保存策略与数据库备份策略不同，需要分别查询对应制度。</pre><h4>cert-server-zh</h4><pre>Evidence ID: E2
+文件名：cert-server-zh.txt
+海湾实验室服务器证书维护规则。服务器证书到期前三十天创建变更单，取得服务负责人批准后再部署。替换证书时应保留回滚版本并验证健康检查。设备客户端续期不走这一流程。任何工单都不得包含证书私钥。</pre><h4>incident-production-zh</h4><pre>Evidence ID: E3
+文件名：incident-production-zh.txt
+海湾实验室大陆正式环境 S1 事故。值班工程师须在八分钟内确认，之后每二十分钟发布一次状态更新。生产负责人协调回滚与沟通，恢复后补交事件记录。没有用户影响的测试环境告警不按 S1 正式事故处理。确认告警不等于已恢复服务。</pre><h4>purchase-small-zh</h4><pre>Evidence ID: E4
+文件名：purchase-small-zh.txt
+海湾实验室大陆办公室小额采购。单笔两千元及以下的办公用品采购由直属经理批准。采购前要确认现有库存，收货后登记费用中心。软件订阅和固定资产不适用本流程。不得把同一需求拆成多笔以绕过较高金额的财务审批。</pre><h4>incident-test-zh</h4><pre>Evidence ID: E5
+文件名：incident-test-zh.txt
+海湾实验室测试环境 S1 标记说明。测试集群中的 S1 标签只是压测分级，不代表正式环境事故。无用户影响时由项目组在下个工作日处理并记录原因。若影响正式服务，转交生产事故流程。测试告警不能替代正式环境的状态通报。</pre></details><h3>仅向量</h3><p>切片 Recall@5：1.0000；nDCG@5：0.9197；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>release-guide-zh--c001</code></li><li><code>release-guide-zh--c000</code></li><li><code>release-guide-zh--c003</code></li><li><code>offboard-contractor-zh--c000</code></li><li><code>incident-production-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>release-guide-zh</h4><pre>Evidence ID: E1
+文件名：release-guide-zh.txt
+海湾实验室澄海服务发布手册。本手册面向大陆生产环境的发布操作员、值班负责人和业务验收人。测试环境练习不能替代正式发布审批。手册依次说明需求登记、上线审批、预演、流量切换、业务检查、回滚、交接和归档。发布单贯穿全部阶段，任何临时变更都必须留在同一条记录中。不要把某个阶段完成误认为整个发布已经成功。
+
+第一节，需求登记。申请人说明版本号、目标服务、变更范围和用户影响，附上可执行的检查清单。服务所有者核对本次发布是否涉及数据库结构或对外接口。若依赖服务尚未就绪，应调整窗口而不是强行继续。登记时还应列出需要参与的人员及联系渠道。重复提交同一需求不会自动提高优先级，协调结论仍需记录在发布单里。
+
+第二节，上线审批。澄海正式上线必须由发布负责人和业务验收人共同批准。两个批准都要对应本次版本号，不能沿用历史版本的审批截图。批准后若增加变更范围，应重新确认。审批人需要看到预期影响、回滚方案和验收条件，而不仅是程序包名称。紧急窗口允许在值班会议中完成确认，但操作员仍须补齐相应记录。
+
+第三节，预演。操作员在隔离环境按照发布清单执行一次预演，记录实际执行顺序、关键命令的结果和遇到的问题。不得复制生产密码到预演脚本。预演使用的测试数据应经过脱敏。若预演暴露了未登记的依赖或额外变更，应回到登记阶段修订方案。预演成功只是进入下一阶段的条件，不代表已经取得生产访问授权。
+
+第四节，流量切换。先确认上一版本可用，再逐步切换少量流量并观察错误率。观察期间暂停与本次发布无关的批量任务，避免干扰判断。值班人员记录切换时间和监控截图。若指标偏离验收条件，不应通过修改告警阈值来隐藏问题。流量增加必须按预先批准的步骤推进，不能因为暂时没有投诉就跳过检查。
+
+第五节，业务检查。业务验收人执行登录、查询和关键业务操作的检查，比较新旧版本的返回结果。检查失败时要说明具体步骤及影响，不能仅写系统异常。操作员核对业务报告与监控时间是否一致。验收人缺席时应暂停后续切换，而不是让操作员代签。完成业务检查仍需要保持回滚资源直到观察阶段结束。
+
+第六节，失败回滚。确认发布失败后十分钟内完成回滚。值班负责人协调切回上一版本，业务验收人再次检查关键流程。回滚期间保留失败版本的必要诊断信息，但不得保留明文用户凭证。若预计不能在规定时间完成，应立即通知事故负责人。不要反复重试同一发布来拖延回滚，新的发布尝试必须有明确的修复与验证依据。
+
+第七节，交接。观察阶段结束后，把版本号、尚未关闭的问题和下一班需要关注的指标交接给值班人员。临时增加的权限在交接前撤销。操作员检查定时任务和通知设置是否恢复。交接清单不能只写正常两个字，应能让未参加发布的人理解当前状态。若仍有未解决的用户影响，发布单不得直接转为完成。
+
+第八节，归档。将审批、预演、切换、业务检查和回滚记录归入同一发布单。归档应区分成功、取消和回滚三种结果。后续复盘只能引用实际发生的操作，不得把原计划当作已经执行。管理员核对相关附件的访问范围，避免把内部环境信息分享给无关人员。发布记录保存策略与数据库备份策略不同，需要分别查询对应制度。</pre><h4>offboard-contractor-zh</h4><pre>Evidence ID: E2
+文件名：offboard-contractor-zh.txt
+海湾实验室大陆团队承包商离场。合同结束当天十八点前关闭项目账号，项目负责人确认交接资料和设备归还。延长访问必须在合同到期前重新批准。项目组成员不得私下共享自己的账号。正式员工离职使用另一份人力资源交接流程。</pre><h4>incident-production-zh</h4><pre>Evidence ID: E3
+文件名：incident-production-zh.txt
+海湾实验室大陆正式环境 S1 事故。值班工程师须在八分钟内确认，之后每二十分钟发布一次状态更新。生产负责人协调回滚与沟通，恢复后补交事件记录。没有用户影响的测试环境告警不按 S1 正式事故处理。确认告警不等于已恢复服务。</pre><h4>backup-shanghai-zh</h4><pre>Evidence ID: E4
+文件名：backup-shanghai-zh.txt
+海湾实验室上海办公系统备份规则。备份保留四十五天，恢复申请由上海平台组处理。申请人需要给出系统名称、恢复日期和工单编号。此规则只涵盖办公系统，不包括杭州研发环境和海外区域。备份到期不等于用户文档的回收站期限。</pre><h4>notify-routine-zh</h4><pre>Evidence ID: E5
+文件名：notify-routine-zh.txt
+海湾实验室大陆团队常规通知。计划内维护和无影响变更汇总到工作日邮件摘要，收件人可在门户查看详情。没有事故时不拨打值班电话。若维护期间出现正式服务中断，应转为紧急通知流程，而不是等待下一封摘要。</pre></details><h3>双路 RRF</h3><p>切片 Recall@5：1.0000；nDCG@5：0.9197；切片事实覆盖：1.0000；最终窗口事实覆盖：1.0000。</p><ol><li><code>release-guide-zh--c001</code></li><li><code>release-guide-zh--c000</code></li><li><code>release-guide-zh--c003</code></li><li><code>incident-production-zh--c000</code></li><li><code>release-guide-zh--c004</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>release-guide-zh</h4><pre>Evidence ID: E1
+文件名：release-guide-zh.txt
+海湾实验室澄海服务发布手册。本手册面向大陆生产环境的发布操作员、值班负责人和业务验收人。测试环境练习不能替代正式发布审批。手册依次说明需求登记、上线审批、预演、流量切换、业务检查、回滚、交接和归档。发布单贯穿全部阶段，任何临时变更都必须留在同一条记录中。不要把某个阶段完成误认为整个发布已经成功。
+
+第一节，需求登记。申请人说明版本号、目标服务、变更范围和用户影响，附上可执行的检查清单。服务所有者核对本次发布是否涉及数据库结构或对外接口。若依赖服务尚未就绪，应调整窗口而不是强行继续。登记时还应列出需要参与的人员及联系渠道。重复提交同一需求不会自动提高优先级，协调结论仍需记录在发布单里。
+
+第二节，上线审批。澄海正式上线必须由发布负责人和业务验收人共同批准。两个批准都要对应本次版本号，不能沿用历史版本的审批截图。批准后若增加变更范围，应重新确认。审批人需要看到预期影响、回滚方案和验收条件，而不仅是程序包名称。紧急窗口允许在值班会议中完成确认，但操作员仍须补齐相应记录。
+
+第三节，预演。操作员在隔离环境按照发布清单执行一次预演，记录实际执行顺序、关键命令的结果和遇到的问题。不得复制生产密码到预演脚本。预演使用的测试数据应经过脱敏。若预演暴露了未登记的依赖或额外变更，应回到登记阶段修订方案。预演成功只是进入下一阶段的条件，不代表已经取得生产访问授权。
+
+第四节，流量切换。先确认上一版本可用，再逐步切换少量流量并观察错误率。观察期间暂停与本次发布无关的批量任务，避免干扰判断。值班人员记录切换时间和监控截图。若指标偏离验收条件，不应通过修改告警阈值来隐藏问题。流量增加必须按预先批准的步骤推进，不能因为暂时没有投诉就跳过检查。
+
+第五节，业务检查。业务验收人执行登录、查询和关键业务操作的检查，比较新旧版本的返回结果。检查失败时要说明具体步骤及影响，不能仅写系统异常。操作员核对业务报告与监控时间是否一致。验收人缺席时应暂停后续切换，而不是让操作员代签。完成业务检查仍需要保持回滚资源直到观察阶段结束。
+
+第六节，失败回滚。确认发布失败后十分钟内完成回滚。值班负责人协调切回上一版本，业务验收人再次检查关键流程。回滚期间保留失败版本的必要诊断信息，但不得保留明文用户凭证。若预计不能在规定时间完成，应立即通知事故负责人。不要反复重试同一发布来拖延回滚，新的发布尝试必须有明确的修复与验证依据。
+
+第七节，交接。观察阶段结束后，把版本号、尚未关闭的问题和下一班需要关注的指标交接给值班人员。临时增加的权限在交接前撤销。操作员检查定时任务和通知设置是否恢复。交接清单不能只写正常两个字，应能让未参加发布的人理解当前状态。若仍有未解决的用户影响，发布单不得直接转为完成。
+
+第八节，归档。将审批、预演、切换、业务检查和回滚记录归入同一发布单。归档应区分成功、取消和回滚三种结果。后续复盘只能引用实际发生的操作，不得把原计划当作已经执行。管理员核对相关附件的访问范围，避免把内部环境信息分享给无关人员。发布记录保存策略与数据库备份策略不同，需要分别查询对应制度。</pre><h4>incident-production-zh</h4><pre>Evidence ID: E2
+文件名：incident-production-zh.txt
+海湾实验室大陆正式环境 S1 事故。值班工程师须在八分钟内确认，之后每二十分钟发布一次状态更新。生产负责人协调回滚与沟通，恢复后补交事件记录。没有用户影响的测试环境告警不按 S1 正式事故处理。确认告警不等于已恢复服务。</pre><h4>cert-server-zh</h4><pre>Evidence ID: E3
+文件名：cert-server-zh.txt
+海湾实验室服务器证书维护规则。服务器证书到期前三十天创建变更单，取得服务负责人批准后再部署。替换证书时应保留回滚版本并验证健康检查。设备客户端续期不走这一流程。任何工单都不得包含证书私钥。</pre><h4>offboard-contractor-zh</h4><pre>Evidence ID: E4
+文件名：offboard-contractor-zh.txt
+海湾实验室大陆团队承包商离场。合同结束当天十八点前关闭项目账号，项目负责人确认交接资料和设备归还。延长访问必须在合同到期前重新批准。项目组成员不得私下共享自己的账号。正式员工离职使用另一份人力资源交接流程。</pre><h4>shipping-local-zh</h4><pre>Evidence ID: E5
+文件名：shipping-local-zh.txt
+海湾实验室大陆设备寄送。已批准的本地备用设备通常在两个工作日内交给承运商，物流时间另计。收件人核对设备编号后签收，并由资产管理员更新保管人。此时间不是国际运输承诺，也不是丢失设备的安全报告时限。</pre></details></section><section id='e21'><h2>e21 · 大陆团队每年有多少天带薪年假？</h2><p><a href='review.html#e21'>查看应答要点与全部标注</a>；向量命中 50，关键词命中 25。</p><h3>仅关键词</h3><p>切片 Recall@5：—；nDCG@5：—；切片事实覆盖：—；最终窗口事实覆盖：—。</p><ol><li><code>remote-standard-zh--c000</code></li><li><code>incident-production-zh--c000</code></li><li><code>offboard-staff-zh--c000</code></li><li><code>remote-exception-zh--c000</code></li><li><code>notify-routine-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>remote-standard-zh</h4><pre>Evidence ID: E1
+文件名：remote-standard-zh.txt
+海湾实验室大陆团队常规远程办公。经直属经理批准，可在周二和周三远程办公，每周最多两天。团队会议和客户现场安排优先。未使用的天数不能累计到下周。连续数周异地办公必须申请例外，不得把常规远程天数拼接成长假。</pre><h4>incident-production-zh</h4><pre>Evidence ID: E2
+文件名：incident-production-zh.txt
+海湾实验室大陆正式环境 S1 事故。值班工程师须在八分钟内确认，之后每二十分钟发布一次状态更新。生产负责人协调回滚与沟通，恢复后补交事件记录。没有用户影响的测试环境告警不按 S1 正式事故处理。确认告警不等于已恢复服务。</pre><h4>offboard-staff-zh</h4><pre>Evidence ID: E3
+文件名：offboard-staff-zh.txt
+海湾实验室大陆团队员工离职。最后工作日十七点停用日常业务账号，由人力资源确认时间，IT 执行。经理负责资料归档和工作交接。法律保留要求不意味着保留本人登录权限。承包商账号按合同结束流程处理。</pre><h4>remote-exception-zh</h4><pre>Evidence ID: E4
+文件名：remote-exception-zh.txt
+海湾实验室大陆团队远程例外。连续异地办公最多三周，必须同时取得人力资源和直属经理批准。申请需说明地点、工作时间和交接安排。例外不改变休假余额，也不能自动延长。常规每周远程安排适用另一份规则。</pre><h4>notify-routine-zh</h4><pre>Evidence ID: E5
+文件名：notify-routine-zh.txt
+海湾实验室大陆团队常规通知。计划内维护和无影响变更汇总到工作日邮件摘要，收件人可在门户查看详情。没有事故时不拨打值班电话。若维护期间出现正式服务中断，应转为紧急通知流程，而不是等待下一封摘要。</pre></details><h3>仅向量</h3><p>切片 Recall@5：—；nDCG@5：—；切片事实覆盖：—；最终窗口事实覆盖：—。</p><ol><li><code>remote-standard-zh--c000</code></li><li><code>remote-exception-zh--c000</code></li><li><code>expense-deadline-zh--c000</code></li><li><code>offboard-staff-zh--c000</code></li><li><code>travel-international-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>remote-standard-zh</h4><pre>Evidence ID: E1
+文件名：remote-standard-zh.txt
+海湾实验室大陆团队常规远程办公。经直属经理批准，可在周二和周三远程办公，每周最多两天。团队会议和客户现场安排优先。未使用的天数不能累计到下周。连续数周异地办公必须申请例外，不得把常规远程天数拼接成长假。</pre><h4>remote-exception-zh</h4><pre>Evidence ID: E2
+文件名：remote-exception-zh.txt
+海湾实验室大陆团队远程例外。连续异地办公最多三周，必须同时取得人力资源和直属经理批准。申请需说明地点、工作时间和交接安排。例外不改变休假余额，也不能自动延长。常规每周远程安排适用另一份规则。</pre><h4>expense-deadline-zh</h4><pre>Evidence ID: E3
+文件名：expense-deadline-zh.txt
+海湾实验室大陆团队费用提交时限。费用发生后十五个自然日内提交报销申请。直属经理审核用途，财务核对凭证和费用中心。超过期限须附延迟说明并取得财务批准。提交及时并不免除正式凭证要求，出差和办公采购也要遵循各自审批规则。</pre><h4>offboard-staff-zh</h4><pre>Evidence ID: E4
+文件名：offboard-staff-zh.txt
+海湾实验室大陆团队员工离职。最后工作日十七点停用日常业务账号，由人力资源确认时间，IT 执行。经理负责资料归档和工作交接。法律保留要求不意味着保留本人登录权限。承包商账号按合同结束流程处理。</pre><h4>travel-international-zh</h4><pre>Evidence ID: E5
+文件名：travel-international-zh.txt
+海湾实验室大陆员工国际出差住宿规则。酒店每晚报销上限为一百八十美元等值金额；超限须在订房前由部门负责人批准。汇率按财务月度表换算。国内差旅使用人民币单独限额。长期派驻住宿按派驻协议执行，不按此规则计算。</pre></details><h3>双路 RRF</h3><p>切片 Recall@5：—；nDCG@5：—；切片事实覆盖：—；最终窗口事实覆盖：—。</p><ol><li><code>remote-standard-zh--c000</code></li><li><code>remote-exception-zh--c000</code></li><li><code>offboard-staff-zh--c000</code></li><li><code>expense-deadline-zh--c000</code></li><li><code>offboard-contractor-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>remote-standard-zh</h4><pre>Evidence ID: E1
+文件名：remote-standard-zh.txt
+海湾实验室大陆团队常规远程办公。经直属经理批准，可在周二和周三远程办公，每周最多两天。团队会议和客户现场安排优先。未使用的天数不能累计到下周。连续数周异地办公必须申请例外，不得把常规远程天数拼接成长假。</pre><h4>remote-exception-zh</h4><pre>Evidence ID: E2
+文件名：remote-exception-zh.txt
+海湾实验室大陆团队远程例外。连续异地办公最多三周，必须同时取得人力资源和直属经理批准。申请需说明地点、工作时间和交接安排。例外不改变休假余额，也不能自动延长。常规每周远程安排适用另一份规则。</pre><h4>offboard-staff-zh</h4><pre>Evidence ID: E3
+文件名：offboard-staff-zh.txt
+海湾实验室大陆团队员工离职。最后工作日十七点停用日常业务账号，由人力资源确认时间，IT 执行。经理负责资料归档和工作交接。法律保留要求不意味着保留本人登录权限。承包商账号按合同结束流程处理。</pre><h4>expense-deadline-zh</h4><pre>Evidence ID: E4
+文件名：expense-deadline-zh.txt
+海湾实验室大陆团队费用提交时限。费用发生后十五个自然日内提交报销申请。直属经理审核用途，财务核对凭证和费用中心。超过期限须附延迟说明并取得财务批准。提交及时并不免除正式凭证要求，出差和办公采购也要遵循各自审批规则。</pre><h4>offboard-contractor-zh</h4><pre>Evidence ID: E5
+文件名：offboard-contractor-zh.txt
+海湾实验室大陆团队承包商离场。合同结束当天十八点前关闭项目账号，项目负责人确认交接资料和设备归还。延长访问必须在合同到期前重新批准。项目组成员不得私下共享自己的账号。正式员工离职使用另一份人力资源交接流程。</pre></details></section><section id='e22'><h2>e22 · Which pet insurance company covers Bristol employees?</h2><p><a href='review.html#e22'>查看应答要点与全部标注</a>；向量命中 50，关键词命中 21。</p><h3>仅关键词</h3><p>切片 Recall@5：—；nDCG@5：—；切片事实覆盖：—；最终窗口事实覆盖：—。</p><ol><li><code>access-staff-en--c000</code></li><li><code>remote-standard-en--c000</code></li><li><code>notify-urgent-en--c000</code></li><li><code>restore-guide-en--c000</code></li><li><code>travel-sales-en--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>access-staff-en</h4><pre>Evidence ID: E1
+文件名：access-staff-en.txt
+Harborview Bristol office staff access rules. Active employees receive a named building badge after identity verification. A lost badge must be disabled before a replacement is issued. Standard building access does not authorize entry to the server room. Visitors and contractors cannot use an employee&#39;s badge as a substitute for registration.</pre><h4>remote-standard-en</h4><pre>Evidence ID: E2
+文件名：remote-standard-en.txt
+Harborview Bristol ordinary remote-work policy. With manager approval, employees may work remotely on Monday and Friday, up to two days per week. Customer visits and mandatory on-site work take priority. Unused days cannot be carried over. A continuous period away requires the separate remote exception process.</pre><h4>notify-urgent-en</h4><pre>Evidence ID: E3
+文件名：notify-urgent-en.txt
+Harborview Bristol urgent notification procedure. Page the on-call engineer for an active customer-facing outage; do not wait for the email digest. Escalate through the duty roster if nobody acknowledges. Routine maintenance announcements use the portal instead. Record the page time and acknowledgment in the incident ticket.</pre><h4>restore-guide-en</h4><pre>Evidence ID: E4
+文件名：restore-guide-en.txt
+Harborview Atlas restoration handbook. This guide covers restoration of the Atlas reporting service, not general office backups. It is organized for operators, service owners and audit reviewers. Read the requested recovery scope before choosing a snapshot. A successful file download alone does not demonstrate that a restoration is correct. Every restoration has a case identifier carried through preparation, validation and closure.</pre><h4>travel-sales-en</h4><pre>Evidence ID: E5
+文件名：travel-sales-en.txt
+Harborview sales travel policy. Domestic hotel reimbursement is capped at USD 160 per night. Obtain sales director approval before booking above the cap and attach the approved itinerary to the claim. This policy covers the sales team only. Engineering travel and long-term assignments have separate allowances.</pre></details><h3>仅向量</h3><p>切片 Recall@5：—；nDCG@5：—；切片事实覆盖：—；最终窗口事实覆盖：—。</p><ol><li><code>access-staff-en--c001</code></li><li><code>offboard-staff-en--c000</code></li><li><code>backup-dublin-en--c001</code></li><li><code>travel-engineering-en--c001</code></li><li><code>remote-standard-en--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>access-staff-en</h4><pre>Evidence ID: E1
+文件名：access-staff-en.txt
+Harborview Bristol office staff access rules. Active employees receive a named building badge after identity verification. A lost badge must be disabled before a replacement is issued. Standard building access does not authorize entry to the server room. Visitors and contractors cannot use an employee&#39;s badge as a substitute for registration.</pre><h4>offboard-staff-en</h4><pre>Evidence ID: E2
+文件名：offboard-staff-en.txt
+Harborview Bristol employee offboarding. HR supplies the confirmed departure time and IT disables interactive access at that time. The manager transfers ownership of shared documents before departure. Retained audit records do not justify keeping the user&#39;s login active. External partner integrations follow the contract closure policy.</pre><h4>backup-dublin-en</h4><pre>Evidence ID: E3
+文件名：backup-dublin-en.txt
+Harborview Dublin service backup policy. Backups are retained for twenty-one days. The Dublin platform team handles restoration requests after the service owner approves the target timestamp. Restores are staged in an isolated database before release. This policy applies to Dublin production services, not Seattle or employee laptops.</pre><h4>travel-engineering-en</h4><pre>Evidence ID: E4
+文件名：travel-engineering-en.txt
+Harborview engineering travel policy. Domestic hotel reimbursement is capped at USD 140 per night. The engineering manager approves exceptions before booking. Keep the itinerary and hotel invoice together. Sales-team allowances do not transfer to engineering travelers, and temporary relocation is handled through a separate agreement.</pre><h4>remote-standard-en</h4><pre>Evidence ID: E5
+文件名：remote-standard-en.txt
+Harborview Bristol ordinary remote-work policy. With manager approval, employees may work remotely on Monday and Friday, up to two days per week. Customer visits and mandatory on-site work take priority. Unused days cannot be carried over. A continuous period away requires the separate remote exception process.</pre></details><h3>双路 RRF</h3><p>切片 Recall@5：—；nDCG@5：—；切片事实覆盖：—；最终窗口事实覆盖：—。</p><ol><li><code>remote-standard-en--c000</code></li><li><code>access-staff-en--c000</code></li><li><code>offboard-staff-en--c000</code></li><li><code>expense-deadline-en--c000</code></li><li><code>notify-urgent-en--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>remote-standard-en</h4><pre>Evidence ID: E1
+文件名：remote-standard-en.txt
+Harborview Bristol ordinary remote-work policy. With manager approval, employees may work remotely on Monday and Friday, up to two days per week. Customer visits and mandatory on-site work take priority. Unused days cannot be carried over. A continuous period away requires the separate remote exception process.</pre><h4>access-staff-en</h4><pre>Evidence ID: E2
+文件名：access-staff-en.txt
+Harborview Bristol office staff access rules. Active employees receive a named building badge after identity verification. A lost badge must be disabled before a replacement is issued. Standard building access does not authorize entry to the server room. Visitors and contractors cannot use an employee&#39;s badge as a substitute for registration.</pre><h4>offboard-staff-en</h4><pre>Evidence ID: E3
+文件名：offboard-staff-en.txt
+Harborview Bristol employee offboarding. HR supplies the confirmed departure time and IT disables interactive access at that time. The manager transfers ownership of shared documents before departure. Retained audit records do not justify keeping the user&#39;s login active. External partner integrations follow the contract closure policy.</pre><h4>expense-deadline-en</h4><pre>Evidence ID: E4
+文件名：expense-deadline-en.txt
+Harborview Bristol expense filing policy. Submit an expense claim within twelve calendar days of the purchase. The manager verifies the business purpose and finance checks the cost center. Late claims require finance approval with an explanation. Timely submission does not waive the separate receipt requirements.</pre><h4>notify-urgent-en</h4><pre>Evidence ID: E5
+文件名：notify-urgent-en.txt
+Harborview Bristol urgent notification procedure. Page the on-call engineer for an active customer-facing outage; do not wait for the email digest. Escalate through the duty roster if nobody acknowledges. Routine maintenance announcements use the portal instead. Record the page time and acknowledgment in the incident ticket.</pre></details></section><section id='e23'><h2>e23 · Relay 客户端 v3 的 HBR-999 错误应该如何修复？</h2><p><a href='review.html#e23'>查看应答要点与全部标注</a>；向量命中 50，关键词命中 28。</p><h3>仅关键词</h3><p>切片 Recall@5：—；nDCG@5：—；切片事实覆盖：—；最终窗口事实覆盖：—。</p><ol><li><code>relay-v3-zh--c000</code></li><li><code>relay-v2-zh--c000</code></li><li><code>relay-gateway-en--c000</code></li><li><code>relay-agent-en--c000</code></li><li><code>cert-client-zh--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>relay-v3-zh</h4><pre>Evidence ID: E1
+文件名：relay-v3-zh.txt
+海湾实验室 Relay 客户端 v3 运维说明。错误 HBR-417 表示设备时钟与认证服务器不同步。先同步设备时间，再刷新登录令牌；不要重置用户密码。本说明只适用于 v3 桌面客户端，不适用于 v2 或支付网关。故障处理后应把客户端版本和发生时间记入支持工单。</pre><h4>relay-v2-zh</h4><pre>Evidence ID: E2
+文件名：relay-v2-zh.txt
+海湾实验室 Relay 客户端 v2 历史支持说明。错误 HBR-417 表示代理证书不受信任。应安装企业根证书，然后重新启动客户端。v2 已进入维护阶段，此含义不能用于 v3 排障。工单应保留代理配置和版本信息，但不要上传私钥。</pre><h4>relay-gateway-en</h4><pre>Evidence ID: E3
+文件名：relay-gateway-en.txt
+Harborview Relay gateway 2.1 support note. Error HBR-471 indicates that a tenant route is not registered. The gateway administrator must register the route before traffic is retried. Do not install a client certificate as a workaround. Include the tenant route name and gateway version in the support ticket.</pre><h4>relay-agent-en</h4><pre>Evidence ID: E4
+文件名：relay-agent-en.txt
+Harborview Relay agent 3.2 operations note. Error HBR-418 means the local disk queue is full. Pause incoming jobs, archive acknowledged records, then resume the agent. This code does not indicate clock drift or a password failure. Record the queue size and agent version in the incident ticket before cleanup.</pre><h4>cert-client-zh</h4><pre>Evidence ID: E5
+文件名：cert-client-zh.txt
+海湾实验室设备客户端证书规则。客户端证书在到期前十四天进入续期窗口。设备管理员在管理台提交续期申请，用户无须重新注册设备。私钥不得附在支持邮件中。本规则不涵盖服务器证书，服务器有独立的变更审批流程。</pre></details><h3>仅向量</h3><p>切片 Recall@5：—；nDCG@5：—；切片事实覆盖：—；最终窗口事实覆盖：—。</p><ol><li><code>relay-v3-zh--c000</code></li><li><code>relay-v2-zh--c000</code></li><li><code>relay-gateway-en--c000</code></li><li><code>relay-agent-en--c000</code></li><li><code>incident-production-en--c001</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>relay-v3-zh</h4><pre>Evidence ID: E1
+文件名：relay-v3-zh.txt
+海湾实验室 Relay 客户端 v3 运维说明。错误 HBR-417 表示设备时钟与认证服务器不同步。先同步设备时间，再刷新登录令牌；不要重置用户密码。本说明只适用于 v3 桌面客户端，不适用于 v2 或支付网关。故障处理后应把客户端版本和发生时间记入支持工单。</pre><h4>relay-v2-zh</h4><pre>Evidence ID: E2
+文件名：relay-v2-zh.txt
+海湾实验室 Relay 客户端 v2 历史支持说明。错误 HBR-417 表示代理证书不受信任。应安装企业根证书，然后重新启动客户端。v2 已进入维护阶段，此含义不能用于 v3 排障。工单应保留代理配置和版本信息，但不要上传私钥。</pre><h4>relay-gateway-en</h4><pre>Evidence ID: E3
+文件名：relay-gateway-en.txt
+Harborview Relay gateway 2.1 support note. Error HBR-471 indicates that a tenant route is not registered. The gateway administrator must register the route before traffic is retried. Do not install a client certificate as a workaround. Include the tenant route name and gateway version in the support ticket.</pre><h4>relay-agent-en</h4><pre>Evidence ID: E4
+文件名：relay-agent-en.txt
+Harborview Relay agent 3.2 operations note. Error HBR-418 means the local disk queue is full. Pause incoming jobs, archive acknowledged records, then resume the agent. This code does not indicate clock drift or a password failure. Record the queue size and agent version in the incident ticket before cleanup.</pre><h4>incident-production-en</h4><pre>Evidence ID: E5
+文件名：incident-production-en.txt
+Harborview Bristol production S1 incident procedure. Acknowledge within twelve minutes and publish an update every twenty-five minutes. The incident lead coordinates mitigation and records decisions. This is the production procedure, not a staging alert rule. Acknowledgment does not mean the service has recovered or that a root cause is confirmed.</pre></details><h3>双路 RRF</h3><p>切片 Recall@5：—；nDCG@5：—；切片事实覆盖：—；最终窗口事实覆盖：—。</p><ol><li><code>relay-v3-zh--c000</code></li><li><code>relay-v2-zh--c000</code></li><li><code>relay-gateway-en--c000</code></li><li><code>relay-agent-en--c000</code></li><li><code>release-guide-zh--c003</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>relay-v3-zh</h4><pre>Evidence ID: E1
+文件名：relay-v3-zh.txt
+海湾实验室 Relay 客户端 v3 运维说明。错误 HBR-417 表示设备时钟与认证服务器不同步。先同步设备时间，再刷新登录令牌；不要重置用户密码。本说明只适用于 v3 桌面客户端，不适用于 v2 或支付网关。故障处理后应把客户端版本和发生时间记入支持工单。</pre><h4>relay-v2-zh</h4><pre>Evidence ID: E2
+文件名：relay-v2-zh.txt
+海湾实验室 Relay 客户端 v2 历史支持说明。错误 HBR-417 表示代理证书不受信任。应安装企业根证书，然后重新启动客户端。v2 已进入维护阶段，此含义不能用于 v3 排障。工单应保留代理配置和版本信息，但不要上传私钥。</pre><h4>relay-gateway-en</h4><pre>Evidence ID: E3
+文件名：relay-gateway-en.txt
+Harborview Relay gateway 2.1 support note. Error HBR-471 indicates that a tenant route is not registered. The gateway administrator must register the route before traffic is retried. Do not install a client certificate as a workaround. Include the tenant route name and gateway version in the support ticket.</pre><h4>relay-agent-en</h4><pre>Evidence ID: E4
+文件名：relay-agent-en.txt
+Harborview Relay agent 3.2 operations note. Error HBR-418 means the local disk queue is full. Pause incoming jobs, archive acknowledged records, then resume the agent. This code does not indicate clock drift or a password failure. Record the queue size and agent version in the incident ticket before cleanup.</pre><h4>release-guide-zh</h4><pre>Evidence ID: E5
+文件名：release-guide-zh.txt
+海湾实验室澄海服务发布手册。本手册面向大陆生产环境的发布操作员、值班负责人和业务验收人。测试环境练习不能替代正式发布审批。手册依次说明需求登记、上线审批、预演、流量切换、业务检查、回滚、交接和归档。发布单贯穿全部阶段，任何临时变更都必须留在同一条记录中。不要把某个阶段完成误认为整个发布已经成功。
+
+第一节，需求登记。申请人说明版本号、目标服务、变更范围和用户影响，附上可执行的检查清单。服务所有者核对本次发布是否涉及数据库结构或对外接口。若依赖服务尚未就绪，应调整窗口而不是强行继续。登记时还应列出需要参与的人员及联系渠道。重复提交同一需求不会自动提高优先级，协调结论仍需记录在发布单里。
+
+第二节，上线审批。澄海正式上线必须由发布负责人和业务验收人共同批准。两个批准都要对应本次版本号，不能沿用历史版本的审批截图。批准后若增加变更范围，应重新确认。审批人需要看到预期影响、回滚方案和验收条件，而不仅是程序包名称。紧急窗口允许在值班会议中完成确认，但操作员仍须补齐相应记录。
+
+第三节，预演。操作员在隔离环境按照发布清单执行一次预演，记录实际执行顺序、关键命令的结果和遇到的问题。不得复制生产密码到预演脚本。预演使用的测试数据应经过脱敏。若预演暴露了未登记的依赖或额外变更，应回到登记阶段修订方案。预演成功只是进入下一阶段的条件，不代表已经取得生产访问授权。
+
+第四节，流量切换。先确认上一版本可用，再逐步切换少量流量并观察错误率。观察期间暂停与本次发布无关的批量任务，避免干扰判断。值班人员记录切换时间和监控截图。若指标偏离验收条件，不应通过修改告警阈值来隐藏问题。流量增加必须按预先批准的步骤推进，不能因为暂时没有投诉就跳过检查。
+
+第五节，业务检查。业务验收人执行登录、查询和关键业务操作的检查，比较新旧版本的返回结果。检查失败时要说明具体步骤及影响，不能仅写系统异常。操作员核对业务报告与监控时间是否一致。验收人缺席时应暂停后续切换，而不是让操作员代签。完成业务检查仍需要保持回滚资源直到观察阶段结束。
+
+第六节，失败回滚。确认发布失败后十分钟内完成回滚。值班负责人协调切回上一版本，业务验收人再次检查关键流程。回滚期间保留失败版本的必要诊断信息，但不得保留明文用户凭证。若预计不能在规定时间完成，应立即通知事故负责人。不要反复重试同一发布来拖延回滚，新的发布尝试必须有明确的修复与验证依据。
+
+第七节，交接。观察阶段结束后，把版本号、尚未关闭的问题和下一班需要关注的指标交接给值班人员。临时增加的权限在交接前撤销。操作员检查定时任务和通知设置是否恢复。交接清单不能只写正常两个字，应能让未参加发布的人理解当前状态。若仍有未解决的用户影响，发布单不得直接转为完成。
+
+第八节，归档。将审批、预演、切换、业务检查和回滚记录归入同一发布单。归档应区分成功、取消和回滚三种结果。后续复盘只能引用实际发生的操作，不得把原计划当作已经执行。管理员核对相关附件的访问范围，避免把内部环境信息分享给无关人员。发布记录保存策略与数据库备份策略不同，需要分别查询对应制度。</pre></details></section><section id='e24'><h2>e24 · How many days does a Harborview software subscription refund take after cancellation?</h2><p><a href='review.html#e24'>查看应答要点与全部标注</a>；向量命中 50，关键词命中 39。</p><h3>仅关键词</h3><p>切片 Recall@5：—；nDCG@5：—；切片事实覆盖：—；最终窗口事实覆盖：—。</p><ol><li><code>purchase-software-en--c000</code></li><li><code>shipping-return-en--c001</code></li><li><code>remote-standard-en--c000</code></li><li><code>purchase-hardware-en--c000</code></li><li><code>access-staff-en--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>purchase-software-en</h4><pre>Evidence ID: E1
+文件名：purchase-software-en.txt
+Harborview Bristol software subscription rule. Every new software vendor requires security review, regardless of price. Annual subscriptions above GBP 1000 additionally require finance approval. The requesting manager owns renewal decisions. Hardware asset purchasing approval does not substitute for the vendor review required here.</pre><h4>shipping-return-en</h4><pre>Evidence ID: E2
+文件名：shipping-return-en.txt
+Harborview Bristol equipment returns. Obtain an asset-team return authorization before shipping a device back. Use the supplied tracking label and keep the collection receipt until the asset team confirms arrival. This process concerns physical equipment only; it does not describe subscription cancellation, refunds or employee benefit claims.</pre><h4>remote-standard-en</h4><pre>Evidence ID: E3
+文件名：remote-standard-en.txt
+Harborview Bristol ordinary remote-work policy. With manager approval, employees may work remotely on Monday and Friday, up to two days per week. Customer visits and mandatory on-site work take priority. Unused days cannot be carried over. A continuous period away requires the separate remote exception process.</pre><h4>purchase-hardware-en</h4><pre>Evidence ID: E4
+文件名：purchase-hardware-en.txt
+Harborview Bristol hardware purchasing rule. Equipment costing up to GBP 800 requires manager approval and asset registration. Higher amounts also require finance approval before ordering. Check the spare-device inventory first. This rule does not authorize software subscriptions, whose security review is handled by a separate process.</pre><h4>access-staff-en</h4><pre>Evidence ID: E5
+文件名：access-staff-en.txt
+Harborview Bristol office staff access rules. Active employees receive a named building badge after identity verification. A lost badge must be disabled before a replacement is issued. Standard building access does not authorize entry to the server room. Visitors and contractors cannot use an employee&#39;s badge as a substitute for registration.</pre></details><h3>仅向量</h3><p>切片 Recall@5：—；nDCG@5：—；切片事实覆盖：—；最终窗口事实覆盖：—。</p><ol><li><code>remote-exception-en--c000</code></li><li><code>remote-standard-en--c000</code></li><li><code>expense-deadline-en--c000</code></li><li><code>purchase-software-en--c000</code></li><li><code>cert-gateway-en--c000</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>remote-exception-en</h4><pre>Evidence ID: E1
+文件名：remote-exception-en.txt
+Harborview Bristol extended remote-work policy. A continuous remote exception can last up to six weeks and needs both HR and manager approval. Provide the location, working hours and handover plan before departure. An extension requires a new approval. Weekly remote days cannot be accumulated to bypass this process.</pre><h4>remote-standard-en</h4><pre>Evidence ID: E2
+文件名：remote-standard-en.txt
+Harborview Bristol ordinary remote-work policy. With manager approval, employees may work remotely on Monday and Friday, up to two days per week. Customer visits and mandatory on-site work take priority. Unused days cannot be carried over. A continuous period away requires the separate remote exception process.</pre><h4>expense-deadline-en</h4><pre>Evidence ID: E3
+文件名：expense-deadline-en.txt
+Harborview Bristol expense filing policy. Submit an expense claim within twelve calendar days of the purchase. The manager verifies the business purpose and finance checks the cost center. Late claims require finance approval with an explanation. Timely submission does not waive the separate receipt requirements.</pre><h4>purchase-software-en</h4><pre>Evidence ID: E4
+文件名：purchase-software-en.txt
+Harborview Bristol software subscription rule. Every new software vendor requires security review, regardless of price. Annual subscriptions above GBP 1000 additionally require finance approval. The requesting manager owns renewal decisions. Hardware asset purchasing approval does not substitute for the vendor review required here.</pre><h4>cert-gateway-en</h4><pre>Evidence ID: E5
+文件名：cert-gateway-en.txt
+Harborview gateway server certificate procedure. Create a change request twenty-one days before expiry. The network owner approves deployment and a rollback certificate must remain available. Run the gateway health checks afterward. Monitoring agent certificates use a separate renewal window and must not be replaced through this procedure.</pre></details><h3>双路 RRF</h3><p>切片 Recall@5：—；nDCG@5：—；切片事实覆盖：—；最终窗口事实覆盖：—。</p><ol><li><code>purchase-software-en--c000</code></li><li><code>remote-standard-en--c000</code></li><li><code>purchase-hardware-en--c000</code></li><li><code>expense-deadline-en--c000</code></li><li><code>shipping-return-en--c001</code></li></ol><details><summary>查看实际选中证据窗口</summary><h4>purchase-software-en</h4><pre>Evidence ID: E1
+文件名：purchase-software-en.txt
+Harborview Bristol software subscription rule. Every new software vendor requires security review, regardless of price. Annual subscriptions above GBP 1000 additionally require finance approval. The requesting manager owns renewal decisions. Hardware asset purchasing approval does not substitute for the vendor review required here.</pre><h4>remote-standard-en</h4><pre>Evidence ID: E2
+文件名：remote-standard-en.txt
+Harborview Bristol ordinary remote-work policy. With manager approval, employees may work remotely on Monday and Friday, up to two days per week. Customer visits and mandatory on-site work take priority. Unused days cannot be carried over. A continuous period away requires the separate remote exception process.</pre><h4>purchase-hardware-en</h4><pre>Evidence ID: E3
+文件名：purchase-hardware-en.txt
+Harborview Bristol hardware purchasing rule. Equipment costing up to GBP 800 requires manager approval and asset registration. Higher amounts also require finance approval before ordering. Check the spare-device inventory first. This rule does not authorize software subscriptions, whose security review is handled by a separate process.</pre><h4>expense-deadline-en</h4><pre>Evidence ID: E4
+文件名：expense-deadline-en.txt
+Harborview Bristol expense filing policy. Submit an expense claim within twelve calendar days of the purchase. The manager verifies the business purpose and finance checks the cost center. Late claims require finance approval with an explanation. Timely submission does not waive the separate receipt requirements.</pre><h4>shipping-return-en</h4><pre>Evidence ID: E5
+文件名：shipping-return-en.txt
+Harborview Bristol equipment returns. Obtain an asset-team return authorization before shipping a device back. Use the supplied tracking label and keep the collection receipt until the asset team confirms arrival. This process concerns physical equipment only; it does not describe subscription cancellation, refunds or employee benefit claims.</pre></details></section><p class='muted'>这是一套诊断性合成数据，不代表真实业务整体准确率；没有评测答案生成或拒答。固定输入、原始命中、窗口和哈希见 JSON 文件。</p></main></html>

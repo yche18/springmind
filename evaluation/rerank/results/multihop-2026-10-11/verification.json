@@ -1,0 +1,14 @@
+{
+  "contextsReproduced" : 180,
+  "newProviderCalls" : 0,
+  "hashes" : {
+    "LiveMultiHopRerankRun.java" : "f996f70a09db3ff49d4f0d8f1a32846843292bd19ad2affc223487bc6424f2ed",
+    "MultiHopRerankAnalysis.java" : "b1491d3bf2d30db3991bcf2c5bbe1812ebb3fd5575bc3675711d8069ae77a83f",
+    "MultiHopRerankReportRun.java" : "6d3a93e77cc9985c4941b2d4916c7aec9d706f552a61e579061d9b941d2867e1",
+    "capture.json" : "4db1c5069a15f21dadd7a5d50fcb864cc06d6c16d748be54c79020653d4d6ffa",
+    "comparison.json" : "d278be13ea6f83edbac979bfcb2658f03ff7fb9db3feda651dfda2b5af28c55a",
+    "local-review.html" : "f15edccdd63a6d473dcb34f0c4ed035ad8f627d5c37075bdc09ec5fb31f9a620",
+    "report.html" : "be90933ae498867706b3f54e41c1670d85cd5c6f8e65d2e20aaad2ccf5136128",
+    "request-ledger-hashes.json" : "c4e1370dded721a37bafaa5e95572f87f7ea8c7b167ee0d38f8de9383825e34b"
+  }
+}

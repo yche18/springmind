@@ -1,51 +1,24 @@
 package com.yche.springmind.document.service;
 
-import com.yche.springmind.common.enums.DocumentStatus;
-import com.yche.springmind.document.mapper.DocumentMapper;
+import com.yche.springmind.ingestion.service.IngestionJobQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-
-/** Recovers documents left in PROCESSING after an interrupted application run. */
+/** Backfills interrupted uploads from versions that did not persist ingestion requests. */
 @Component
 public class StaleProcessingDocumentRecoveryRunner implements ApplicationRunner {
-
     private static final Logger log = LoggerFactory.getLogger(StaleProcessingDocumentRecoveryRunner.class);
-    private static final String DEFAULT_FAILURE_REASON = "文档处理任务因服务中断未完成，请重试。";
+    private final IngestionJobQueue queue;
 
-    private final DocumentMapper documentMapper;
-
-    public StaleProcessingDocumentRecoveryRunner(
-            DocumentMapper documentMapper,
-            @Value("${document.ingestion.processing-timeout-minutes:30}") long staleTimeoutMinutes
-    ) {
-        this.documentMapper = documentMapper;
+    public StaleProcessingDocumentRecoveryRunner(IngestionJobQueue queue) {
+        this.queue = queue;
     }
 
     @Override
-    @Transactional
     public void run(ApplicationArguments args) {
-        LocalDateTime now = LocalDateTime.now();
-        int recovered = documentMapper.markStaleProcessingDocumentsFailed(
-                DocumentStatus.PROCESSING.name(),
-                DocumentStatus.FAILED.name(),
-                DEFAULT_FAILURE_REASON,
-                null,
-                now
-        );
-        if (recovered > 0) {
-            log.warn(
-                    "启动回收遗留处理中文档: recoveredCount={}",
-                    recovered
-            );
-        } else {
-            log.info("启动检查遗留处理中文档完成，无需回收");
-        }
+        log.info("Recovered unqueued ingestion requests: count={}", queue.recoverUnqueuedDocuments());
     }
 }

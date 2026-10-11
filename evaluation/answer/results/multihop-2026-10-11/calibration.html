@@ -1,0 +1,561 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MultiHop-RAG · 最后一轮答案评测</title><style>body{font:16px/1.7 system-ui,"Microsoft YaHei";max-width:1200px;margin:32px auto;padding:0 20px;background:#f3f6f8;color:#193247}table{border-collapse:collapse;width:100%}td,th{padding:9px;border-bottom:1px solid #ddd;text-align:left}details,.card{background:white;padding:18px;margin:18px 0;border:1px solid #d6e0e7;border-radius:10px}summary{cursor:pointer;font-weight:650}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;background:#f6f8fa;padding:12px}.note{background:#fff0cc;padding:16px}select,input,button{padding:9px;margin:5px}a{color:#006894}.scroll{overflow:auto}</style>
+<h1>MultiHop-RAG · 四组答案对照</h1><p>60题 · 缓存上下文 · DeepSeek Flash · 未重新检索或精排</p>
+<p class="note">当前是自动评分，语义正确性和引用蕴含尚待复核。严格匹配不等于完整语义准确率；引用原文存在不等于论证成立。“参考支持代理”还要求引用窗口覆盖全部官方事实，可能过严，也不替代人工核验。不要将代理指标写成最终忠实性。</p>
+<p><a href="../../../../target/multihop-answer/review.html">打开本地回答与证据复核页</a></p>
+<section class="card"><h2>CALIBRATION</h2><div class="scroll"><table><tr><th>组别</th><th>全题严格正确（含拒答）</th><th>有答案 EM</th><th>参考支持代理</th><th>无答案正确拒答</th><th>有答案却拒答</th><th>生成 p50 / p95</th></tr>
+<tr><td>VECTOR</td><td>5/10 (50.0%)</td><td>4/9 (44.4%)</td><td>2/9</td><td>1/1</td><td>5</td><td>1242 / 1710 ms</td></tr>
+<tr><td>RRF</td><td>5/10 (50.0%)</td><td>4/9 (44.4%)</td><td>1/9</td><td>1/1</td><td>5</td><td>1308 / 1893 ms</td></tr>
+<tr><td>VECTOR_QWEN</td><td>6/10 (60.0%)</td><td>5/9 (55.6%)</td><td>2/9</td><td>1/1</td><td>4</td><td>1246 / 1779 ms</td></tr>
+<tr><td>RRF_QWEN</td><td>6/10 (60.0%)</td><td>5/9 (55.6%)</td><td>2/9</td><td>1/1</td><td>3</td><td>1356 / 1650 ms</td></tr>
+</table></div><p>生成延迟不含检索和精排，不是完整在线请求耗时。正式集44题有答案＋6题无答案；校准集9＋1，不合并。</p></section>
+<section class="card"><h2>正式集配对变化（严格匹配）</h2>
+<p>VECTOR -&gt; RRF：改善 []；退步 []；持平 0</p>
+<p>VECTOR -&gt; VECTOR_QWEN：改善 []；退步 []；持平 0</p>
+<p>RRF -&gt; RRF_QWEN：改善 []；退步 []；持平 0</p>
+<p>VECTOR_QWEN -&gt; RRF_QWEN：改善 []；退步 []；持平 0</p>
+</section><h2>回答复核</h2><p>优先看有争议的题目。每题四组并排顺序一致，点开可看全部答案；正确拒答、失败和退步均保留。标记只保存在当前浏览器，可导出复核记录，不会自动改动指标。</p><input id="search" placeholder="搜索题号或问题"><select id="filter"><option value="flagged">待复核题目</option><option value="all">全部题目</option><option value="FORMAL">正式集</option><option value="CALIBRATION">校准集</option></select><button onclick="download()">导出复核记录</button>
+<details class="question" id="m2258" data-split="CALIBRATION" data-flagged="true"><summary>m2258 · Which company, recently reviewed by TechCrunch for its generative AI model Gemini, is also accused by The Age of manipulating its primary service to maximize ad revenue, and is facing a class action antitrust suit as reported by TechCrunch for harming news publishers’ bottom lines through anticompetitive practices?</summary><p>官方答案：<b>Google</b> · CALIBRATION</p><p>复核原因：[&#x27;EXACT_BUT_SUPPORT_PENDING&#x27;]</p>
+<h3>VECTOR</h3><p>严格匹配：True；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: true,
+  &quot;answer&quot;: &quot;Google&quot;,
+  &quot;explanation&quot;: &quot;TechCrunch reviewed Google&#x27;s Gemini model (E3, E4, E5), and TechCrunch reported a class action antitrust suit accusing Google of anticompetitive behavior harming news publishers (E1). However, the evidence does not mention The Age accusing Google of manipulating its primary service to maximize ad revenue, so that condition is unsupported.&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;evidenceId&quot;: &quot;E4&quot;,
+      &quot;quote&quot;: &quot;This week, Google took the wraps off of Gemini, its new flagship generative AI model meant to power a range of products and services including Bard, Google’s ChatGPT competitor.&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E1&quot;,
+      &quot;quote&quot;: &quot;A new class action lawsuit filed this week in the U.S. District Court in D.C. accuses Google and parent company Alphabet of anticompetitive behavior in violation of U.S. antitrust law, the Sherman Act, and others, on behalf of news publishers.&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;&quot;
+}</pre>
+<label>语义答案<select data-key="m2258-VECTOR/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m2258-VECTOR/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m2258-VECTOR/note" placeholder="备注">
+<h3>RRF</h3><p>严格匹配：True；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: true,
+  &quot;answer&quot;: &quot;Google&quot;,
+  &quot;explanation&quot;: &quot;TechCrunch reviewed Google&#x27;s Gemini model (E2, E4), and TechCrunch reported a class action antitrust suit accusing Google of anticompetitive behavior harming news publishers (E1). However, the evidence does not mention The Age accusing Google of manipulating its primary service to maximize ad revenue, so that condition is unsupported.&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;evidenceId&quot;: &quot;E2&quot;,
+      &quot;quote&quot;: &quot;This week, Google took the wraps off of Gemini, its new flagship generative AI model meant to power a range of products and services including Bard, Google’s ChatGPT competitor.&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E1&quot;,
+      &quot;quote&quot;: &quot;A new class action lawsuit filed this week in the U.S. District Court in D.C. accuses Google and parent company Alphabet of anticompetitive behavior in violation of U.S. antitrust law, the Sherman Act, and others, on behalf of news publishers.&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;&quot;
+}</pre>
+<label>语义答案<select data-key="m2258-RRF/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m2258-RRF/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m2258-RRF/note" placeholder="备注">
+<h3>VECTOR_QWEN</h3><p>严格匹配：True；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: true,
+  &quot;answer&quot;: &quot;Google&quot;,
+  &quot;explanation&quot;: &quot;TechCrunch reviewed Google&#x27;s Gemini model (E3, E5). TechCrunch reported a class action antitrust suit against Google and Alphabet for harming news publishers (E1). The Age accusation is not in the evidence, but the question&#x27;s other conditions identify Google.&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;evidenceId&quot;: &quot;E3&quot;,
+      &quot;quote&quot;: &quot;This week, Google took the wraps off of Gemini, its new flagship generative AI model&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E1&quot;,
+      &quot;quote&quot;: &quot;A new class action lawsuit filed this week in the U.S. District Court in D.C. accuses Google and parent company Alphabet of anticompetitive behavior&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;&quot;
+}</pre>
+<label>语义答案<select data-key="m2258-VECTOR_QWEN/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m2258-VECTOR_QWEN/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m2258-VECTOR_QWEN/note" placeholder="备注">
+<h3>RRF_QWEN</h3><p>严格匹配：True；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: true,
+  &quot;answer&quot;: &quot;Google&quot;,
+  &quot;explanation&quot;: &quot;TechCrunch reviewed Google&#x27;s Gemini (E2, E3). TechCrunch reported a class action antitrust suit accusing Google/Alphabet of anticompetitive behavior harming news publishers (E1). The Age accusation is not in the evidence, but the question&#x27;s other conditions identify Google.&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;evidenceId&quot;: &quot;E2&quot;,
+      &quot;quote&quot;: &quot;This week, Google took the wraps off of Gemini, its new flagship generative AI model&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E1&quot;,
+      &quot;quote&quot;: &quot;A new class action lawsuit filed this week in the U.S. District Court in D.C. accuses Google and parent company Alphabet of anticompetitive behavior in violation of U.S. antitrust law&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;&quot;
+}</pre>
+<label>语义答案<select data-key="m2258-RRF_QWEN/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m2258-RRF_QWEN/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m2258-RRF_QWEN/note" placeholder="备注">
+</details>
+<details class="question" id="m0331" data-split="CALIBRATION" data-flagged="true"><summary>m0331 · What company is at the center of claims involving manipulation of search results to maximize ad revenue according to Megan Grey in &#x27;The Age&#x27;, ranking local search results based on relevance, distance, and prominence as reported by &#x27;The Verge&#x27;, and is accused by a news publisher in a class action antitrust suit covered by &#x27;TechCrunch&#x27; for harming their bottom line through anticompetitive practices?</summary><p>官方答案：<b>Google</b> · CALIBRATION</p><p>复核原因：[&#x27;EXACT_BUT_SUPPORT_PENDING&#x27;]</p>
+<h3>VECTOR</h3><p>严格匹配：True；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: true,
+  &quot;answer&quot;: &quot;Google&quot;,
+  &quot;explanation&quot;: &quot;The Age reports Megan Gray alleged Google manipulates search queries for maximum ad revenue. TechCrunch covers a class action antitrust suit by Helena World Chronicle accusing Google of anticompetitive behavior harming publishers&#x27; bottom line.&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;evidenceId&quot;: &quot;E2&quot;,
+      &quot;quote&quot;: &quot;Megan Gray, which alleged that Google had accidentally revealed during the trial that it manipulates people’s search queries for maximum ad revenue.&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E1&quot;,
+      &quot;quote&quot;: &quot;A new class action lawsuit filed this week in the U.S. District Court in D.C. accuses Google and parent company Alphabet of anticompetitive behavior in violation of U.S. antitrust law&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;&quot;
+}</pre>
+<label>语义答案<select data-key="m0331-VECTOR/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m0331-VECTOR/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m0331-VECTOR/note" placeholder="备注">
+<h3>RRF</h3><p>严格匹配：True；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: true,
+  &quot;answer&quot;: &quot;Google&quot;,
+  &quot;explanation&quot;: &quot;The Age reports Megan Gray&#x27;s claim that Google manipulates search queries for maximum ad revenue (E2, E3). TechCrunch covers a class action antitrust suit by news publisher Helena World Chronicle accusing Google of anticompetitive behavior harming publishers&#x27; bottom line (E1). All evidence centers on Google.&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;evidenceId&quot;: &quot;E2&quot;,
+      &quot;quote&quot;: &quot;Megan Gray, which alleged that Google had accidentally revealed during the trial that it manipulates people’s search queries for maximum ad revenue.&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E3&quot;,
+      &quot;quote&quot;: &quot;maintains that Google manipulates Search to maximise ad revenue&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E1&quot;,
+      &quot;quote&quot;: &quot;A new class action lawsuit filed this week in the U.S. District Court in D.C. accuses Google and parent company Alphabet of anticompetitive behavior&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;&quot;
+}</pre>
+<label>语义答案<select data-key="m0331-RRF/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m0331-RRF/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m0331-RRF/note" placeholder="备注">
+<h3>VECTOR_QWEN</h3><p>严格匹配：True；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: true,
+  &quot;answer&quot;: &quot;Google&quot;,
+  &quot;explanation&quot;: &quot;Evidence E3 (The Age) states Megan Grey maintains Google manipulates Search to maximise ad revenue. Evidence E1 (TechCrunch) describes a class action antitrust suit by news publisher Helena World Chronicle accusing Google of anticompetitive behavior harming publishers&#x27; ad revenue. The question&#x27;s &#x27;The Verge&#x27; ranking detail is not in the supplied evidence, but the other two conditions identify Google.&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;evidenceId&quot;: &quot;E3&quot;,
+      &quot;quote&quot;: &quot;She admits that she may have misinterpreted the evidence, but maintains that Google manipulates Search to maximise ad revenue.&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E1&quot;,
+      &quot;quote&quot;: &quot;A new class action lawsuit filed this week in the U.S. District Court in D.C. accuses Google and parent company Alphabet of anticompetitive behavior in violation of U.S. antitrust law, the Sherman Act, and others, on behalf of news publishers.&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E1&quot;,
+      &quot;quote&quot;: &quot;Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means.&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;&quot;
+}</pre>
+<label>语义答案<select data-key="m0331-VECTOR_QWEN/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m0331-VECTOR_QWEN/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m0331-VECTOR_QWEN/note" placeholder="备注">
+<h3>RRF_QWEN</h3><p>严格匹配：True；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: true,
+  &quot;answer&quot;: &quot;Google&quot;,
+  &quot;explanation&quot;: &quot;The Age reports Megan Grey&#x27;s claim that Google manipulates Search to maximise ad revenue. TechCrunch covers a class action antitrust suit by news publisher Helena World Chronicle accusing Google of anticompetitive behavior harming its bottom line. The evidence identifies Google as the company at the center of these claims.&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;evidenceId&quot;: &quot;E2&quot;,
+      &quot;quote&quot;: &quot;She admits that she may have misinterpreted the evidence, but maintains that Google manipulates Search to maximise ad revenue.&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E1&quot;,
+      &quot;quote&quot;: &quot;A new class action lawsuit filed this week in the U.S. District Court in D.C. accuses Google and parent company Alphabet of anticompetitive behavior in violation of U.S. antitrust law&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;&quot;
+}</pre>
+<label>语义答案<select data-key="m0331-RRF_QWEN/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m0331-RRF_QWEN/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m0331-RRF_QWEN/note" placeholder="备注">
+</details>
+<details class="question" id="m0487" data-split="CALIBRATION" data-flagged="true"><summary>m0487 · Which company, known for being more responsive to consumer feedback in recent years and is planning to appeal an ITC decision on a patent dispute, is expected to focus on Macs and new chipsets at an upcoming event and has been criticized for enforcing uniform terms on developers, OEMs, and carriers through its store and payment system according to TechCrunch, Engadget, and two articles from The Verge?</summary><p>官方答案：<b>Apple</b> · CALIBRATION</p><p>复核原因：[&#x27;CROSS_ARM_DISAGREEMENT&#x27;, &#x27;EXACT_BUT_SUPPORT_PENDING&#x27;, &#x27;INVALID_CITATION&#x27;]</p>
+<h3>VECTOR</h3><p>严格匹配：False；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: false,
+  &quot;answer&quot;: &quot;&quot;,
+  &quot;explanation&quot;: &quot;&quot;,
+  &quot;citations&quot;: [],
+  &quot;reason&quot;: &quot;The supplied evidence does not identify any company that is planning to appeal an ITC decision on a patent dispute, nor does it contain the TechCrunch, Engadget, and two The Verge articles describing criticism for enforcing uniform terms on developers, OEMs, and carriers. The evidence covers unrelated topics such as OpenAI&#x27;s dev day, Apple&#x27;s M3 reviews, Bumble&#x27;s CEO change, and Epic v. Google.&quot;
+}</pre>
+<label>语义答案<select data-key="m0487-VECTOR/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m0487-VECTOR/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m0487-VECTOR/note" placeholder="备注">
+<h3>RRF</h3><p>严格匹配：True；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: true,
+  &quot;answer&quot;: &quot;Apple&quot;,
+  &quot;explanation&quot;: &quot;Evidence identifies Apple as the company criticized by Tim Sweeney for forcing developers, OEMs, and carriers to accept the same terms through its store and payments (E1). Engadget reports Apple&#x27;s upcoming event will focus on Macs and new chipsets (E2). The Verge notes Apple faces an ITC import ban and is working on a workaround/redesign (E4, E5).&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;evidenceId&quot;: &quot;E1&quot;,
+      &quot;quote&quot;: &quot;They use their store, their payments, they force developers to all have the same terms, they force OEMs and carriers to all have the same terms.&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E2&quot;,
+      &quot;quote&quot;: &quot;Apple&#x27;s focus during the Scary Fast event will be on Macs and a fresh batch of chipsets to power them.&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E4&quot;,
+      &quot;quote&quot;: &quot;This import ban isn’t the only one Apple is facing.&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E5&quot;,
+      &quot;quote&quot;: &quot;for this route to be successful, Iancu says it depends on the specific patent, ITC ruling, and what exactly Apple has planned as far as redesigning the product.&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;&quot;
+}</pre>
+<label>语义答案<select data-key="m0487-RRF/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m0487-RRF/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m0487-RRF/note" placeholder="备注">
+<h3>VECTOR_QWEN</h3><p>严格匹配：True；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: true,
+  &quot;answer&quot;: &quot;Apple&quot;,
+  &quot;explanation&quot;: &quot;The evidence links Apple to the described traits: The Verge quotes Sweeney saying Apple forces developers, OEMs, and carriers to all have the same terms via its store and payments; The Verge reports the ITC ruled Apple infringed Masimo patents and imposed an Apple Watch import ban; TechCrunch mentions reviews of the M3 iMac and MacBook Pro. No evidence supports the &#x27;more responsive to consumer feedback&#x27; or &#x27;planning to appeal&#x27; claims, but the core entity is Apple.&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;evidenceId&quot;: &quot;E1&quot;,
+      &quot;quote&quot;: &quot;They use their store, their payments, they force developers to all have the same terms, they force OEMs and carriers to all have the same terms.&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E2&quot;,
+      &quot;quote&quot;: &quot;the US International Trade Commission (ITC) ruled that Apple had infringed on two patents from medical device maker Masimo.&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E3&quot;,
+      &quot;quote&quot;: &quot;TechCrunch reviews the M3 iMac and MacBook Pro&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;&quot;
+}</pre>
+<label>语义答案<select data-key="m0487-VECTOR_QWEN/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m0487-VECTOR_QWEN/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m0487-VECTOR_QWEN/note" placeholder="备注">
+<h3>RRF_QWEN</h3><p>严格匹配：True；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: true,
+  &quot;answer&quot;: &quot;Apple&quot;,
+  &quot;explanation&quot;: &quot;Evidence shows Apple is the company criticized by Tim Sweeney for forcing developers, OEMs, and carriers to accept the same terms through its store and payments (E1), expected to focus on Macs and new chipsets at its Scary Fast event (E2, E3), and involved in an ITC patent dispute over the Apple Watch (E4).&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;evidenceId&quot;: &quot;E1&quot;,
+      &quot;quote&quot;: &quot;They use their store, their payments, they force developers to all have the same terms, they force OEMs and carriers to all have the same terms.&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E2&quot;,
+      &quot;quote&quot;: &quot;Apple&#x27;s focus during the Scary Fast event will be on Macs and a fresh batch of chipsets to power them.&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E4&quot;,
+      &quot;quote&quot;: &quot;This ban is the result of a long-standing patent dispute between Apple and the medical device maker Masimo.&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;&quot;
+}</pre>
+<label>语义答案<select data-key="m0487-RRF_QWEN/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m0487-RRF_QWEN/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m0487-RRF_QWEN/note" placeholder="备注">
+</details>
+<details class="question" id="m0939" data-split="CALIBRATION" data-flagged="true"><summary>m0939 · Does &#x27;The New York Times&#x27; article suggest that Connor Bedard lacks the potential to dominate in the NHL, while the &#x27;Sporting News&#x27; article indicates that the USC basketball team has the potential to become a National Championship contender, or do both articles suggest a similar potential for their respective subjects?</summary><p>官方答案：<b>no</b> · CALIBRATION</p><p>复核原因：[&#x27;CROSS_ARM_DISAGREEMENT&#x27;, &#x27;NONEXACT_ANSWER&#x27;]</p>
+<h3>VECTOR</h3><p>严格匹配：False；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: false,
+  &quot;answer&quot;: &quot;&quot;,
+  &quot;explanation&quot;: &quot;&quot;,
+  &quot;citations&quot;: [],
+  &quot;reason&quot;: &quot;The supplied evidence only includes The New York Times article about Connor Bedard; there is no Sporting News article about the USC basketball team, so the comparison cannot be evaluated.&quot;
+}</pre>
+<label>语义答案<select data-key="m0939-VECTOR/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m0939-VECTOR/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m0939-VECTOR/note" placeholder="备注">
+<h3>RRF</h3><p>严格匹配：False；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: false,
+  &quot;answer&quot;: &quot;&quot;,
+  &quot;explanation&quot;: &quot;&quot;,
+  &quot;citations&quot;: [],
+  &quot;reason&quot;: &quot;The evidence does not contain any statement from The New York Times suggesting Connor Bedard lacks potential to dominate, nor does it contain a Sporting News article indicating the USC basketball team has potential to become a National Championship contender. The Sporting News evidence (E1) discusses USC&#x27;s odds and opportunity to &#x27;blossom into a title contender,&#x27; but the question asks about a specific claim that is not fully supported, and the NYT evidence (E3, E5) does not suggest Bedard lacks potential. Therefore, the comparison cannot be answered.&quot;
+}</pre>
+<label>语义答案<select data-key="m0939-RRF/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m0939-RRF/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m0939-RRF/note" placeholder="备注">
+<h3>VECTOR_QWEN</h3><p>严格匹配：False；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: false,
+  &quot;answer&quot;: &quot;&quot;,
+  &quot;explanation&quot;: &quot;&quot;,
+  &quot;citations&quot;: [],
+  &quot;reason&quot;: &quot;The evidence does not support the claim that the NYT article suggests Bedard lacks potential to dominate; it describes him as hockey&#x27;s brightest young star and details his special shot. The Sporting News evidence does indicate USC has talent to make a title run, but the question&#x27;s first condition is unsupported, so the comparison cannot be answered.&quot;
+}</pre>
+<label>语义答案<select data-key="m0939-VECTOR_QWEN/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m0939-VECTOR_QWEN/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m0939-VECTOR_QWEN/note" placeholder="备注">
+<h3>RRF_QWEN</h3><p>严格匹配：False；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: true,
+  &quot;answer&quot;: &quot;No, both articles suggest similar potential for their respective subjects.&quot;,
+  &quot;explanation&quot;: &quot;The NYT article portrays Bedard as hockey&#x27;s brightest young star with a special, dangerous shot, not as lacking potential to dominate. The Sporting News article says USC has an opportunity to cash in if bullish on their ability to improve and blossom into a title contender. Both suggest potential, so the claim that NYT says Bedard lacks potential is unsupported.&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;evidenceId&quot;: &quot;E2&quot;,
+      &quot;quote&quot;: &quot;He’s Hockey’s Brightest Young Star. This Is What Makes His Shot So Special.&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E1&quot;,
+      &quot;quote&quot;: &quot;there’s definitely an opportunity to cash in on them if you’re bullish on their ability to improve and blossom into a title contender.&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;&quot;
+}</pre>
+<label>语义答案<select data-key="m0939-RRF_QWEN/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m0939-RRF_QWEN/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m0939-RRF_QWEN/note" placeholder="备注">
+</details>
+<details class="question" id="m0343" data-split="CALIBRATION" data-flagged="true"><summary>m0343 · Does the &#x27;Zee Business&#x27; article claim that the India national cricket team played against Australia in the 2015 World Cup semi-final, while the &#x27;TalkSport&#x27; article states that the England national teams are facing South Africa in both the Rugby World Cup and the ODI Cricket World Cup semi-finals, indicating different opponents for each country&#x27;s national teams in their respective semi-final matches?</summary><p>官方答案：<b>Yes</b> · CALIBRATION</p><p>复核原因：[&#x27;CROSS_ARM_DISAGREEMENT&#x27;]</p>
+<h3>VECTOR</h3><p>严格匹配：True；参考支持代理：True</p><pre>{
+  &quot;answered&quot;: true,
+  &quot;answer&quot;: &quot;Yes&quot;,
+  &quot;explanation&quot;: &quot;Zee Business states India played Australia in the 2015 World Cup second semi-final. TalkSport states England face South Africa in both the Rugby World Cup and ODI Cricket World Cup semi-finals. Thus the two articles indicate different opponents for each country&#x27;s national teams.&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;evidenceId&quot;: &quot;E1&quot;,
+      &quot;quote&quot;: &quot;India were playing against Australia in the second semi-final of the 2015 World Cup in Sydney on March 26.&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E3&quot;,
+      &quot;quote&quot;: &quot;It&#x27;s crunch time for England in the World Cups as they face South Africa in the semi-final of the Rugby World Cup and in the ODI Cricket World Cup.&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;&quot;
+}</pre>
+<label>语义答案<select data-key="m0343-VECTOR/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m0343-VECTOR/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m0343-VECTOR/note" placeholder="备注">
+<h3>RRF</h3><p>严格匹配：False；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: false,
+  &quot;answer&quot;: &quot;&quot;,
+  &quot;explanation&quot;: &quot;&quot;,
+  &quot;citations&quot;: [],
+  &quot;reason&quot;: &quot;The supplied evidence includes Zee Business articles confirming India played Australia in the 2015 World Cup semi-final, but there is no TalkSport article or any evidence about England facing South Africa in Rugby World Cup and ODI Cricket World Cup semi-finals. The second part of the question is unsupported.&quot;
+}</pre>
+<label>语义答案<select data-key="m0343-RRF/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m0343-RRF/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m0343-RRF/note" placeholder="备注">
+<h3>VECTOR_QWEN</h3><p>严格匹配：True；参考支持代理：True</p><pre>{
+  &quot;answered&quot;: true,
+  &quot;answer&quot;: &quot;Yes&quot;,
+  &quot;explanation&quot;: &quot;Zee Business states India played Australia in the 2015 World Cup semi-final. TalkSport states England face South Africa in both the Rugby World Cup and ODI Cricket World Cup semi-finals, indicating different opponents for each country&#x27;s teams.&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;evidenceId&quot;: &quot;E2&quot;,
+      &quot;quote&quot;: &quot;2015 World Cup, against Australia\n\nIndia were playing against Australia in the second semi-final of the 2015 World Cup in Sydney on March 26.&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E1&quot;,
+      &quot;quote&quot;: &quot;It&#x27;s crunch time for England in the World Cups as they face South Africa in the semi-final of the Rugby World Cup and in the ODI Cricket World Cup.&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;&quot;
+}</pre>
+<label>语义答案<select data-key="m0343-VECTOR_QWEN/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m0343-VECTOR_QWEN/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m0343-VECTOR_QWEN/note" placeholder="备注">
+<h3>RRF_QWEN</h3><p>严格匹配：True；参考支持代理：True</p><pre>{
+  &quot;answered&quot;: true,
+  &quot;answer&quot;: &quot;Yes&quot;,
+  &quot;explanation&quot;: &quot;Zee Business states India played Australia in the 2015 World Cup semi-final. TalkSport states England face South Africa in both the Rugby World Cup and ODI Cricket World Cup semi-finals. Thus the two articles indicate different opponents for each country&#x27;s national teams in their respective semi-finals.&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;evidenceId&quot;: &quot;E2&quot;,
+      &quot;quote&quot;: &quot;2015 World Cup, against Australia&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E2&quot;,
+      &quot;quote&quot;: &quot;India were playing against Australia in the second semi-final of the 2015 World Cup in Sydney on March 26.&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E1&quot;,
+      &quot;quote&quot;: &quot;It&#x27;s crunch time for England in the World Cups as they face South Africa in the semi-final of the Rugby World Cup and in the ODI Cricket World Cup.&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;&quot;
+}</pre>
+<label>语义答案<select data-key="m0343-RRF_QWEN/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m0343-RRF_QWEN/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m0343-RRF_QWEN/note" placeholder="备注">
+</details>
+<details class="question" id="m0090" data-split="CALIBRATION" data-flagged="false"><summary>m0090 · Does &#x27;The Verge&#x27; claim that Google has the ability to resolve issues related to Android app distribution and in-app payment systems, while &#x27;TechCrunch&#x27; accuses Google of anticompetitive behavior towards news publishers, indicating a difference in Google&#x27;s impact on different industries?</summary><p>官方答案：<b>Yes</b> · CALIBRATION</p><p>复核原因：[]</p>
+<h3>VECTOR</h3><p>严格匹配：False；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: false,
+  &quot;answer&quot;: &quot;&quot;,
+  &quot;explanation&quot;: &quot;&quot;,
+  &quot;citations&quot;: [],
+  &quot;reason&quot;: &quot;The evidence does not support the claim that The Verge says Google has the ability to resolve Android app distribution and in-app payment issues. The Verge describes Epic&#x27;s allegations that Google has illegal monopolies in those areas, not that Google can resolve the issues. TechCrunch does accuse Google of anticompetitive behavior toward news publishers, but the first part of the comparison is unsupported.&quot;
+}</pre>
+<label>语义答案<select data-key="m0090-VECTOR/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m0090-VECTOR/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m0090-VECTOR/note" placeholder="备注">
+<h3>RRF</h3><p>严格匹配：False；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: false,
+  &quot;answer&quot;: &quot;&quot;,
+  &quot;explanation&quot;: &quot;&quot;,
+  &quot;citations&quot;: [],
+  &quot;reason&quot;: &quot;The evidence does not support the claim that The Verge says Google has the ability to resolve Android app distribution and in-app payment issues; The Verge reports Epic&#x27;s allegations and a jury verdict that Google has an illegal monopoly, not that Google can resolve the issues. TechCrunch does report a class action accusing Google of anticompetitive behavior toward news publishers, but the first condition is unsupported, so the comparison cannot be confirmed.&quot;
+}</pre>
+<label>语义答案<select data-key="m0090-RRF/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m0090-RRF/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m0090-RRF/note" placeholder="备注">
+<h3>VECTOR_QWEN</h3><p>严格匹配：False；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: false,
+  &quot;answer&quot;: &quot;&quot;,
+  &quot;explanation&quot;: &quot;&quot;,
+  &quot;citations&quot;: [],
+  &quot;reason&quot;: &quot;The evidence does not support the claim that The Verge says Google has the ability to resolve Android app distribution and in-app payment issues, nor does it show TechCrunch accusing Google of anticompetitive behavior toward news publishers. TechCrunch&#x27;s cited evidence concerns anticompetitive behavior regarding Android app store and commission structure, not news publishers.&quot;
+}</pre>
+<label>语义答案<select data-key="m0090-VECTOR_QWEN/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m0090-VECTOR_QWEN/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m0090-VECTOR_QWEN/note" placeholder="备注">
+<h3>RRF_QWEN</h3><p>严格匹配：False；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: false,
+  &quot;answer&quot;: &quot;&quot;,
+  &quot;explanation&quot;: &quot;&quot;,
+  &quot;citations&quot;: [],
+  &quot;reason&quot;: &quot;The evidence does not support the claim that The Verge says Google can resolve Android app distribution/payment issues, nor that TechCrunch accuses Google of anticompetitive behavior specifically toward news publishers. TechCrunch&#x27;s coverage concerns Epic Games and Android app store competition, not news publishers.&quot;
+}</pre>
+<label>语义答案<select data-key="m0090-RRF_QWEN/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m0090-RRF_QWEN/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m0090-RRF_QWEN/note" placeholder="备注">
+</details>
+<details class="question" id="m1527" data-split="CALIBRATION" data-flagged="false"><summary>m1527 · After Sporting News reported on Alejandro Mata&#x27;s successful 31-yard field goal for Colorado on October 28, 2023, did the same news source report a successful or unsuccessful field goal attempt by Jayden Fielding in a later article?</summary><p>官方答案：<b>Unsuccessful</b> · CALIBRATION</p><p>复核原因：[]</p>
+<h3>VECTOR</h3><p>严格匹配：True；参考支持代理：True</p><pre>{
+  &quot;answered&quot;: true,
+  &quot;answer&quot;: &quot;unsuccessful&quot;,
+  &quot;explanation&quot;: &quot;Sporting News reported Alejandro Mata&#x27;s successful 31-yard field goal on Oct. 28, 2023 (E5). A later Sporting News article (Nov. 25, 2023) reported Jayden Fielding missed a 52-yard field goal wide left (E1).&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;evidenceId&quot;: &quot;E5&quot;,
+      &quot;quote&quot;: &quot;His 31-yard field goal is good, and the Buffs take the first lead of the game on their first drive.&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E1&quot;,
+      &quot;quote&quot;: &quot;The Buckeyes settled for a 52-yard field goal late in the first half, which Jayden Fielding missed wide left.&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;&quot;
+}</pre>
+<label>语义答案<select data-key="m1527-VECTOR/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m1527-VECTOR/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m1527-VECTOR/note" placeholder="备注">
+<h3>RRF</h3><p>严格匹配：True；参考支持代理：True</p><pre>{
+  &quot;answered&quot;: true,
+  &quot;answer&quot;: &quot;Unsuccessful&quot;,
+  &quot;explanation&quot;: &quot;Sporting News reported Alejandro Mata&#x27;s 31-yard field goal on Oct. 28, 2023 (E1). A later Sporting News article (Nov. 25, 2023) reports Jayden Fielding missed a 52-yard field goal wide left (E3), so the attempt was unsuccessful.&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;evidenceId&quot;: &quot;E1&quot;,
+      &quot;quote&quot;: &quot;His 31-yard field goal is good, and the Buffs take the first lead of the game on their first drive.&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E3&quot;,
+      &quot;quote&quot;: &quot;The Buckeyes settled for a 52-yard field goal late in the first half, which Jayden Fielding missed wide left.&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;&quot;
+}</pre>
+<label>语义答案<select data-key="m1527-RRF/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m1527-RRF/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m1527-RRF/note" placeholder="备注">
+<h3>VECTOR_QWEN</h3><p>严格匹配：True；参考支持代理：True</p><pre>{
+  &quot;answered&quot;: true,
+  &quot;answer&quot;: &quot;Unsuccessful&quot;,
+  &quot;explanation&quot;: &quot;Sporting News reported Alejandro Mata&#x27;s 31-yard field goal on Oct. 28, 2023 (E1). A later Sporting News article (Nov. 25, 2023) reports Jayden Fielding missed a 52-yard field goal wide left (E3), so the attempt was unsuccessful.&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;evidenceId&quot;: &quot;E1&quot;,
+      &quot;quote&quot;: &quot;His 31-yard field goal is good, and the Buffs take the first lead of the game on their first drive.&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E3&quot;,
+      &quot;quote&quot;: &quot;The Buckeyes settled for a 52-yard field goal late in the first half, which Jayden Fielding missed wide left.&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;&quot;
+}</pre>
+<label>语义答案<select data-key="m1527-VECTOR_QWEN/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m1527-VECTOR_QWEN/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m1527-VECTOR_QWEN/note" placeholder="备注">
+<h3>RRF_QWEN</h3><p>严格匹配：True；参考支持代理：True</p><pre>{
+  &quot;answered&quot;: true,
+  &quot;answer&quot;: &quot;Unsuccessful&quot;,
+  &quot;explanation&quot;: &quot;Sporting News reported Alejandro Mata&#x27;s 31-yard field goal on Oct. 28, 2023 (E1). A later Sporting News article (Nov. 25, 2023) states Jayden Fielding missed a 52-yard field goal wide left (E4), so the attempt was unsuccessful.&quot;,
+  &quot;citations&quot;: [
+    {
+      &quot;evidenceId&quot;: &quot;E1&quot;,
+      &quot;quote&quot;: &quot;His 31-yard field goal is good, and the Buffs take the first lead of the game on their first drive.&quot;
+    },
+    {
+      &quot;evidenceId&quot;: &quot;E4&quot;,
+      &quot;quote&quot;: &quot;The Buckeyes settled for a 52-yard field goal late in the first half, which Jayden Fielding missed wide left.&quot;
+    }
+  ],
+  &quot;reason&quot;: &quot;&quot;
+}</pre>
+<label>语义答案<select data-key="m1527-RRF_QWEN/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m1527-RRF_QWEN/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m1527-RRF_QWEN/note" placeholder="备注">
+</details>
+<details class="question" id="m0871" data-split="CALIBRATION" data-flagged="false"><summary>m0871 · Has the redemption option for cash back rewards as statement credits for cardholders changed between the &#x27;American Express Cash Magnet® card&#x27; as reported by Fortune before November 3, 2023, or the &#x27;Fifth Third 1.67% Card&#x27; as reported by the same news source?</summary><p>官方答案：<b>no</b> · CALIBRATION</p><p>复核原因：[]</p>
+<h3>VECTOR</h3><p>严格匹配：False；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: false,
+  &quot;answer&quot;: &quot;&quot;,
+  &quot;explanation&quot;: &quot;&quot;,
+  &quot;citations&quot;: [],
+  &quot;reason&quot;: &quot;The evidence only covers the Fifth Third 1.67% Card and does not include any information about the American Express Cash Magnet® card or its redemption options, so no comparison or change can be established.&quot;
+}</pre>
+<label>语义答案<select data-key="m0871-VECTOR/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m0871-VECTOR/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m0871-VECTOR/note" placeholder="备注">
+<h3>RRF</h3><p>严格匹配：False；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: false,
+  &quot;answer&quot;: &quot;&quot;,
+  &quot;explanation&quot;: &quot;&quot;,
+  &quot;citations&quot;: [],
+  &quot;reason&quot;: &quot;The evidence describes the redemption option for statement credits for both cards, but it does not indicate that this option changed over time or between the two cards. No evidence of a change is provided.&quot;
+}</pre>
+<label>语义答案<select data-key="m0871-RRF/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m0871-RRF/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m0871-RRF/note" placeholder="备注">
+<h3>VECTOR_QWEN</h3><p>严格匹配：False；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: false,
+  &quot;answer&quot;: &quot;&quot;,
+  &quot;explanation&quot;: &quot;&quot;,
+  &quot;citations&quot;: [],
+  &quot;reason&quot;: &quot;The evidence describes the redemption options for each card separately, but does not provide information about the same card&#x27;s redemption option changing over time, nor does it compare changes between the two cards. The question asks about a change between the two cards, which is not supported by the evidence.&quot;
+}</pre>
+<label>语义答案<select data-key="m0871-VECTOR_QWEN/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m0871-VECTOR_QWEN/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m0871-VECTOR_QWEN/note" placeholder="备注">
+<h3>RRF_QWEN</h3><p>严格匹配：False；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: false,
+  &quot;answer&quot;: &quot;&quot;,
+  &quot;explanation&quot;: &quot;&quot;,
+  &quot;citations&quot;: [],
+  &quot;reason&quot;: &quot;The evidence describes the redemption options for each card separately but does not provide information about whether the redemption option for statement credits changed over time or between the two cards.&quot;
+}</pre>
+<label>语义答案<select data-key="m0871-RRF_QWEN/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m0871-RRF_QWEN/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m0871-RRF_QWEN/note" placeholder="备注">
+</details>
+<details class="question" id="m1256" data-split="CALIBRATION" data-flagged="false"><summary>m1256 · Between the report by The Verge on Apple&#x27;s defense of its Google Search deal published before September 26, 2023, and the report by TechCrunch on the class action antitrust suit against Google published after that date, was there a change in the portrayal of Google&#x27;s business practices from a perspective of necessity to one of alleged anticompetitive behavior?</summary><p>官方答案：<b>Yes</b> · CALIBRATION</p><p>复核原因：[]</p>
+<h3>VECTOR</h3><p>严格匹配：False；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: false,
+  &quot;answer&quot;: &quot;&quot;,
+  &quot;explanation&quot;: &quot;&quot;,
+  &quot;citations&quot;: [],
+  &quot;reason&quot;: &quot;The supplied evidence does not include the specified Verge report published before September 26, 2023, nor a TechCrunch report on a class action antitrust suit against Google published after that date. The available TechCrunch articles are dated October 31 and November 13, 2023, and concern the US v Google trial, not the described class action. Therefore the evidence is insufficient to assess any change in portrayal.&quot;
+}</pre>
+<label>语义答案<select data-key="m1256-VECTOR/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m1256-VECTOR/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m1256-VECTOR/note" placeholder="备注">
+<h3>RRF</h3><p>严格匹配：False；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: false,
+  &quot;answer&quot;: &quot;&quot;,
+  &quot;explanation&quot;: &quot;&quot;,
+  &quot;citations&quot;: [],
+  &quot;reason&quot;: &quot;The supplied evidence contains only the TechCrunch report on the class action antitrust suit (published 2023-12-15). It does not include the earlier Verge report on Apple&#x27;s defense of its Google Search deal, so no comparison of the two portrayals can be made.&quot;
+}</pre>
+<label>语义答案<select data-key="m1256-RRF/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m1256-RRF/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m1256-RRF/note" placeholder="备注">
+<h3>VECTOR_QWEN</h3><p>严格匹配：False；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: false,
+  &quot;answer&quot;: &quot;&quot;,
+  &quot;explanation&quot;: &quot;&quot;,
+  &quot;citations&quot;: [],
+  &quot;reason&quot;: &quot;The evidence does not include a TechCrunch report on a class action antitrust suit against Google published after September 26, 2023. E4/E5 are a TechCrunch article about the Google antitrust case, but it does not mention a class action suit, so the requested comparison cannot be supported.&quot;
+}</pre>
+<label>语义答案<select data-key="m1256-VECTOR_QWEN/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m1256-VECTOR_QWEN/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m1256-VECTOR_QWEN/note" placeholder="备注">
+<h3>RRF_QWEN</h3><p>严格匹配：False；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: false,
+  &quot;answer&quot;: &quot;&quot;,
+  &quot;explanation&quot;: &quot;&quot;,
+  &quot;citations&quot;: [],
+  &quot;reason&quot;: &quot;The supplied evidence only includes The Verge report published on 2023-09-26; no TechCrunch report published after that date is provided, so the requested comparison cannot be supported.&quot;
+}</pre>
+<label>语义答案<select data-key="m1256-RRF_QWEN/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m1256-RRF_QWEN/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m1256-RRF_QWEN/note" placeholder="备注">
+</details>
+<details class="question" id="m1865" data-split="CALIBRATION" data-flagged="false"><summary>m1865 · Considering the information from a CNBC article detailing Visa Inc&#x27;s latest strategic partnership and a Bloomberg report on Visa Inc&#x27;s financial performance in the last quarter, which single letter grade represents the combined assessment of Visa&#x27;s market strategy effectiveness and its financial health as inferred from both sources?</summary><p>官方答案：<b>Insufficient information.</b> · CALIBRATION</p><p>复核原因：[]</p>
+<h3>VECTOR</h3><p>严格匹配：True；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: false,
+  &quot;answer&quot;: &quot;&quot;,
+  &quot;explanation&quot;: &quot;&quot;,
+  &quot;citations&quot;: [],
+  &quot;reason&quot;: &quot;The supplied evidence contains no CNBC article about a Visa Inc strategic partnership and no Bloomberg report on Visa&#x27;s last-quarter financial performance; Visa is only mentioned in a list of companies reporting earnings, so the requested combined assessment cannot be inferred.&quot;
+}</pre>
+<label>语义答案<select data-key="m1865-VECTOR/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m1865-VECTOR/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m1865-VECTOR/note" placeholder="备注">
+<h3>RRF</h3><p>严格匹配：True；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: false,
+  &quot;answer&quot;: &quot;&quot;,
+  &quot;explanation&quot;: &quot;&quot;,
+  &quot;citations&quot;: [],
+  &quot;reason&quot;: &quot;The supplied evidence does not include a CNBC article detailing Visa Inc&#x27;s latest strategic partnership or a Bloomberg report on Visa Inc&#x27;s financial performance in the last quarter. Evidence only mentions Visa in an earnings preview list, so no combined letter grade can be inferred.&quot;
+}</pre>
+<label>语义答案<select data-key="m1865-RRF/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m1865-RRF/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m1865-RRF/note" placeholder="备注">
+<h3>VECTOR_QWEN</h3><p>严格匹配：True；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: false,
+  &quot;answer&quot;: &quot;&quot;,
+  &quot;explanation&quot;: &quot;&quot;,
+  &quot;citations&quot;: [],
+  &quot;reason&quot;: &quot;The supplied evidence contains no CNBC article about a Visa Inc strategic partnership and no Bloomberg report on Visa&#x27;s last-quarter financial performance, so the requested combined letter grade cannot be inferred.&quot;
+}</pre>
+<label>语义答案<select data-key="m1865-VECTOR_QWEN/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m1865-VECTOR_QWEN/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m1865-VECTOR_QWEN/note" placeholder="备注">
+<h3>RRF_QWEN</h3><p>严格匹配：True；参考支持代理：False</p><pre>{
+  &quot;answered&quot;: false,
+  &quot;answer&quot;: &quot;&quot;,
+  &quot;explanation&quot;: &quot;&quot;,
+  &quot;citations&quot;: [],
+  &quot;reason&quot;: &quot;The supplied evidence contains no CNBC article about a Visa Inc strategic partnership and no Bloomberg report on Visa Inc&#x27;s last-quarter financial performance; the evidence concerns Flexport, valuation metrics, and U.S.-China relations, so no letter grade can be inferred.&quot;
+}</pre>
+<label>语义答案<select data-key="m1865-RRF_QWEN/answer"><option value="">待确认</option><option>正确</option><option>错误</option><option>标注存疑</option></select></label><label>回答有充分引用支持<select data-key="m1865-RRF_QWEN/grounded"><option value="">待确认</option><option>是</option><option>否</option><option>不适用（拒答）</option></select></label><input data-key="m1865-RRF_QWEN/note" placeholder="备注">
+</details>
+<script>
+const prefix='multihop-answer-v1/';let records={};try{records=JSON.parse(localStorage.getItem(prefix)||'{}')}catch(e){}
+document.querySelectorAll('[data-key]').forEach(e=>{e.value=records[e.dataset.key]||'';e.addEventListener('change',()=>{records[e.dataset.key]=e.value;try{localStorage.setItem(prefix,JSON.stringify(records))}catch(e){alert('无法保存，请导出记录')}})});
+function download(){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify({version:1,status:'USER_REVIEW_EXPORT',records},null,2)],{type:'application/json'}));a.download='multihop-answer-review.json';a.click();URL.revokeObjectURL(a.href)}
+const search=document.getElementById('search'),filter=document.getElementById('filter');function apply(){document.querySelectorAll('.question').forEach(e=>{e.hidden=!(e.textContent.toLowerCase().includes(search.value.toLowerCase())&&(filter.value==='all'||filter.value==='flagged'&&e.dataset.flagged==='true'||e.dataset.split===filter.value))})}search.addEventListener('input',apply);filter.addEventListener('change',apply);apply();function anchor(){const e=document.getElementById(location.hash.slice(1));if(e&&e.classList.contains('question')){e.hidden=false;e.open=true;e.scrollIntoView()}}addEventListener('hashchange',anchor);anchor();</script></html>

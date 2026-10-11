@@ -17,14 +17,15 @@ public class CitationAssembler {
         if (documents == null || documents.isEmpty()) {
             return List.of();
         }
-        Map<String, AskQuestionResponse.Citation> citationsByFileName = new LinkedHashMap<>();
+        Map<String, AskQuestionResponse.Citation> citationsByDocument = new LinkedHashMap<>();
         for (Document document : documents) {
             AskQuestionResponse.Citation citation = toCitation(document);
             if (citation != null) {
-                citationsByFileName.putIfAbsent(citation.fileName(), citation);
+                String identity = citation.documentId() == null ? "file:" + citation.fileName() : "document:" + citation.documentId();
+                citationsByDocument.putIfAbsent(identity, citation);
             }
         }
-        return List.copyOf(citationsByFileName.values());
+        return List.copyOf(citationsByDocument.values());
     }
 
     private AskQuestionResponse.Citation toCitation(Document document) {

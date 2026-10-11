@@ -1,0 +1,6 @@
+# These implementations are byte-hashed in the MultiHop experiment provenance.
+MultiHop*.java -text
+LiveMultiHopRun.java -text
+LiveMultiHopRerankRun.java -text
+RecordedMultiHopTest.java -text
+RecordedMultiHopRerankTest.java -text

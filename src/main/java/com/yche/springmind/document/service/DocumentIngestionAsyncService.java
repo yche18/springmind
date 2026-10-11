@@ -11,9 +11,6 @@ import com.yche.springmind.ingestion.vector.VectorIngestionService;
 import com.yche.springmind.retrieval.elasticsearch.ElasticsearchChunkIndexService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.retry.annotation.Backoff;
-import org.springframework.retry.annotation.Recover;
-import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,20 +47,15 @@ public class DocumentIngestionAsyncService {
         this.elasticsearchChunkIndexService = elasticsearchChunkIndexService;
     }
 
-    /**
-     * Rebuild all processing artifacts and retry transient failures up to the
-     * configured limit before delegating to {@link #recover}.
-     */
-    @Retryable(
-            retryFor = RuntimeException.class,
-            maxAttempts = 3,
-            backoff = @Backoff(delay = 2000, multiplier = 2.0)
-    )
+    /** Execute one attempt; the durable queue owns retry scheduling. */
     @Transactional
     public void ingestDocument(Long documentId, Long groupId) {
         DocumentEntity document = requireDocument(documentId, groupId);
         log.info("开始异步执行文档ETL: documentId={}, groupId={}", documentId, groupId);
-        cleanupProcessingArtifacts(documentId);
+        // Abort a rebuild if cleanup fails, rather than exposing mixed generations.
+        documentChunkMapper.deleteByDocumentId(documentId);
+        vectorIngestionService.deleteDocumentVectors(documentId);
+        elasticsearchChunkIndexService.deleteDocumentChunks(documentId);
         documentIngestionProcessor.process(documentId, groupId);
         syncSearchIndex(document);
         markDocumentStatus(documentId, groupId, DocumentStatus.READY.name(), null, LocalDateTime.now());
@@ -71,7 +63,6 @@ public class DocumentIngestionAsyncService {
     }
 
     /** Remove partial artifacts and mark the document failed after retry exhaustion. */
-    @Recover
     @Transactional
     public void recover(RuntimeException exception, Long documentId, Long groupId) {
         log.error("异步文档ETL最终失败: documentId={}, groupId={}, reason={}", documentId, groupId, exception.getMessage(), exception);

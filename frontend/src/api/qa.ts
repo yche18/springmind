@@ -20,6 +20,59 @@ export interface AskQuestionResponse {
   reasonCode: string | null
   reasonMessage: string | null
   citations: CitationItem[]
+  trace?: AnswerTrace
+}
+
+export interface TraceEvidence {
+  evidenceId: string
+  documentId: number | null
+  fileName: string
+  startChunkIndex: number | null
+  endChunkIndex: number | null
+  source: string
+  score: number
+  excerpt: string
+  truncated: boolean
+  rrfRank?: number | null
+  selectionRank?: number | null
+  rerankScore?: number | null
+}
+
+export interface AnswerTrace {
+  traceId: string
+  evidenceLevel: string
+  retrieval: {
+    queryPlan: { strategy: string; queries: string[] }
+    timingsMs: Record<string, number>
+    vectorHits: number
+    keywordHits: number
+    candidateCount: number
+    selection?: {
+      rerankStatus: string
+      inputCandidates: number
+      selectedCount: number
+      inputTokens: number
+      selectedTokens: number
+      maxTokens: number
+    }
+  } | null
+  retrievalMs: number
+  generationMs: number
+  totalMs: number
+  evidence: TraceEvidence[]
+}
+
+export interface SourceChunk {
+  chunkId: number
+  chunkIndex: number
+  text: string
+}
+
+export async function fetchEvidenceSource(groupId: number, evidence: TraceEvidence): Promise<SourceChunk[]> {
+  const { data } = await http.get<SourceChunk[]>('/qa/evidence', {
+    params: { groupId, documentId: evidence.documentId, start: evidence.startChunkIndex, end: evidence.endChunkIndex },
+  })
+  return data
 }
 
 export async function askQuestion(payload: AskQuestionPayload): Promise<AskQuestionResponse> {
@@ -31,5 +84,6 @@ export async function askQuestion(payload: AskQuestionPayload): Promise<AskQuest
     reasonCode: data.reasonCode ?? null,
     reasonMessage: data.reasonMessage ?? null,
     citations: data.citations ?? [],
+    trace: data.trace,
   }
 }

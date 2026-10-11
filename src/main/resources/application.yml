@@ -8,6 +8,21 @@ spring:
       max-file-size: 256MB
       max-request-size: 256MB
 
+qa:
+  evidence:
+    max-tokens: ${QA_EVIDENCE_MAX_TOKENS:4096}
+    candidate-limit: 30
+    rerank-enabled: ${RERANK_ENABLED:false}
+    rerank-url: ${RERANK_URL:}
+    rerank-api-key: ${RERANK_API_KEY:}
+    rerank-model: ${RERANK_MODEL:}
+    rerank-timeout: ${RERANK_TIMEOUT:2s}
+
+document:
+  ingestion:
+    worker-enabled: true
+    poll-interval-ms: 2000
+
 app:
   ai:
     chat:

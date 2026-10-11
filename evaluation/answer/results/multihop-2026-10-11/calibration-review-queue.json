@@ -1,0 +1,228 @@
+[
+  {
+    "id": "m2258",
+    "arm": "VECTOR",
+    "split": "CALIBRATION",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2258",
+    "arm": "RRF",
+    "split": "CALIBRATION",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2258",
+    "arm": "VECTOR_QWEN",
+    "split": "CALIBRATION",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m2258",
+    "arm": "RRF_QWEN",
+    "split": "CALIBRATION",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0331",
+    "arm": "RRF",
+    "split": "CALIBRATION",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0331",
+    "arm": "VECTOR_QWEN",
+    "split": "CALIBRATION",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0331",
+    "arm": "RRF_QWEN",
+    "split": "CALIBRATION",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0331",
+    "arm": "VECTOR",
+    "split": "CALIBRATION",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0487",
+    "arm": "VECTOR_QWEN",
+    "split": "CALIBRATION",
+    "flags": [
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0487",
+    "arm": "RRF_QWEN",
+    "split": "CALIBRATION",
+    "flags": [
+      "INVALID_CITATION",
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0487",
+    "arm": "VECTOR",
+    "split": "CALIBRATION",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0487",
+    "arm": "RRF",
+    "split": "CALIBRATION",
+    "flags": [
+      "INVALID_CITATION",
+      "EXACT_BUT_SUPPORT_PENDING",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0939",
+    "arm": "RRF_QWEN",
+    "split": "CALIBRATION",
+    "flags": [
+      "NONEXACT_ANSWER",
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0939",
+    "arm": "VECTOR",
+    "split": "CALIBRATION",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0939",
+    "arm": "RRF",
+    "split": "CALIBRATION",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0939",
+    "arm": "VECTOR_QWEN",
+    "split": "CALIBRATION",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0343",
+    "arm": "VECTOR",
+    "split": "CALIBRATION",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0343",
+    "arm": "RRF",
+    "split": "CALIBRATION",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0343",
+    "arm": "VECTOR_QWEN",
+    "split": "CALIBRATION",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  },
+  {
+    "id": "m0343",
+    "arm": "RRF_QWEN",
+    "split": "CALIBRATION",
+    "flags": [
+      "CROSS_ARM_DISAGREEMENT"
+    ],
+    "semanticCorrect": null,
+    "grounded": null,
+    "note": ""
+  }
+]

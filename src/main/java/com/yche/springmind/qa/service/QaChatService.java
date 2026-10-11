@@ -5,6 +5,7 @@ import com.yche.springmind.common.exception.BusinessException;
 import com.yche.springmind.qa.model.KnowledgeAnswerOutput;
 import com.yche.springmind.qa.model.EvidenceLevel;
 import com.yche.springmind.qa.model.vo.AskQuestionResponse;
+import com.yche.springmind.qa.model.vo.AnswerTrace;
 import com.yche.springmind.qa.rag.EvidenceRetriever;
 import com.yche.springmind.qa.rag.ReadyChunkDocumentRetriever;
 import com.yche.springmind.qa.rag.RetrievedEvidenceBundle;
@@ -23,6 +24,8 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+import org.slf4j.MDC;
 
 /** Generate evidence-constrained answers and assemble citations from retrieved chunks. */
 @Service
@@ -65,7 +68,27 @@ public class QaChatService {
      * model response cannot satisfy the structured answer contract.
      */
     public AskQuestionResponse ask(Long userId, Long groupId, String question) {
-        RetrievedEvidenceBundle evidenceBundle = evidenceRetriever.retrieve(userId, groupId, question);
+        String traceId = UUID.randomUUID().toString();
+        long start = System.nanoTime();
+        try (MDC.MDCCloseable ignored = MDC.putCloseable("qaTraceId", traceId)) {
+            RetrievedEvidenceBundle evidenceBundle = evidenceRetriever.retrieve(userId, groupId, question);
+            long retrievalMs = (System.nanoTime() - start) / 1_000_000;
+            long generationStart = System.nanoTime();
+            AskQuestionResponse response = answer(groupId, question, evidenceBundle);
+            long generationMs = evidenceBundle.documents().isEmpty() ? 0 : (System.nanoTime() - generationStart) / 1_000_000;
+            AnswerTrace trace = new AnswerTrace(traceId, evidenceBundle.evidenceLevel().name(), evidenceBundle.trace(),
+                    retrievalMs, generationMs, (System.nanoTime() - start) / 1_000_000,
+                    AnswerTrace.evidence(evidenceBundle.documents()));
+            log.info("QA completed: traceId={}, answered={}, evidenceCount={}, retrievalMs={}, generationMs={}",
+                    traceId, response.answered(), trace.evidence().size(), retrievalMs, generationMs);
+            return response.withTrace(trace);
+        } catch (RuntimeException failure) {
+            log.warn("QA failed: traceId={}, errorType={}", traceId, failure.getClass().getSimpleName());
+            throw failure;
+        }
+    }
+
+    private AskQuestionResponse answer(Long groupId, String question, RetrievedEvidenceBundle evidenceBundle) {
         List<Document> documents = evidenceBundle.documents();
         if (documents.isEmpty()) {
             return AskQuestionResponse.unanswered(INSUFFICIENT_CODE, INSUFFICIENT_MESSAGE, List.of());

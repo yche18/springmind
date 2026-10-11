@@ -1,0 +1,3 @@
+# Preserve the protocol and model lock bytes used by capture hashes.
+README.md -text
+*.json -text whitespace=trailing-space,space-before-tab,cr-at-eol

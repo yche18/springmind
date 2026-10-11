@@ -1,0 +1,14 @@
+{
+  "status": "HUMAN_REVIEWED",
+  "annotationRevision": "harborview-v1",
+  "fixtureSha256": "279421dc7e5339e929111e92c075ec12caea8ae33fbfd335b9249a58e7cc5a6c",
+  "corpusSha256": "357a436e4505173433725e68fe7dfd8d1cf411476a609dc66d7a5f33ee62e5c8",
+  "reviewer": "project owner",
+  "confirmationSource": "User confirmation in the project conversation",
+  "confirmationText": "复合完毕，没问题。",
+  "recordedAt": "2026-10-10T12:33:11Z",
+  "reviewedCases": 24,
+  "reviewedChunkGrades": 2520,
+  "changesRequested": false,
+  "scope": "Human confirmation of all Harborview v1 expected answers, evidence, chunk grades and no-answer judgments without changes. This does not validate generated answers, refusal accuracy, production representativeness or universal superiority of any retrieval strategy."
+}

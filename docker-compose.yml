@@ -112,6 +112,12 @@ services:
       AI_BASE_URL: ${AI_BASE_URL:-https://api.openai.com/v1}
       AI_API_KEY: ${AI_API_KEY:-}
       AI_CHAT_MODEL: ${AI_CHAT_MODEL:-gpt-4o-mini}
+      QA_EVIDENCE_MAX_TOKENS: ${QA_EVIDENCE_MAX_TOKENS:-4096}
+      RERANK_ENABLED: ${RERANK_ENABLED:-false}
+      RERANK_URL: ${RERANK_URL:-}
+      RERANK_API_KEY: ${RERANK_API_KEY:-}
+      RERANK_MODEL: ${RERANK_MODEL:-}
+      RERANK_TIMEOUT: ${RERANK_TIMEOUT:-2s}
       MAVEN_OPTS: -Dfile.encoding=UTF-8
     ports:
       - "${BACKEND_PORT:-18080}:8080"

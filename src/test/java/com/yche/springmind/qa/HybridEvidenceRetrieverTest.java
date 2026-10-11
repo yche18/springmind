@@ -62,6 +62,11 @@ class HybridEvidenceRetrieverTest {
         RetrievedEvidenceBundle bundle = retrievalService.retrieve(2001L, "上传流程", 5);
 
         assertThat(bundle.documents()).hasSize(1);
+        assertThat(bundle.trace().queryPlan().strategy()).isEqualTo(QueryPlanStrategy.DIRECT);
+        assertThat(bundle.trace().vectorHits()).isEqualTo(1);
+        assertThat(bundle.trace().keywordHits()).isZero();
+        assertThat(bundle.trace().candidateCount()).isEqualTo(1);
+        assertThat(bundle.trace().timingsMs()).containsKeys("planning", "vector", "keyword", "assembly");
         Document evidence = bundle.documents().getFirst();
         assertThat(evidence.getMetadata()).containsEntry("fileName", "产品手册.md");
         assertThat(evidence.getText()).contains("文件名：产品手册.md");

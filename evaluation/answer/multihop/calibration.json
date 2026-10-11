@@ -1,0 +1,24 @@
+{
+  "approved": true,
+  "approvedAt": "2026-10-10T23:52:41.633308+00:00",
+  "approvalScope": "Technical calibration gate, not user semantic adjudication",
+  "freezeSha256": "8dd2812a10cf0e0b73ecb0c785908fad5ede4010456945c6a53d55c6799d6e80",
+  "captureSha256": "0b94cb8ed4006eecf7f72a66cacd80356b16fcc86edcad170b8b5b087d05ead4",
+  "responsesInspected": 40,
+  "providerFailures": 0,
+  "schemaFailures": 0,
+  "promptChanged": false,
+  "scoringChanged": false,
+  "additionalCalibrationCalls": 0,
+  "decision": "Proceed once with the frozen prompt and strict EM; retain semantic and grounding review separately. No aliases or prompt changes selected to favor any arm.",
+  "observations": [
+    "All40 requests succeeded, all responses satisfy the schema, all use deepseek-flash; no truncated response.",
+    "m2258 all four arms name Google while their explanations acknowledge a missing condition. Strict EM passes but reference-supported proxy fails; this is not verified grounded correctness.",
+    "m0939 RRF_QWEN answers a longer No sentence rather than bare no. Strict EM intentionally fails; human semantic adjudication may accept the answer. Do not retrospectively broaden formal matching rules.",
+    "m0487 RRF and RRF_QWEN contain a non-verbatim citation; preserve citation validity failures instead of repairing generated text.",
+    "m0343 changes from RRF abstention to RRF_QWEN Yes, with reference support. m1527 all four arms correctly answer Unsuccessful with official reference coverage.",
+    "m0871 highlights potentially overcautious abstention on a negative temporal comparison. Refusals on answerable questions count as incorrect, not as safe successes.",
+    "m1865 null question is refused by all four arms. One calibration null question is not a general reliability claim.",
+    "Calibration full-question EM is5/10,5/10,6/10,6/10 for VECTOR,RRF,VECTOR_QWEN,RRF_QWEN. Excluded from formal headline scores."
+  ]
+}

@@ -1,0 +1,1835 @@
+{
+  "groups": {
+    "CALIBRATION": {
+      "VECTOR": {
+        "n": 10,
+        "answerable": 9,
+        "null": 1,
+        "correct": 5,
+        "em": 0.5,
+        "answerableCorrect": 4,
+        "answerableEM": 0.4444444444444444,
+        "answerableTokenF1": 0.4444444444444444,
+        "correctNullRefusals": 1,
+        "answerableRefusals": 5,
+        "referenceSupportedExactProxyCount": 2,
+        "referenceSupportedExactProxy": 0.2222222222222222,
+        "citationQuoteValidity": 1.0,
+        "schemaFailures": 0,
+        "p50GenerationMs": 1242.0,
+        "p95GenerationMs": 1710,
+        "usage": {
+          "prompt_tokens": 30195,
+          "completion_tokens": 1145,
+          "total_tokens": 31340,
+          "prompt_cache_hit_tokens": 2688,
+          "prompt_cache_miss_tokens": 27507
+        },
+        "semanticAnswerAccuracy": null,
+        "humanVerifiedGroundedAccuracy": null
+      },
+      "RRF": {
+        "n": 10,
+        "answerable": 9,
+        "null": 1,
+        "correct": 5,
+        "em": 0.5,
+        "answerableCorrect": 4,
+        "answerableEM": 0.4444444444444444,
+        "answerableTokenF1": 0.4444444444444444,
+        "correctNullRefusals": 1,
+        "answerableRefusals": 5,
+        "referenceSupportedExactProxyCount": 1,
+        "referenceSupportedExactProxy": 0.1111111111111111,
+        "citationQuoteValidity": 0.9090909090909091,
+        "schemaFailures": 0,
+        "p50GenerationMs": 1308.5,
+        "p95GenerationMs": 1893,
+        "usage": {
+          "prompt_tokens": 29032,
+          "completion_tokens": 1306,
+          "total_tokens": 30338,
+          "prompt_cache_hit_tokens": 5760,
+          "prompt_cache_miss_tokens": 23272
+        },
+        "semanticAnswerAccuracy": null,
+        "humanVerifiedGroundedAccuracy": null
+      },
+      "VECTOR_QWEN": {
+        "n": 10,
+        "answerable": 9,
+        "null": 1,
+        "correct": 6,
+        "em": 0.6,
+        "answerableCorrect": 5,
+        "answerableEM": 0.5555555555555556,
+        "answerableTokenF1": 0.5555555555555556,
+        "correctNullRefusals": 1,
+        "answerableRefusals": 4,
+        "referenceSupportedExactProxyCount": 2,
+        "referenceSupportedExactProxy": 0.2222222222222222,
+        "citationQuoteValidity": 1.0,
+        "schemaFailures": 0,
+        "p50GenerationMs": 1245.5,
+        "p95GenerationMs": 1779,
+        "usage": {
+          "prompt_tokens": 26770,
+          "completion_tokens": 1300,
+          "total_tokens": 28070,
+          "prompt_cache_hit_tokens": 6912,
+          "prompt_cache_miss_tokens": 19858
+        },
+        "semanticAnswerAccuracy": null,
+        "humanVerifiedGroundedAccuracy": null
+      },
+      "RRF_QWEN": {
+        "n": 10,
+        "answerable": 9,
+        "null": 1,
+        "correct": 6,
+        "em": 0.6,
+        "answerableCorrect": 5,
+        "answerableEM": 0.5555555555555556,
+        "answerableTokenF1": 0.5757575757575758,
+        "correctNullRefusals": 1,
+        "answerableRefusals": 3,
+        "referenceSupportedExactProxyCount": 2,
+        "referenceSupportedExactProxy": 0.2222222222222222,
+        "citationQuoteValidity": 0.9285714285714286,
+        "schemaFailures": 0,
+        "p50GenerationMs": 1355.5,
+        "p95GenerationMs": 1650,
+        "usage": {
+          "prompt_tokens": 27558,
+          "completion_tokens": 1276,
+          "total_tokens": 28834,
+          "prompt_cache_hit_tokens": 11136,
+          "prompt_cache_miss_tokens": 16422
+        },
+        "semanticAnswerAccuracy": null,
+        "humanVerifiedGroundedAccuracy": null
+      }
+    }
+  },
+  "excludingAnswerLeakingQuestion": {},
+  "pairedEM": {
+    "VECTOR -> RRF": {
+      "gains": [],
+      "losses": []
+    },
+    "VECTOR -> VECTOR_QWEN": {
+      "gains": [],
+      "losses": []
+    },
+    "RRF -> RRF_QWEN": {
+      "gains": [],
+      "losses": []
+    },
+    "VECTOR_QWEN -> RRF_QWEN": {
+      "gains": [],
+      "losses": []
+    }
+  },
+  "reviewStatus": "PENDING_SEMANTIC_ADJUDICATION",
+  "rows": [
+    {
+      "id": "m2258",
+      "arm": "VECTOR",
+      "split": "CALIBRATION",
+      "type": "inference_query",
+      "validSchema": true,
+      "answered": true,
+      "refused": false,
+      "exact": true,
+      "f1": 1.0,
+      "validCitationCount": 2,
+      "citationCount": 2,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [
+        "f1",
+        "f3"
+      ],
+      "flags": [
+        "EXACT_BUT_SUPPORT_PENDING"
+      ],
+      "output": {
+        "answered": true,
+        "answer": "Google",
+        "explanation": "TechCrunch reviewed Google's Gemini model (E3, E4, E5), and TechCrunch reported a class action antitrust suit accusing Google of anticompetitive behavior harming news publishers (E1). However, the evidence does not mention The Age accusing Google of manipulating its primary service to maximize ad revenue, so that condition is unsupported.",
+        "citations": [
+          {
+            "evidenceId": "E4",
+            "quote": "This week, Google took the wraps off of Gemini, its new flagship generative AI model meant to power a range of products and services including Bard, Google’s ChatGPT competitor."
+          },
+          {
+            "evidenceId": "E1",
+            "quote": "A new class action lawsuit filed this week in the U.S. District Court in D.C. accuses Google and parent company Alphabet of anticompetitive behavior in violation of U.S. antitrust law, the Sherman Act, and others, on behalf of news publishers."
+          }
+        ],
+        "reason": ""
+      },
+      "elapsedMs": 1710,
+      "usage": {
+        "prompt_tokens": 4183,
+        "completion_tokens": 200,
+        "total_tokens": 4383,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 4183
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m2258",
+      "arm": "RRF",
+      "split": "CALIBRATION",
+      "type": "inference_query",
+      "validSchema": true,
+      "answered": true,
+      "refused": false,
+      "exact": true,
+      "f1": 1.0,
+      "validCitationCount": 2,
+      "citationCount": 2,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [
+        "f1",
+        "f3"
+      ],
+      "flags": [
+        "EXACT_BUT_SUPPORT_PENDING"
+      ],
+      "output": {
+        "answered": true,
+        "answer": "Google",
+        "explanation": "TechCrunch reviewed Google's Gemini model (E2, E4), and TechCrunch reported a class action antitrust suit accusing Google of anticompetitive behavior harming news publishers (E1). However, the evidence does not mention The Age accusing Google of manipulating its primary service to maximize ad revenue, so that condition is unsupported.",
+        "citations": [
+          {
+            "evidenceId": "E2",
+            "quote": "This week, Google took the wraps off of Gemini, its new flagship generative AI model meant to power a range of products and services including Bard, Google’s ChatGPT competitor."
+          },
+          {
+            "evidenceId": "E1",
+            "quote": "A new class action lawsuit filed this week in the U.S. District Court in D.C. accuses Google and parent company Alphabet of anticompetitive behavior in violation of U.S. antitrust law, the Sherman Act, and others, on behalf of news publishers."
+          }
+        ],
+        "reason": ""
+      },
+      "elapsedMs": 1744,
+      "usage": {
+        "prompt_tokens": 4154,
+        "completion_tokens": 197,
+        "total_tokens": 4351,
+        "prompt_tokens_details": {
+          "cached_tokens": 2176
+        },
+        "prompt_cache_hit_tokens": 2176,
+        "prompt_cache_miss_tokens": 1978
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m2258",
+      "arm": "VECTOR_QWEN",
+      "split": "CALIBRATION",
+      "type": "inference_query",
+      "validSchema": true,
+      "answered": true,
+      "refused": false,
+      "exact": true,
+      "f1": 1.0,
+      "validCitationCount": 2,
+      "citationCount": 2,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [
+        "f1",
+        "f3"
+      ],
+      "flags": [
+        "EXACT_BUT_SUPPORT_PENDING"
+      ],
+      "output": {
+        "answered": true,
+        "answer": "Google",
+        "explanation": "TechCrunch reviewed Google's Gemini model (E3, E5). TechCrunch reported a class action antitrust suit against Google and Alphabet for harming news publishers (E1). The Age accusation is not in the evidence, but the question's other conditions identify Google.",
+        "citations": [
+          {
+            "evidenceId": "E3",
+            "quote": "This week, Google took the wraps off of Gemini, its new flagship generative AI model"
+          },
+          {
+            "evidenceId": "E1",
+            "quote": "A new class action lawsuit filed this week in the U.S. District Court in D.C. accuses Google and parent company Alphabet of anticompetitive behavior"
+          }
+        ],
+        "reason": ""
+      },
+      "elapsedMs": 1652,
+      "usage": {
+        "prompt_tokens": 3962,
+        "completion_tokens": 144,
+        "total_tokens": 4106,
+        "prompt_tokens_details": {
+          "cached_tokens": 3072
+        },
+        "prompt_cache_hit_tokens": 3072,
+        "prompt_cache_miss_tokens": 890
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m2258",
+      "arm": "RRF_QWEN",
+      "split": "CALIBRATION",
+      "type": "inference_query",
+      "validSchema": true,
+      "answered": true,
+      "refused": false,
+      "exact": true,
+      "f1": 1.0,
+      "validCitationCount": 2,
+      "citationCount": 2,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [
+        "f1",
+        "f3"
+      ],
+      "flags": [
+        "EXACT_BUT_SUPPORT_PENDING"
+      ],
+      "output": {
+        "answered": true,
+        "answer": "Google",
+        "explanation": "TechCrunch reviewed Google's Gemini (E2, E3). TechCrunch reported a class action antitrust suit accusing Google/Alphabet of anticompetitive behavior harming news publishers (E1). The Age accusation is not in the evidence, but the question's other conditions identify Google.",
+        "citations": [
+          {
+            "evidenceId": "E2",
+            "quote": "This week, Google took the wraps off of Gemini, its new flagship generative AI model"
+          },
+          {
+            "evidenceId": "E1",
+            "quote": "A new class action lawsuit filed this week in the U.S. District Court in D.C. accuses Google and parent company Alphabet of anticompetitive behavior in violation of U.S. antitrust law"
+          }
+        ],
+        "reason": ""
+      },
+      "elapsedMs": 1590,
+      "usage": {
+        "prompt_tokens": 4154,
+        "completion_tokens": 156,
+        "total_tokens": 4310,
+        "prompt_tokens_details": {
+          "cached_tokens": 3200
+        },
+        "prompt_cache_hit_tokens": 3200,
+        "prompt_cache_miss_tokens": 954
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m0331",
+      "arm": "RRF",
+      "split": "CALIBRATION",
+      "type": "inference_query",
+      "validSchema": true,
+      "answered": true,
+      "refused": false,
+      "exact": true,
+      "f1": 1.0,
+      "validCitationCount": 3,
+      "citationCount": 3,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [
+        "f1",
+        "f3",
+        "f4"
+      ],
+      "flags": [
+        "EXACT_BUT_SUPPORT_PENDING"
+      ],
+      "output": {
+        "answered": true,
+        "answer": "Google",
+        "explanation": "The Age reports Megan Gray's claim that Google manipulates search queries for maximum ad revenue (E2, E3). TechCrunch covers a class action antitrust suit by news publisher Helena World Chronicle accusing Google of anticompetitive behavior harming publishers' bottom line (E1). All evidence centers on Google.",
+        "citations": [
+          {
+            "evidenceId": "E2",
+            "quote": "Megan Gray, which alleged that Google had accidentally revealed during the trial that it manipulates people’s search queries for maximum ad revenue."
+          },
+          {
+            "evidenceId": "E3",
+            "quote": "maintains that Google manipulates Search to maximise ad revenue"
+          },
+          {
+            "evidenceId": "E1",
+            "quote": "A new class action lawsuit filed this week in the U.S. District Court in D.C. accuses Google and parent company Alphabet of anticompetitive behavior"
+          }
+        ],
+        "reason": ""
+      },
+      "elapsedMs": 1636,
+      "usage": {
+        "prompt_tokens": 4195,
+        "completion_tokens": 184,
+        "total_tokens": 4379,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        },
+        "prompt_cache_hit_tokens": 128,
+        "prompt_cache_miss_tokens": 4067
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m0331",
+      "arm": "VECTOR_QWEN",
+      "split": "CALIBRATION",
+      "type": "inference_query",
+      "validSchema": true,
+      "answered": true,
+      "refused": false,
+      "exact": true,
+      "f1": 1.0,
+      "validCitationCount": 3,
+      "citationCount": 3,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [
+        "f1",
+        "f4"
+      ],
+      "flags": [
+        "EXACT_BUT_SUPPORT_PENDING"
+      ],
+      "output": {
+        "answered": true,
+        "answer": "Google",
+        "explanation": "Evidence E3 (The Age) states Megan Grey maintains Google manipulates Search to maximise ad revenue. Evidence E1 (TechCrunch) describes a class action antitrust suit by news publisher Helena World Chronicle accusing Google of anticompetitive behavior harming publishers' ad revenue. The question's 'The Verge' ranking detail is not in the supplied evidence, but the other two conditions identify Google.",
+        "citations": [
+          {
+            "evidenceId": "E3",
+            "quote": "She admits that she may have misinterpreted the evidence, but maintains that Google manipulates Search to maximise ad revenue."
+          },
+          {
+            "evidenceId": "E1",
+            "quote": "A new class action lawsuit filed this week in the U.S. District Court in D.C. accuses Google and parent company Alphabet of anticompetitive behavior in violation of U.S. antitrust law, the Sherman Act, and others, on behalf of news publishers."
+          },
+          {
+            "evidenceId": "E1",
+            "quote": "Helena World Chronicle, argues that Google “siphons off” news publishers’ content, their readers and ad revenue through anticompetitive means."
+          }
+        ],
+        "reason": ""
+      },
+      "elapsedMs": 1687,
+      "usage": {
+        "prompt_tokens": 3538,
+        "completion_tokens": 236,
+        "total_tokens": 3774,
+        "prompt_tokens_details": {
+          "cached_tokens": 1408
+        },
+        "prompt_cache_hit_tokens": 1408,
+        "prompt_cache_miss_tokens": 2130
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m0331",
+      "arm": "RRF_QWEN",
+      "split": "CALIBRATION",
+      "type": "inference_query",
+      "validSchema": true,
+      "answered": true,
+      "refused": false,
+      "exact": true,
+      "f1": 1.0,
+      "validCitationCount": 2,
+      "citationCount": 2,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [
+        "f1",
+        "f4"
+      ],
+      "flags": [
+        "EXACT_BUT_SUPPORT_PENDING"
+      ],
+      "output": {
+        "answered": true,
+        "answer": "Google",
+        "explanation": "The Age reports Megan Grey's claim that Google manipulates Search to maximise ad revenue. TechCrunch covers a class action antitrust suit by news publisher Helena World Chronicle accusing Google of anticompetitive behavior harming its bottom line. The evidence identifies Google as the company at the center of these claims.",
+        "citations": [
+          {
+            "evidenceId": "E2",
+            "quote": "She admits that she may have misinterpreted the evidence, but maintains that Google manipulates Search to maximise ad revenue."
+          },
+          {
+            "evidenceId": "E1",
+            "quote": "A new class action lawsuit filed this week in the U.S. District Court in D.C. accuses Google and parent company Alphabet of anticompetitive behavior in violation of U.S. antitrust law"
+          }
+        ],
+        "reason": ""
+      },
+      "elapsedMs": 1464,
+      "usage": {
+        "prompt_tokens": 4195,
+        "completion_tokens": 162,
+        "total_tokens": 4357,
+        "prompt_tokens_details": {
+          "cached_tokens": 2944
+        },
+        "prompt_cache_hit_tokens": 2944,
+        "prompt_cache_miss_tokens": 1251
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m0331",
+      "arm": "VECTOR",
+      "split": "CALIBRATION",
+      "type": "inference_query",
+      "validSchema": true,
+      "answered": true,
+      "refused": false,
+      "exact": true,
+      "f1": 1.0,
+      "validCitationCount": 2,
+      "citationCount": 2,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [
+        "f3",
+        "f4"
+      ],
+      "flags": [
+        "EXACT_BUT_SUPPORT_PENDING"
+      ],
+      "output": {
+        "answered": true,
+        "answer": "Google",
+        "explanation": "The Age reports Megan Gray alleged Google manipulates search queries for maximum ad revenue. TechCrunch covers a class action antitrust suit by Helena World Chronicle accusing Google of anticompetitive behavior harming publishers' bottom line.",
+        "citations": [
+          {
+            "evidenceId": "E2",
+            "quote": "Megan Gray, which alleged that Google had accidentally revealed during the trial that it manipulates people’s search queries for maximum ad revenue."
+          },
+          {
+            "evidenceId": "E1",
+            "quote": "A new class action lawsuit filed this week in the U.S. District Court in D.C. accuses Google and parent company Alphabet of anticompetitive behavior in violation of U.S. antitrust law"
+          }
+        ],
+        "reason": ""
+      },
+      "elapsedMs": 1336,
+      "usage": {
+        "prompt_tokens": 3483,
+        "completion_tokens": 151,
+        "total_tokens": 3634,
+        "prompt_tokens_details": {
+          "cached_tokens": 1408
+        },
+        "prompt_cache_hit_tokens": 1408,
+        "prompt_cache_miss_tokens": 2075
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m0487",
+      "arm": "VECTOR_QWEN",
+      "split": "CALIBRATION",
+      "type": "inference_query",
+      "validSchema": true,
+      "answered": true,
+      "refused": false,
+      "exact": true,
+      "f1": 1.0,
+      "validCitationCount": 3,
+      "citationCount": 3,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [
+        "f4"
+      ],
+      "flags": [
+        "EXACT_BUT_SUPPORT_PENDING",
+        "CROSS_ARM_DISAGREEMENT"
+      ],
+      "output": {
+        "answered": true,
+        "answer": "Apple",
+        "explanation": "The evidence links Apple to the described traits: The Verge quotes Sweeney saying Apple forces developers, OEMs, and carriers to all have the same terms via its store and payments; The Verge reports the ITC ruled Apple infringed Masimo patents and imposed an Apple Watch import ban; TechCrunch mentions reviews of the M3 iMac and MacBook Pro. No evidence supports the 'more responsive to consumer feedback' or 'planning to appeal' claims, but the core entity is Apple.",
+        "citations": [
+          {
+            "evidenceId": "E1",
+            "quote": "They use their store, their payments, they force developers to all have the same terms, they force OEMs and carriers to all have the same terms."
+          },
+          {
+            "evidenceId": "E2",
+            "quote": "the US International Trade Commission (ITC) ruled that Apple had infringed on two patents from medical device maker Masimo."
+          },
+          {
+            "evidenceId": "E3",
+            "quote": "TechCrunch reviews the M3 iMac and MacBook Pro"
+          }
+        ],
+        "reason": ""
+      },
+      "elapsedMs": 1779,
+      "usage": {
+        "prompt_tokens": 2030,
+        "completion_tokens": 220,
+        "total_tokens": 2250,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        },
+        "prompt_cache_hit_tokens": 128,
+        "prompt_cache_miss_tokens": 1902
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m0487",
+      "arm": "RRF_QWEN",
+      "split": "CALIBRATION",
+      "type": "inference_query",
+      "validSchema": true,
+      "answered": true,
+      "refused": false,
+      "exact": true,
+      "f1": 1.0,
+      "validCitationCount": 2,
+      "citationCount": 3,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [
+        "f4"
+      ],
+      "flags": [
+        "INVALID_CITATION",
+        "EXACT_BUT_SUPPORT_PENDING",
+        "CROSS_ARM_DISAGREEMENT"
+      ],
+      "output": {
+        "answered": true,
+        "answer": "Apple",
+        "explanation": "Evidence shows Apple is the company criticized by Tim Sweeney for forcing developers, OEMs, and carriers to accept the same terms through its store and payments (E1), expected to focus on Macs and new chipsets at its Scary Fast event (E2, E3), and involved in an ITC patent dispute over the Apple Watch (E4).",
+        "citations": [
+          {
+            "evidenceId": "E1",
+            "quote": "They use their store, their payments, they force developers to all have the same terms, they force OEMs and carriers to all have the same terms."
+          },
+          {
+            "evidenceId": "E2",
+            "quote": "Apple's focus during the Scary Fast event will be on Macs and a fresh batch of chipsets to power them."
+          },
+          {
+            "evidenceId": "E4",
+            "quote": "This ban is the result of a long-standing patent dispute between Apple and the medical device maker Masimo."
+          }
+        ],
+        "reason": ""
+      },
+      "elapsedMs": 1482,
+      "usage": {
+        "prompt_tokens": 2154,
+        "completion_tokens": 199,
+        "total_tokens": 2353,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 1642
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m0487",
+      "arm": "VECTOR",
+      "split": "CALIBRATION",
+      "type": "inference_query",
+      "validSchema": true,
+      "answered": false,
+      "refused": true,
+      "exact": false,
+      "f1": 0.0,
+      "validCitationCount": 0,
+      "citationCount": 0,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [],
+      "flags": [
+        "CROSS_ARM_DISAGREEMENT"
+      ],
+      "output": {
+        "answered": false,
+        "answer": "",
+        "explanation": "",
+        "citations": [],
+        "reason": "The supplied evidence does not identify any company that is planning to appeal an ITC decision on a patent dispute, nor does it contain the TechCrunch, Engadget, and two The Verge articles describing criticism for enforcing uniform terms on developers, OEMs, and carriers. The evidence covers unrelated topics such as OpenAI's dev day, Apple's M3 reviews, Bumble's CEO change, and Epic v. Google."
+      },
+      "elapsedMs": 1340,
+      "usage": {
+        "prompt_tokens": 2914,
+        "completion_tokens": 106,
+        "total_tokens": 3020,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2658
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m0487",
+      "arm": "RRF",
+      "split": "CALIBRATION",
+      "type": "inference_query",
+      "validSchema": true,
+      "answered": true,
+      "refused": false,
+      "exact": true,
+      "f1": 1.0,
+      "validCitationCount": 3,
+      "citationCount": 4,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [
+        "f4"
+      ],
+      "flags": [
+        "INVALID_CITATION",
+        "EXACT_BUT_SUPPORT_PENDING",
+        "CROSS_ARM_DISAGREEMENT"
+      ],
+      "output": {
+        "answered": true,
+        "answer": "Apple",
+        "explanation": "Evidence identifies Apple as the company criticized by Tim Sweeney for forcing developers, OEMs, and carriers to accept the same terms through its store and payments (E1). Engadget reports Apple's upcoming event will focus on Macs and new chipsets (E2). The Verge notes Apple faces an ITC import ban and is working on a workaround/redesign (E4, E5).",
+        "citations": [
+          {
+            "evidenceId": "E1",
+            "quote": "They use their store, their payments, they force developers to all have the same terms, they force OEMs and carriers to all have the same terms."
+          },
+          {
+            "evidenceId": "E2",
+            "quote": "Apple's focus during the Scary Fast event will be on Macs and a fresh batch of chipsets to power them."
+          },
+          {
+            "evidenceId": "E4",
+            "quote": "This import ban isn’t the only one Apple is facing."
+          },
+          {
+            "evidenceId": "E5",
+            "quote": "for this route to be successful, Iancu says it depends on the specific patent, ITC ruling, and what exactly Apple has planned as far as redesigning the product."
+          }
+        ],
+        "reason": ""
+      },
+      "elapsedMs": 1893,
+      "usage": {
+        "prompt_tokens": 2299,
+        "completion_tokens": 246,
+        "total_tokens": 2545,
+        "prompt_tokens_details": {
+          "cached_tokens": 1024
+        },
+        "prompt_cache_hit_tokens": 1024,
+        "prompt_cache_miss_tokens": 1275
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m0939",
+      "arm": "RRF_QWEN",
+      "split": "CALIBRATION",
+      "type": "comparison_query",
+      "validSchema": true,
+      "answered": true,
+      "refused": false,
+      "exact": false,
+      "f1": 0.18181818181818182,
+      "validCitationCount": 2,
+      "citationCount": 2,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [
+        "f2"
+      ],
+      "flags": [
+        "NONEXACT_ANSWER",
+        "CROSS_ARM_DISAGREEMENT"
+      ],
+      "output": {
+        "answered": true,
+        "answer": "No, both articles suggest similar potential for their respective subjects.",
+        "explanation": "The NYT article portrays Bedard as hockey's brightest young star with a special, dangerous shot, not as lacking potential to dominate. The Sporting News article says USC has an opportunity to cash in if bullish on their ability to improve and blossom into a title contender. Both suggest potential, so the claim that NYT says Bedard lacks potential is unsupported.",
+        "citations": [
+          {
+            "evidenceId": "E2",
+            "quote": "He’s Hockey’s Brightest Young Star. This Is What Makes His Shot So Special."
+          },
+          {
+            "evidenceId": "E1",
+            "quote": "there’s definitely an opportunity to cash in on them if you’re bullish on their ability to improve and blossom into a title contender."
+          }
+        ],
+        "reason": ""
+      },
+      "elapsedMs": 1650,
+      "usage": {
+        "prompt_tokens": 2526,
+        "completion_tokens": 171,
+        "total_tokens": 2697,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        },
+        "prompt_cache_hit_tokens": 128,
+        "prompt_cache_miss_tokens": 2398
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m0939",
+      "arm": "VECTOR",
+      "split": "CALIBRATION",
+      "type": "comparison_query",
+      "validSchema": true,
+      "answered": false,
+      "refused": true,
+      "exact": false,
+      "f1": 0.0,
+      "validCitationCount": 0,
+      "citationCount": 0,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [],
+      "flags": [
+        "CROSS_ARM_DISAGREEMENT"
+      ],
+      "output": {
+        "answered": false,
+        "answer": "",
+        "explanation": "",
+        "citations": [],
+        "reason": "The supplied evidence only includes The New York Times article about Connor Bedard; there is no Sporting News article about the USC basketball team, so the comparison cannot be evaluated."
+      },
+      "elapsedMs": 967,
+      "usage": {
+        "prompt_tokens": 3158,
+        "completion_tokens": 54,
+        "total_tokens": 3212,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        },
+        "prompt_cache_hit_tokens": 128,
+        "prompt_cache_miss_tokens": 3030
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m0939",
+      "arm": "RRF",
+      "split": "CALIBRATION",
+      "type": "comparison_query",
+      "validSchema": true,
+      "answered": false,
+      "refused": true,
+      "exact": false,
+      "f1": 0.0,
+      "validCitationCount": 0,
+      "citationCount": 0,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [],
+      "flags": [
+        "CROSS_ARM_DISAGREEMENT"
+      ],
+      "output": {
+        "answered": false,
+        "answer": "",
+        "explanation": "",
+        "citations": [],
+        "reason": "The evidence does not contain any statement from The New York Times suggesting Connor Bedard lacks potential to dominate, nor does it contain a Sporting News article indicating the USC basketball team has potential to become a National Championship contender. The Sporting News evidence (E1) discusses USC's odds and opportunity to 'blossom into a title contender,' but the question asks about a specific claim that is not fully supported, and the NYT evidence (E3, E5) does not suggest Bedard lacks potential. Therefore, the comparison cannot be answered."
+      },
+      "elapsedMs": 1465,
+      "usage": {
+        "prompt_tokens": 2200,
+        "completion_tokens": 129,
+        "total_tokens": 2329,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 1688
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m0939",
+      "arm": "VECTOR_QWEN",
+      "split": "CALIBRATION",
+      "type": "comparison_query",
+      "validSchema": true,
+      "answered": false,
+      "refused": true,
+      "exact": false,
+      "f1": 0.0,
+      "validCitationCount": 0,
+      "citationCount": 0,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [],
+      "flags": [
+        "CROSS_ARM_DISAGREEMENT"
+      ],
+      "output": {
+        "answered": false,
+        "answer": "",
+        "explanation": "",
+        "citations": [],
+        "reason": "The evidence does not support the claim that the NYT article suggests Bedard lacks potential to dominate; it describes him as hockey's brightest young star and details his special shot. The Sporting News evidence does indicate USC has talent to make a title run, but the question's first condition is unsupported, so the comparison cannot be answered."
+      },
+      "elapsedMs": 1028,
+      "usage": {
+        "prompt_tokens": 2139,
+        "completion_tokens": 87,
+        "total_tokens": 2226,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 1627
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m0343",
+      "arm": "VECTOR",
+      "split": "CALIBRATION",
+      "type": "comparison_query",
+      "validSchema": true,
+      "answered": true,
+      "refused": false,
+      "exact": true,
+      "f1": 1.0,
+      "validCitationCount": 2,
+      "citationCount": 2,
+      "referenceSupportedExactProxy": true,
+      "citedReferenceFacts": [
+        "f1",
+        "f2"
+      ],
+      "flags": [
+        "CROSS_ARM_DISAGREEMENT"
+      ],
+      "output": {
+        "answered": true,
+        "answer": "Yes",
+        "explanation": "Zee Business states India played Australia in the 2015 World Cup second semi-final. TalkSport states England face South Africa in both the Rugby World Cup and ODI Cricket World Cup semi-finals. Thus the two articles indicate different opponents for each country's national teams.",
+        "citations": [
+          {
+            "evidenceId": "E1",
+            "quote": "India were playing against Australia in the second semi-final of the 2015 World Cup in Sydney on March 26."
+          },
+          {
+            "evidenceId": "E3",
+            "quote": "It's crunch time for England in the World Cups as they face South Africa in the semi-final of the Rugby World Cup and in the ODI Cricket World Cup."
+          }
+        ],
+        "reason": ""
+      },
+      "elapsedMs": 1290,
+      "usage": {
+        "prompt_tokens": 2207,
+        "completion_tokens": 149,
+        "total_tokens": 2356,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        },
+        "prompt_cache_hit_tokens": 128,
+        "prompt_cache_miss_tokens": 2079
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m0343",
+      "arm": "RRF",
+      "split": "CALIBRATION",
+      "type": "comparison_query",
+      "validSchema": true,
+      "answered": false,
+      "refused": true,
+      "exact": false,
+      "f1": 0.0,
+      "validCitationCount": 0,
+      "citationCount": 0,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [],
+      "flags": [
+        "CROSS_ARM_DISAGREEMENT"
+      ],
+      "output": {
+        "answered": false,
+        "answer": "",
+        "explanation": "",
+        "citations": [],
+        "reason": "The supplied evidence includes Zee Business articles confirming India played Australia in the 2015 World Cup semi-final, but there is no TalkSport article or any evidence about England facing South Africa in Rugby World Cup and ODI Cricket World Cup semi-finals. The second part of the question is unsupported."
+      },
+      "elapsedMs": 1320,
+      "usage": {
+        "prompt_tokens": 3029,
+        "completion_tokens": 79,
+        "total_tokens": 3108,
+        "prompt_tokens_details": {
+          "cached_tokens": 640
+        },
+        "prompt_cache_hit_tokens": 640,
+        "prompt_cache_miss_tokens": 2389
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m0343",
+      "arm": "VECTOR_QWEN",
+      "split": "CALIBRATION",
+      "type": "comparison_query",
+      "validSchema": true,
+      "answered": true,
+      "refused": false,
+      "exact": true,
+      "f1": 1.0,
+      "validCitationCount": 2,
+      "citationCount": 2,
+      "referenceSupportedExactProxy": true,
+      "citedReferenceFacts": [
+        "f1",
+        "f2"
+      ],
+      "flags": [
+        "CROSS_ARM_DISAGREEMENT"
+      ],
+      "output": {
+        "answered": true,
+        "answer": "Yes",
+        "explanation": "Zee Business states India played Australia in the 2015 World Cup semi-final. TalkSport states England face South Africa in both the Rugby World Cup and ODI Cricket World Cup semi-finals, indicating different opponents for each country's teams.",
+        "citations": [
+          {
+            "evidenceId": "E2",
+            "quote": "2015 World Cup, against Australia\n\nIndia were playing against Australia in the second semi-final of the 2015 World Cup in Sydney on March 26."
+          },
+          {
+            "evidenceId": "E1",
+            "quote": "It's crunch time for England in the World Cups as they face South Africa in the semi-final of the Rugby World Cup and in the ODI Cricket World Cup."
+          }
+        ],
+        "reason": ""
+      },
+      "elapsedMs": 1215,
+      "usage": {
+        "prompt_tokens": 2870,
+        "completion_tokens": 152,
+        "total_tokens": 3022,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2614
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m0343",
+      "arm": "RRF_QWEN",
+      "split": "CALIBRATION",
+      "type": "comparison_query",
+      "validSchema": true,
+      "answered": true,
+      "refused": false,
+      "exact": true,
+      "f1": 1.0,
+      "validCitationCount": 3,
+      "citationCount": 3,
+      "referenceSupportedExactProxy": true,
+      "citedReferenceFacts": [
+        "f1",
+        "f2"
+      ],
+      "flags": [
+        "CROSS_ARM_DISAGREEMENT"
+      ],
+      "output": {
+        "answered": true,
+        "answer": "Yes",
+        "explanation": "Zee Business states India played Australia in the 2015 World Cup semi-final. TalkSport states England face South Africa in both the Rugby World Cup and ODI Cricket World Cup semi-finals. Thus the two articles indicate different opponents for each country's national teams in their respective semi-finals.",
+        "citations": [
+          {
+            "evidenceId": "E2",
+            "quote": "2015 World Cup, against Australia"
+          },
+          {
+            "evidenceId": "E2",
+            "quote": "India were playing against Australia in the second semi-final of the 2015 World Cup in Sydney on March 26."
+          },
+          {
+            "evidenceId": "E1",
+            "quote": "It's crunch time for England in the World Cups as they face South Africa in the semi-final of the Rugby World Cup and in the ODI Cricket World Cup."
+          }
+        ],
+        "reason": ""
+      },
+      "elapsedMs": 1083,
+      "usage": {
+        "prompt_tokens": 3232,
+        "completion_tokens": 170,
+        "total_tokens": 3402,
+        "prompt_tokens_details": {
+          "cached_tokens": 1024
+        },
+        "prompt_cache_hit_tokens": 1024,
+        "prompt_cache_miss_tokens": 2208
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m0090",
+      "arm": "RRF",
+      "split": "CALIBRATION",
+      "type": "comparison_query",
+      "validSchema": true,
+      "answered": false,
+      "refused": true,
+      "exact": false,
+      "f1": 0.0,
+      "validCitationCount": 0,
+      "citationCount": 0,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [],
+      "flags": [],
+      "output": {
+        "answered": false,
+        "answer": "",
+        "explanation": "",
+        "citations": [],
+        "reason": "The evidence does not support the claim that The Verge says Google has the ability to resolve Android app distribution and in-app payment issues; The Verge reports Epic's allegations and a jury verdict that Google has an illegal monopoly, not that Google can resolve the issues. TechCrunch does report a class action accusing Google of anticompetitive behavior toward news publishers, but the first condition is unsupported, so the comparison cannot be confirmed."
+      },
+      "elapsedMs": 1149,
+      "usage": {
+        "prompt_tokens": 3004,
+        "completion_tokens": 108,
+        "total_tokens": 3112,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        },
+        "prompt_cache_hit_tokens": 128,
+        "prompt_cache_miss_tokens": 2876
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m0090",
+      "arm": "VECTOR_QWEN",
+      "split": "CALIBRATION",
+      "type": "comparison_query",
+      "validSchema": true,
+      "answered": false,
+      "refused": true,
+      "exact": false,
+      "f1": 0.0,
+      "validCitationCount": 0,
+      "citationCount": 0,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [],
+      "flags": [],
+      "output": {
+        "answered": false,
+        "answer": "",
+        "explanation": "",
+        "citations": [],
+        "reason": "The evidence does not support the claim that The Verge says Google has the ability to resolve Android app distribution and in-app payment issues, nor does it show TechCrunch accusing Google of anticompetitive behavior toward news publishers. TechCrunch's cited evidence concerns anticompetitive behavior regarding Android app store and commission structure, not news publishers."
+      },
+      "elapsedMs": 1254,
+      "usage": {
+        "prompt_tokens": 2264,
+        "completion_tokens": 90,
+        "total_tokens": 2354,
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        },
+        "prompt_cache_hit_tokens": 768,
+        "prompt_cache_miss_tokens": 1496
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m0090",
+      "arm": "RRF_QWEN",
+      "split": "CALIBRATION",
+      "type": "comparison_query",
+      "validSchema": true,
+      "answered": false,
+      "refused": true,
+      "exact": false,
+      "f1": 0.0,
+      "validCitationCount": 0,
+      "citationCount": 0,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [],
+      "flags": [],
+      "output": {
+        "answered": false,
+        "answer": "",
+        "explanation": "",
+        "citations": [],
+        "reason": "The evidence does not support the claim that The Verge says Google can resolve Android app distribution/payment issues, nor that TechCrunch accuses Google of anticompetitive behavior specifically toward news publishers. TechCrunch's coverage concerns Epic Games and Android app store competition, not news publishers."
+      },
+      "elapsedMs": 1455,
+      "usage": {
+        "prompt_tokens": 2227,
+        "completion_tokens": 79,
+        "total_tokens": 2306,
+        "prompt_tokens_details": {
+          "cached_tokens": 1152
+        },
+        "prompt_cache_hit_tokens": 1152,
+        "prompt_cache_miss_tokens": 1075
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m0090",
+      "arm": "VECTOR",
+      "split": "CALIBRATION",
+      "type": "comparison_query",
+      "validSchema": true,
+      "answered": false,
+      "refused": true,
+      "exact": false,
+      "f1": 0.0,
+      "validCitationCount": 0,
+      "citationCount": 0,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [],
+      "flags": [],
+      "output": {
+        "answered": false,
+        "answer": "",
+        "explanation": "",
+        "citations": [],
+        "reason": "The evidence does not support the claim that The Verge says Google has the ability to resolve Android app distribution and in-app payment issues. The Verge describes Epic's allegations that Google has illegal monopolies in those areas, not that Google can resolve the issues. TechCrunch does accuse Google of anticompetitive behavior toward news publishers, but the first part of the comparison is unsupported."
+      },
+      "elapsedMs": 998,
+      "usage": {
+        "prompt_tokens": 2815,
+        "completion_tokens": 99,
+        "total_tokens": 2914,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        },
+        "prompt_cache_hit_tokens": 128,
+        "prompt_cache_miss_tokens": 2687
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m1527",
+      "arm": "VECTOR_QWEN",
+      "split": "CALIBRATION",
+      "type": "temporal_query",
+      "validSchema": true,
+      "answered": true,
+      "refused": false,
+      "exact": true,
+      "f1": 1.0,
+      "validCitationCount": 2,
+      "citationCount": 2,
+      "referenceSupportedExactProxy": true,
+      "citedReferenceFacts": [
+        "f1",
+        "f2"
+      ],
+      "flags": [],
+      "output": {
+        "answered": true,
+        "answer": "Unsuccessful",
+        "explanation": "Sporting News reported Alejandro Mata's 31-yard field goal on Oct. 28, 2023 (E1). A later Sporting News article (Nov. 25, 2023) reports Jayden Fielding missed a 52-yard field goal wide left (E3), so the attempt was unsuccessful.",
+        "citations": [
+          {
+            "evidenceId": "E1",
+            "quote": "His 31-yard field goal is good, and the Buffs take the first lead of the game on their first drive."
+          },
+          {
+            "evidenceId": "E3",
+            "quote": "The Buckeyes settled for a 52-yard field goal late in the first half, which Jayden Fielding missed wide left."
+          }
+        ],
+        "reason": ""
+      },
+      "elapsedMs": 1237,
+      "usage": {
+        "prompt_tokens": 2251,
+        "completion_tokens": 157,
+        "total_tokens": 2408,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        },
+        "prompt_cache_hit_tokens": 128,
+        "prompt_cache_miss_tokens": 2123
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m1527",
+      "arm": "RRF_QWEN",
+      "split": "CALIBRATION",
+      "type": "temporal_query",
+      "validSchema": true,
+      "answered": true,
+      "refused": false,
+      "exact": true,
+      "f1": 1.0,
+      "validCitationCount": 2,
+      "citationCount": 2,
+      "referenceSupportedExactProxy": true,
+      "citedReferenceFacts": [
+        "f1",
+        "f2"
+      ],
+      "flags": [],
+      "output": {
+        "answered": true,
+        "answer": "Unsuccessful",
+        "explanation": "Sporting News reported Alejandro Mata's 31-yard field goal on Oct. 28, 2023 (E1). A later Sporting News article (Nov. 25, 2023) states Jayden Fielding missed a 52-yard field goal wide left (E4), so the attempt was unsuccessful.",
+        "citations": [
+          {
+            "evidenceId": "E1",
+            "quote": "His 31-yard field goal is good, and the Buffs take the first lead of the game on their first drive."
+          },
+          {
+            "evidenceId": "E4",
+            "quote": "The Buckeyes settled for a 52-yard field goal late in the first half, which Jayden Fielding missed wide left."
+          }
+        ],
+        "reason": ""
+      },
+      "elapsedMs": 1233,
+      "usage": {
+        "prompt_tokens": 2301,
+        "completion_tokens": 157,
+        "total_tokens": 2458,
+        "prompt_tokens_details": {
+          "cached_tokens": 1024
+        },
+        "prompt_cache_hit_tokens": 1024,
+        "prompt_cache_miss_tokens": 1277
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m1527",
+      "arm": "VECTOR",
+      "split": "CALIBRATION",
+      "type": "temporal_query",
+      "validSchema": true,
+      "answered": true,
+      "refused": false,
+      "exact": true,
+      "f1": 1.0,
+      "validCitationCount": 2,
+      "citationCount": 2,
+      "referenceSupportedExactProxy": true,
+      "citedReferenceFacts": [
+        "f1",
+        "f2"
+      ],
+      "flags": [],
+      "output": {
+        "answered": true,
+        "answer": "unsuccessful",
+        "explanation": "Sporting News reported Alejandro Mata's successful 31-yard field goal on Oct. 28, 2023 (E5). A later Sporting News article (Nov. 25, 2023) reported Jayden Fielding missed a 52-yard field goal wide left (E1).",
+        "citations": [
+          {
+            "evidenceId": "E5",
+            "quote": "His 31-yard field goal is good, and the Buffs take the first lead of the game on their first drive."
+          },
+          {
+            "evidenceId": "E1",
+            "quote": "The Buckeyes settled for a 52-yard field goal late in the first half, which Jayden Fielding missed wide left."
+          }
+        ],
+        "reason": ""
+      },
+      "elapsedMs": 1194,
+      "usage": {
+        "prompt_tokens": 2231,
+        "completion_tokens": 152,
+        "total_tokens": 2383,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        },
+        "prompt_cache_hit_tokens": 128,
+        "prompt_cache_miss_tokens": 2103
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m1527",
+      "arm": "RRF",
+      "split": "CALIBRATION",
+      "type": "temporal_query",
+      "validSchema": true,
+      "answered": true,
+      "refused": false,
+      "exact": true,
+      "f1": 1.0,
+      "validCitationCount": 2,
+      "citationCount": 2,
+      "referenceSupportedExactProxy": true,
+      "citedReferenceFacts": [
+        "f1",
+        "f2"
+      ],
+      "flags": [],
+      "output": {
+        "answered": true,
+        "answer": "Unsuccessful",
+        "explanation": "Sporting News reported Alejandro Mata's 31-yard field goal on Oct. 28, 2023 (E1). A later Sporting News article (Nov. 25, 2023) reports Jayden Fielding missed a 52-yard field goal wide left (E3), so the attempt was unsuccessful.",
+        "citations": [
+          {
+            "evidenceId": "E1",
+            "quote": "His 31-yard field goal is good, and the Buffs take the first lead of the game on their first drive."
+          },
+          {
+            "evidenceId": "E3",
+            "quote": "The Buckeyes settled for a 52-yard field goal late in the first half, which Jayden Fielding missed wide left."
+          }
+        ],
+        "reason": ""
+      },
+      "elapsedMs": 1297,
+      "usage": {
+        "prompt_tokens": 2283,
+        "completion_tokens": 157,
+        "total_tokens": 2440,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "prompt_cache_hit_tokens": 512,
+        "prompt_cache_miss_tokens": 1771
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m0871",
+      "arm": "RRF_QWEN",
+      "split": "CALIBRATION",
+      "type": "temporal_query",
+      "validSchema": true,
+      "answered": false,
+      "refused": true,
+      "exact": false,
+      "f1": 0.0,
+      "validCitationCount": 0,
+      "citationCount": 0,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [],
+      "flags": [],
+      "output": {
+        "answered": false,
+        "answer": "",
+        "explanation": "",
+        "citations": [],
+        "reason": "The evidence describes the redemption options for each card separately but does not provide information about whether the redemption option for statement credits changed over time or between the two cards."
+      },
+      "elapsedMs": 1256,
+      "usage": {
+        "prompt_tokens": 2339,
+        "completion_tokens": 52,
+        "total_tokens": 2391,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        },
+        "prompt_cache_hit_tokens": 128,
+        "prompt_cache_miss_tokens": 2211
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m0871",
+      "arm": "VECTOR",
+      "split": "CALIBRATION",
+      "type": "temporal_query",
+      "validSchema": true,
+      "answered": false,
+      "refused": true,
+      "exact": false,
+      "f1": 0.0,
+      "validCitationCount": 0,
+      "citationCount": 0,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [],
+      "flags": [],
+      "output": {
+        "answered": false,
+        "answer": "",
+        "explanation": "",
+        "citations": [],
+        "reason": "The evidence only covers the Fifth Third 1.67% Card and does not include any information about the American Express Cash Magnet® card or its redemption options, so no comparison or change can be established."
+      },
+      "elapsedMs": 1057,
+      "usage": {
+        "prompt_tokens": 4031,
+        "completion_tokens": 61,
+        "total_tokens": 4092,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        },
+        "prompt_cache_hit_tokens": 128,
+        "prompt_cache_miss_tokens": 3903
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m0871",
+      "arm": "RRF",
+      "split": "CALIBRATION",
+      "type": "temporal_query",
+      "validSchema": true,
+      "answered": false,
+      "refused": true,
+      "exact": false,
+      "f1": 0.0,
+      "validCitationCount": 0,
+      "citationCount": 0,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [],
+      "flags": [],
+      "output": {
+        "answered": false,
+        "answer": "",
+        "explanation": "",
+        "citations": [],
+        "reason": "The evidence describes the redemption option for statement credits for both cards, but it does not indicate that this option changed over time or between the two cards. No evidence of a change is provided."
+      },
+      "elapsedMs": 1064,
+      "usage": {
+        "prompt_tokens": 2946,
+        "completion_tokens": 58,
+        "total_tokens": 3004,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2690
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m0871",
+      "arm": "VECTOR_QWEN",
+      "split": "CALIBRATION",
+      "type": "temporal_query",
+      "validSchema": true,
+      "answered": false,
+      "refused": true,
+      "exact": false,
+      "f1": 0.0,
+      "validCitationCount": 0,
+      "citationCount": 0,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [],
+      "flags": [],
+      "output": {
+        "answered": false,
+        "answer": "",
+        "explanation": "",
+        "citations": [],
+        "reason": "The evidence describes the redemption options for each card separately, but does not provide information about the same card's redemption option changing over time, nor does it compare changes between the two cards. The question asks about a change between the two cards, which is not supported by the evidence."
+      },
+      "elapsedMs": 1367,
+      "usage": {
+        "prompt_tokens": 3081,
+        "completion_tokens": 76,
+        "total_tokens": 3157,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2825
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m1256",
+      "arm": "VECTOR",
+      "split": "CALIBRATION",
+      "type": "temporal_query",
+      "validSchema": true,
+      "answered": false,
+      "refused": true,
+      "exact": false,
+      "f1": 0.0,
+      "validCitationCount": 0,
+      "citationCount": 0,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [],
+      "flags": [],
+      "output": {
+        "answered": false,
+        "answer": "",
+        "explanation": "",
+        "citations": [],
+        "reason": "The supplied evidence does not include the specified Verge report published before September 26, 2023, nor a TechCrunch report on a class action antitrust suit against Google published after that date. The available TechCrunch articles are dated October 31 and November 13, 2023, and concern the US v Google trial, not the described class action. Therefore the evidence is insufficient to assess any change in portrayal."
+      },
+      "elapsedMs": 1378,
+      "usage": {
+        "prompt_tokens": 2615,
+        "completion_tokens": 106,
+        "total_tokens": 2721,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        },
+        "prompt_cache_hit_tokens": 128,
+        "prompt_cache_miss_tokens": 2487
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m1256",
+      "arm": "RRF",
+      "split": "CALIBRATION",
+      "type": "temporal_query",
+      "validSchema": true,
+      "answered": false,
+      "refused": true,
+      "exact": false,
+      "f1": 0.0,
+      "validCitationCount": 0,
+      "citationCount": 0,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [],
+      "flags": [],
+      "output": {
+        "answered": false,
+        "answer": "",
+        "explanation": "",
+        "citations": [],
+        "reason": "The supplied evidence contains only the TechCrunch report on the class action antitrust suit (published 2023-12-15). It does not include the earlier Verge report on Apple's defense of its Google Search deal, so no comparison of the two portrayals can be made."
+      },
+      "elapsedMs": 981,
+      "usage": {
+        "prompt_tokens": 2452,
+        "completion_tokens": 77,
+        "total_tokens": 2529,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2196
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m1256",
+      "arm": "VECTOR_QWEN",
+      "split": "CALIBRATION",
+      "type": "temporal_query",
+      "validSchema": true,
+      "answered": false,
+      "refused": true,
+      "exact": false,
+      "f1": 0.0,
+      "validCitationCount": 0,
+      "citationCount": 0,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [],
+      "flags": [],
+      "output": {
+        "answered": false,
+        "answer": "",
+        "explanation": "",
+        "citations": [],
+        "reason": "The evidence does not include a TechCrunch report on a class action antitrust suit against Google published after September 26, 2023. E4/E5 are a TechCrunch article about the Google antitrust case, but it does not mention a class action suit, so the requested comparison cannot be supported."
+      },
+      "elapsedMs": 993,
+      "usage": {
+        "prompt_tokens": 2418,
+        "completion_tokens": 82,
+        "total_tokens": 2500,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2162
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m1256",
+      "arm": "RRF_QWEN",
+      "split": "CALIBRATION",
+      "type": "temporal_query",
+      "validSchema": true,
+      "answered": false,
+      "refused": true,
+      "exact": false,
+      "f1": 0.0,
+      "validCitationCount": 0,
+      "citationCount": 0,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [],
+      "flags": [],
+      "output": {
+        "answered": false,
+        "answer": "",
+        "explanation": "",
+        "citations": [],
+        "reason": "The supplied evidence only includes The Verge report published on 2023-09-26; no TechCrunch report published after that date is provided, so the requested comparison cannot be supported."
+      },
+      "elapsedMs": 961,
+      "usage": {
+        "prompt_tokens": 2040,
+        "completion_tokens": 59,
+        "total_tokens": 2099,
+        "prompt_tokens_details": {
+          "cached_tokens": 896
+        },
+        "prompt_cache_hit_tokens": 896,
+        "prompt_cache_miss_tokens": 1144
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m1865",
+      "arm": "RRF",
+      "split": "CALIBRATION",
+      "type": "null_query",
+      "validSchema": true,
+      "answered": false,
+      "refused": true,
+      "exact": true,
+      "f1": 0.0,
+      "validCitationCount": 0,
+      "citationCount": 0,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [],
+      "flags": [],
+      "output": {
+        "answered": false,
+        "answer": "",
+        "explanation": "",
+        "citations": [],
+        "reason": "The supplied evidence does not include a CNBC article detailing Visa Inc's latest strategic partnership or a Bloomberg report on Visa Inc's financial performance in the last quarter. Evidence only mentions Visa in an earnings preview list, so no combined letter grade can be inferred."
+      },
+      "elapsedMs": 920,
+      "usage": {
+        "prompt_tokens": 2470,
+        "completion_tokens": 71,
+        "total_tokens": 2541,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        },
+        "prompt_cache_hit_tokens": 128,
+        "prompt_cache_miss_tokens": 2342
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m1865",
+      "arm": "VECTOR_QWEN",
+      "split": "CALIBRATION",
+      "type": "null_query",
+      "validSchema": true,
+      "answered": false,
+      "refused": true,
+      "exact": true,
+      "f1": 0.0,
+      "validCitationCount": 0,
+      "citationCount": 0,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [],
+      "flags": [],
+      "output": {
+        "answered": false,
+        "answer": "",
+        "explanation": "",
+        "citations": [],
+        "reason": "The supplied evidence contains no CNBC article about a Visa Inc strategic partnership and no Bloomberg report on Visa's last-quarter financial performance, so the requested combined letter grade cannot be inferred."
+      },
+      "elapsedMs": 1058,
+      "usage": {
+        "prompt_tokens": 2217,
+        "completion_tokens": 56,
+        "total_tokens": 2273,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        },
+        "prompt_cache_hit_tokens": 128,
+        "prompt_cache_miss_tokens": 2089
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m1865",
+      "arm": "RRF_QWEN",
+      "split": "CALIBRATION",
+      "type": "null_query",
+      "validSchema": true,
+      "answered": false,
+      "refused": true,
+      "exact": true,
+      "f1": 0.0,
+      "validCitationCount": 0,
+      "citationCount": 0,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [],
+      "flags": [],
+      "output": {
+        "answered": false,
+        "answer": "",
+        "explanation": "",
+        "citations": [],
+        "reason": "The supplied evidence contains no CNBC article about a Visa Inc strategic partnership and no Bloomberg report on Visa Inc's last-quarter financial performance; the evidence concerns Flexport, valuation metrics, and U.S.-China relations, so no letter grade can be inferred."
+      },
+      "elapsedMs": 837,
+      "usage": {
+        "prompt_tokens": 2390,
+        "completion_tokens": 71,
+        "total_tokens": 2461,
+        "prompt_tokens_details": {
+          "cached_tokens": 128
+        },
+        "prompt_cache_hit_tokens": 128,
+        "prompt_cache_miss_tokens": 2262
+      },
+      "semanticReview": "PENDING"
+    },
+    {
+      "id": "m1865",
+      "arm": "VECTOR",
+      "split": "CALIBRATION",
+      "type": "null_query",
+      "validSchema": true,
+      "answered": false,
+      "refused": true,
+      "exact": true,
+      "f1": 0.0,
+      "validCitationCount": 0,
+      "citationCount": 0,
+      "referenceSupportedExactProxy": false,
+      "citedReferenceFacts": [],
+      "flags": [],
+      "output": {
+        "answered": false,
+        "answer": "",
+        "explanation": "",
+        "citations": [],
+        "reason": "The supplied evidence contains no CNBC article about a Visa Inc strategic partnership and no Bloomberg report on Visa's last-quarter financial performance; Visa is only mentioned in a list of companies reporting earnings, so the requested combined assessment cannot be inferred."
+      },
+      "elapsedMs": 913,
+      "usage": {
+        "prompt_tokens": 2558,
+        "completion_tokens": 67,
+        "total_tokens": 2625,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "prompt_cache_hit_tokens": 256,
+        "prompt_cache_miss_tokens": 2302
+      },
+      "semanticReview": "PENDING"
+    }
+  ]
+}

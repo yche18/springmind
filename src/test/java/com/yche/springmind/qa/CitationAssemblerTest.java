@@ -13,6 +13,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 class CitationAssemblerTest {
 
     @Test
+    void shouldPreserveDifferentDocumentsWithTheSameFilename() {
+        Document first = Document.builder().text("A").metadata(Map.of("documentId", 1L, "fileName", "guide.md")).build();
+        Document second = Document.builder().text("B").metadata(Map.of("documentId", 2L, "fileName", "guide.md")).build();
+        assertThat(new CitationAssembler().assembleDocuments(List.of(first, first, second)))
+                .extracting(AskQuestionResponse.Citation::documentId).containsExactly(1L, 2L);
+    }
+
+    @Test
     void shouldUseFileNameWhenPresent() {
         CitationAssembler citationAssembler = new CitationAssembler();
         Document document = Document.builder()

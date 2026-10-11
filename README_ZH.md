@@ -9,13 +9,15 @@ SpringMind 围绕“文档入库—混合检索—证据分级—可追溯回答
 ## 核心亮点
 
 - 组织级数据隔离：检索请求必须携带真实用户与知识组上下文，文档、切片和检索结果按 `groupId` 隔离。
-- 完整文档生命周期：支持普通上传与分片续传、MinIO 对象存储、异步入库、失败重试和卡死任务恢复。
+- 完整文档生命周期：支持普通上传与分片续传、MinIO 对象存储、事务内持久化入库任务、有限次数重试和崩溃恢复。详见[可靠入库设计](docs/durable-ingestion.md)。
 - 结构感知解析：支持 PDF、DOCX、Markdown、TXT，经过文本清洗和带重叠窗口的结构化切片。
-- 混合检索：pgvector 语义检索与 Elasticsearch 关键词检索并行召回，使用 RRF 融合排名。
+- 混合检索：结合 pgvector 语义检索与 Elasticsearch 关键词检索，使用 RRF 融合排名，支持可选 HTTP 重排序、证据去重和 token 预算。[配置与边界](docs/evidence-selection.md)。
 - 查询规划：模型根据问题选择直接检索、改写或拆解；规划失败时自动回退原问题，不阻断问答。
 - 证据约束回答：对召回结果划分 `NONE / WEAK / PARTIAL / SUFFICIENT`，限制模型只能基于证据作答。
 - 可追溯引用：答案返回文档名、文档 ID、切片位置和检索分数等引用信息。
+- 回答依据面板：展开查看查询规划、各阶段耗时、所选证据，并在重新校验权限后查看原文片段。详见[追踪接口说明](docs/answer-traces.md)。
 - 可执行质量门禁：认证、组权限、文档生命周期和问答检索均有 Harness 测试约束核心业务规则。
+- 可重复精排评测：固定候选集，对照排序指标、回退次数及显式开启真实调用后的耗时。附 30 个中英文合成样例，仅验证工具，不代表真实业务效果。详见[评测指南](evaluation/rerank/README.md)。默认离线运行：`mvn "-Dtest=RerankEvaluationRun" test`（Java 21，无模型调用费用）。
 
 ## 业务流程
 
@@ -147,7 +149,7 @@ frontend/src/
 可以按以下顺序跟随文档入库与问答主链路：
 
 1. `DocumentController` → `DocumentService` / `DocumentUploadService`
-2. `DocumentIngestionAsyncListener` → `EtlDocumentIngestionProcessor`
+2. `IngestionJobQueue` → `IngestionJobWorker` → `DocumentIngestionAsyncService` → `EtlDocumentIngestionProcessor`
 3. `StructureAwareChunkTransformer` → `VectorIngestionService` / `ElasticsearchChunkIndexService`
 4. `QaController` → `QaService` → `QueryPlanningService`
 5. `HybridEvidenceRetriever` → `QaChatService` → `CitationAssembler`
@@ -168,6 +170,8 @@ mvn -Dtest=FlywayMigrationTest test
 ```
 
 详细门禁规则见 [Harness 说明](harness/README.md)。
+
+评测结论、指标口径、实验沿革和各报告入口统一见[评测总览](evaluation/README.md)。
 
 ## 设计边界
 
